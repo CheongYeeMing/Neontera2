@@ -22,7 +22,7 @@ public class CharacterAttack : MonoBehaviour
 
     private void Update()
     {
-        if (Input.GetMouseButton(0) && cooldownTimer > attackCooldown && playerMovement.canAttack())
+        if (Input.GetKey(KeyCode.A))
         {
             Attack();
         }
@@ -32,7 +32,7 @@ public class CharacterAttack : MonoBehaviour
 
     private void Attack()
     {
-        playerMovement.ChangeAnmationState(PLAYER_ATTACK_FIREBALL);
+        playerMovement.ChangeAnimationState(PLAYER_ATTACK_FIREBALL);
         cooldownTimer = 0;
 
         // Pool Fireballs

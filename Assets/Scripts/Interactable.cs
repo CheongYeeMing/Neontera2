@@ -20,9 +20,6 @@ public class Interactable : MonoBehaviour
     public Image examineImage;
     public Text examineText;
     public bool isExamining = false;
-    [Header("Others")]
-    // List of picked items
-    public List<GameObject> pickedItems = new List<GameObject>();
 
     // Update is called once per frame
     void Update()
@@ -33,6 +30,12 @@ public class Interactable : MonoBehaviour
             {
                 detectedObject.GetComponent<Item>().Interact();
             }
+        } else
+        {
+            // Hide the Examine Window when walk past game object
+            examineWindow.SetActive(false);
+            // Disable the boolean
+            isExamining = false;
         }
     }
     private void OnDrawGizmosSelected()
@@ -60,12 +63,7 @@ public class Interactable : MonoBehaviour
             return true;
         }
     }
-
-    public void PickUpItem(GameObject item)
-    {
-        pickedItems.Add(item);
-    }
-
+    
     public void ExamineItem(Item item)
     {
         if (isExamining)
@@ -80,7 +78,7 @@ public class Interactable : MonoBehaviour
             // Show the item's image on the left side
             examineImage.sprite = item.GetComponent<SpriteRenderer>().sprite;
             // Write description text on the right side of image
-            examineText.text = item.descriptionText;
+            examineText.text = item.examineText;
             // Display an Examine Window
             examineWindow.SetActive(true);
             // Enable the boolean

@@ -7,10 +7,21 @@ using UnityEngine.Events;
 public class Item : MonoBehaviour
 {
     public enum InteractionType { NONE, PickUp, Examine}
-    public InteractionType type;
+    public enum ItemType { Consumables, Equipment, Currency, Chest}
+    [Header("Attributes")]
+    public InteractionType interactType;
+    public ItemType itemType;
+
     [Header("Examine")]
-    public string descriptionText;
-    public UnityEvent customEvent;
+    public string examineText;
+    
+    [Header("Custom Events")]
+    public UnityEvent customEvent; //for quests
+    public UnityEvent consumeEvent;
+
+    [SerializeField] public string ItemName;
+    [SerializeField] public Sprite Icon;
+    [SerializeField] public string descriptionText;
 
     // Called in editor only
     // Used for setting default values of Object
@@ -22,11 +33,11 @@ public class Item : MonoBehaviour
 
     public void Interact()
     {
-        switch (type)
+        switch (interactType)
         {
             case InteractionType.PickUp:
                 // Add the object to the PickedUpItems 
-                FindObjectOfType<Interactable>().PickUpItem(gameObject);
+                FindObjectOfType<InventorySystem>().PickUp(gameObject);
                 // Delete the object
                 gameObject.SetActive(false);
                 break;
