@@ -30,7 +30,7 @@ public class CharacterMovement : MonoBehaviour
     }
 
 
-    public void ChangeAnmationState(string newState)
+    public void ChangeAnimationState(string newState)
     {
         // Stop the same animation from interupting itself
         if (currentState == newState) return;
@@ -42,7 +42,7 @@ public class CharacterMovement : MonoBehaviour
         currentState = newState;
     }
 
-    private void Update()
+    private void FixedUpdate()
     {
         if (CanMove() == false) return;
 
@@ -65,11 +65,11 @@ public class CharacterMovement : MonoBehaviour
         {
             if (horizontalInput != 0)
             {
-                ChangeAnmationState(PLAYER_RUN);
+                ChangeAnimationState(PLAYER_RUN);
             }
             else
             {
-                ChangeAnmationState(PLAYER_IDLE);
+                ChangeAnimationState(PLAYER_IDLE);
             }
         }
 
@@ -87,7 +87,7 @@ public class CharacterMovement : MonoBehaviour
             {
                 body.gravityScale = 3;
             }
-            // Player jump
+            // Player jump key
             if (Input.GetKey(KeyCode.UpArrow) || Input.GetKey(KeyCode.Space))
             {
                 Jump();
@@ -105,11 +105,11 @@ public class CharacterMovement : MonoBehaviour
         {
             body.velocity = new Vector2(body.velocity.x, jumpPower);
             //animator.SetTrigger("jump");
-            ChangeAnmationState(PLAYER_JUMP);
+            ChangeAnimationState(PLAYER_JUMP);
         }
         else if (onWall() && !isGrounded())
         {
-            ChangeAnmationState(PLAYER_JUMP);
+            ChangeAnimationState(PLAYER_JUMP);
             // Wall grab animation !!
             if (horizontalInput == 0)
             {
@@ -145,6 +145,10 @@ public class CharacterMovement : MonoBehaviour
     {
         bool can = true;
         if (FindObjectOfType<Interactable>().isExamining)
+        {
+            can = false;
+        }
+        if (FindObjectOfType<InventorySystem>().isOpen)
         {
             can = false;
         }
