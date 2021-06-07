@@ -21,8 +21,11 @@ public class EquipableItem : Item
     [Space]
     public EquipmentType EquipmentType;
 
+    public bool isEquipped;
+
     public void Equip(Character c)
     {
+        isEquipped = true;
         if (AttackBonus != 0)
         {
             c.Attack.AddModifier(new StatModifier(AttackBonus, StatModType.Flat, this));
@@ -51,6 +54,7 @@ public class EquipableItem : Item
 
     public void Unequip(Character c)
     {
+        isEquipped = false;
         c.Attack.RemoveAllModifiersFromSource(this);
         c.Health.RemoveAllModifiersFromSource(this);
         c.Speed.RemoveAllModifiersFromSource(this);

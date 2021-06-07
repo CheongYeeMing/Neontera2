@@ -11,6 +11,7 @@ public class Character : MonoBehaviour
     [SerializeField] Inventory inventory;
     [SerializeField] EquipmentPanel equipmentPanel;
     [SerializeField] StatPanel statPanel;
+    [SerializeField] SelectedItemPanel selectedItemPanel;
 
     private void Awake()
     {
@@ -18,6 +19,24 @@ public class Character : MonoBehaviour
         statPanel.UpdateStatValues();
         inventory.OnItemRightClickedEvent += EquipFromInventory;
         equipmentPanel.OnItemRightClickedEvent += UnequipFromEquipPanel;
+        inventory.OnItemLeftClickedEvent += ShowInSelectedItemPanel;
+        equipmentPanel.OnItemLeftClickedEvent += ShowInSelectedItemPanel;
+    }
+
+    private void ShowInSelectedItemPanel(Item item)
+    {
+        if (item.itemType == Item.ItemType.Equipment)
+        {
+            selectedItemPanel.SelectedEquipableItem(item);
+        }
+        if (item.itemType == Item.ItemType.Consumables)
+        {
+            selectedItemPanel.SelectedConsumableItem(item);
+        }
+        if (item.itemType == Item.ItemType.Quest)
+        {
+            selectedItemPanel.SelectedQuestItem(item);
+        }
     }
 
     private void EquipFromInventory(Item item)
