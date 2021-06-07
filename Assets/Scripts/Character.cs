@@ -25,9 +25,10 @@ public class Character : MonoBehaviour
 
     private void ShowInSelectedItemPanel(Item item)
     {
-        if (item.itemType == Item.ItemType.Equipment)
+        selectedItemPanel.item = item;
+        if (item.itemType == Item.ItemType.Equipment && item is EquipableItem)
         {
-            selectedItemPanel.SelectedEquipableItem(item);
+            selectedItemPanel.SelectedEquipableItem((EquipableItem)item);
         }
         if (item.itemType == Item.ItemType.Consumables)
         {
@@ -41,6 +42,7 @@ public class Character : MonoBehaviour
 
     private void EquipFromInventory(Item item)
     {
+        selectedItemPanel.gameObject.SetActive(false);
         if (item is EquipableItem)
         {
             Equip((EquipableItem)item);
@@ -49,6 +51,7 @@ public class Character : MonoBehaviour
 
     private void UnequipFromEquipPanel(Item item)
     {
+        selectedItemPanel.gameObject.SetActive(false);
         if (item is EquipableItem)
         {
             Unequip((EquipableItem)item);
@@ -85,5 +88,12 @@ public class Character : MonoBehaviour
             statPanel.UpdateStatValues();
             inventory.AddItem(item);
         }
+    }
+
+    public void Delete(EquipableItem item)
+    {
+        equipmentPanel.RemoveItem(item);
+        item.Unequip(this);
+        statPanel.UpdateStatValues();
     }
 }

@@ -7,7 +7,7 @@ using UnityEngine.Events;
 public class Item : MonoBehaviour
 {
     public enum InteractionType { NONE, PickUp, Examine}
-    public enum ItemType { Consumables, Equipment, Currency, Chest}
+    public enum ItemType { Consumables, Equipment, Currency, Quest}
     [Header("Attributes")]
     public InteractionType interactType;
     public ItemType itemType;

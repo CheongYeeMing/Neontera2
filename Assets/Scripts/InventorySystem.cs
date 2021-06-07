@@ -7,11 +7,8 @@ public class InventorySystem : MonoBehaviour
 {
     [SerializeField] Inventory inventory;
     [Header("General Fields")]
-    // List of items picked up
-    //public List<GameObject> items = new List<GameObject>();
-    // Flag indicates is the inventory is open or not
     public bool isOpen;
-    [Header("UI Items Section")]
+
     // Inventory System Window
     public GameObject ui_Window;
 
@@ -26,6 +23,8 @@ public class InventorySystem : MonoBehaviour
     public void ToggleInventory()
     {
         isOpen = !isOpen;
+        if (FindObjectOfType<SelectedItemPanel>())
+            FindObjectOfType<SelectedItemPanel>().gameObject.SetActive(false);
         ui_Window.SetActive(isOpen);
     }
 
