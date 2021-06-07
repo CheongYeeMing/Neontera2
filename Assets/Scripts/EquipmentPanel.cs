@@ -8,12 +8,15 @@ public class EquipmentPanel : MonoBehaviour
     [SerializeField] EquipmentSlot[] equipmentSlots;
 
     public event Action<Item> OnItemRightClickedEvent;
+    public event Action<Item> OnItemLeftClickedEvent;
+
 
     private void Start()
     {
         for (int i = 0; i < equipmentSlots.Length; i++)
         {
             equipmentSlots[i].OnRightClickEvent += OnItemRightClickedEvent;
+            equipmentSlots[i].OnLeftClickEvent += OnItemLeftClickedEvent;
         }
     }
 

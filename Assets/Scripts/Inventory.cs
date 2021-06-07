@@ -9,12 +9,14 @@ public class Inventory : MonoBehaviour
     [SerializeField] ItemSlot[] itemSlots;
 
     public event Action<Item> OnItemRightClickedEvent;
+    public event Action<Item> OnItemLeftClickedEvent;
 
     private void Awake()
     {
         for (int i = 0; i < itemSlots.Length; i++)
         {
             itemSlots[i].OnRightClickEvent += OnItemRightClickedEvent;
+            itemSlots[i].OnLeftClickEvent += OnItemLeftClickedEvent;
         }
     }
 
@@ -49,7 +51,6 @@ public class Inventory : MonoBehaviour
         }
         items.Add(item);
         RefreshUI();
-        Debug.Log("Added back inv");
         return true;
     }
 
