@@ -152,6 +152,15 @@ public class CharacterMovement : MonoBehaviour
         {
             can = false;
         }
+        DialogueManager[] npc = FindObjectsOfType<DialogueManager>();
+        for (int i = 0; i < npc.Length; i++)
+        {
+            if (npc[i].isTalking)
+            {
+                can = false;
+                break;
+            }
+        }
         return can;
     }
 }

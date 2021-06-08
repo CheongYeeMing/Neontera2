@@ -1,4 +1,4 @@
-using System.Collections;
+using System;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
@@ -28,9 +28,19 @@ public class Interactable : MonoBehaviour
         {
             if (InteractInput())
             {
-                detectedObject.GetComponent<Item>().Interact();
+                if (detectedObject.CompareTag("Item"))
+                {
+                    detectedObject.GetComponent<Item>().Interact();
+                }
+                else if (detectedObject.CompareTag("NPC"))
+                {
+                    detectedObject.GetComponent<DialogueManager>().TriggerDialogue();
+                }
+                
+                
             }
-        } else
+        } 
+        else
         {
             // Hide the Examine Window when walk past game object
             examineWindow.SetActive(false);
@@ -44,12 +54,12 @@ public class Interactable : MonoBehaviour
         Gizmos.DrawSphere(detectionPoint.position, detectionRadius);
     }
 
-    bool InteractInput()
+    public bool InteractInput()
     {
         return Input.GetKeyDown(KeyCode.T);
     }
 
-    bool DetectObject()
+    public bool DetectObject()
     {
         Collider2D obj = Physics2D.OverlapCircle(detectionPoint.position, detectionRadius, detectionLayer);
         if (obj == null)
