@@ -38,6 +38,14 @@ public class Interactable : MonoBehaviour
                 }
                 
                 
+            } 
+            else if (OpenShop())
+            {
+                ShopManager shopManager;
+                if (detectedObject.TryGetComponent<ShopManager>(out shopManager) == true)
+                {
+                    detectedObject.GetComponent<DialogueManager>().OpenShop();
+                }
             }
         } 
         else
@@ -66,6 +74,11 @@ public class Interactable : MonoBehaviour
     public bool InteractInput()
     {
         return Input.GetKeyDown(KeyCode.T);
+    }
+
+    public bool OpenShop()
+    {
+        return Input.GetKeyDown(KeyCode.Return);
     }
 
     public bool DetectObject()

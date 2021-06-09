@@ -6,7 +6,7 @@ using UnityEngine.UI;
 [SerializeField]
 public class CharacterWallet : MonoBehaviour
 {
-    [SerializeField] public Wallet Wallet;
+    [SerializeField] public List<Wallet> Wallet;
     
     public float GoldAmount;
 
@@ -18,7 +18,11 @@ public class CharacterWallet : MonoBehaviour
     
     public void UpdateWallet()
     {
-        Wallet.goldAmountText.text = GoldAmount.ToString();
+        foreach (Wallet wallet in Wallet)
+        {
+            wallet.goldAmountText.text = GoldAmount.ToString();
+        }
+        
     }
 
     public void AddGold(float goldAmount)
@@ -31,5 +35,10 @@ public class CharacterWallet : MonoBehaviour
     {
         GoldAmount -= goldAmount;
         UpdateWallet();
+    }
+
+    public bool HasEnoughGold(float goldAmount)
+    {
+        return goldAmount <= GoldAmount;
     }
 }

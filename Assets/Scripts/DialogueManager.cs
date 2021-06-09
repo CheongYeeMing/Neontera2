@@ -9,6 +9,7 @@ public class DialogueManager : MonoBehaviour
     public NPC npc;
 
     public bool isTalking = false;
+    public bool storyTime;
 
     public float distance;
     public float currResponseTracker = 0;
@@ -51,7 +52,13 @@ public class DialogueManager : MonoBehaviour
         }
         if (Input.GetKeyDown(KeyCode.Return))
         {
-            npcDialogueBox.text = npc.dialogue[(int)currResponseTracker+1];
+            //npcDialogueBox.text = npc.dialogue[(int)currResponseTracker+1];
+            StopAllCoroutines();
+            StartCoroutine(TypeSentence(npc.dialogue[(int)currResponseTracker + 1]));
+            if (storyTime == true)
+            {
+                currResponseTracker++;
+            }
         }
     }
 
@@ -75,7 +82,9 @@ public class DialogueManager : MonoBehaviour
         currResponseTracker = 0;
         npcName.text = npc.npcName;
         npcFace.sprite = npc.icon;
-        npcDialogueBox.text = npc.dialogue[0]; // Set to greeting message
+        //npcDialogueBox.text = npc.dialogue[0]; // Set to greeting message
+        StopAllCoroutines();
+        StartCoroutine(TypeSentence(npc.dialogue[0]));
         for (int i = 0; i < npc.characterDialogue.Length; i++)
         {
             characterResponses[i].gameObject.SetActive(true);
@@ -103,5 +112,33 @@ public class DialogueManager : MonoBehaviour
             characterResponses[i].gameObject.SetActive(false);
         }
         isTalking = false;
+        CloseShop();
+    }
+
+    IEnumerator TypeSentence(string sentence)
+    {
+        npcDialogueBox.text = "";
+        foreach (char letter in sentence.ToCharArray())
+        {
+            npcDialogueBox.text += letter;
+            yield return null;
+        }
+    }
+
+    public void OpenShop()
+    {
+        ShopManager shopManager;
+        if (currResponseTracker == 0 && gameObject.TryGetComponent<ShopManager>(out shopManager) == true)
+        {
+            shopManager.ShopWindow.GetComponentInChildren<Shop>().SetItems(npc.items);
+            shopManager.ShopWindow.gameObject.SetActive(true);
+        }
+    }
+
+    public void CloseShop()
+    {
+        ShopManager shop;
+        if (gameObject.TryGetComponent<ShopManager>(out shop) == true)
+            shop.ShopWindow.gameObject.SetActive(false);
     }
 }
