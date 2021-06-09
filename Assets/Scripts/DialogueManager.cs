@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.EventSystems;
 using UnityEngine.UI;
 
 public class DialogueManager : MonoBehaviour
@@ -18,7 +19,7 @@ public class DialogueManager : MonoBehaviour
     public Text npcName;
     public Image npcFace;
     public Text npcDialogueBox;
-    public Text characterResponse;
+    public Button[] characterResponses;
 
     public Animator animator;
     [SerializeField] DialogueFocus dialogueFocus;
@@ -31,6 +32,7 @@ public class DialogueManager : MonoBehaviour
 
     public void Update()
     {
+        if (!isTalking) return;
         if (Input.GetKeyDown(KeyCode.DownArrow))
         {
             currResponseTracker++;
@@ -47,29 +49,9 @@ public class DialogueManager : MonoBehaviour
                 currResponseTracker = 0;
             }
         }
-        if (currResponseTracker == 0 && npc.characterDialogue.Length >= 0)
+        if (Input.GetKeyDown(KeyCode.Return))
         {
-            characterResponse.text = npc.characterDialogue[0];
-            if (Input.GetKeyDown(KeyCode.Return))
-            {
-                npcDialogueBox.text = npc.dialogue[1];
-            }
-        }
-        else if (currResponseTracker == 1 && npc.characterDialogue.Length >= 1)
-        {
-            characterResponse.text = npc.characterDialogue[1];
-            if (Input.GetKeyDown(KeyCode.Return))
-            {
-                npcDialogueBox.text = npc.dialogue[2];
-            }
-        }
-        else if (currResponseTracker == 2 && npc.characterDialogue.Length >= 2)
-        {
-            characterResponse.text = npc.characterDialogue[2];
-            if (Input.GetKeyDown(KeyCode.Return))
-            {
-                npcDialogueBox.text = npc.dialogue[3];
-            }
+            npcDialogueBox.text = npc.dialogue[(int)currResponseTracker+1];
         }
     }
 
@@ -84,8 +66,6 @@ public class DialogueManager : MonoBehaviour
         {
             EndDialogue();
         }
-
-        
     }
 
     public void StartConversation()
@@ -96,11 +76,32 @@ public class DialogueManager : MonoBehaviour
         npcName.text = npc.npcName;
         npcFace.sprite = npc.icon;
         npcDialogueBox.text = npc.dialogue[0]; // Set to greeting message
+        for (int i = 0; i < npc.characterDialogue.Length; i++)
+        {
+            characterResponses[i].gameObject.SetActive(true);
+            characterResponses[i].GetComponentInChildren<Text>().text = npc.characterDialogue[i];  
+        }
+        // Clear selcted object
+        EventSystem.current.SetSelectedGameObject(null);
+        // Set new selected object
+        EventSystem.current.SetSelectedGameObject(characterResponses[0].gameObject);
+    }
+
+    public void HideCharacterResponseOption()
+    {
+        for (int i = 0; i < npc.characterDialogue.Length; i++)
+        {
+            characterResponses[i].gameObject.SetActive(false);
+        }
     }
 
     public void EndDialogue()
     {
         animator.SetBool("IsOpen", false);
+        for (int i = 0; i < npc.characterDialogue.Length; i++)
+        {
+            characterResponses[i].gameObject.SetActive(false);
+        }
         isTalking = false;
     }
 }
