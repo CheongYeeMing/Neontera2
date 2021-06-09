@@ -46,6 +46,15 @@ public class Interactable : MonoBehaviour
             examineWindow.SetActive(false);
             // Disable the boolean
             isExamining = false;
+            DialogueManager[] npc = FindObjectsOfType<DialogueManager>();
+            for (int i = 0; i < npc.Length; i++)
+            {
+                if (npc[i].isTalking)
+                {
+                    npc[i].TriggerDialogue();
+                    break;
+                }
+            }
         }
     }
     private void OnDrawGizmosSelected()

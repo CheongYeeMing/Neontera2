@@ -21,12 +21,12 @@ public class DialogueManager : MonoBehaviour
     public Text characterResponse;
 
     public Animator animator;
+    [SerializeField] DialogueFocus dialogueFocus;
 
     // Start is called before the first frame update
     void Start()
     {
         animator.SetBool("IsOpen", false);
-        //dialogueWindow.SetActive(false);
     }
 
     public void Update()
@@ -75,7 +75,7 @@ public class DialogueManager : MonoBehaviour
 
     public void TriggerDialogue()
     {
-        
+        dialogueFocus.ToggleZoom();
         if (isTalking == false)
         {
             StartConversation();
@@ -93,7 +93,6 @@ public class DialogueManager : MonoBehaviour
         animator.SetBool("IsOpen", true);
         isTalking = true;
         currResponseTracker = 0;
-        //dialogueWindow.SetActive(true);
         npcName.text = npc.npcName;
         npcFace.sprite = npc.icon;
         npcDialogueBox.text = npc.dialogue[0]; // Set to greeting message
@@ -103,6 +102,5 @@ public class DialogueManager : MonoBehaviour
     {
         animator.SetBool("IsOpen", false);
         isTalking = false;
-        //dialogueWindow.SetActive(false);
     }
 }
