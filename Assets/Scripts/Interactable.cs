@@ -36,15 +36,21 @@ public class Interactable : MonoBehaviour
                 {
                     detectedObject.GetComponent<DialogueManager>().TriggerDialogue();
                 }
-                
-                
             } 
-            else if (OpenShop())
+            if (OpenShop())
             {
                 ShopManager shopManager;
                 if (detectedObject.TryGetComponent<ShopManager>(out shopManager) == true)
                 {
                     detectedObject.GetComponent<DialogueManager>().OpenShop();
+                }
+            }
+            if (OpenQuestWindow())
+            {
+                QuestGiver questGiver;
+                if (detectedObject.TryGetComponent<QuestGiver>(out questGiver) == true)
+                {
+                    detectedObject.GetComponent<DialogueManager>().OpenQuestWindow();
                 }
             }
         } 
@@ -77,6 +83,11 @@ public class Interactable : MonoBehaviour
     }
 
     public bool OpenShop()
+    {
+        return Input.GetKeyDown(KeyCode.Return);
+    }
+
+    public bool OpenQuestWindow()
     {
         return Input.GetKeyDown(KeyCode.Return);
     }

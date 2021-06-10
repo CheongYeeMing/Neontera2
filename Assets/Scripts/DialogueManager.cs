@@ -25,6 +25,8 @@ public class DialogueManager : MonoBehaviour
     public Animator animator;
     [SerializeField] DialogueFocus dialogueFocus;
 
+    [SerializeField] QuestList questList;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -94,6 +96,18 @@ public class DialogueManager : MonoBehaviour
         EventSystem.current.SetSelectedGameObject(null);
         // Set new selected object
         EventSystem.current.SetSelectedGameObject(characterResponses[0].gameObject);
+
+        foreach (Quest quest in questList.quests)
+        {
+            if (quest.questCriteria.criteriaType == CriteriaType.Talk)
+            {
+                if (quest.questCriteria.Target == npc.npcName)
+                {
+                    quest.questCriteria.Execute();
+                    quest.Update();
+                }
+            }
+        }
     }
 
     public void HideCharacterResponseOption()
@@ -113,6 +127,7 @@ public class DialogueManager : MonoBehaviour
         }
         isTalking = false;
         CloseShop();
+        CloseQuestWindow();
     }
 
     IEnumerator TypeSentence(string sentence)
@@ -140,5 +155,23 @@ public class DialogueManager : MonoBehaviour
         ShopManager shop;
         if (gameObject.TryGetComponent<ShopManager>(out shop) == true)
             shop.ShopWindow.gameObject.SetActive(false);
+    }
+
+    public void OpenQuestWindow()
+    {
+        QuestGiver questGiver;
+        if (currResponseTracker == 0 && gameObject.TryGetComponent<QuestGiver>(out questGiver) == true)
+        {
+            questGiver.quest = npc.quests[questGiver.questNumber];
+            questGiver.OpenQuestWindow();
+        }
+    }
+
+    public void CloseQuestWindow()
+    {
+        QuestGiver questGiver;
+        if (gameObject.TryGetComponent<QuestGiver>(out questGiver) == true)
+            questGiver.CloseQuestWindow();
+
     }
 }
