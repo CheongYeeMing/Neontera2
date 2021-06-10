@@ -45,7 +45,7 @@ public class Inventory : MonoBehaviour
 
     public bool AddItem(Item item)
     {
-        if (IsFull())
+        if (IsFull() || item == null)
         {
             return false;
         }

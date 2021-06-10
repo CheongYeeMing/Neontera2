@@ -12,6 +12,8 @@ public class Character : MonoBehaviour
     [SerializeField] EquipmentPanel equipmentPanel;
     [SerializeField] StatPanel statPanel;
     [SerializeField] SelectedItemPanel selectedItemPanel;
+    [SerializeField] QuestList questList;
+    [SerializeField] SelectedQuestWindow selectedQuestWindow;
 
     private void Awake()
     {
@@ -21,6 +23,13 @@ public class Character : MonoBehaviour
         equipmentPanel.OnItemRightClickedEvent += UnequipFromEquipPanel;
         inventory.OnItemLeftClickedEvent += ShowInSelectedItemPanel;
         equipmentPanel.OnItemLeftClickedEvent += ShowInSelectedItemPanel;
+        questList.OnItemLeftClickedEvent += ShowInSelectedQuestWindow;
+    }
+
+    public void ShowInSelectedQuestWindow(Quest quest)
+    {
+        selectedQuestWindow.gameObject.SetActive(true);
+        selectedQuestWindow.QuestSelected(quest);
     }
 
     private void ShowInSelectedItemPanel(Item item)

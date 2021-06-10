@@ -1,4 +1,4 @@
-using System.Collections;
+using System;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
@@ -28,14 +28,47 @@ public class Interactable : MonoBehaviour
         {
             if (InteractInput())
             {
-                detectedObject.GetComponent<Item>().Interact();
+                if (detectedObject.CompareTag("Item"))
+                {
+                    detectedObject.GetComponent<Item>().Interact();
+                }
+                else if (detectedObject.CompareTag("NPC"))
+                {
+                    detectedObject.GetComponent<DialogueManager>().TriggerDialogue();
+                }
+            } 
+            if (OpenShop())
+            {
+                ShopManager shopManager;
+                if (detectedObject.TryGetComponent<ShopManager>(out shopManager) == true)
+                {
+                    detectedObject.GetComponent<DialogueManager>().OpenShop();
+                }
             }
-        } else
+            if (OpenQuestWindow())
+            {
+                QuestGiver questGiver;
+                if (detectedObject.TryGetComponent<QuestGiver>(out questGiver) == true)
+                {
+                    detectedObject.GetComponent<DialogueManager>().OpenQuestWindow();
+                }
+            }
+        } 
+        else
         {
             // Hide the Examine Window when walk past game object
             examineWindow.SetActive(false);
             // Disable the boolean
             isExamining = false;
+            DialogueManager[] npc = FindObjectsOfType<DialogueManager>();
+            for (int i = 0; i < npc.Length; i++)
+            {
+                if (npc[i].isTalking)
+                {
+                    npc[i].TriggerDialogue();
+                    break;
+                }
+            }
         }
     }
     private void OnDrawGizmosSelected()
@@ -44,12 +77,22 @@ public class Interactable : MonoBehaviour
         Gizmos.DrawSphere(detectionPoint.position, detectionRadius);
     }
 
-    bool InteractInput()
+    public bool InteractInput()
     {
         return Input.GetKeyDown(KeyCode.T);
     }
 
-    bool DetectObject()
+    public bool OpenShop()
+    {
+        return Input.GetKeyDown(KeyCode.Return);
+    }
+
+    public bool OpenQuestWindow()
+    {
+        return Input.GetKeyDown(KeyCode.Return);
+    }
+
+    public bool DetectObject()
     {
         Collider2D obj = Physics2D.OverlapCircle(detectionPoint.position, detectionRadius, detectionLayer);
         if (obj == null)

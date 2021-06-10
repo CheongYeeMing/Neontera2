@@ -16,7 +16,6 @@ public class SelectedItemPanel : MonoBehaviour
     public Item item;
     public bool active;
 
-
     public void SelectedEquipableItem(EquipableItem item)
     {
         ItemName.text = item.ItemName;

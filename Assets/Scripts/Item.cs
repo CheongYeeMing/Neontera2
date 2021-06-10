@@ -22,6 +22,7 @@ public class Item : MonoBehaviour
     [SerializeField] public string ItemName;
     [SerializeField] public Sprite Icon;
     [SerializeField] public string descriptionText;
+    [SerializeField] public int cost;
 
     // Called in editor only
     // Used for setting default values of Object
