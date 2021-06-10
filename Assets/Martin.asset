@@ -1,0 +1,28 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3fbed15bb973d6c468a3d7d0e6c11e7a, type: 3}
+  m_Name: Martin
+  m_EditorClassIdentifier: 
+  npcName: Martin
+  icon: {fileID: 21300000, guid: ac159a9ac0cfe2c48b57e67f70c74c32, type: 3}
+  items:
+  - {fileID: 171027649447050905, guid: 10ea64dda7f88af458f4b14147c6ffb6, type: 3}
+  - {fileID: 1645576359943562433, guid: c3f35dd8affa47e4283d27ae70458bee, type: 3}
+  - {fileID: 4317239124109681369, guid: 9406610717ba9504d975efbc29a00708, type: 3}
+  - {fileID: 227948212008674030, guid: 5059df9dbf3a2f742b6a42b7419613de, type: 3}
+  dialogue:
+  - Hello there, is there anything I can help you with?
+  - C'mon in, let me show you what I have to offer!
+  - Alrighty, have a good day adventurer!
+  characterDialogue:
+  - Yes, I need some equipment!
+  - Its okay, just looking around.
