@@ -6,7 +6,7 @@ public class ShopManager : MonoBehaviour
 {
     [SerializeField] public GameObject ShopWindow;
     [SerializeField] Shop shop;
-    [SerializeField] ShopSelectedItemPanel shopSelectedItemPanel;
+    [SerializeField] public ShopSelectedItemPanel shopSelectedItemPanel;
 
     public void Awake()
     {

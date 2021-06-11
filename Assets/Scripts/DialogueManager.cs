@@ -142,7 +142,9 @@ public class DialogueManager : MonoBehaviour
 
     public void OpenShop()
     {
+        Debug.Log("PASS");
         if (!isTalking) return;
+        
         ShopManager shopManager;
         if (currResponseTracker == 0 && gameObject.TryGetComponent<ShopManager>(out shopManager) == true)
         {
@@ -153,11 +155,11 @@ public class DialogueManager : MonoBehaviour
 
     public void CloseShop()
     {
-        ShopManager shop;
-        if (gameObject.TryGetComponent<ShopManager>(out shop) == true)
+        ShopManager shopManager;
+        if (gameObject.TryGetComponent<ShopManager>(out shopManager) == true)
         {
-            FindObjectOfType<ShopSelectedItemPanel>().gameObject.SetActive(false);
-            shop.ShopWindow.gameObject.SetActive(false);
+            shopManager.shopSelectedItemPanel.gameObject.SetActive(false);
+            shopManager.ShopWindow.gameObject.SetActive(false);
         }
     }
 

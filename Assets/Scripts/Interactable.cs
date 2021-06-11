@@ -38,7 +38,7 @@ public class Interactable : MonoBehaviour
                 }
             } 
             if (OpenShop())
-            {
+            { 
                 ShopManager shopManager;
                 if (detectedObject.TryGetComponent<ShopManager>(out shopManager) == true)
                 {
