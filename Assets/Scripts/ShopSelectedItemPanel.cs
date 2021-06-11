@@ -50,7 +50,7 @@ public class ShopSelectedItemPanel : MonoBehaviour
 
     public void BuyItem()
     {
-        if (FindObjectOfType<CharacterWallet>().HasEnoughGold(item.cost))
+        if (FindObjectOfType<CharacterWallet>().HasEnoughGold(item.cost) && !inventory.IsFull())
         {
             FindObjectOfType<CharacterWallet>().MinusGold(item.cost);
             if (item is EquipableItem)

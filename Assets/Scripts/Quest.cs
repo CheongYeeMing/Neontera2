@@ -7,6 +7,7 @@ using UnityEngine.Events;
 public class Quest
 {
     public bool isActive;
+    public bool canRepeat;
     public enum Status { COMPLETED, ONGOING, WAITING}
 
     public Status status;
@@ -39,5 +40,11 @@ public class Quest
         {
             status = Status.COMPLETED;
         }
+    }
+
+    public void Reset()
+    {
+        status = Status.WAITING;
+        questCriteria.currentAmount = 0;
     }
 }

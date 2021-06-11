@@ -98,6 +98,11 @@ public class SelectedQuestWindow : MonoBehaviour
         gameObject.SetActive(false);
         
         // Some Quest to be reset
+        if (quest.canRepeat == true)
+        {
+            quest.Reset();
+        }
         // Some Quest can only be done once then move on to next Quest already
+
     }
 }

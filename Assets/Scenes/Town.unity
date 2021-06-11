@@ -363,7 +363,8 @@ MonoBehaviour:
   - {fileID: 1115220938}
   - {fileID: 1299745404}
   animator: {fileID: 87260410}
-  dialogueFocus: {fileID: 0}
+  dialogueFocus: {fileID: 611188141}
+  questList: {fileID: 2118822157}
 --- !u!212 &21019840
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -1594,7 +1595,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   npc: {fileID: 11400000, guid: 62438ac2e69796543b9bcf0fc72a85f4, type: 2}
   isTalking: 0
-  storyTime: 0
+  storyTime: 1
   distance: 0
   currResponseTracker: 0
   character: {fileID: 1183930568}
@@ -1608,6 +1609,7 @@ MonoBehaviour:
   - {fileID: 1299745404}
   animator: {fileID: 87260410}
   dialogueFocus: {fileID: 611188141}
+  questList: {fileID: 2118822157}
 --- !u!212 &267458630
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -112833,6 +112835,7 @@ MonoBehaviour:
   questList: {fileID: 2118822157}
   quest:
     isActive: 0
+    canRepeat: 0
     status: 0
     title: 
     description: 
@@ -114940,6 +114943,7 @@ MonoBehaviour:
   - {fileID: 1299745404}
   animator: {fileID: 87260410}
   dialogueFocus: {fileID: 611188141}
+  questList: {fileID: 2118822157}
 --- !u!61 &1195939784
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -117777,6 +117781,7 @@ MonoBehaviour:
   - {fileID: 1299745404}
   animator: {fileID: 87260410}
   dialogueFocus: {fileID: 611188141}
+  questList: {fileID: 2118822157}
 --- !u!212 &1736067945
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -117857,6 +117862,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   quest:
     isActive: 0
+    canRepeat: 0
     status: 0
     title: 
     description: 
