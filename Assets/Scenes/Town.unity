@@ -1595,7 +1595,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   npc: {fileID: 11400000, guid: 62438ac2e69796543b9bcf0fc72a85f4, type: 2}
   isTalking: 0
-  storyTime: 1
+  storyTime: 0
   distance: 0
   currResponseTracker: 0
   character: {fileID: 1183930568}
