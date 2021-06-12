@@ -25,11 +25,11 @@ public class CharacterHealth : MonoBehaviour
     {
         health = Mathf.Clamp(health, 0, maxHealth);
         UpdateHealthUI();
-        if (Input.GetKeyDown(KeyCode.A))
+        if (Input.GetKeyDown(KeyCode.D))
         {
             TakeDamage(Random.Range(5, 10));
         }
-        if (Input.GetKeyDown(KeyCode.S))
+        if (Input.GetKeyDown(KeyCode.F))
         {
             RestoreHealth(Random.Range(5, 10));
         }
