@@ -7,6 +7,8 @@ public class MobAttack : MonoBehaviour
     public Collider2D boxCollider;
     public float attack;
 
+    [SerializeField] public bool isHostile;
+
     public void OnCollisionEnter2D(Collision2D collision)
     {
         if (collision.gameObject.CompareTag("Character"))
