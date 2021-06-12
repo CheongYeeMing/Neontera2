@@ -5,62 +5,41 @@ using UnityEngine;
 public class Projectile : MonoBehaviour
 {
     [SerializeField] private float speed;
-    private float direction;
-    private bool hit;
-    private float lifetime;
+    [SerializeField] private float lifetime;
 
-    private BoxCollider2D boxCollider;
     private Animator animator;
 
-    private void Awake()
+    public float damage;
+
+    public IEnumerator Start()
     {
-        boxCollider = GetComponent<BoxCollider2D>();
         animator = GetComponent<Animator>();
+        if (GetComponent<Rigidbody2D>().velocity.x < 0)
+        {
+            transform.localScale = new Vector2(-transform.localScale.x, transform.localScale.y);
+        }
+        yield return new WaitForSeconds(lifetime);
+        Destroy(gameObject);
     }
 
-    
-    private void Update()
+    private void OnTriggerEnter2D(Collider2D collision)
     {
-        if (hit)
+        if (collision.gameObject.tag == "Invincible")
         {
-            return;
-        }
-        float movementSpeed = speed * Time.deltaTime * direction;
-        transform.Translate(movementSpeed, 0, 0);
-
-        lifetime += Time.deltaTime;
-        if (lifetime > 5)
-        {
-            gameObject.SetActive(false);
+            StartCoroutine(Collide(collision.gameObject));
         }
     }
 
-    private void OnTriggerEnter2D(Collider2D collsion)
+    public IEnumerator Collide(GameObject collidedObject)
     {
-        hit = true;
-        boxCollider.enabled = false;
+        GetComponent<Rigidbody2D>().velocity = Vector2.zero;
         animator.SetTrigger("explode");
-    }
-
-    public void SetDirection(float _direction)
-    {
-        lifetime = 0;
-        direction = _direction;
-        gameObject.SetActive(true);
-        hit = false;
-        boxCollider.enabled = true;
-
-        float localScaleX = transform.localScale.x;
-        if (Mathf.Sign(localScaleX) != _direction)
+        MobHealth mobHealth;
+        if (collidedObject.TryGetComponent<MobHealth>(out mobHealth))
         {
-            localScaleX = -localScaleX;
+            mobHealth.TakeDamage(damage);
         }
-
-        transform.localScale = new Vector3(localScaleX, transform.localScale.y, transform.localScale.z);
-    }
-
-    private void Deactivate()
-    {
-        gameObject.SetActive(false);
+        yield return new WaitForSeconds(0.3f);
+        Destroy(gameObject);
     }
 }

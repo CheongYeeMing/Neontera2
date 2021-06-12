@@ -14,6 +14,7 @@ public class CharacterMovement : MonoBehaviour
     private float wallJumpCooldown; // Prevent instant teleportation up wall
     private float horizontalInput;
     private string currentState;
+    [SerializeField] public CharacterAttack characterAttack;
 
     // Animation States
     const string PLAYER_IDLE = "Idle";
@@ -61,7 +62,7 @@ public class CharacterMovement : MonoBehaviour
         // Set animator parameters
         //animator.SetBool("run", horizontalInput != 0);
         //animator.SetBool("grounded", isGrounded());
-        if (isGrounded())
+        if (isGrounded() && !characterAttack.isAttacking)
         {
             if (horizontalInput != 0)
             {
