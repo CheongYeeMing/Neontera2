@@ -9,6 +9,7 @@ public class MobMovement : MonoBehaviour
 
     public bool isPatrolling;
     public bool isAtEdge;
+    public bool inPatrolRange;
 
     public Rigidbody2D rb;
     public Collider2D boxCollider;
@@ -49,6 +50,7 @@ public class MobMovement : MonoBehaviour
         {
             StopPatrol();
         }
+
         if (gameObject.GetComponent<MobHealth>().isHurting || gameObject.GetComponent<MobHealth>().isDead)
         {
             isPatrolling = false;
@@ -56,6 +58,15 @@ public class MobMovement : MonoBehaviour
         else
         {
             isPatrolling = true;
+        }
+
+        if (Vector2.Distance(spawnPoint, new Vector2(transform.position.x, transform.position.y)) > patrolRadius)
+        {
+            inPatrolRange = false;
+        } 
+        else
+        {
+            inPatrolRange = true;
         }
     }
 
@@ -77,10 +88,10 @@ public class MobMovement : MonoBehaviour
                 Flip();
             }
         }
-        else if (jumpBoxCollider.IsTouchingLayers(wallLayer) || Vector2.Distance(spawnPoint, new Vector2(transform.position.x, transform.position.y)) > patrolRadius)
+        else if (jumpBoxCollider.IsTouchingLayers(wallLayer) || (!insidePatrolRange()))
         {
             Flip();
-        }
+        } 
         
         if (isGrounded() && hitStep())
         {
@@ -108,7 +119,27 @@ public class MobMovement : MonoBehaviour
         return jumpBoxCollider.IsTouchingLayers(groundLayer);
     }
 
-    void Flip()
+    public bool insidePatrolRange()
+    {
+        if (inPatrolRange)
+        {
+            return true;
+        }
+        else
+        {
+            if (transform.position.x < spawnPoint.x && moveSpeed > 0)
+            {
+                return true;
+            }
+            else if (transform.position.x > spawnPoint.x && moveSpeed < 0)
+            {
+                return true;
+            }
+            return false;
+        }
+    }
+
+    public void Flip()
     //function to flip the enemy
     {
         transform.localScale = new Vector2(transform.localScale.x * -1, transform.localScale.y);
