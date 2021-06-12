@@ -4,23 +4,21 @@ using UnityEngine;
 
 public class CharacterAttack : MonoBehaviour
 {
-    [SerializeField] private float attackCooldown;
-
     [SerializeField] private Transform firePoint;
 
     [SerializeField] public Transform attackPoint;
     public float attackRange = 0.5f;
     public LayerMask mobLayer;
     public bool isAttacking;
-    [SerializeField] public float attackDelay = 0.3f;
-
-    [SerializeField] private GameObject[] fireballs;
+    [SerializeField] public float attackDelay = 1f;
 
     [SerializeField] private GameObject fireball;
 
     private Animator animator;
     private CharacterMovement playerMovement;
     private float cooldownTimer = Mathf.Infinity;
+
+    public float attack;
 
     // Animation States
     const string PLAYER_ATTACK = "Attack";
@@ -30,15 +28,16 @@ public class CharacterAttack : MonoBehaviour
     {
         animator = GetComponent<Animator>();
         playerMovement = GetComponent<CharacterMovement>();
+        attack = gameObject.GetComponent<Character>().Attack.CalculateFinalValue();
     }
 
     private void Update()
     {
-        if (Input.GetKey(KeyCode.A) && playerMovement.canAttack() && cooldownTimer > attackCooldown)
+        if (Input.GetKey(KeyCode.A) && playerMovement.canAttack() && !isAttacking)
         {
             Attack();
         }
-        else if (Input.GetKeyDown(KeyCode.S) && playerMovement.canAttack() && cooldownTimer > attackCooldown)
+        else if (Input.GetKeyDown(KeyCode.S) && playerMovement.canAttack() && cooldownTimer > attackDelay)
         {
             SpecialAttack();
         }
@@ -52,11 +51,12 @@ public class CharacterAttack : MonoBehaviour
         playerMovement.ChangeAnimationState(PLAYER_ATTACK);
         cooldownTimer = 0;
 
-        Collider2D[] hitEnemies = Physics2D.OverlapCircleAll(attackPoint.position, attackRange, mobLayer);
+        Collider2D[] hitMobs = Physics2D.OverlapCircleAll(attackPoint.position, attackRange, mobLayer);
+        attack = gameObject.GetComponent<Character>().Attack.CalculateFinalValue();
 
-        foreach (Collider2D enemy in hitEnemies)
+        foreach (Collider2D mob in hitMobs)
         {
-            Debug.Log("We hit" + enemy.name);
+            mob.GetComponent<MobHealth>().TakeDamage(attack);
         }
 
         Invoke("AttackComplete", attackDelay);
@@ -79,6 +79,7 @@ public class CharacterAttack : MonoBehaviour
         cooldownTimer = 0;
 
         GameObject fireBall = Instantiate(fireball, firePoint.transform.position, Quaternion.identity) as GameObject;
+        fireBall.GetComponent<Projectile>().damage = (float)(gameObject.GetComponent<Character>().Attack.CalculateFinalValue()*0.75);
         fireBall.GetComponent<Rigidbody2D>().velocity = new Vector2(Mathf.Sign(transform.localScale.x) * 15.0f, 0);
 
         Invoke("AttackComplete", attackDelay);

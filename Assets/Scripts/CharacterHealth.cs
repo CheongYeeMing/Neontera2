@@ -4,7 +4,7 @@ using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
 
-public class CharacterHealth : MonoBehaviour
+public class CharacterHealth : MonoBehaviour, Health
 {
     private float health;
     private float lerpTimer;
@@ -65,6 +65,10 @@ public class CharacterHealth : MonoBehaviour
     {
         health -= damage;
         lerpTimer = 0f;
+        if (health <= 0)
+        {
+            Die();
+        }
     }
 
     public void RestoreHealth(float healAmount)
@@ -77,5 +81,10 @@ public class CharacterHealth : MonoBehaviour
     {
         maxHealth += (health * 0.01f) * ((100 - level) * 0.1f);
         health = maxHealth;
+    }
+
+    public void Die()
+    {
+        Debug.Log("Character is dead!!!");
     }
 }

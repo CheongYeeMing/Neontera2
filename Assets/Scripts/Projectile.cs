@@ -9,6 +9,8 @@ public class Projectile : MonoBehaviour
 
     private Animator animator;
 
+    public float damage;
+
     public IEnumerator Start()
     {
         animator = GetComponent<Animator>();
@@ -24,14 +26,19 @@ public class Projectile : MonoBehaviour
     {
         if (collision.gameObject.tag == "Invincible")
         {
-            StartCoroutine(Collide());
+            StartCoroutine(Collide(collision.gameObject));
         }
     }
 
-    public IEnumerator Collide()
+    public IEnumerator Collide(GameObject collidedObject)
     {
         GetComponent<Rigidbody2D>().velocity = Vector2.zero;
         animator.SetTrigger("explode");
+        MobHealth mobHealth;
+        if (collidedObject.TryGetComponent<MobHealth>(out mobHealth))
+        {
+            mobHealth.TakeDamage(damage);
+        }
         yield return new WaitForSeconds(0.3f);
         Destroy(gameObject);
     }

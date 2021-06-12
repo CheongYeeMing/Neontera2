@@ -11,6 +11,7 @@ TagManager:
   - Item
   - NPC
   - Invincible
+  - Character
   layers:
   - Default
   - TransparentFX
