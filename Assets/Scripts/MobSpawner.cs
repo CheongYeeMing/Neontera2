@@ -25,6 +25,7 @@ public class MobSpawner : MonoBehaviour
 
     public void Respawn()
     {
+        gameObject.transform.position = gameObject.GetComponent<MobMovement>().spawnPoint;
         gameObject.GetComponent<MobHealth>().Start();
         gameObject.GetComponent<MobReward>().Start();
         gameObject.GetComponent<MobAnimation>().Start();

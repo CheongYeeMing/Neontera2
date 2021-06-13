@@ -20,6 +20,8 @@ public class CharacterHealth : MonoBehaviour, Health
     public Image backHealthBar;
     public TextMeshProUGUI healthText;
 
+    public GameObject attackedBy;
+
     // Character Animation States
     public const string CHARACTER_HURT = "Hurt";
     public const string CHARACTER_DIE = "Die";
@@ -75,6 +77,7 @@ public class CharacterHealth : MonoBehaviour, Health
     {
         isHurting = true;
         gameObject.GetComponent<CharacterAnimation>().ChangeAnimationState(CHARACTER_HURT);
+        KnockBack(attackedBy);
         health -= damage;
         lerpTimer = 0f;
         if (health <= 0)
@@ -87,6 +90,19 @@ public class CharacterHealth : MonoBehaviour, Health
     public void HurtComplete()
     {
         isHurting = false;
+    }
+
+    public void KnockBack(GameObject mob)
+    {
+        Rigidbody2D body = gameObject.GetComponent<CharacterMovement>().body;
+        if (mob.transform.position.x > gameObject.transform.position.x)
+        {
+            body.velocity = new Vector2(body.velocity.x - mob.GetComponent<MobAttack>().KnockbackX, body.velocity.y + mob.GetComponent<MobAttack>().KnockbackY);
+        }
+        else
+        {
+            body.velocity = new Vector2(body.velocity.x + mob.GetComponent<MobAttack>().KnockbackX, body.velocity.y + mob.GetComponent<MobAttack>().KnockbackY);
+        }
     }
 
     public void RestoreHealth(float healAmount)
@@ -105,8 +121,6 @@ public class CharacterHealth : MonoBehaviour, Health
     {
         isDead = true;
         gameObject.GetComponent<CharacterAnimation>().ChangeAnimationState(CHARACTER_DIE);
-        GetComponent<Collider2D>().enabled = false;
-        this.enabled = false;
         Debug.Log("Character is dead!!!");
         // Dead Screen, Auto Respawn in Town area??? 
     }

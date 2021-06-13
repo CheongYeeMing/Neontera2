@@ -23,8 +23,11 @@ public class MobHealth : MonoBehaviour, Health
         currentHealth = maxHealth;
         isHurting = false;
         isDead = false;
-        GetComponent<Collider2D>().enabled = true;
-        this.enabled = true;
+        gameObject.GetComponent<Rigidbody2D>().gravityScale = 3;
+        foreach (BoxCollider2D boxCollider in gameObject.GetComponents<BoxCollider2D>())
+        {
+            boxCollider.enabled = true;
+        }
         gameObject.GetComponent<SpriteRenderer>().enabled = true;
     }
 
@@ -47,10 +50,12 @@ public class MobHealth : MonoBehaviour, Health
         gameObject.GetComponent<MobSpawner>().deathTimer = 0;
         isDead = true;
         Debug.Log("Mob is dead!!!");
-        // Death animation
         gameObject.GetComponent<MobAnimation>().ChangeAnimationState(MOB_DIE);
-        GetComponent<Collider2D>().enabled = false;
-        this.enabled = false;
+        gameObject.GetComponent<Rigidbody2D>().gravityScale = 0;
+        foreach (BoxCollider2D boxCollider in gameObject.GetComponents<BoxCollider2D>())
+        {
+            boxCollider.enabled = false;
+        }
         Invoke("DieComplete", dieDelay);
     }
 

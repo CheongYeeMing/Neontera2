@@ -5,9 +5,9 @@ using UnityEngine;
 public class MobAttack : MonoBehaviour
 {
     [SerializeField] public float attackDelay;
+    [SerializeField] public float KnockbackX;
+    [SerializeField] public float KnockbackY;
     [SerializeField] public bool isHostile;
-    
-    public Collider2D boxCollider;
 
     public float attack;
 
@@ -18,7 +18,7 @@ public class MobAttack : MonoBehaviour
     {
         if (collision.gameObject.CompareTag("Character"))
         {
-            Debug.Log("damage");
+            collision.gameObject.GetComponent<CharacterHealth>().attackedBy = gameObject;
             collision.gameObject.GetComponent<CharacterHealth>().TakeDamage(attack);
         }
     }

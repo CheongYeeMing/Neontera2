@@ -12,7 +12,7 @@ public class CharacterMovement : MonoBehaviour
     [SerializeField] public CharacterAttack characterAttack;
 
     private BoxCollider2D boxCollider;
-    private Rigidbody2D body;
+    public Rigidbody2D body;
 
     private float wallJumpCooldown; // Prevent instant teleportation up wall
     private float horizontalInput;

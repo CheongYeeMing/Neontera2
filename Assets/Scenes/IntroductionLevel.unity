@@ -164,9 +164,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 70ce5b5d47e93b742a18cad306d694f9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  attackDelay: 0.2
-  hurtDelay: 0.25
-  dieDelay: 0.35
   animator: {fileID: 13641416}
 --- !u!95 &13641416
 Animator:
@@ -199,8 +196,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a28b2b918e20328479c578beff2fbbb6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  attackDelay: 1
+  KnockbackX: 3
+  KnockbackY: 3.5
   isHostile: 0
-  boxCollider: {fileID: 13641424}
+  boxCollider: {fileID: 450594396}
   attack: 10
 --- !u!61 &13641418
 BoxCollider2D:
@@ -258,7 +258,7 @@ MonoBehaviour:
   edgeDetector: {fileID: 1639259877}
   spawnPoint: {x: 0, y: 0}
   patrolRadius: 5
-  jumpPower: 2
+  jumpPower: 1
   onFloatingPlatform: 0
 --- !u!114 &13641420
 MonoBehaviour:
@@ -440,8 +440,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f923b7da464b4f34da250b347073b843, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  canRespawn: 0
-  respawnTime: 0
+  canRespawn: 1
+  respawnTime: 5
+  deathTimer: 0
 --- !u!114 &13641428
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -457,6 +458,7 @@ MonoBehaviour:
   expReward: 5
   goldReward: 2
   itemDrops: []
+  rewardGiven: 0
 --- !u!1 &33191796
 GameObject:
   m_ObjectHideFlags: 0
@@ -814,7 +816,7 @@ MonoBehaviour:
   edgeDetector: {fileID: 1087771034}
   spawnPoint: {x: 0, y: 0}
   patrolRadius: 5
-  jumpPower: 2
+  jumpPower: 1
   onFloatingPlatform: 1
 --- !u!61 &40825175
 BoxCollider2D:
@@ -854,8 +856,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a28b2b918e20328479c578beff2fbbb6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  attackDelay: 1
+  KnockbackX: 3
+  KnockbackY: 3.5
   isHostile: 0
-  boxCollider: {fileID: 40825169}
+  boxCollider: {fileID: 450594396}
   attack: 10
 --- !u!95 &40825177
 Animator:
@@ -888,9 +893,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 70ce5b5d47e93b742a18cad306d694f9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  attackDelay: 0.2
-  hurtDelay: 0.25
-  dieDelay: 0.35
   animator: {fileID: 40825177}
 --- !u!114 &40825179
 MonoBehaviour:
@@ -904,8 +906,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f923b7da464b4f34da250b347073b843, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  canRespawn: 0
-  respawnTime: 0
+  canRespawn: 1
+  respawnTime: 5
+  deathTimer: 0
 --- !u!114 &40825180
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -921,6 +924,7 @@ MonoBehaviour:
   expReward: 5
   goldReward: 2
   itemDrops: []
+  rewardGiven: 0
 --- !u!1 &63016267
 GameObject:
   m_ObjectHideFlags: 0
@@ -1239,9 +1243,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 70ce5b5d47e93b742a18cad306d694f9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  attackDelay: 0.2
-  hurtDelay: 0.25
-  dieDelay: 0.35
   animator: {fileID: 251608582}
 --- !u!95 &251608582
 Animator:
@@ -1274,8 +1275,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a28b2b918e20328479c578beff2fbbb6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  attackDelay: 1
+  KnockbackX: 3
+  KnockbackY: 3.5
   isHostile: 0
-  boxCollider: {fileID: 251608590}
+  boxCollider: {fileID: 450594396}
   attack: 10
 --- !u!61 &251608584
 BoxCollider2D:
@@ -1333,7 +1337,7 @@ MonoBehaviour:
   edgeDetector: {fileID: 477726413}
   spawnPoint: {x: 0, y: 0}
   patrolRadius: 5
-  jumpPower: 2
+  jumpPower: 1
   onFloatingPlatform: 0
 --- !u!114 &251608586
 MonoBehaviour:
@@ -1515,8 +1519,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f923b7da464b4f34da250b347073b843, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  canRespawn: 0
-  respawnTime: 0
+  canRespawn: 1
+  respawnTime: 5
+  deathTimer: 0
 --- !u!114 &251608594
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1532,6 +1537,7 @@ MonoBehaviour:
   expReward: 5
   goldReward: 2
   itemDrops: []
+  rewardGiven: 0
 --- !u!1 &255478986
 GameObject:
   m_ObjectHideFlags: 0
@@ -2099,9 +2105,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 70ce5b5d47e93b742a18cad306d694f9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  attackDelay: 0.2
-  hurtDelay: 0.25
-  dieDelay: 0.35
   animator: {fileID: 449598657}
 --- !u!95 &449598657
 Animator:
@@ -2134,8 +2137,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a28b2b918e20328479c578beff2fbbb6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  attackDelay: 1
+  KnockbackX: 3
+  KnockbackY: 3.5
   isHostile: 0
-  boxCollider: {fileID: 449598665}
+  boxCollider: {fileID: 450594396}
   attack: 10
 --- !u!61 &449598659
 BoxCollider2D:
@@ -2193,7 +2199,7 @@ MonoBehaviour:
   edgeDetector: {fileID: 459885036}
   spawnPoint: {x: 0, y: 0}
   patrolRadius: 5
-  jumpPower: 2
+  jumpPower: 1
   onFloatingPlatform: 0
 --- !u!114 &449598661
 MonoBehaviour:
@@ -2375,8 +2381,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f923b7da464b4f34da250b347073b843, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  canRespawn: 0
-  respawnTime: 0
+  canRespawn: 1
+  respawnTime: 5
+  deathTimer: 0
 --- !u!114 &449598669
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2392,6 +2399,7 @@ MonoBehaviour:
   expReward: 5
   goldReward: 2
   itemDrops: []
+  rewardGiven: 0
 --- !u!1 &450594386
 GameObject:
   m_ObjectHideFlags: 0
@@ -2433,9 +2441,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 70ce5b5d47e93b742a18cad306d694f9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  attackDelay: 0.2
-  hurtDelay: 0.25
-  dieDelay: 0.35
   animator: {fileID: 450594388}
 --- !u!95 &450594388
 Animator:
@@ -2468,6 +2473,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a28b2b918e20328479c578beff2fbbb6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  attackDelay: 1
+  KnockbackX: 3
+  KnockbackY: 3.5
   isHostile: 0
   boxCollider: {fileID: 450594396}
   attack: 10
@@ -2527,7 +2535,7 @@ MonoBehaviour:
   edgeDetector: {fileID: 882249582}
   spawnPoint: {x: 0, y: 0}
   patrolRadius: 5
-  jumpPower: 2
+  jumpPower: 1
   onFloatingPlatform: 0
 --- !u!114 &450594392
 MonoBehaviour:
@@ -2709,8 +2717,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f923b7da464b4f34da250b347073b843, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  canRespawn: 0
-  respawnTime: 0
+  canRespawn: 1
+  respawnTime: 5
+  deathTimer: 0
 --- !u!114 &450594400
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2726,6 +2735,7 @@ MonoBehaviour:
   expReward: 5
   goldReward: 2
   itemDrops: []
+  rewardGiven: 0
 --- !u!1 &459885035
 GameObject:
   m_ObjectHideFlags: 0
@@ -2986,9 +2996,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 70ce5b5d47e93b742a18cad306d694f9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  attackDelay: 0.2
-  hurtDelay: 0.25
-  dieDelay: 0.35
   animator: {fileID: 573965613}
 --- !u!95 &573965613
 Animator:
@@ -3021,8 +3028,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a28b2b918e20328479c578beff2fbbb6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  attackDelay: 1
+  KnockbackX: 3
+  KnockbackY: 3.5
   isHostile: 0
-  boxCollider: {fileID: 573965621}
+  boxCollider: {fileID: 450594396}
   attack: 10
 --- !u!61 &573965615
 BoxCollider2D:
@@ -3080,7 +3090,7 @@ MonoBehaviour:
   edgeDetector: {fileID: 813944213}
   spawnPoint: {x: 0, y: 0}
   patrolRadius: 5
-  jumpPower: 2
+  jumpPower: 1
   onFloatingPlatform: 0
 --- !u!114 &573965617
 MonoBehaviour:
@@ -3262,8 +3272,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f923b7da464b4f34da250b347073b843, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  canRespawn: 0
-  respawnTime: 0
+  canRespawn: 1
+  respawnTime: 5
+  deathTimer: 0
 --- !u!114 &573965625
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3279,6 +3290,7 @@ MonoBehaviour:
   expReward: 5
   goldReward: 2
   itemDrops: []
+  rewardGiven: 0
 --- !u!1 &582501079
 GameObject:
   m_ObjectHideFlags: 0
@@ -4183,9 +4195,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 70ce5b5d47e93b742a18cad306d694f9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  attackDelay: 0.2
-  hurtDelay: 0.25
-  dieDelay: 0.35
   animator: {fileID: 730199538}
 --- !u!95 &730199538
 Animator:
@@ -4218,8 +4227,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a28b2b918e20328479c578beff2fbbb6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  attackDelay: 1
+  KnockbackX: 3
+  KnockbackY: 3.5
   isHostile: 0
-  boxCollider: {fileID: 730199546}
+  boxCollider: {fileID: 450594396}
   attack: 10
 --- !u!61 &730199540
 BoxCollider2D:
@@ -4277,7 +4289,7 @@ MonoBehaviour:
   edgeDetector: {fileID: 1135178911}
   spawnPoint: {x: 0, y: 0}
   patrolRadius: 5
-  jumpPower: 2
+  jumpPower: 1
   onFloatingPlatform: 0
 --- !u!114 &730199542
 MonoBehaviour:
@@ -4459,8 +4471,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f923b7da464b4f34da250b347073b843, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  canRespawn: 0
-  respawnTime: 0
+  canRespawn: 1
+  respawnTime: 5
+  deathTimer: 0
 --- !u!114 &730199550
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -4476,6 +4489,7 @@ MonoBehaviour:
   expReward: 5
   goldReward: 2
   itemDrops: []
+  rewardGiven: 0
 --- !u!1 &730807955
 GameObject:
   m_ObjectHideFlags: 0
@@ -4517,9 +4531,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 70ce5b5d47e93b742a18cad306d694f9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  attackDelay: 0.2
-  hurtDelay: 0.25
-  dieDelay: 0.35
   animator: {fileID: 730807957}
 --- !u!95 &730807957
 Animator:
@@ -4552,8 +4563,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a28b2b918e20328479c578beff2fbbb6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  attackDelay: 1
+  KnockbackX: 3
+  KnockbackY: 3.5
   isHostile: 0
-  boxCollider: {fileID: 730807965}
+  boxCollider: {fileID: 450594396}
   attack: 10
 --- !u!61 &730807959
 BoxCollider2D:
@@ -4611,7 +4625,7 @@ MonoBehaviour:
   edgeDetector: {fileID: 263430051}
   spawnPoint: {x: 0, y: 0}
   patrolRadius: 5
-  jumpPower: 2
+  jumpPower: 1
   onFloatingPlatform: 0
 --- !u!114 &730807961
 MonoBehaviour:
@@ -4793,8 +4807,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f923b7da464b4f34da250b347073b843, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  canRespawn: 0
-  respawnTime: 0
+  canRespawn: 1
+  respawnTime: 5
+  deathTimer: 0
 --- !u!114 &730807969
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -4810,6 +4825,7 @@ MonoBehaviour:
   expReward: 5
   goldReward: 2
   itemDrops: []
+  rewardGiven: 0
 --- !u!1 &741625926
 GameObject:
   m_ObjectHideFlags: 0
@@ -131200,9 +131216,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 70ce5b5d47e93b742a18cad306d694f9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  attackDelay: 0.2
-  hurtDelay: 0.25
-  dieDelay: 0.35
   animator: {fileID: 1089219546}
 --- !u!95 &1089219546
 Animator:
@@ -131235,8 +131248,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a28b2b918e20328479c578beff2fbbb6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  attackDelay: 1
+  KnockbackX: 3
+  KnockbackY: 3.5
   isHostile: 0
-  boxCollider: {fileID: 1089219554}
+  boxCollider: {fileID: 450594396}
   attack: 10
 --- !u!61 &1089219548
 BoxCollider2D:
@@ -131294,7 +131310,7 @@ MonoBehaviour:
   edgeDetector: {fileID: 1245056488}
   spawnPoint: {x: 0, y: 0}
   patrolRadius: 5
-  jumpPower: 2
+  jumpPower: 1
   onFloatingPlatform: 0
 --- !u!114 &1089219550
 MonoBehaviour:
@@ -131476,8 +131492,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f923b7da464b4f34da250b347073b843, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  canRespawn: 0
-  respawnTime: 0
+  canRespawn: 1
+  respawnTime: 5
+  deathTimer: 0
 --- !u!114 &1089219558
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -131493,6 +131510,7 @@ MonoBehaviour:
   expReward: 5
   goldReward: 2
   itemDrops: []
+  rewardGiven: 0
 --- !u!1 &1135178910
 GameObject:
   m_ObjectHideFlags: 0
@@ -131701,9 +131719,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 70ce5b5d47e93b742a18cad306d694f9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  attackDelay: 0.2
-  hurtDelay: 0.25
-  dieDelay: 0.35
   animator: {fileID: 1257914630}
 --- !u!95 &1257914630
 Animator:
@@ -131736,8 +131751,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a28b2b918e20328479c578beff2fbbb6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  attackDelay: 1
+  KnockbackX: 3
+  KnockbackY: 3.5
   isHostile: 0
-  boxCollider: {fileID: 1257914638}
+  boxCollider: {fileID: 450594396}
   attack: 10
 --- !u!61 &1257914632
 BoxCollider2D:
@@ -131795,7 +131813,7 @@ MonoBehaviour:
   edgeDetector: {fileID: 1575325987}
   spawnPoint: {x: 0, y: 0}
   patrolRadius: 5
-  jumpPower: 2
+  jumpPower: 1
   onFloatingPlatform: 0
 --- !u!114 &1257914634
 MonoBehaviour:
@@ -131977,8 +131995,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f923b7da464b4f34da250b347073b843, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  canRespawn: 0
-  respawnTime: 0
+  canRespawn: 1
+  respawnTime: 5
+  deathTimer: 0
 --- !u!114 &1257914642
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -131994,6 +132013,7 @@ MonoBehaviour:
   expReward: 5
   goldReward: 2
   itemDrops: []
+  rewardGiven: 0
 --- !u!1 &1275889550
 GameObject:
   m_ObjectHideFlags: 0
@@ -134689,9 +134709,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 70ce5b5d47e93b742a18cad306d694f9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  attackDelay: 0.2
-  hurtDelay: 0.25
-  dieDelay: 0.35
   animator: {fileID: 1677956183}
 --- !u!95 &1677956183
 Animator:
@@ -134724,8 +134741,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a28b2b918e20328479c578beff2fbbb6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  attackDelay: 1
+  KnockbackX: 3
+  KnockbackY: 3.5
   isHostile: 0
-  boxCollider: {fileID: 1677956191}
+  boxCollider: {fileID: 450594396}
   attack: 10
 --- !u!61 &1677956185
 BoxCollider2D:
@@ -134783,7 +134803,7 @@ MonoBehaviour:
   edgeDetector: {fileID: 1178933973}
   spawnPoint: {x: 0, y: 0}
   patrolRadius: 5
-  jumpPower: 2
+  jumpPower: 1
   onFloatingPlatform: 0
 --- !u!114 &1677956187
 MonoBehaviour:
@@ -134965,8 +134985,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f923b7da464b4f34da250b347073b843, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  canRespawn: 0
-  respawnTime: 0
+  canRespawn: 1
+  respawnTime: 5
+  deathTimer: 0
 --- !u!114 &1677956195
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -134982,6 +135003,7 @@ MonoBehaviour:
   expReward: 5
   goldReward: 2
   itemDrops: []
+  rewardGiven: 0
 --- !u!1 &1707803116
 GameObject:
   m_ObjectHideFlags: 0
@@ -135181,9 +135203,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 70ce5b5d47e93b742a18cad306d694f9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  attackDelay: 0.2
-  hurtDelay: 0.25
-  dieDelay: 0.35
   animator: {fileID: 1752370802}
 --- !u!95 &1752370802
 Animator:
@@ -135216,8 +135235,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a28b2b918e20328479c578beff2fbbb6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  attackDelay: 1
+  KnockbackX: 3
+  KnockbackY: 3.5
   isHostile: 0
-  boxCollider: {fileID: 1752370810}
+  boxCollider: {fileID: 450594396}
   attack: 10
 --- !u!61 &1752370804
 BoxCollider2D:
@@ -135275,7 +135297,7 @@ MonoBehaviour:
   edgeDetector: {fileID: 1878020826}
   spawnPoint: {x: 0, y: 0}
   patrolRadius: 5
-  jumpPower: 2
+  jumpPower: 1
   onFloatingPlatform: 0
 --- !u!114 &1752370806
 MonoBehaviour:
@@ -135457,8 +135479,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f923b7da464b4f34da250b347073b843, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  canRespawn: 0
-  respawnTime: 0
+  canRespawn: 1
+  respawnTime: 5
+  deathTimer: 0
 --- !u!114 &1752370814
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -135474,6 +135497,7 @@ MonoBehaviour:
   expReward: 5
   goldReward: 2
   itemDrops: []
+  rewardGiven: 0
 --- !u!114 &1799150981 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 4322237880540490116, guid: 53583bf3984895145a044066b1de28a7, type: 3}
@@ -135751,9 +135775,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 70ce5b5d47e93b742a18cad306d694f9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  attackDelay: 0.2
-  hurtDelay: 0.25
-  dieDelay: 0.35
   animator: {fileID: 1869643274}
 --- !u!95 &1869643274
 Animator:
@@ -135786,8 +135807,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a28b2b918e20328479c578beff2fbbb6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  attackDelay: 1
+  KnockbackX: 3
+  KnockbackY: 3.5
   isHostile: 0
-  boxCollider: {fileID: 1869643282}
+  boxCollider: {fileID: 450594396}
   attack: 10
 --- !u!61 &1869643276
 BoxCollider2D:
@@ -135845,7 +135869,7 @@ MonoBehaviour:
   edgeDetector: {fileID: 1574791159}
   spawnPoint: {x: 0, y: 0}
   patrolRadius: 5
-  jumpPower: 2
+  jumpPower: 1
   onFloatingPlatform: 1
 --- !u!114 &1869643278
 MonoBehaviour:
@@ -136027,8 +136051,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f923b7da464b4f34da250b347073b843, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  canRespawn: 0
-  respawnTime: 0
+  canRespawn: 1
+  respawnTime: 5
+  deathTimer: 0
 --- !u!114 &1869643286
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -136044,6 +136069,7 @@ MonoBehaviour:
   expReward: 5
   goldReward: 2
   itemDrops: []
+  rewardGiven: 0
 --- !u!1 &1878020825
 GameObject:
   m_ObjectHideFlags: 0
@@ -136115,9 +136141,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 70ce5b5d47e93b742a18cad306d694f9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  attackDelay: 0.2
-  hurtDelay: 0.25
-  dieDelay: 0.35
   animator: {fileID: 1905384445}
 --- !u!95 &1905384445
 Animator:
@@ -136150,8 +136173,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a28b2b918e20328479c578beff2fbbb6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  attackDelay: 1
+  KnockbackX: 3
+  KnockbackY: 3.5
   isHostile: 0
-  boxCollider: {fileID: 1905384453}
+  boxCollider: {fileID: 450594396}
   attack: 10
 --- !u!61 &1905384447
 BoxCollider2D:
@@ -136209,7 +136235,7 @@ MonoBehaviour:
   edgeDetector: {fileID: 1560059980}
   spawnPoint: {x: 0, y: 0}
   patrolRadius: 5
-  jumpPower: 2
+  jumpPower: 1
   onFloatingPlatform: 0
 --- !u!114 &1905384449
 MonoBehaviour:
@@ -136391,8 +136417,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f923b7da464b4f34da250b347073b843, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  canRespawn: 0
-  respawnTime: 0
+  canRespawn: 1
+  respawnTime: 5
+  deathTimer: 0
 --- !u!114 &1905384457
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -136408,6 +136435,7 @@ MonoBehaviour:
   expReward: 5
   goldReward: 2
   itemDrops: []
+  rewardGiven: 0
 --- !u!1 &1912856751
 GameObject:
   m_ObjectHideFlags: 0
@@ -136771,9 +136799,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 70ce5b5d47e93b742a18cad306d694f9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  attackDelay: 0.2
-  hurtDelay: 0.25
-  dieDelay: 0.35
   animator: {fileID: 1943814909}
 --- !u!95 &1943814909
 Animator:
@@ -136806,8 +136831,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a28b2b918e20328479c578beff2fbbb6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  attackDelay: 1
+  KnockbackX: 3
+  KnockbackY: 3.5
   isHostile: 0
-  boxCollider: {fileID: 1943814917}
+  boxCollider: {fileID: 450594396}
   attack: 10
 --- !u!61 &1943814911
 BoxCollider2D:
@@ -136865,7 +136893,7 @@ MonoBehaviour:
   edgeDetector: {fileID: 1004742899}
   spawnPoint: {x: 0, y: 0}
   patrolRadius: 5
-  jumpPower: 2
+  jumpPower: 1
   onFloatingPlatform: 0
 --- !u!114 &1943814913
 MonoBehaviour:
@@ -137047,8 +137075,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f923b7da464b4f34da250b347073b843, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  canRespawn: 0
-  respawnTime: 0
+  canRespawn: 1
+  respawnTime: 5
+  deathTimer: 0
 --- !u!114 &1943814921
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -137064,6 +137093,7 @@ MonoBehaviour:
   expReward: 5
   goldReward: 2
   itemDrops: []
+  rewardGiven: 0
 --- !u!1 &1960185698
 GameObject:
   m_ObjectHideFlags: 0
