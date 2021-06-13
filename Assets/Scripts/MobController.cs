@@ -5,6 +5,7 @@ using UnityEngine.AI;
 
 public class MobController : MonoBehaviour
 {
+    [SerializeField] public string mobName;
     public float lookRadius = 10f;
 
     Transform target;

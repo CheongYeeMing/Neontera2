@@ -33,7 +33,7 @@ public class CharacterAttack : MonoBehaviour
 
     private void Update()
     {
-        if (Input.GetKey(KeyCode.A) && playerMovement.canAttack() && !isAttacking)
+        if (Input.GetKey(KeyCode.A) && playerMovement.canAttack() && !isAttacking && cooldownTimer > attackDelay)
         {
             Attack();
         }
@@ -57,6 +57,23 @@ public class CharacterAttack : MonoBehaviour
         foreach (Collider2D mob in hitMobs)
         {
             mob.GetComponent<MobHealth>().TakeDamage(attack);
+        }
+        foreach (Collider2D mob in hitMobs)
+        {
+            if (mob.GetComponent<MobHealth>().isDead)
+            {
+                foreach(Quest quest in gameObject.GetComponent<Character>().questList.quests)
+                {
+                    if (quest.questCriteria.criteriaType == CriteriaType.Kill)
+                    {
+                        if (quest.questCriteria.Target == mob.GetComponent<MobController>().mobName)
+                        {
+                            quest.questCriteria.Execute();
+                            quest.Update();
+                        }
+                    }
+                }
+            }
         }
 
         Invoke("AttackComplete", attackDelay);
