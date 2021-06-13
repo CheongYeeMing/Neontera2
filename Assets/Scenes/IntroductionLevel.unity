@@ -143,6 +143,8 @@ GameObject:
   - component: {fileID: 13641417}
   - component: {fileID: 13641416}
   - component: {fileID: 13641415}
+  - component: {fileID: 13641427}
+  - component: {fileID: 13641428}
   m_Layer: 11
   m_Name: Slime (11)
   m_TagString: Invincible
@@ -162,10 +164,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 70ce5b5d47e93b742a18cad306d694f9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  animator: {fileID: 13641416}
   attackDelay: 0.2
   hurtDelay: 0.25
   dieDelay: 0.35
+  animator: {fileID: 13641416}
 --- !u!95 &13641416
 Animator:
   serializedVersion: 3
@@ -197,9 +199,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a28b2b918e20328479c578beff2fbbb6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  isHostile: 0
   boxCollider: {fileID: 13641424}
   attack: 10
-  isHostile: 0
 --- !u!61 &13641418
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -270,10 +272,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 35e08246361f1a94483e2bdb0e5e1182, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  maxHealth: 100
-  currentHealth: 0
   hurtDelay: 0.7
   dieDelay: 0.55
+  maxHealth: 100
+  currentHealth: 0
   isHurting: 0
   isDead: 0
 --- !u!114 &13641421
@@ -288,6 +290,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 71582638d998eb9418148c1d7c0fcbea, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  mobName: Slime
   lookRadius: 10
 --- !u!50 &13641422
 Rigidbody2D:
@@ -425,6 +428,35 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 23
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &13641427
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 13641414}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f923b7da464b4f34da250b347073b843, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  canRespawn: 0
+  respawnTime: 0
+--- !u!114 &13641428
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 13641414}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 79a1937d5d993194aa0162a89e3c84e1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  expReward: 5
+  goldReward: 2
+  itemDrops: []
 --- !u!1 &33191796
 GameObject:
   m_ObjectHideFlags: 0
@@ -575,6 +607,8 @@ GameObject:
   - component: {fileID: 40825176}
   - component: {fileID: 40825177}
   - component: {fileID: 40825178}
+  - component: {fileID: 40825179}
+  - component: {fileID: 40825180}
   m_Layer: 11
   m_Name: Slime
   m_TagString: Invincible
@@ -687,10 +721,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 35e08246361f1a94483e2bdb0e5e1182, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  maxHealth: 100
-  currentHealth: 0
   hurtDelay: 0.7
   dieDelay: 0.55
+  maxHealth: 100
+  currentHealth: 0
   isHurting: 0
   isDead: 0
 --- !u!114 &40825171
@@ -705,6 +739,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 71582638d998eb9418148c1d7c0fcbea, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  mobName: Slime
   lookRadius: 10
 --- !u!50 &40825172
 Rigidbody2D:
@@ -819,9 +854,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a28b2b918e20328479c578beff2fbbb6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  isHostile: 0
   boxCollider: {fileID: 40825169}
   attack: 10
-  isHostile: 0
 --- !u!95 &40825177
 Animator:
   serializedVersion: 3
@@ -853,10 +888,39 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 70ce5b5d47e93b742a18cad306d694f9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  animator: {fileID: 40825177}
   attackDelay: 0.2
   hurtDelay: 0.25
   dieDelay: 0.35
+  animator: {fileID: 40825177}
+--- !u!114 &40825179
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 40825166}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f923b7da464b4f34da250b347073b843, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  canRespawn: 0
+  respawnTime: 0
+--- !u!114 &40825180
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 40825166}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 79a1937d5d993194aa0162a89e3c84e1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  expReward: 5
+  goldReward: 2
+  itemDrops: []
 --- !u!1 &63016267
 GameObject:
   m_ObjectHideFlags: 0
@@ -1154,6 +1218,8 @@ GameObject:
   - component: {fileID: 251608583}
   - component: {fileID: 251608582}
   - component: {fileID: 251608581}
+  - component: {fileID: 251608593}
+  - component: {fileID: 251608594}
   m_Layer: 11
   m_Name: Slime (9)
   m_TagString: Invincible
@@ -1173,10 +1239,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 70ce5b5d47e93b742a18cad306d694f9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  animator: {fileID: 251608582}
   attackDelay: 0.2
   hurtDelay: 0.25
   dieDelay: 0.35
+  animator: {fileID: 251608582}
 --- !u!95 &251608582
 Animator:
   serializedVersion: 3
@@ -1208,9 +1274,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a28b2b918e20328479c578beff2fbbb6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  isHostile: 0
   boxCollider: {fileID: 251608590}
   attack: 10
-  isHostile: 0
 --- !u!61 &251608584
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -1224,7 +1290,7 @@ BoxCollider2D:
   m_IsTrigger: 0
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: 0.038037904, y: -0.03334158}
+  m_Offset: {x: 0.03217631, y: -0.03334158}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
@@ -1235,7 +1301,7 @@ BoxCollider2D:
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 0.15713619, y: 0.11311287}
+  m_Size: {x: 0.145413, y: 0.11311287}
   m_EdgeRadius: 0
 --- !u!114 &251608585
 MonoBehaviour:
@@ -1281,10 +1347,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 35e08246361f1a94483e2bdb0e5e1182, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  maxHealth: 100
-  currentHealth: 0
   hurtDelay: 0.7
   dieDelay: 0.55
+  maxHealth: 100
+  currentHealth: 0
   isHurting: 0
   isDead: 0
 --- !u!114 &251608587
@@ -1299,6 +1365,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 71582638d998eb9418148c1d7c0fcbea, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  mobName: Slime
   lookRadius: 10
 --- !u!50 &251608588
 Rigidbody2D:
@@ -1436,6 +1503,35 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 21
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &251608593
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 251608580}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f923b7da464b4f34da250b347073b843, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  canRespawn: 0
+  respawnTime: 0
+--- !u!114 &251608594
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 251608580}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 79a1937d5d993194aa0162a89e3c84e1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  expReward: 5
+  goldReward: 2
+  itemDrops: []
 --- !u!1 &255478986
 GameObject:
   m_ObjectHideFlags: 0
@@ -1982,6 +2078,8 @@ GameObject:
   - component: {fileID: 449598658}
   - component: {fileID: 449598657}
   - component: {fileID: 449598656}
+  - component: {fileID: 449598668}
+  - component: {fileID: 449598669}
   m_Layer: 11
   m_Name: Slime (5)
   m_TagString: Invincible
@@ -2001,10 +2099,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 70ce5b5d47e93b742a18cad306d694f9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  animator: {fileID: 449598657}
   attackDelay: 0.2
   hurtDelay: 0.25
   dieDelay: 0.35
+  animator: {fileID: 449598657}
 --- !u!95 &449598657
 Animator:
   serializedVersion: 3
@@ -2036,9 +2134,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a28b2b918e20328479c578beff2fbbb6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  isHostile: 0
   boxCollider: {fileID: 449598665}
   attack: 10
-  isHostile: 0
 --- !u!61 &449598659
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -2109,10 +2207,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 35e08246361f1a94483e2bdb0e5e1182, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  maxHealth: 100
-  currentHealth: 0
   hurtDelay: 0.7
   dieDelay: 0.55
+  maxHealth: 100
+  currentHealth: 0
   isHurting: 0
   isDead: 0
 --- !u!114 &449598662
@@ -2127,6 +2225,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 71582638d998eb9418148c1d7c0fcbea, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  mobName: Slime
   lookRadius: 10
 --- !u!50 &449598663
 Rigidbody2D:
@@ -2264,6 +2363,35 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 17
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &449598668
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 449598655}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f923b7da464b4f34da250b347073b843, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  canRespawn: 0
+  respawnTime: 0
+--- !u!114 &449598669
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 449598655}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 79a1937d5d993194aa0162a89e3c84e1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  expReward: 5
+  goldReward: 2
+  itemDrops: []
 --- !u!1 &450594386
 GameObject:
   m_ObjectHideFlags: 0
@@ -2284,6 +2412,8 @@ GameObject:
   - component: {fileID: 450594389}
   - component: {fileID: 450594388}
   - component: {fileID: 450594387}
+  - component: {fileID: 450594399}
+  - component: {fileID: 450594400}
   m_Layer: 11
   m_Name: Slime (14)
   m_TagString: Invincible
@@ -2303,10 +2433,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 70ce5b5d47e93b742a18cad306d694f9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  animator: {fileID: 450594388}
   attackDelay: 0.2
   hurtDelay: 0.25
   dieDelay: 0.35
+  animator: {fileID: 450594388}
 --- !u!95 &450594388
 Animator:
   serializedVersion: 3
@@ -2338,9 +2468,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a28b2b918e20328479c578beff2fbbb6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  isHostile: 0
   boxCollider: {fileID: 450594396}
   attack: 10
-  isHostile: 0
 --- !u!61 &450594390
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -2411,10 +2541,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 35e08246361f1a94483e2bdb0e5e1182, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  maxHealth: 100
-  currentHealth: 0
   hurtDelay: 0.7
   dieDelay: 0.55
+  maxHealth: 100
+  currentHealth: 0
   isHurting: 0
   isDead: 0
 --- !u!114 &450594393
@@ -2429,6 +2559,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 71582638d998eb9418148c1d7c0fcbea, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  mobName: Slime
   lookRadius: 10
 --- !u!50 &450594394
 Rigidbody2D:
@@ -2566,6 +2697,35 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 26
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &450594399
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 450594386}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f923b7da464b4f34da250b347073b843, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  canRespawn: 0
+  respawnTime: 0
+--- !u!114 &450594400
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 450594386}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 79a1937d5d993194aa0162a89e3c84e1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  expReward: 5
+  goldReward: 2
+  itemDrops: []
 --- !u!1 &459885035
 GameObject:
   m_ObjectHideFlags: 0
@@ -2805,6 +2965,8 @@ GameObject:
   - component: {fileID: 573965614}
   - component: {fileID: 573965613}
   - component: {fileID: 573965612}
+  - component: {fileID: 573965624}
+  - component: {fileID: 573965625}
   m_Layer: 11
   m_Name: Slime (10)
   m_TagString: Invincible
@@ -2824,10 +2986,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 70ce5b5d47e93b742a18cad306d694f9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  animator: {fileID: 573965613}
   attackDelay: 0.2
   hurtDelay: 0.25
   dieDelay: 0.35
+  animator: {fileID: 573965613}
 --- !u!95 &573965613
 Animator:
   serializedVersion: 3
@@ -2859,9 +3021,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a28b2b918e20328479c578beff2fbbb6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  isHostile: 0
   boxCollider: {fileID: 573965621}
   attack: 10
-  isHostile: 0
 --- !u!61 &573965615
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -2932,10 +3094,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 35e08246361f1a94483e2bdb0e5e1182, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  maxHealth: 100
-  currentHealth: 0
   hurtDelay: 0.7
   dieDelay: 0.55
+  maxHealth: 100
+  currentHealth: 0
   isHurting: 0
   isDead: 0
 --- !u!114 &573965618
@@ -2950,6 +3112,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 71582638d998eb9418148c1d7c0fcbea, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  mobName: Slime
   lookRadius: 10
 --- !u!50 &573965619
 Rigidbody2D:
@@ -3087,6 +3250,35 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 22
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &573965624
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 573965611}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f923b7da464b4f34da250b347073b843, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  canRespawn: 0
+  respawnTime: 0
+--- !u!114 &573965625
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 573965611}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 79a1937d5d993194aa0162a89e3c84e1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  expReward: 5
+  goldReward: 2
+  itemDrops: []
 --- !u!1 &582501079
 GameObject:
   m_ObjectHideFlags: 0
@@ -3445,7 +3637,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 667391833}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 35.11, y: -4.2799997, z: -10}
+  m_LocalPosition: {x: -4.6000004, y: -3.4499998, z: -10}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 856245504}
@@ -3970,6 +4162,8 @@ GameObject:
   - component: {fileID: 730199539}
   - component: {fileID: 730199538}
   - component: {fileID: 730199537}
+  - component: {fileID: 730199549}
+  - component: {fileID: 730199550}
   m_Layer: 11
   m_Name: Slime (3)
   m_TagString: Invincible
@@ -3989,10 +4183,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 70ce5b5d47e93b742a18cad306d694f9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  animator: {fileID: 730199538}
   attackDelay: 0.2
   hurtDelay: 0.25
   dieDelay: 0.35
+  animator: {fileID: 730199538}
 --- !u!95 &730199538
 Animator:
   serializedVersion: 3
@@ -4024,9 +4218,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a28b2b918e20328479c578beff2fbbb6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  isHostile: 0
   boxCollider: {fileID: 730199546}
   attack: 10
-  isHostile: 0
 --- !u!61 &730199540
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -4097,10 +4291,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 35e08246361f1a94483e2bdb0e5e1182, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  maxHealth: 100
-  currentHealth: 0
   hurtDelay: 0.7
   dieDelay: 0.55
+  maxHealth: 100
+  currentHealth: 0
   isHurting: 0
   isDead: 0
 --- !u!114 &730199543
@@ -4115,6 +4309,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 71582638d998eb9418148c1d7c0fcbea, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  mobName: Slime
   lookRadius: 10
 --- !u!50 &730199544
 Rigidbody2D:
@@ -4252,6 +4447,35 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 15
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &730199549
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 730199536}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f923b7da464b4f34da250b347073b843, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  canRespawn: 0
+  respawnTime: 0
+--- !u!114 &730199550
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 730199536}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 79a1937d5d993194aa0162a89e3c84e1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  expReward: 5
+  goldReward: 2
+  itemDrops: []
 --- !u!1 &730807955
 GameObject:
   m_ObjectHideFlags: 0
@@ -4272,6 +4496,8 @@ GameObject:
   - component: {fileID: 730807958}
   - component: {fileID: 730807957}
   - component: {fileID: 730807956}
+  - component: {fileID: 730807968}
+  - component: {fileID: 730807969}
   m_Layer: 11
   m_Name: Slime (1)
   m_TagString: Invincible
@@ -4291,10 +4517,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 70ce5b5d47e93b742a18cad306d694f9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  animator: {fileID: 730807957}
   attackDelay: 0.2
   hurtDelay: 0.25
   dieDelay: 0.35
+  animator: {fileID: 730807957}
 --- !u!95 &730807957
 Animator:
   serializedVersion: 3
@@ -4326,9 +4552,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a28b2b918e20328479c578beff2fbbb6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  isHostile: 0
   boxCollider: {fileID: 730807965}
   attack: 10
-  isHostile: 0
 --- !u!61 &730807959
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -4399,10 +4625,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 35e08246361f1a94483e2bdb0e5e1182, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  maxHealth: 100
-  currentHealth: 0
   hurtDelay: 0.7
   dieDelay: 0.55
+  maxHealth: 100
+  currentHealth: 0
   isHurting: 0
   isDead: 0
 --- !u!114 &730807962
@@ -4417,6 +4643,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 71582638d998eb9418148c1d7c0fcbea, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  mobName: Slime
   lookRadius: 10
 --- !u!50 &730807963
 Rigidbody2D:
@@ -4554,6 +4781,35 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 13
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &730807968
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 730807955}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f923b7da464b4f34da250b347073b843, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  canRespawn: 0
+  respawnTime: 0
+--- !u!114 &730807969
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 730807955}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 79a1937d5d993194aa0162a89e3c84e1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  expReward: 5
+  goldReward: 2
+  itemDrops: []
 --- !u!1 &741625926
 GameObject:
   m_ObjectHideFlags: 0
@@ -130923,6 +131179,8 @@ GameObject:
   - component: {fileID: 1089219547}
   - component: {fileID: 1089219546}
   - component: {fileID: 1089219545}
+  - component: {fileID: 1089219557}
+  - component: {fileID: 1089219558}
   m_Layer: 11
   m_Name: Slime (13)
   m_TagString: Invincible
@@ -130942,10 +131200,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 70ce5b5d47e93b742a18cad306d694f9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  animator: {fileID: 1089219546}
   attackDelay: 0.2
   hurtDelay: 0.25
   dieDelay: 0.35
+  animator: {fileID: 1089219546}
 --- !u!95 &1089219546
 Animator:
   serializedVersion: 3
@@ -130977,9 +131235,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a28b2b918e20328479c578beff2fbbb6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  isHostile: 0
   boxCollider: {fileID: 1089219554}
   attack: 10
-  isHostile: 0
 --- !u!61 &1089219548
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -131050,10 +131308,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 35e08246361f1a94483e2bdb0e5e1182, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  maxHealth: 100
-  currentHealth: 0
   hurtDelay: 0.7
   dieDelay: 0.55
+  maxHealth: 100
+  currentHealth: 0
   isHurting: 0
   isDead: 0
 --- !u!114 &1089219551
@@ -131068,6 +131326,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 71582638d998eb9418148c1d7c0fcbea, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  mobName: Slime
   lookRadius: 10
 --- !u!50 &1089219552
 Rigidbody2D:
@@ -131205,6 +131464,35 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 25
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1089219557
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1089219544}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f923b7da464b4f34da250b347073b843, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  canRespawn: 0
+  respawnTime: 0
+--- !u!114 &1089219558
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1089219544}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 79a1937d5d993194aa0162a89e3c84e1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  expReward: 5
+  goldReward: 2
+  itemDrops: []
 --- !u!1 &1135178910
 GameObject:
   m_ObjectHideFlags: 0
@@ -131392,6 +131680,8 @@ GameObject:
   - component: {fileID: 1257914631}
   - component: {fileID: 1257914630}
   - component: {fileID: 1257914629}
+  - component: {fileID: 1257914641}
+  - component: {fileID: 1257914642}
   m_Layer: 11
   m_Name: Slime (2)
   m_TagString: Invincible
@@ -131411,10 +131701,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 70ce5b5d47e93b742a18cad306d694f9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  animator: {fileID: 1257914630}
   attackDelay: 0.2
   hurtDelay: 0.25
   dieDelay: 0.35
+  animator: {fileID: 1257914630}
 --- !u!95 &1257914630
 Animator:
   serializedVersion: 3
@@ -131446,9 +131736,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a28b2b918e20328479c578beff2fbbb6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  isHostile: 0
   boxCollider: {fileID: 1257914638}
   attack: 10
-  isHostile: 0
 --- !u!61 &1257914632
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -131519,10 +131809,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 35e08246361f1a94483e2bdb0e5e1182, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  maxHealth: 100
-  currentHealth: 0
   hurtDelay: 0.7
   dieDelay: 0.55
+  maxHealth: 100
+  currentHealth: 0
   isHurting: 0
   isDead: 0
 --- !u!114 &1257914635
@@ -131537,6 +131827,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 71582638d998eb9418148c1d7c0fcbea, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  mobName: Slime
   lookRadius: 10
 --- !u!50 &1257914636
 Rigidbody2D:
@@ -131674,6 +131965,35 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 14
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1257914641
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1257914628}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f923b7da464b4f34da250b347073b843, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  canRespawn: 0
+  respawnTime: 0
+--- !u!114 &1257914642
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1257914628}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 79a1937d5d993194aa0162a89e3c84e1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  expReward: 5
+  goldReward: 2
+  itemDrops: []
 --- !u!1 &1275889550
 GameObject:
   m_ObjectHideFlags: 0
@@ -133830,6 +134150,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d0798ddd3a4243c43be7c8b8e5f25f40, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!95 &1509935005 stripped
+Animator:
+  m_CorrespondingSourceObject: {fileID: 8316542597656949619, guid: 3c902716b1dec4341898e3f99721ae9d, type: 3}
+  m_PrefabInstance: {fileID: 8316542597176214069}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &1513578080 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 4322237881362016865, guid: 53583bf3984895145a044066b1de28a7, type: 3}
@@ -134343,6 +134668,8 @@ GameObject:
   - component: {fileID: 1677956184}
   - component: {fileID: 1677956183}
   - component: {fileID: 1677956182}
+  - component: {fileID: 1677956194}
+  - component: {fileID: 1677956195}
   m_Layer: 11
   m_Name: Slime (8)
   m_TagString: Invincible
@@ -134362,10 +134689,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 70ce5b5d47e93b742a18cad306d694f9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  animator: {fileID: 1677956183}
   attackDelay: 0.2
   hurtDelay: 0.25
   dieDelay: 0.35
+  animator: {fileID: 1677956183}
 --- !u!95 &1677956183
 Animator:
   serializedVersion: 3
@@ -134397,9 +134724,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a28b2b918e20328479c578beff2fbbb6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  isHostile: 0
   boxCollider: {fileID: 1677956191}
   attack: 10
-  isHostile: 0
 --- !u!61 &1677956185
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -134470,10 +134797,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 35e08246361f1a94483e2bdb0e5e1182, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  maxHealth: 100
-  currentHealth: 0
   hurtDelay: 0.7
   dieDelay: 0.55
+  maxHealth: 100
+  currentHealth: 0
   isHurting: 0
   isDead: 0
 --- !u!114 &1677956188
@@ -134488,6 +134815,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 71582638d998eb9418148c1d7c0fcbea, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  mobName: Slime
   lookRadius: 10
 --- !u!50 &1677956189
 Rigidbody2D:
@@ -134625,6 +134953,35 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 20
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1677956194
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1677956181}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f923b7da464b4f34da250b347073b843, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  canRespawn: 0
+  respawnTime: 0
+--- !u!114 &1677956195
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1677956181}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 79a1937d5d993194aa0162a89e3c84e1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  expReward: 5
+  goldReward: 2
+  itemDrops: []
 --- !u!1 &1707803116
 GameObject:
   m_ObjectHideFlags: 0
@@ -134803,6 +135160,8 @@ GameObject:
   - component: {fileID: 1752370803}
   - component: {fileID: 1752370802}
   - component: {fileID: 1752370801}
+  - component: {fileID: 1752370813}
+  - component: {fileID: 1752370814}
   m_Layer: 11
   m_Name: Slime (6)
   m_TagString: Invincible
@@ -134822,10 +135181,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 70ce5b5d47e93b742a18cad306d694f9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  animator: {fileID: 1752370802}
   attackDelay: 0.2
   hurtDelay: 0.25
   dieDelay: 0.35
+  animator: {fileID: 1752370802}
 --- !u!95 &1752370802
 Animator:
   serializedVersion: 3
@@ -134857,9 +135216,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a28b2b918e20328479c578beff2fbbb6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  isHostile: 0
   boxCollider: {fileID: 1752370810}
   attack: 10
-  isHostile: 0
 --- !u!61 &1752370804
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -134930,10 +135289,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 35e08246361f1a94483e2bdb0e5e1182, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  maxHealth: 100
-  currentHealth: 0
   hurtDelay: 0.7
   dieDelay: 0.55
+  maxHealth: 100
+  currentHealth: 0
   isHurting: 0
   isDead: 0
 --- !u!114 &1752370807
@@ -134948,6 +135307,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 71582638d998eb9418148c1d7c0fcbea, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  mobName: Slime
   lookRadius: 10
 --- !u!50 &1752370808
 Rigidbody2D:
@@ -135085,6 +135445,35 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 18
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1752370813
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1752370800}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f923b7da464b4f34da250b347073b843, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  canRespawn: 0
+  respawnTime: 0
+--- !u!114 &1752370814
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1752370800}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 79a1937d5d993194aa0162a89e3c84e1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  expReward: 5
+  goldReward: 2
+  itemDrops: []
 --- !u!114 &1799150981 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 4322237880540490116, guid: 53583bf3984895145a044066b1de28a7, type: 3}
@@ -135341,6 +135730,8 @@ GameObject:
   - component: {fileID: 1869643275}
   - component: {fileID: 1869643274}
   - component: {fileID: 1869643273}
+  - component: {fileID: 1869643285}
+  - component: {fileID: 1869643286}
   m_Layer: 11
   m_Name: Slime (4)
   m_TagString: Invincible
@@ -135360,10 +135751,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 70ce5b5d47e93b742a18cad306d694f9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  animator: {fileID: 1869643274}
   attackDelay: 0.2
   hurtDelay: 0.25
   dieDelay: 0.35
+  animator: {fileID: 1869643274}
 --- !u!95 &1869643274
 Animator:
   serializedVersion: 3
@@ -135395,9 +135786,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a28b2b918e20328479c578beff2fbbb6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  isHostile: 0
   boxCollider: {fileID: 1869643282}
   attack: 10
-  isHostile: 0
 --- !u!61 &1869643276
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -135468,10 +135859,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 35e08246361f1a94483e2bdb0e5e1182, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  maxHealth: 100
-  currentHealth: 0
   hurtDelay: 0.7
   dieDelay: 0.55
+  maxHealth: 100
+  currentHealth: 0
   isHurting: 0
   isDead: 0
 --- !u!114 &1869643279
@@ -135486,6 +135877,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 71582638d998eb9418148c1d7c0fcbea, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  mobName: Slime
   lookRadius: 10
 --- !u!50 &1869643280
 Rigidbody2D:
@@ -135623,6 +136015,35 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 16
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1869643285
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1869643272}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f923b7da464b4f34da250b347073b843, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  canRespawn: 0
+  respawnTime: 0
+--- !u!114 &1869643286
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1869643272}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 79a1937d5d993194aa0162a89e3c84e1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  expReward: 5
+  goldReward: 2
+  itemDrops: []
 --- !u!1 &1878020825
 GameObject:
   m_ObjectHideFlags: 0
@@ -135673,6 +136094,8 @@ GameObject:
   - component: {fileID: 1905384446}
   - component: {fileID: 1905384445}
   - component: {fileID: 1905384444}
+  - component: {fileID: 1905384456}
+  - component: {fileID: 1905384457}
   m_Layer: 11
   m_Name: Slime (7)
   m_TagString: Invincible
@@ -135692,10 +136115,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 70ce5b5d47e93b742a18cad306d694f9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  animator: {fileID: 1905384445}
   attackDelay: 0.2
   hurtDelay: 0.25
   dieDelay: 0.35
+  animator: {fileID: 1905384445}
 --- !u!95 &1905384445
 Animator:
   serializedVersion: 3
@@ -135727,9 +136150,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a28b2b918e20328479c578beff2fbbb6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  isHostile: 0
   boxCollider: {fileID: 1905384453}
   attack: 10
-  isHostile: 0
 --- !u!61 &1905384447
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -135800,10 +136223,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 35e08246361f1a94483e2bdb0e5e1182, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  maxHealth: 100
-  currentHealth: 0
   hurtDelay: 0.7
   dieDelay: 0.55
+  maxHealth: 100
+  currentHealth: 0
   isHurting: 0
   isDead: 0
 --- !u!114 &1905384450
@@ -135818,6 +136241,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 71582638d998eb9418148c1d7c0fcbea, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  mobName: Slime
   lookRadius: 10
 --- !u!50 &1905384451
 Rigidbody2D:
@@ -135955,6 +136379,35 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 19
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1905384456
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1905384443}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f923b7da464b4f34da250b347073b843, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  canRespawn: 0
+  respawnTime: 0
+--- !u!114 &1905384457
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1905384443}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 79a1937d5d993194aa0162a89e3c84e1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  expReward: 5
+  goldReward: 2
+  itemDrops: []
 --- !u!1 &1912856751
 GameObject:
   m_ObjectHideFlags: 0
@@ -136297,6 +136750,8 @@ GameObject:
   - component: {fileID: 1943814910}
   - component: {fileID: 1943814909}
   - component: {fileID: 1943814908}
+  - component: {fileID: 1943814920}
+  - component: {fileID: 1943814921}
   m_Layer: 11
   m_Name: Slime (12)
   m_TagString: Invincible
@@ -136316,10 +136771,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 70ce5b5d47e93b742a18cad306d694f9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  animator: {fileID: 1943814909}
   attackDelay: 0.2
   hurtDelay: 0.25
   dieDelay: 0.35
+  animator: {fileID: 1943814909}
 --- !u!95 &1943814909
 Animator:
   serializedVersion: 3
@@ -136351,9 +136806,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a28b2b918e20328479c578beff2fbbb6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  isHostile: 0
   boxCollider: {fileID: 1943814917}
   attack: 10
-  isHostile: 0
 --- !u!61 &1943814911
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -136424,10 +136879,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 35e08246361f1a94483e2bdb0e5e1182, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  maxHealth: 100
-  currentHealth: 0
   hurtDelay: 0.7
   dieDelay: 0.55
+  maxHealth: 100
+  currentHealth: 0
   isHurting: 0
   isDead: 0
 --- !u!114 &1943814914
@@ -136442,6 +136897,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 71582638d998eb9418148c1d7c0fcbea, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  mobName: Slime
   lookRadius: 10
 --- !u!50 &1943814915
 Rigidbody2D:
@@ -136579,6 +137035,35 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 24
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1943814920
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1943814907}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f923b7da464b4f34da250b347073b843, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  canRespawn: 0
+  respawnTime: 0
+--- !u!114 &1943814921
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1943814907}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 79a1937d5d993194aa0162a89e3c84e1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  expReward: 5
+  goldReward: 2
+  itemDrops: []
 --- !u!1 &1960185698
 GameObject:
   m_ObjectHideFlags: 0
@@ -137449,6 +137934,10 @@ PrefabInstance:
     m_TransformParent: {fileID: 0}
     m_Modifications:
     - target: {fileID: 480833862, guid: 3c902716b1dec4341898e3f99721ae9d, type: 3}
+      propertyPath: hurtDelay
+      value: 0.4
+      objectReference: {fileID: 0}
+    - target: {fileID: 480833862, guid: 3c902716b1dec4341898e3f99721ae9d, type: 3}
       propertyPath: healthText
       value: 
       objectReference: {fileID: 601088113}
@@ -137480,13 +137969,13 @@ PrefabInstance:
       propertyPath: charInfoWindow
       value: 
       objectReference: {fileID: 1818509194}
+    - target: {fileID: 5840978662308655727, guid: 3c902716b1dec4341898e3f99721ae9d, type: 3}
+      propertyPath: animator
+      value: 
+      objectReference: {fileID: 1509935005}
     - target: {fileID: 8316542597656949616, guid: 3c902716b1dec4341898e3f99721ae9d, type: 3}
       propertyPath: m_Name
       value: Xenonian
-      objectReference: {fileID: 0}
-    - target: {fileID: 8316542597656949616, guid: 3c902716b1dec4341898e3f99721ae9d, type: 3}
-      propertyPath: m_TagString
-      value: Character
       objectReference: {fileID: 0}
     - target: {fileID: 8316542597656949624, guid: 3c902716b1dec4341898e3f99721ae9d, type: 3}
       propertyPath: examineText
@@ -137534,11 +138023,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8316542597656949630, guid: 3c902716b1dec4341898e3f99721ae9d, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 35.11
+      value: -4.6
       objectReference: {fileID: 0}
     - target: {fileID: 8316542597656949630, guid: 3c902716b1dec4341898e3f99721ae9d, type: 3}
       propertyPath: m_LocalPosition.y
-      value: -3.98
+      value: -3.15
       objectReference: {fileID: 0}
     - target: {fileID: 8316542597656949630, guid: 3c902716b1dec4341898e3f99721ae9d, type: 3}
       propertyPath: m_LocalPosition.z

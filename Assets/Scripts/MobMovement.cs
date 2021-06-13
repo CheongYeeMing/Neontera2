@@ -12,6 +12,7 @@ public class MobMovement : MonoBehaviour
     public bool inPatrolRange;
 
     public Rigidbody2D rb;
+
     public Collider2D boxCollider;
     public Collider2D jumpBoxCollider;
 
@@ -22,11 +23,14 @@ public class MobMovement : MonoBehaviour
     public Transform edgeDetector;
 
     public Vector2 spawnPoint;
+
     [SerializeField] public float patrolRadius;
     [SerializeField] public float jumpPower;
     [SerializeField] public bool onFloatingPlatform;
 
-    const string MOB_MOVE = "Move";
+    // Mob Animation States
+    public const string MOB_IDLE = "Idle";
+    public const string MOB_MOVE = "Move";
 
     // Start is called before the first frame update
     void Start()

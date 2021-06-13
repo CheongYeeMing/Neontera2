@@ -5,28 +5,25 @@ using UnityEngine;
 public class CharacterAttack : MonoBehaviour
 {
     [SerializeField] private Transform firePoint;
-
     [SerializeField] public Transform attackPoint;
+    [SerializeField] public float attackDelay;
+    [SerializeField] private GameObject fireball;
+
     public float attackRange = 0.5f;
     public LayerMask mobLayer;
     public bool isAttacking;
-    [SerializeField] public float attackDelay = 1f;
-
-    [SerializeField] private GameObject fireball;
-
-    private Animator animator;
+   
     private CharacterMovement playerMovement;
     private float cooldownTimer = Mathf.Infinity;
 
     public float attack;
 
-    // Animation States
-    const string PLAYER_ATTACK = "Attack";
-    const string PLAYER_SPECIAL_ATTACK = "AttackFireball";
+    // Character Animation States
+    const string CHARACTER_ATTACK = "Attack";
+    const string CHARACTER_SPECIAL_ATTACK = "AttackFireball";
 
     private void Awake()
     {
-        animator = GetComponent<Animator>();
         playerMovement = GetComponent<CharacterMovement>();
         attack = gameObject.GetComponent<Character>().Attack.CalculateFinalValue();
     }
@@ -48,7 +45,7 @@ public class CharacterAttack : MonoBehaviour
     private void Attack()
     {
         isAttacking = true;
-        playerMovement.ChangeAnimationState(PLAYER_ATTACK);
+        gameObject.GetComponent<CharacterAnimation>().ChangeAnimationState(CHARACTER_ATTACK);
         cooldownTimer = 0;
 
         Collider2D[] hitMobs = Physics2D.OverlapCircleAll(attackPoint.position, attackRange, mobLayer);
@@ -60,9 +57,9 @@ public class CharacterAttack : MonoBehaviour
         }
         foreach (Collider2D mob in hitMobs)
         {
-            if (mob.GetComponent<MobHealth>().isDead)
+            if (mob.GetComponent<MobHealth>().isDead && mob.GetComponent<MobReward>().rewardGiven == false)
             {
-                foreach(Quest quest in gameObject.GetComponent<Character>().questList.quests)
+                foreach (Quest quest in gameObject.GetComponent<Character>().questList.quests)
                 {
                     if (quest.questCriteria.criteriaType == CriteriaType.Kill)
                     {
@@ -73,6 +70,8 @@ public class CharacterAttack : MonoBehaviour
                         }
                     }
                 }
+                // Rewards for Mob kill
+                mob.GetComponent<MobReward>().GetReward(gameObject.GetComponent<CharacterLevel>(), gameObject.GetComponent<CharacterWallet>());
             }
         }
 
@@ -92,7 +91,7 @@ public class CharacterAttack : MonoBehaviour
 
     private void SpecialAttack()
     {
-        playerMovement.ChangeAnimationState(PLAYER_SPECIAL_ATTACK);
+        gameObject.GetComponent<CharacterAnimation>().ChangeAnimationState(CHARACTER_SPECIAL_ATTACK);
         cooldownTimer = 0;
 
         GameObject fireBall = Instantiate(fireball, firePoint.transform.position, Quaternion.identity) as GameObject;

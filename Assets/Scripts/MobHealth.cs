@@ -4,24 +4,28 @@ using UnityEngine;
 
 public class MobHealth : MonoBehaviour, Health
 {
-    public float maxHealth = 100;
-    public float currentHealth;
-
-    const string MOB_HURT = "Hurt";
-    const string MOB_DIE = "Die";
-
     [SerializeField] public float hurtDelay;
     [SerializeField] public float dieDelay;
+
+    public float maxHealth = 100;
+    public float currentHealth;
 
     public bool isHurting;
     public bool isDead;
 
+    // Mob Animation States
+    public const string MOB_HURT = "Hurt";
+    public const string MOB_DIE = "Die";
+
     // Start is called before the first frame update
-    void Start()
+    public void Start()
     {
         currentHealth = maxHealth;
         isHurting = false;
         isDead = false;
+        GetComponent<Collider2D>().enabled = true;
+        this.enabled = true;
+        gameObject.GetComponent<SpriteRenderer>().enabled = true;
     }
 
     public void TakeDamage(float damage)
@@ -40,6 +44,7 @@ public class MobHealth : MonoBehaviour, Health
 
     public void Die()
     {
+        gameObject.GetComponent<MobSpawner>().deathTimer = 0;
         isDead = true;
         Debug.Log("Mob is dead!!!");
         // Death animation
@@ -56,7 +61,6 @@ public class MobHealth : MonoBehaviour, Health
 
     public void DieComplete()
     {
-        isDead = false;
-        gameObject.SetActive(false);
+        gameObject.GetComponent<SpriteRenderer>().enabled = false;
     }
 }

@@ -17,6 +17,21 @@ MonoBehaviour:
   items: []
   quests:
   - isActive: 1
+    canRepeat: 0
+    status: 1
+    title: Slime Manefestation
+    description: There has been a uprise in slimes, we need you to help reduce their
+      numbers!
+    questCriteria:
+      criteriaType: 0
+      action: Kill 5 Slimes
+      Target: Slime
+      requiredAmount: 5
+      currentAmount: 2
+    expReward: 100
+    goldReward: 100
+    itemReward: {fileID: 0}
+  - isActive: 1
     canRepeat: 1
     status: 2
     title: 'Talk to Martin '

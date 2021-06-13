@@ -6,13 +6,23 @@ using TMPro;
 
 public class CharacterHealth : MonoBehaviour, Health
 {
+    [SerializeField] public float hurtDelay;
+
     private float health;
     private float lerpTimer;
     public float maxHealth = 100;
     public float chipSpeed = 2f;
+
+    public bool isHurting;
+    public bool isDead;
+
     public Image frontHealthBar;
     public Image backHealthBar;
     public TextMeshProUGUI healthText;
+
+    // Character Animation States
+    public const string CHARACTER_HURT = "Hurt";
+    public const string CHARACTER_DIE = "Die";
 
     // Start is called before the first frame update
     void Start()
@@ -63,12 +73,20 @@ public class CharacterHealth : MonoBehaviour, Health
 
     public void TakeDamage(float damage)
     {
+        isHurting = true;
+        gameObject.GetComponent<CharacterAnimation>().ChangeAnimationState(CHARACTER_HURT);
         health -= damage;
         lerpTimer = 0f;
         if (health <= 0)
         {
             Die();
         }
+        Invoke("HurtComplete", hurtDelay);
+    }
+
+    public void HurtComplete()
+    {
+        isHurting = false;
     }
 
     public void RestoreHealth(float healAmount)
@@ -85,6 +103,11 @@ public class CharacterHealth : MonoBehaviour, Health
 
     public void Die()
     {
+        isDead = true;
+        gameObject.GetComponent<CharacterAnimation>().ChangeAnimationState(CHARACTER_DIE);
+        GetComponent<Collider2D>().enabled = false;
+        this.enabled = false;
         Debug.Log("Character is dead!!!");
+        // Dead Screen, Auto Respawn in Town area??? 
     }
 }
