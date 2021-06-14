@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class MobHealth : MonoBehaviour, Health
 {
+    [SerializeField] public string mobName;
     [SerializeField] public float hurtDelay;
     [SerializeField] public float dieDelay;
     [SerializeField] public Transform DamagePopup;

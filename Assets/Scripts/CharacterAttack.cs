@@ -69,7 +69,7 @@ public class CharacterAttack : MonoBehaviour
                 {
                     if (quest.questCriteria.criteriaType == CriteriaType.Kill)
                     {
-                        if (quest.questCriteria.Target == mob.GetComponent<MobController>().mobName)
+                        if (quest.questCriteria.Target == mob.GetComponent<MobHealth>().mobName)
                         {
                             quest.questCriteria.Execute();
                             quest.Update();

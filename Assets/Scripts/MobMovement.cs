@@ -49,7 +49,12 @@ public class MobMovement : MonoBehaviour
                 gameObject.GetComponent<MobAnimation>().ChangeAnimationState(MOB_MOVE);
                 Patrol();
             }
-        }       
+        } 
+        
+        if (!gameObject.GetComponent<MobHealth>().isHurting && !gameObject.GetComponent<MobHealth>().isDead && gameObject.GetComponent<MobPathfindingAI>().isChasingTarget)
+        {
+            gameObject.GetComponent<MobAnimation>().ChangeAnimationState(MOB_MOVE);
+        }
 
         if (gameObject.GetComponent<MobHealth>().isDead)
         {
@@ -145,7 +150,6 @@ public class MobMovement : MonoBehaviour
 
     public void ChaseTarget(Vector2 direction)
     {
-        gameObject.GetComponent<MobAnimation>().ChangeAnimationState(MOB_MOVE);
         if (Mathf.Sign(moveSpeed) != Mathf.Sign(direction.x))
         {
             Flip();

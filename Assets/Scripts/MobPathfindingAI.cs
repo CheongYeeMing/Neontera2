@@ -88,6 +88,9 @@ public class MobPathfindingAI : MonoBehaviour
     public void Update()
     {
         if (!isChasingTarget) return;
-        gameObject.GetComponent<MobMovement>().ChaseTarget(direction);
+        if (!gameObject.GetComponent<MobHealth>().isHurting && !gameObject.GetComponent<MobHealth>().isDead)
+        {
+            gameObject.GetComponent<MobMovement>().ChaseTarget(direction);
+        }
     }
 }

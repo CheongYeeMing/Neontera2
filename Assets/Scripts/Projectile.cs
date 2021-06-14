@@ -49,7 +49,7 @@ public class Projectile : MonoBehaviour
                 {
                     if (quest.questCriteria.criteriaType == CriteriaType.Kill)
                     {
-                        if (quest.questCriteria.Target == mobHealth.gameObject.GetComponent<MobController>().mobName)
+                        if (quest.questCriteria.Target == mobHealth.mobName)
                         {
                             quest.questCriteria.Execute();
                             quest.Update();
