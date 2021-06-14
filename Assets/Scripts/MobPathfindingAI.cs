@@ -75,7 +75,14 @@ public class MobPathfindingAI : MonoBehaviour
             reachedEndOfPath = false;
         }
 
-        direction = ((Vector2)path.vectorPath[currentWaypoint] - rb.position).normalized;
+        direction = ((Vector2)path.vectorPath[currentWaypoint] - rb.position);
+
+        if (Mathf.Sign(gameObject.GetComponent<MobMovement>().moveSpeed) != Mathf.Sign(direction.x) && direction.x != 0)
+        {
+            gameObject.GetComponent<MobMovement>().Flip();
+        }
+
+        
 
         float distance = Vector2.Distance(rb.position, path.vectorPath[currentWaypoint]);
 
@@ -88,6 +95,7 @@ public class MobPathfindingAI : MonoBehaviour
     public void Update()
     {
         if (!isChasingTarget) return;
+
         if (!gameObject.GetComponent<MobHealth>().isHurting && !gameObject.GetComponent<MobHealth>().isDead)
         {
             gameObject.GetComponent<MobMovement>().ChaseTarget(direction);

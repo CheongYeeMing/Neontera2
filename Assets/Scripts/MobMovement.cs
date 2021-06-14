@@ -25,6 +25,7 @@ public class MobMovement : MonoBehaviour
     public Vector2 spawnPoint;
 
     [SerializeField] public float patrolRadius;
+    [SerializeField] public float chaseRadius;
     [SerializeField] public float jumpPower;
     [SerializeField] public bool onFloatingPlatform;
 
@@ -42,19 +43,9 @@ public class MobMovement : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (isPatrolling)
-        {
-            if (!gameObject.GetComponent<MobHealth>().isHurting && !gameObject.GetComponent<MobHealth>().isDead && !gameObject.GetComponent<MobPathfindingAI>().isChasingTarget)
-            {
-                gameObject.GetComponent<MobAnimation>().ChangeAnimationState(MOB_MOVE);
-                Patrol();
-            }
-        } 
-        
-        if (!gameObject.GetComponent<MobHealth>().isHurting && !gameObject.GetComponent<MobHealth>().isDead && gameObject.GetComponent<MobPathfindingAI>().isChasingTarget)
-        {
-            gameObject.GetComponent<MobAnimation>().ChangeAnimationState(MOB_MOVE);
-        }
+        if (!CanPatrol()) return;
+        Patrol();
+        gameObject.GetComponent<MobAnimation>().ChangeAnimationState(MOB_MOVE);
 
         if (gameObject.GetComponent<MobHealth>().isDead)
         {
@@ -109,6 +100,28 @@ public class MobMovement : MonoBehaviour
         rb.velocity = new Vector2(0, rb.velocity.y);
     }
 
+    public bool CanPatrol()
+    {
+        bool can = true;
+        if (gameObject.GetComponent<MobHealth>().isHurting)
+        {
+            can = false;
+        }
+        else if (gameObject.GetComponent<MobHealth>().isDead)
+        {
+            can = false;
+        }
+        else if (gameObject.GetComponent<MobAttack>().isAttacking)
+        {
+            can = false;
+        }
+        else if (gameObject.GetComponent<MobPathfindingAI>().isChasingTarget)
+        {
+            can = false;
+        }
+        return can;
+    }
+
     private bool isGrounded()
     {
         RaycastHit2D raycastHit = Physics2D.BoxCast(boxCollider.bounds.center, boxCollider.bounds.size, 0, Vector2.down, 0.03f, groundLayer);
@@ -150,25 +163,28 @@ public class MobMovement : MonoBehaviour
 
     public void ChaseTarget(Vector2 direction)
     {
-        if (Mathf.Sign(moveSpeed) != Mathf.Sign(direction.x))
+        gameObject.GetComponent<MobAnimation>().ChangeAnimationState(MOB_MOVE);
+        if (!InChaseRange() || player.gameObject.GetComponent<CharacterHealth>().isDead)
         {
-            Flip();
-        }
-
-        if ((!insidePatrolRange()))
-        {
+            Debug.Log("ChaseTarget!insideChaseRange");
             gameObject.GetComponent<MobPathfindingAI>().isChasingTarget = false;
-            Patrol();
             return;
         }
 
         if (isGrounded() && hitStep())
         {
+            Debug.Log("ChaseTargetIsGrounded&&HitStep");
             rb.velocity = new Vector2(moveSpeed * Time.fixedDeltaTime, rb.velocity.y + jumpPower);
         }
         else
         {
+            Debug.Log("ChaseTargetElse");
             rb.velocity = new Vector2(moveSpeed * Time.fixedDeltaTime, rb.velocity.y);
         }
+    }
+
+    public bool InChaseRange()
+    {
+        return Vector2.Distance(spawnPoint, player.position) < chaseRadius;
     }
 }

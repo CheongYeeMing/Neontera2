@@ -11,6 +11,8 @@ public class MobAttack : MonoBehaviour
 
     public float attack;
 
+    public bool isAttacking;
+
     // Mob Animation States
     public const string MOB_ATTACK = "Attack";
 
@@ -18,8 +20,19 @@ public class MobAttack : MonoBehaviour
     {
         if (collision.gameObject.CompareTag("Character"))
         {
+            if (isAttacking == false)
+            {
+                isAttacking = true;
+                gameObject.GetComponent<MobAnimation>().ChangeAnimationState(MOB_ATTACK);
+            }
             collision.gameObject.GetComponent<CharacterHealth>().attackedBy = gameObject;
             collision.gameObject.GetComponent<CharacterHealth>().TakeDamage(attack);
+            Invoke("AttackComplete", attackDelay);
         }
+    }
+
+    public void AttackComplete()
+    {
+        isAttacking = false;
     }
 }

@@ -75,10 +75,6 @@ public class MobHealth : MonoBehaviour, Health
     {
         isHurting = true;
         gameObject.GetComponent<MobMovement>().StopPatrol();
-        if (gameObject.GetComponent<MobPathfindingAI>().passiveAggressive)
-        {
-            gameObject.GetComponent<MobPathfindingAI>().isChasingTarget = true;
-        }
         DamagePopUp.Create(gameObject, damage);
         gameObject.GetComponent<MobAnimation>().ChangeAnimationState(MOB_HURT);
         KnockBack(attackedBy);
@@ -123,6 +119,10 @@ public class MobHealth : MonoBehaviour, Health
     public void HurtComplete()
     {
         isHurting = false;
+        if (gameObject.GetComponent<MobPathfindingAI>().passiveAggressive)
+        {
+            gameObject.GetComponent<MobPathfindingAI>().isChasingTarget = true;
+        }
     }
 
     public void DieComplete()
