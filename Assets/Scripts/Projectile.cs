@@ -37,7 +37,11 @@ public class Projectile : MonoBehaviour
         MobHealth mobHealth;
         if (collidedObject.TryGetComponent<MobHealth>(out mobHealth))
         {
-            mobHealth.TakeDamage(damage);
+            if (!mobHealth.isHurting)
+            {
+                mobHealth.attackedBy = gameObject;
+                mobHealth.TakeDamage(damage);
+            }
             if (mobHealth.gameObject.GetComponent<MobHealth>().isDead && mobHealth.gameObject.GetComponent<MobReward>().rewardGiven == false)
             {
                 Character character = FindObjectOfType<Character>();

@@ -44,24 +44,16 @@ public class MobMovement : MonoBehaviour
     {
         if (isPatrolling)
         {
-            if (!gameObject.GetComponent<MobHealth>().isHurting && !gameObject.GetComponent<MobHealth>().isDead)
+            if (!gameObject.GetComponent<MobHealth>().isHurting && !gameObject.GetComponent<MobHealth>().isDead && !gameObject.GetComponent<MobPathfindingAI>().isChasingTarget)
             {
                 gameObject.GetComponent<MobAnimation>().ChangeAnimationState(MOB_MOVE);
+                Patrol();
             }
-            Patrol();
-        }
-        else
+        }       
+
+        if (gameObject.GetComponent<MobHealth>().isDead)
         {
             StopPatrol();
-        }
-
-        if (gameObject.GetComponent<MobHealth>().isHurting || gameObject.GetComponent<MobHealth>().isDead)
-        {
-            isPatrolling = false;
-        }
-        else
-        {
-            isPatrolling = true;
         }
 
         if (Vector2.Distance(spawnPoint, new Vector2(transform.position.x, transform.position.y)) > patrolRadius)
@@ -151,5 +143,28 @@ public class MobMovement : MonoBehaviour
         isAtEdge = false;
     }
 
+    public void ChaseTarget(Vector2 direction)
+    {
+        gameObject.GetComponent<MobAnimation>().ChangeAnimationState(MOB_MOVE);
+        if (Mathf.Sign(moveSpeed) != Mathf.Sign(direction.x))
+        {
+            Flip();
+        }
 
+        if ((!insidePatrolRange()))
+        {
+            gameObject.GetComponent<MobPathfindingAI>().isChasingTarget = false;
+            Patrol();
+            return;
+        }
+
+        if (isGrounded() && hitStep())
+        {
+            rb.velocity = new Vector2(moveSpeed * Time.fixedDeltaTime, rb.velocity.y + jumpPower);
+        }
+        else
+        {
+            rb.velocity = new Vector2(moveSpeed * Time.fixedDeltaTime, rb.velocity.y);
+        }
+    }
 }

@@ -8,6 +8,8 @@ public class CharacterAttack : MonoBehaviour
     [SerializeField] public Transform attackPoint;
     [SerializeField] public float attackDelay;
     [SerializeField] private GameObject fireball;
+    [SerializeField] public float KnockbackX;
+    [SerializeField] public float KnockbackY;
 
     public float attackRange = 0.5f;
     public LayerMask mobLayer;
@@ -53,7 +55,11 @@ public class CharacterAttack : MonoBehaviour
 
         foreach (Collider2D mob in hitMobs)
         {
-            mob.GetComponent<MobHealth>().TakeDamage(attack);
+            if (!mob.GetComponent<MobHealth>().isHurting)
+            {
+                mob.GetComponent<MobHealth>().attackedBy = gameObject;
+                mob.GetComponent<MobHealth>().TakeDamage(attack);
+            }
         }
         foreach (Collider2D mob in hitMobs)
         {
