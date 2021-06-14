@@ -45,6 +45,11 @@ public class MobMovement : MonoBehaviour
     {
         if (!CanPatrol()) return;
         Patrol();
+        if (gameObject.GetComponent<MobPathfindingAI>().instantAggressive && InChaseRange())
+        {
+            gameObject.GetComponent<MobPathfindingAI>().isChasingTarget = true;
+            return;
+        }
         gameObject.GetComponent<MobAnimation>().ChangeAnimationState(MOB_MOVE);
 
         if (gameObject.GetComponent<MobHealth>().isDead)
@@ -154,7 +159,6 @@ public class MobMovement : MonoBehaviour
     }
 
     public void Flip()
-    //function to flip the enemy
     {
         transform.localScale = new Vector2(transform.localScale.x * -1, transform.localScale.y);
         moveSpeed *= -1;
@@ -166,19 +170,16 @@ public class MobMovement : MonoBehaviour
         gameObject.GetComponent<MobAnimation>().ChangeAnimationState(MOB_MOVE);
         if (!InChaseRange() || player.gameObject.GetComponent<CharacterHealth>().isDead)
         {
-            Debug.Log("ChaseTarget!insideChaseRange");
             gameObject.GetComponent<MobPathfindingAI>().isChasingTarget = false;
             return;
         }
 
         if (isGrounded() && hitStep())
         {
-            Debug.Log("ChaseTargetIsGrounded&&HitStep");
             rb.velocity = new Vector2(moveSpeed * Time.fixedDeltaTime, rb.velocity.y + jumpPower);
         }
         else
         {
-            Debug.Log("ChaseTargetElse");
             rb.velocity = new Vector2(moveSpeed * Time.fixedDeltaTime, rb.velocity.y);
         }
     }
