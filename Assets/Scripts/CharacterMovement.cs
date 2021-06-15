@@ -4,43 +4,29 @@ using UnityEngine;
 
 public class CharacterMovement : MonoBehaviour
 {
-    private Rigidbody2D body;
+    
     [SerializeField] private float speed;
     [SerializeField] private float jumpPower;
-    private Animator animator;
-    private BoxCollider2D boxCollider;
     [SerializeField] private LayerMask groundLayer;
     [SerializeField] private LayerMask wallLayer;
-    private float wallJumpCooldown; // Prevent instant teleportation up wall
-    private float horizontalInput;
-    private string currentState;
     [SerializeField] public CharacterAttack characterAttack;
 
-    // Animation States
-    const string PLAYER_IDLE = "Idle";
-    const string PLAYER_RUN = "Run";
-    const string PLAYER_JUMP = "Jump";
+    private BoxCollider2D boxCollider;
+    public Rigidbody2D body;
+
+    private float wallJumpCooldown; // Prevent instant teleportation up wall
+    private float horizontalInput;
+
+    // Mob Animation States
+    public const string CHARACTER_IDLE = "Idle";
+    public const string CHARACTER_RUN = "Run";
+    public const string CHARACTER_JUMP = "Jump";
     
 
     private void Awake()
     {
-        // Grab reference for rigidbody and animaator from game object
         body = GetComponent<Rigidbody2D>();
-        animator = GetComponent<Animator>();
         boxCollider = GetComponent<BoxCollider2D>();
-    }
-
-
-    public void ChangeAnimationState(string newState)
-    {
-        // Stop the same animation from interupting itself
-        if (currentState == newState) return;
-
-        // Play the Animation
-        animator.Play(newState);
-
-        // Reassign current state with new state
-        currentState = newState;
     }
 
     private void FixedUpdate()
@@ -66,11 +52,11 @@ public class CharacterMovement : MonoBehaviour
         {
             if (horizontalInput != 0)
             {
-                ChangeAnimationState(PLAYER_RUN);
+                gameObject.GetComponent<CharacterAnimation>().ChangeAnimationState(CHARACTER_RUN);
             }
             else
             {
-                ChangeAnimationState(PLAYER_IDLE);
+                gameObject.GetComponent<CharacterAnimation>().ChangeAnimationState(CHARACTER_IDLE);
             }
         }
 
@@ -106,11 +92,11 @@ public class CharacterMovement : MonoBehaviour
         {
             body.velocity = new Vector2(body.velocity.x, jumpPower);
             //animator.SetTrigger("jump");
-            ChangeAnimationState(PLAYER_JUMP);
+            gameObject.GetComponent<CharacterAnimation>().ChangeAnimationState(CHARACTER_JUMP);
         }
         else if (onWall() && !isGrounded())
         {
-            ChangeAnimationState(PLAYER_JUMP);
+            gameObject.GetComponent<CharacterAnimation>().ChangeAnimationState(CHARACTER_JUMP);
             // Wall grab animation !!
             if (horizontalInput == 0)
             {
@@ -150,6 +136,10 @@ public class CharacterMovement : MonoBehaviour
             can = false;
         }
         if (FindObjectOfType<InventorySystem>().isOpen)
+        {
+            can = false;
+        }
+        if (gameObject.GetComponent<CharacterHealth>().isHurting || gameObject.GetComponent<CharacterHealth>().isDead)
         {
             can = false;
         }

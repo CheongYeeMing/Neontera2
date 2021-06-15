@@ -4,17 +4,36 @@ using UnityEngine;
 
 public class MobAttack : MonoBehaviour
 {
-    public Collider2D boxCollider;
+    [SerializeField] public float attackDelay;
+    [SerializeField] public float KnockbackX;
+    [SerializeField] public float KnockbackY;
+    [SerializeField] public bool isHostile;
+
     public float attack;
 
-    [SerializeField] public bool isHostile;
+    public bool isAttacking;
+
+    // Mob Animation States
+    public const string MOB_ATTACK = "Attack";
 
     public void OnCollisionEnter2D(Collision2D collision)
     {
         if (collision.gameObject.CompareTag("Character"))
         {
-            Debug.Log("damage");
+            if (isAttacking == false)
+            {
+                Debug.Log("attack animation called");
+                isAttacking = true;
+                gameObject.GetComponent<MobAnimation>().ChangeAnimationState(MOB_ATTACK);
+            }
+            collision.gameObject.GetComponent<CharacterHealth>().attackedBy = gameObject;
             collision.gameObject.GetComponent<CharacterHealth>().TakeDamage(attack);
+            Invoke("AttackComplete", attackDelay);
         }
+    }
+
+    public void AttackComplete()
+    {
+        isAttacking = false;
     }
 }

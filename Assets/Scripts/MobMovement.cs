@@ -12,6 +12,7 @@ public class MobMovement : MonoBehaviour
     public bool inPatrolRange;
 
     public Rigidbody2D rb;
+
     public Collider2D boxCollider;
     public Collider2D jumpBoxCollider;
 
@@ -22,11 +23,15 @@ public class MobMovement : MonoBehaviour
     public Transform edgeDetector;
 
     public Vector2 spawnPoint;
+
     [SerializeField] public float patrolRadius;
+    [SerializeField] public float chaseRadius;
     [SerializeField] public float jumpPower;
     [SerializeField] public bool onFloatingPlatform;
 
-    const string MOB_MOVE = "Move";
+    // Mob Animation States
+    public const string MOB_IDLE = "Idle";
+    public const string MOB_MOVE = "Move";
 
     // Start is called before the first frame update
     void Start()
@@ -38,26 +43,17 @@ public class MobMovement : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (isPatrolling)
+        if (!CanPatrol()) return;
+        Patrol();
+        if (gameObject.GetComponent<MobPathfindingAI>().instantAggressive && InChaseRange())
         {
-            if (!gameObject.GetComponent<MobHealth>().isHurting && !gameObject.GetComponent<MobHealth>().isDead)
-            {
-                gameObject.GetComponent<MobAnimation>().ChangeAnimationState(MOB_MOVE);
-            }
-            Patrol();
-        }
-        else
-        {
-            StopPatrol();
+            gameObject.GetComponent<MobPathfindingAI>().isChasingTarget = true;
+            return;
         }
 
-        if (gameObject.GetComponent<MobHealth>().isHurting || gameObject.GetComponent<MobHealth>().isDead)
+        if (gameObject.GetComponent<MobHealth>().isDead)
         {
-            isPatrolling = false;
-        }
-        else
-        {
-            isPatrolling = true;
+            StopPatrol();
         }
 
         if (Vector2.Distance(spawnPoint, new Vector2(transform.position.x, transform.position.y)) > patrolRadius)
@@ -81,6 +77,7 @@ public class MobMovement : MonoBehaviour
 
     void Patrol()
     {
+        gameObject.GetComponent<MobAnimation>().ChangeAnimationState(MOB_MOVE);
         if (onFloatingPlatform)
         {
             if (isAtEdge)
@@ -106,6 +103,28 @@ public class MobMovement : MonoBehaviour
     public void StopPatrol()
     {
         rb.velocity = new Vector2(0, rb.velocity.y);
+    }
+
+    public bool CanPatrol()
+    {
+        bool can = true;
+        if (gameObject.GetComponent<MobHealth>().isHurting)
+        {
+            can = false;
+        }
+        else if (gameObject.GetComponent<MobHealth>().isDead)
+        {
+            can = false;
+        }
+        else if (gameObject.GetComponent<MobAttack>().isAttacking)
+        {
+            can = false;
+        }
+        else if (gameObject.GetComponent<MobPathfindingAI>().isChasingTarget)
+        {
+            can = false;
+        }
+        return can;
     }
 
     private bool isGrounded()
@@ -140,12 +159,33 @@ public class MobMovement : MonoBehaviour
     }
 
     public void Flip()
-    //function to flip the enemy
     {
         transform.localScale = new Vector2(transform.localScale.x * -1, transform.localScale.y);
         moveSpeed *= -1;
         isAtEdge = false;
     }
 
+    public void ChaseTarget(Vector2 direction)
+    {
+        gameObject.GetComponent<MobAnimation>().ChangeAnimationState(MOB_MOVE);
+        if (!InChaseRange() || player.gameObject.GetComponent<CharacterHealth>().isDead)
+        {
+            gameObject.GetComponent<MobPathfindingAI>().isChasingTarget = false;
+            return;
+        }
 
+        if (isGrounded() && hitStep())
+        {
+            rb.velocity = new Vector2(moveSpeed * Time.fixedDeltaTime, rb.velocity.y + jumpPower);
+        }
+        else
+        {
+            rb.velocity = new Vector2(moveSpeed * Time.fixedDeltaTime, rb.velocity.y);
+        }
+    }
+
+    public bool InChaseRange()
+    {
+        return Vector2.Distance(spawnPoint, player.position) < chaseRadius;
+    }
 }

@@ -5,9 +5,12 @@ using UnityEngine.AI;
 
 public class MobController : MonoBehaviour
 {
+    [SerializeField] public string mobName;
+
     public float lookRadius = 10f;
 
     Transform target;
+
     NavMeshAgent agent;
 
     // Start is called before the first frame update

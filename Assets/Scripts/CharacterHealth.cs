@@ -6,13 +6,25 @@ using TMPro;
 
 public class CharacterHealth : MonoBehaviour, Health
 {
+    [SerializeField] public float hurtDelay;
+
     private float health;
     private float lerpTimer;
     public float maxHealth = 100;
     public float chipSpeed = 2f;
+
+    public bool isHurting;
+    public bool isDead;
+
     public Image frontHealthBar;
     public Image backHealthBar;
     public TextMeshProUGUI healthText;
+
+    public GameObject attackedBy;
+
+    // Character Animation States
+    public const string CHARACTER_HURT = "Hurt";
+    public const string CHARACTER_DIE = "Die";
 
     // Start is called before the first frame update
     void Start()
@@ -63,11 +75,33 @@ public class CharacterHealth : MonoBehaviour, Health
 
     public void TakeDamage(float damage)
     {
+        isHurting = true;
+        gameObject.GetComponent<CharacterAnimation>().ChangeAnimationState(CHARACTER_HURT);
+        KnockBack(attackedBy);
         health -= damage;
         lerpTimer = 0f;
         if (health <= 0)
         {
             Die();
+        }
+        Invoke("HurtComplete", hurtDelay);
+    }
+
+    public void HurtComplete()
+    {
+        isHurting = false;
+    }
+
+    public void KnockBack(GameObject mob)
+    {
+        Rigidbody2D body = gameObject.GetComponent<CharacterMovement>().body;
+        if (mob.transform.position.x > gameObject.transform.position.x)
+        {
+            body.velocity = new Vector2(body.velocity.x - mob.GetComponent<MobAttack>().KnockbackX, body.velocity.y + mob.GetComponent<MobAttack>().KnockbackY);
+        }
+        else
+        {
+            body.velocity = new Vector2(body.velocity.x + mob.GetComponent<MobAttack>().KnockbackX, body.velocity.y + mob.GetComponent<MobAttack>().KnockbackY);
         }
     }
 
@@ -85,6 +119,9 @@ public class CharacterHealth : MonoBehaviour, Health
 
     public void Die()
     {
+        isDead = true;
+        gameObject.GetComponent<CharacterAnimation>().ChangeAnimationState(CHARACTER_DIE);
         Debug.Log("Character is dead!!!");
+        // Dead Screen, Auto Respawn in Town area??? 
     }
 }

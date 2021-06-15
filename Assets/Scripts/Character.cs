@@ -8,12 +8,12 @@ public class Character : MonoBehaviour
     public CharacterStat Health;
     public CharacterStat Speed;
 
-    [SerializeField] Inventory inventory;
-    [SerializeField] EquipmentPanel equipmentPanel;
-    [SerializeField] StatPanel statPanel;
-    [SerializeField] SelectedItemPanel selectedItemPanel;
-    [SerializeField] QuestList questList;
-    [SerializeField] SelectedQuestWindow selectedQuestWindow;
+    [SerializeField] public Inventory inventory;
+    [SerializeField] public EquipmentPanel equipmentPanel;
+    [SerializeField] public StatPanel statPanel;
+    [SerializeField] public SelectedItemPanel selectedItemPanel;
+    [SerializeField] public QuestList questList;
+    [SerializeField] public SelectedQuestWindow selectedQuestWindow;
 
     private void Awake()
     {

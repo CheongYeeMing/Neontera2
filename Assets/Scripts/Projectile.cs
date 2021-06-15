@@ -37,7 +37,28 @@ public class Projectile : MonoBehaviour
         MobHealth mobHealth;
         if (collidedObject.TryGetComponent<MobHealth>(out mobHealth))
         {
-            mobHealth.TakeDamage(damage);
+            if (!mobHealth.isHurting)
+            {
+                mobHealth.attackedBy = gameObject;
+                mobHealth.TakeDamage(damage);
+            }
+            if (mobHealth.gameObject.GetComponent<MobHealth>().isDead && mobHealth.gameObject.GetComponent<MobReward>().rewardGiven == false)
+            {
+                Character character = FindObjectOfType<Character>();
+                foreach (Quest quest in character.questList.quests)
+                {
+                    if (quest.questCriteria.criteriaType == CriteriaType.Kill)
+                    {
+                        if (quest.questCriteria.Target == mobHealth.mobName)
+                        {
+                            quest.questCriteria.Execute();
+                            quest.Update();
+                        }
+                    }
+                }
+                // Rewards for Mob kill
+                mobHealth.gameObject.GetComponent<MobReward>().GetReward(character.GetComponent<CharacterLevel>(), character.GetComponent<CharacterWallet>());
+            }
         }
         yield return new WaitForSeconds(0.3f);
         Destroy(gameObject);
