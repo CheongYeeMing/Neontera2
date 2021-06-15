@@ -77,8 +77,13 @@ public class MobPathfindingAI : MonoBehaviour
 
         direction = ((Vector2)path.vectorPath[currentWaypoint] - rb.position);
 
-        if (Mathf.Sign(gameObject.GetComponent<MobMovement>().moveSpeed) != Mathf.Sign(direction.x) && direction.x != 0)
+        if (Mathf.Sign(gameObject.GetComponent<MobMovement>().moveSpeed) != Mathf.Sign(direction.x) && Mathf.Abs(direction.x) > 0.1)
         {
+            Debug.Log("Why u flip again cb");
+            Debug.Log("Movespeed: " + gameObject.GetComponent<MobMovement>().moveSpeed);
+            Debug.Log("Movespeed Sign: " + Mathf.Sign(gameObject.GetComponent<MobMovement>().moveSpeed));
+            Debug.Log("Direction X: " + direction.x);
+            Debug.Log("Direction X Sign: " + Mathf.Sign(direction.x));
             gameObject.GetComponent<MobMovement>().Flip();
         }
 

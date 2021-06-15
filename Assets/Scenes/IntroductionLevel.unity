@@ -224,6 +224,8 @@ GameObject:
   - component: {fileID: 13641415}
   - component: {fileID: 13641427}
   - component: {fileID: 13641428}
+  - component: {fileID: 13641429}
+  - component: {fileID: 13641430}
   m_Layer: 11
   m_Name: Slime (11)
   m_TagString: Invincible
@@ -280,6 +282,7 @@ MonoBehaviour:
   KnockbackY: 3.5
   isHostile: 0
   attack: 5
+  isAttacking: 0
 --- !u!61 &13641418
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -336,6 +339,7 @@ MonoBehaviour:
   edgeDetector: {fileID: 1639259877}
   spawnPoint: {x: 0, y: 0}
   patrolRadius: 5
+  chaseRadius: 0
   jumpPower: 1
   onFloatingPlatform: 0
 --- !u!114 &13641420
@@ -350,13 +354,18 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 35e08246361f1a94483e2bdb0e5e1182, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  mobName: Slime
   hurtDelay: 0.3
   dieDelay: 0.55
   DamagePopup: {fileID: 1923102147109379809, guid: c9d3f3764b4385e4d8779b7b7ee0abaa, type: 3}
+  HealingPopup: {fileID: 2107037215308737033, guid: d318d1de8f80b4e4cbf246af9cf1d3ef, type: 3}
   maxHealth: 100
   currentHealth: 0
+  regenTimer: 0
+  outOfCombatTimer: 0
   isHurting: 0
   isDead: 0
+  attackedBy: {fileID: 0}
 --- !u!114 &13641421
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -538,6 +547,56 @@ MonoBehaviour:
   goldReward: 2
   itemDrops: []
   rewardGiven: 0
+--- !u!114 &13641429
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 13641414}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a5db922ac8ba6974dabf1846782032a3, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  passiveAggressive: 0
+  instantAggressive: 0
+  target: {fileID: 480833867}
+  speed: 0
+  nextWayPointDistance: 3
+  currentWaypoint: 0
+  reachedEndOfPath: 0
+  rb: {fileID: 13641422}
+  direction: {x: 0, y: 0}
+  isChasingTarget: 0
+--- !u!114 &13641430
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 13641414}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 373b52eb9bf8c40f785bb6947a1aee66, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  version: 1
+  drawGizmos: 1
+  detailedGizmos: 0
+  startEndModifier:
+    addPoints: 0
+    exactStartPoint: 3
+    exactEndPoint: 3
+    useRaycasting: 0
+    mask:
+      serializedVersion: 2
+      m_Bits: 4294967295
+    useGraphRaycasting: 0
+  traversableTags: -1
+  tagPenalties: 0000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000
+  graphMask:
+    value: -1
 --- !u!1 &26378976
 GameObject:
   m_ObjectHideFlags: 0
@@ -1413,6 +1472,8 @@ GameObject:
   - component: {fileID: 251608581}
   - component: {fileID: 251608593}
   - component: {fileID: 251608594}
+  - component: {fileID: 251608595}
+  - component: {fileID: 251608596}
   m_Layer: 11
   m_Name: Slime (9)
   m_TagString: Invincible
@@ -1469,6 +1530,7 @@ MonoBehaviour:
   KnockbackY: 3.5
   isHostile: 0
   attack: 5
+  isAttacking: 0
 --- !u!61 &251608584
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -1525,6 +1587,7 @@ MonoBehaviour:
   edgeDetector: {fileID: 477726413}
   spawnPoint: {x: 0, y: 0}
   patrolRadius: 5
+  chaseRadius: 0
   jumpPower: 1
   onFloatingPlatform: 0
 --- !u!114 &251608586
@@ -1539,13 +1602,18 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 35e08246361f1a94483e2bdb0e5e1182, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  mobName: Slime
   hurtDelay: 0.3
   dieDelay: 0.55
   DamagePopup: {fileID: 1923102147109379809, guid: c9d3f3764b4385e4d8779b7b7ee0abaa, type: 3}
+  HealingPopup: {fileID: 2107037215308737033, guid: d318d1de8f80b4e4cbf246af9cf1d3ef, type: 3}
   maxHealth: 100
   currentHealth: 0
+  regenTimer: 0
+  outOfCombatTimer: 0
   isHurting: 0
   isDead: 0
+  attackedBy: {fileID: 0}
 --- !u!114 &251608587
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1727,6 +1795,56 @@ MonoBehaviour:
   goldReward: 2
   itemDrops: []
   rewardGiven: 0
+--- !u!114 &251608595
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 251608580}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a5db922ac8ba6974dabf1846782032a3, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  passiveAggressive: 0
+  instantAggressive: 0
+  target: {fileID: 480833867}
+  speed: 0
+  nextWayPointDistance: 3
+  currentWaypoint: 0
+  reachedEndOfPath: 0
+  rb: {fileID: 251608588}
+  direction: {x: 0, y: 0}
+  isChasingTarget: 0
+--- !u!114 &251608596
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 251608580}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 373b52eb9bf8c40f785bb6947a1aee66, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  version: 1
+  drawGizmos: 1
+  detailedGizmos: 0
+  startEndModifier:
+    addPoints: 0
+    exactStartPoint: 3
+    exactEndPoint: 3
+    useRaycasting: 0
+    mask:
+      serializedVersion: 2
+      m_Bits: 4294967295
+    useGraphRaycasting: 0
+  traversableTags: -1
+  tagPenalties: 0000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000
+  graphMask:
+    value: -1
 --- !u!1 &252785557
 GameObject:
   m_ObjectHideFlags: 0
@@ -1915,7 +2033,7 @@ Transform:
   m_LocalScale: {x: 5.1753, y: 5.1753, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 3
+  m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!61 &255478990
 BoxCollider2D:
@@ -2497,7 +2615,7 @@ Transform:
   - {fileID: 1286078324}
   - {fileID: 499790355}
   m_Father: {fileID: 0}
-  m_RootOrder: 6
+  m_RootOrder: 7
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &403740708
 GameObject:
@@ -2779,6 +2897,8 @@ GameObject:
   - component: {fileID: 449598656}
   - component: {fileID: 449598668}
   - component: {fileID: 449598669}
+  - component: {fileID: 449598670}
+  - component: {fileID: 449598671}
   m_Layer: 11
   m_Name: Slime (5)
   m_TagString: Invincible
@@ -2835,6 +2955,7 @@ MonoBehaviour:
   KnockbackY: 3.5
   isHostile: 0
   attack: 5
+  isAttacking: 0
 --- !u!61 &449598659
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -2891,6 +3012,7 @@ MonoBehaviour:
   edgeDetector: {fileID: 459885036}
   spawnPoint: {x: 0, y: 0}
   patrolRadius: 5
+  chaseRadius: 0
   jumpPower: 1
   onFloatingPlatform: 0
 --- !u!114 &449598661
@@ -2905,13 +3027,18 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 35e08246361f1a94483e2bdb0e5e1182, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  mobName: Slime
   hurtDelay: 0.3
   dieDelay: 0.55
   DamagePopup: {fileID: 1923102147109379809, guid: c9d3f3764b4385e4d8779b7b7ee0abaa, type: 3}
+  HealingPopup: {fileID: 2107037215308737033, guid: d318d1de8f80b4e4cbf246af9cf1d3ef, type: 3}
   maxHealth: 100
   currentHealth: 0
+  regenTimer: 0
+  outOfCombatTimer: 0
   isHurting: 0
   isDead: 0
+  attackedBy: {fileID: 0}
 --- !u!114 &449598662
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3093,6 +3220,56 @@ MonoBehaviour:
   goldReward: 2
   itemDrops: []
   rewardGiven: 0
+--- !u!114 &449598670
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 449598655}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a5db922ac8ba6974dabf1846782032a3, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  passiveAggressive: 0
+  instantAggressive: 0
+  target: {fileID: 480833867}
+  speed: 0
+  nextWayPointDistance: 3
+  currentWaypoint: 0
+  reachedEndOfPath: 0
+  rb: {fileID: 449598663}
+  direction: {x: 0, y: 0}
+  isChasingTarget: 0
+--- !u!114 &449598671
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 449598655}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 373b52eb9bf8c40f785bb6947a1aee66, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  version: 1
+  drawGizmos: 1
+  detailedGizmos: 0
+  startEndModifier:
+    addPoints: 0
+    exactStartPoint: 3
+    exactEndPoint: 3
+    useRaycasting: 0
+    mask:
+      serializedVersion: 2
+      m_Bits: 4294967295
+    useGraphRaycasting: 0
+  traversableTags: -1
+  tagPenalties: 0000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000
+  graphMask:
+    value: -1
 --- !u!1 &450594386
 GameObject:
   m_ObjectHideFlags: 0
@@ -3115,6 +3292,8 @@ GameObject:
   - component: {fileID: 450594387}
   - component: {fileID: 450594399}
   - component: {fileID: 450594400}
+  - component: {fileID: 450594401}
+  - component: {fileID: 450594402}
   m_Layer: 11
   m_Name: Slime (14)
   m_TagString: Invincible
@@ -3171,6 +3350,7 @@ MonoBehaviour:
   KnockbackY: 3.5
   isHostile: 0
   attack: 5
+  isAttacking: 0
 --- !u!61 &450594390
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -3227,6 +3407,7 @@ MonoBehaviour:
   edgeDetector: {fileID: 882249582}
   spawnPoint: {x: 0, y: 0}
   patrolRadius: 5
+  chaseRadius: 0
   jumpPower: 1
   onFloatingPlatform: 0
 --- !u!114 &450594392
@@ -3241,13 +3422,18 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 35e08246361f1a94483e2bdb0e5e1182, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  mobName: Slime
   hurtDelay: 0.3
   dieDelay: 0.55
   DamagePopup: {fileID: 1923102147109379809, guid: c9d3f3764b4385e4d8779b7b7ee0abaa, type: 3}
+  HealingPopup: {fileID: 2107037215308737033, guid: d318d1de8f80b4e4cbf246af9cf1d3ef, type: 3}
   maxHealth: 100
   currentHealth: 0
+  regenTimer: 0
+  outOfCombatTimer: 0
   isHurting: 0
   isDead: 0
+  attackedBy: {fileID: 0}
 --- !u!114 &450594393
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3429,6 +3615,56 @@ MonoBehaviour:
   goldReward: 2
   itemDrops: []
   rewardGiven: 0
+--- !u!114 &450594401
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 450594386}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a5db922ac8ba6974dabf1846782032a3, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  passiveAggressive: 0
+  instantAggressive: 0
+  target: {fileID: 480833867}
+  speed: 0
+  nextWayPointDistance: 3
+  currentWaypoint: 0
+  reachedEndOfPath: 0
+  rb: {fileID: 450594394}
+  direction: {x: 0, y: 0}
+  isChasingTarget: 0
+--- !u!114 &450594402
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 450594386}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 373b52eb9bf8c40f785bb6947a1aee66, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  version: 1
+  drawGizmos: 1
+  detailedGizmos: 0
+  startEndModifier:
+    addPoints: 0
+    exactStartPoint: 3
+    exactEndPoint: 3
+    useRaycasting: 0
+    mask:
+      serializedVersion: 2
+      m_Bits: 4294967295
+    useGraphRaycasting: 0
+  traversableTags: -1
+  tagPenalties: 0000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000
+  graphMask:
+    value: -1
 --- !u!1 &459885035
 GameObject:
   m_ObjectHideFlags: 0
@@ -3594,6 +3830,66 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 8316542597656949630, guid: 3c902716b1dec4341898e3f99721ae9d, type: 3}
   m_PrefabInstance: {fileID: 8316542597176214069}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &494483440 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 5232583707257192584, guid: 87601ccd21befa94d92bb77967e83d09, type: 3}
+  m_PrefabInstance: {fileID: 5232583707296084422}
+  m_PrefabAsset: {fileID: 0}
+--- !u!50 &494483449 stripped
+Rigidbody2D:
+  m_CorrespondingSourceObject: {fileID: 5232583707257192594, guid: 87601ccd21befa94d92bb77967e83d09, type: 3}
+  m_PrefabInstance: {fileID: 5232583707296084422}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &494483453
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 494483440}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a5db922ac8ba6974dabf1846782032a3, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  passiveAggressive: 0
+  instantAggressive: 0
+  target: {fileID: 480833867}
+  speed: 0
+  nextWayPointDistance: 3
+  currentWaypoint: 0
+  reachedEndOfPath: 0
+  rb: {fileID: 494483449}
+  direction: {x: 0, y: 0}
+  isChasingTarget: 0
+--- !u!114 &494483454
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 494483440}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 373b52eb9bf8c40f785bb6947a1aee66, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  version: 1
+  drawGizmos: 1
+  detailedGizmos: 0
+  startEndModifier:
+    addPoints: 0
+    exactStartPoint: 3
+    exactEndPoint: 3
+    useRaycasting: 0
+    mask:
+      serializedVersion: 2
+      m_Bits: 4294967295
+    useGraphRaycasting: 0
+  traversableTags: -1
+  tagPenalties: 0000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000
+  graphMask:
+    value: -1
 --- !u!1 &499790354
 GameObject:
   m_ObjectHideFlags: 0
@@ -3926,6 +4222,8 @@ GameObject:
   - component: {fileID: 573965612}
   - component: {fileID: 573965624}
   - component: {fileID: 573965625}
+  - component: {fileID: 573965626}
+  - component: {fileID: 573965627}
   m_Layer: 11
   m_Name: Slime (10)
   m_TagString: Invincible
@@ -3982,6 +4280,7 @@ MonoBehaviour:
   KnockbackY: 3.5
   isHostile: 0
   attack: 5
+  isAttacking: 0
 --- !u!61 &573965615
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -4038,6 +4337,7 @@ MonoBehaviour:
   edgeDetector: {fileID: 813944213}
   spawnPoint: {x: 0, y: 0}
   patrolRadius: 5
+  chaseRadius: 0
   jumpPower: 1
   onFloatingPlatform: 0
 --- !u!114 &573965617
@@ -4052,13 +4352,18 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 35e08246361f1a94483e2bdb0e5e1182, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  mobName: Slime
   hurtDelay: 0.3
   dieDelay: 0.55
   DamagePopup: {fileID: 1923102147109379809, guid: c9d3f3764b4385e4d8779b7b7ee0abaa, type: 3}
+  HealingPopup: {fileID: 2107037215308737033, guid: d318d1de8f80b4e4cbf246af9cf1d3ef, type: 3}
   maxHealth: 100
   currentHealth: 0
+  regenTimer: 0
+  outOfCombatTimer: 0
   isHurting: 0
   isDead: 0
+  attackedBy: {fileID: 0}
 --- !u!114 &573965618
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -4240,6 +4545,56 @@ MonoBehaviour:
   goldReward: 2
   itemDrops: []
   rewardGiven: 0
+--- !u!114 &573965626
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 573965611}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a5db922ac8ba6974dabf1846782032a3, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  passiveAggressive: 0
+  instantAggressive: 0
+  target: {fileID: 480833867}
+  speed: 0
+  nextWayPointDistance: 3
+  currentWaypoint: 0
+  reachedEndOfPath: 0
+  rb: {fileID: 573965619}
+  direction: {x: 0, y: 0}
+  isChasingTarget: 0
+--- !u!114 &573965627
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 573965611}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 373b52eb9bf8c40f785bb6947a1aee66, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  version: 1
+  drawGizmos: 1
+  detailedGizmos: 0
+  startEndModifier:
+    addPoints: 0
+    exactStartPoint: 3
+    exactEndPoint: 3
+    useRaycasting: 0
+    mask:
+      serializedVersion: 2
+      m_Bits: 4294967295
+    useGraphRaycasting: 0
+  traversableTags: -1
+  tagPenalties: 0000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000
+  graphMask:
+    value: -1
 --- !u!1 &582501079
 GameObject:
   m_ObjectHideFlags: 0
@@ -4984,7 +5339,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 667391833}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -4.6000004, y: -3.4499998, z: -10}
+  m_LocalPosition: {x: 47.49, y: -18.58, z: -10}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 856245504}
@@ -5511,6 +5866,8 @@ GameObject:
   - component: {fileID: 730199537}
   - component: {fileID: 730199549}
   - component: {fileID: 730199550}
+  - component: {fileID: 730199551}
+  - component: {fileID: 730199552}
   m_Layer: 11
   m_Name: Slime (3)
   m_TagString: Invincible
@@ -5567,6 +5924,7 @@ MonoBehaviour:
   KnockbackY: 3.5
   isHostile: 0
   attack: 5
+  isAttacking: 0
 --- !u!61 &730199540
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -5623,6 +5981,7 @@ MonoBehaviour:
   edgeDetector: {fileID: 1135178911}
   spawnPoint: {x: 0, y: 0}
   patrolRadius: 5
+  chaseRadius: 0
   jumpPower: 1
   onFloatingPlatform: 0
 --- !u!114 &730199542
@@ -5637,13 +5996,18 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 35e08246361f1a94483e2bdb0e5e1182, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  mobName: Slime
   hurtDelay: 0.3
   dieDelay: 0.55
   DamagePopup: {fileID: 1923102147109379809, guid: c9d3f3764b4385e4d8779b7b7ee0abaa, type: 3}
+  HealingPopup: {fileID: 2107037215308737033, guid: d318d1de8f80b4e4cbf246af9cf1d3ef, type: 3}
   maxHealth: 100
   currentHealth: 0
+  regenTimer: 0
+  outOfCombatTimer: 0
   isHurting: 0
   isDead: 0
+  attackedBy: {fileID: 0}
 --- !u!114 &730199543
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -5825,6 +6189,56 @@ MonoBehaviour:
   goldReward: 2
   itemDrops: []
   rewardGiven: 0
+--- !u!114 &730199551
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 730199536}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a5db922ac8ba6974dabf1846782032a3, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  passiveAggressive: 0
+  instantAggressive: 0
+  target: {fileID: 480833867}
+  speed: 0
+  nextWayPointDistance: 3
+  currentWaypoint: 0
+  reachedEndOfPath: 0
+  rb: {fileID: 730199544}
+  direction: {x: 0, y: 0}
+  isChasingTarget: 0
+--- !u!114 &730199552
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 730199536}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 373b52eb9bf8c40f785bb6947a1aee66, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  version: 1
+  drawGizmos: 1
+  detailedGizmos: 0
+  startEndModifier:
+    addPoints: 0
+    exactStartPoint: 3
+    exactEndPoint: 3
+    useRaycasting: 0
+    mask:
+      serializedVersion: 2
+      m_Bits: 4294967295
+    useGraphRaycasting: 0
+  traversableTags: -1
+  tagPenalties: 0000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000
+  graphMask:
+    value: -1
 --- !u!1 &730807955
 GameObject:
   m_ObjectHideFlags: 0
@@ -5847,6 +6261,8 @@ GameObject:
   - component: {fileID: 730807956}
   - component: {fileID: 730807968}
   - component: {fileID: 730807969}
+  - component: {fileID: 730807970}
+  - component: {fileID: 730807971}
   m_Layer: 11
   m_Name: Slime (1)
   m_TagString: Invincible
@@ -5903,6 +6319,7 @@ MonoBehaviour:
   KnockbackY: 3.5
   isHostile: 0
   attack: 5
+  isAttacking: 0
 --- !u!61 &730807959
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -5959,6 +6376,7 @@ MonoBehaviour:
   edgeDetector: {fileID: 263430051}
   spawnPoint: {x: 0, y: 0}
   patrolRadius: 5
+  chaseRadius: 0
   jumpPower: 1
   onFloatingPlatform: 0
 --- !u!114 &730807961
@@ -5973,13 +6391,18 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 35e08246361f1a94483e2bdb0e5e1182, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  mobName: Slime
   hurtDelay: 0.3
   dieDelay: 0.55
   DamagePopup: {fileID: 1923102147109379809, guid: c9d3f3764b4385e4d8779b7b7ee0abaa, type: 3}
+  HealingPopup: {fileID: 2107037215308737033, guid: d318d1de8f80b4e4cbf246af9cf1d3ef, type: 3}
   maxHealth: 100
   currentHealth: 0
+  regenTimer: 0
+  outOfCombatTimer: 0
   isHurting: 0
   isDead: 0
+  attackedBy: {fileID: 0}
 --- !u!114 &730807962
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -6161,6 +6584,56 @@ MonoBehaviour:
   goldReward: 2
   itemDrops: []
   rewardGiven: 0
+--- !u!114 &730807970
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 730807955}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a5db922ac8ba6974dabf1846782032a3, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  passiveAggressive: 0
+  instantAggressive: 0
+  target: {fileID: 480833867}
+  speed: 0
+  nextWayPointDistance: 3
+  currentWaypoint: 0
+  reachedEndOfPath: 0
+  rb: {fileID: 730807963}
+  direction: {x: 0, y: 0}
+  isChasingTarget: 0
+--- !u!114 &730807971
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 730807955}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 373b52eb9bf8c40f785bb6947a1aee66, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  version: 1
+  drawGizmos: 1
+  detailedGizmos: 0
+  startEndModifier:
+    addPoints: 0
+    exactStartPoint: 3
+    exactEndPoint: 3
+    useRaycasting: 0
+    mask:
+      serializedVersion: 2
+      m_Bits: 4294967295
+    useGraphRaycasting: 0
+  traversableTags: -1
+  tagPenalties: 0000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000
+  graphMask:
+    value: -1
 --- !u!1 &741625926
 GameObject:
   m_ObjectHideFlags: 0
@@ -133359,7 +133832,7 @@ Transform:
   m_LocalScale: {x: 1.8316, y: 1.8316, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 11
+  m_RootOrder: 12
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1085979710
 GameObject:
@@ -133481,6 +133954,8 @@ GameObject:
   - component: {fileID: 1089219545}
   - component: {fileID: 1089219557}
   - component: {fileID: 1089219558}
+  - component: {fileID: 1089219559}
+  - component: {fileID: 1089219560}
   m_Layer: 11
   m_Name: Slime (13)
   m_TagString: Invincible
@@ -133537,6 +134012,7 @@ MonoBehaviour:
   KnockbackY: 3.5
   isHostile: 0
   attack: 5
+  isAttacking: 0
 --- !u!61 &1089219548
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -133593,6 +134069,7 @@ MonoBehaviour:
   edgeDetector: {fileID: 1245056488}
   spawnPoint: {x: 0, y: 0}
   patrolRadius: 5
+  chaseRadius: 0
   jumpPower: 1
   onFloatingPlatform: 0
 --- !u!114 &1089219550
@@ -133607,13 +134084,18 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 35e08246361f1a94483e2bdb0e5e1182, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  mobName: Slime
   hurtDelay: 0.3
   dieDelay: 0.55
   DamagePopup: {fileID: 1923102147109379809, guid: c9d3f3764b4385e4d8779b7b7ee0abaa, type: 3}
+  HealingPopup: {fileID: 2107037215308737033, guid: d318d1de8f80b4e4cbf246af9cf1d3ef, type: 3}
   maxHealth: 100
   currentHealth: 0
+  regenTimer: 0
+  outOfCombatTimer: 0
   isHurting: 0
   isDead: 0
+  attackedBy: {fileID: 0}
 --- !u!114 &1089219551
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -133795,6 +134277,56 @@ MonoBehaviour:
   goldReward: 2
   itemDrops: []
   rewardGiven: 0
+--- !u!114 &1089219559
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1089219544}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a5db922ac8ba6974dabf1846782032a3, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  passiveAggressive: 0
+  instantAggressive: 0
+  target: {fileID: 480833867}
+  speed: 0
+  nextWayPointDistance: 3
+  currentWaypoint: 0
+  reachedEndOfPath: 0
+  rb: {fileID: 1089219552}
+  direction: {x: 0, y: 0}
+  isChasingTarget: 0
+--- !u!114 &1089219560
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1089219544}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 373b52eb9bf8c40f785bb6947a1aee66, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  version: 1
+  drawGizmos: 1
+  detailedGizmos: 0
+  startEndModifier:
+    addPoints: 0
+    exactStartPoint: 3
+    exactEndPoint: 3
+    useRaycasting: 0
+    mask:
+      serializedVersion: 2
+      m_Bits: 4294967295
+    useGraphRaycasting: 0
+  traversableTags: -1
+  tagPenalties: 0000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000
+  graphMask:
+    value: -1
 --- !u!1 &1135178910
 GameObject:
   m_ObjectHideFlags: 0
@@ -133941,7 +134473,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 5
+  m_RootOrder: 6
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1178933972
 GameObject:
@@ -134125,6 +134657,8 @@ GameObject:
   - component: {fileID: 1257914629}
   - component: {fileID: 1257914641}
   - component: {fileID: 1257914642}
+  - component: {fileID: 1257914643}
+  - component: {fileID: 1257914644}
   m_Layer: 11
   m_Name: Slime (2)
   m_TagString: Invincible
@@ -134181,6 +134715,7 @@ MonoBehaviour:
   KnockbackY: 3.5
   isHostile: 0
   attack: 5
+  isAttacking: 0
 --- !u!61 &1257914632
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -134237,6 +134772,7 @@ MonoBehaviour:
   edgeDetector: {fileID: 1575325987}
   spawnPoint: {x: 0, y: 0}
   patrolRadius: 5
+  chaseRadius: 0
   jumpPower: 1
   onFloatingPlatform: 0
 --- !u!114 &1257914634
@@ -134251,13 +134787,18 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 35e08246361f1a94483e2bdb0e5e1182, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  mobName: Slime
   hurtDelay: 0.3
   dieDelay: 0.55
   DamagePopup: {fileID: 1923102147109379809, guid: c9d3f3764b4385e4d8779b7b7ee0abaa, type: 3}
+  HealingPopup: {fileID: 2107037215308737033, guid: d318d1de8f80b4e4cbf246af9cf1d3ef, type: 3}
   maxHealth: 100
   currentHealth: 0
+  regenTimer: 0
+  outOfCombatTimer: 0
   isHurting: 0
   isDead: 0
+  attackedBy: {fileID: 0}
 --- !u!114 &1257914635
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -134439,6 +134980,56 @@ MonoBehaviour:
   goldReward: 2
   itemDrops: []
   rewardGiven: 0
+--- !u!114 &1257914643
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1257914628}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a5db922ac8ba6974dabf1846782032a3, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  passiveAggressive: 0
+  instantAggressive: 0
+  target: {fileID: 480833867}
+  speed: 0
+  nextWayPointDistance: 3
+  currentWaypoint: 0
+  reachedEndOfPath: 0
+  rb: {fileID: 1257914636}
+  direction: {x: 0, y: 0}
+  isChasingTarget: 0
+--- !u!114 &1257914644
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1257914628}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 373b52eb9bf8c40f785bb6947a1aee66, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  version: 1
+  drawGizmos: 1
+  detailedGizmos: 0
+  startEndModifier:
+    addPoints: 0
+    exactStartPoint: 3
+    exactEndPoint: 3
+    useRaycasting: 0
+    mask:
+      serializedVersion: 2
+      m_Bits: 4294967295
+    useGraphRaycasting: 0
+  traversableTags: -1
+  tagPenalties: 0000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000
+  graphMask:
+    value: -1
 --- !u!1 &1275889550
 GameObject:
   m_ObjectHideFlags: 0
@@ -135861,9 +136452,20 @@ GameObject:
   - component: {fileID: 1301909802}
   - component: {fileID: 1301909801}
   - component: {fileID: 1301909800}
-  m_Layer: 0
+  - component: {fileID: 1301909813}
+  - component: {fileID: 1301909812}
+  - component: {fileID: 1301909811}
+  - component: {fileID: 1301909809}
+  - component: {fileID: 1301909808}
+  - component: {fileID: 1301909807}
+  - component: {fileID: 1301909806}
+  - component: {fileID: 1301909805}
+  - component: {fileID: 1301909804}
+  - component: {fileID: 1301909803}
+  - component: {fileID: 1301909810}
+  m_Layer: 11
   m_Name: BossSlime
-  m_TagString: Untagged
+  m_TagString: Invincible
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -135947,12 +136549,255 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1301909799}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 63.68, y: -23.55, z: -11.22263}
-  m_LocalScale: {x: 15, y: 15, z: 1}
-  m_Children: []
+  m_LocalPosition: {x: 65.01, y: -22.78, z: 0}
+  m_LocalScale: {x: 15, y: 20, z: 1}
+  m_Children:
+  - {fileID: 1916728408}
   m_Father: {fileID: 0}
-  m_RootOrder: 12
+  m_RootOrder: 13
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1301909803
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1301909799}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f923b7da464b4f34da250b347073b843, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  canRespawn: 1
+  respawnTime: 10
+  deathTimer: 0
+--- !u!114 &1301909804
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1301909799}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 79a1937d5d993194aa0162a89e3c84e1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  expReward: 50
+  goldReward: 50
+  itemDrops: []
+  rewardGiven: 0
+--- !u!114 &1301909805
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1301909799}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a5db922ac8ba6974dabf1846782032a3, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  passiveAggressive: 0
+  instantAggressive: 1
+  target: {fileID: 480833867}
+  speed: 0
+  nextWayPointDistance: 3
+  currentWaypoint: 0
+  reachedEndOfPath: 0
+  rb: {fileID: 1301909811}
+  direction: {x: 0, y: 0}
+  isChasingTarget: 0
+--- !u!114 &1301909806
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1301909799}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2093c2cc65f5f3c49952d371a8222764, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  moveSpeed: 150
+  distFromPlayer: 0
+  isPatrolling: 0
+  isAtEdge: 0
+  inPatrolRange: 0
+  rb: {fileID: 1301909811}
+  boxCollider: {fileID: 1301909813}
+  jumpBoxCollider: {fileID: 1301909812}
+  groundLayer:
+    serializedVersion: 2
+    m_Bits: 256
+  wallLayer:
+    serializedVersion: 2
+    m_Bits: 512
+  player: {fileID: 480833867}
+  edgeDetector: {fileID: 1916728408}
+  spawnPoint: {x: 0, y: 0}
+  patrolRadius: 15
+  chaseRadius: 15
+  jumpPower: 3
+  onFloatingPlatform: 0
+--- !u!114 &1301909807
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1301909799}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 35e08246361f1a94483e2bdb0e5e1182, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  mobName: 
+  hurtDelay: 0.3
+  dieDelay: 0.55
+  DamagePopup: {fileID: 1923102147109379809, guid: c9d3f3764b4385e4d8779b7b7ee0abaa, type: 3}
+  HealingPopup: {fileID: 2107037215308737033, guid: d318d1de8f80b4e4cbf246af9cf1d3ef, type: 3}
+  maxHealth: 500
+  currentHealth: 0
+  regenTimer: 0
+  outOfCombatTimer: 0
+  isHurting: 0
+  isDead: 0
+  attackedBy: {fileID: 0}
+--- !u!114 &1301909808
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1301909799}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a28b2b918e20328479c578beff2fbbb6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  attackDelay: 1
+  KnockbackX: 3
+  KnockbackY: 3.5
+  isHostile: 0
+  attack: 5
+  isAttacking: 0
+--- !u!114 &1301909809
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1301909799}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 70ce5b5d47e93b742a18cad306d694f9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  animator: {fileID: 1301909800}
+--- !u!114 &1301909810
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1301909799}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 373b52eb9bf8c40f785bb6947a1aee66, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  version: 1
+  drawGizmos: 1
+  detailedGizmos: 0
+  startEndModifier:
+    addPoints: 0
+    exactStartPoint: 3
+    exactEndPoint: 3
+    useRaycasting: 0
+    mask:
+      serializedVersion: 2
+      m_Bits: 4294967295
+    useGraphRaycasting: 0
+  traversableTags: -1
+  tagPenalties: 0000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000
+  graphMask:
+    value: -1
+--- !u!50 &1301909811
+Rigidbody2D:
+  serializedVersion: 4
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1301909799}
+  m_BodyType: 0
+  m_Simulated: 1
+  m_UseFullKinematicContacts: 0
+  m_UseAutoMass: 0
+  m_Mass: 1
+  m_LinearDrag: 0
+  m_AngularDrag: 0.05
+  m_GravityScale: 1
+  m_Material: {fileID: 6200000, guid: 0bf18f0845b3b3242ba1de79fe771d5a, type: 2}
+  m_Interpolate: 0
+  m_SleepingMode: 1
+  m_CollisionDetection: 0
+  m_Constraints: 4
+--- !u!61 &1301909812
+BoxCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1301909799}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 6200000, guid: 0bf18f0845b3b3242ba1de79fe771d5a, type: 2}
+  m_IsTrigger: 0
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: 0.05209151, y: -0.03725814}
+  m_SpriteTilingProperty:
+    border: {x: 0, y: 0, z: 0, w: 0}
+    pivot: {x: 0.5, y: 0.5}
+    oldSize: {x: 0.32, y: 0.25}
+    newSize: {x: 0.32, y: 0.25}
+    adaptiveTilingThreshold: 0.5
+    drawMode: 0
+    adaptiveTiling: 0
+  m_AutoTiling: 0
+  serializedVersion: 2
+  m_Size: {x: 0.13817394, y: 0.116938844}
+  m_EdgeRadius: 0
+--- !u!61 &1301909813
+BoxCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1301909799}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 6200000, guid: 0bf18f0845b3b3242ba1de79fe771d5a, type: 2}
+  m_IsTrigger: 0
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: -0.009527177, y: -0.044496253}
+  m_SpriteTilingProperty:
+    border: {x: 0, y: 0, z: 0, w: 0}
+    pivot: {x: 0.5, y: 0.5}
+    oldSize: {x: 0.32, y: 0.25}
+    newSize: {x: 0.32, y: 0.25}
+    adaptiveTilingThreshold: 0.5
+    drawMode: 0
+    adaptiveTiling: 0
+  m_AutoTiling: 0
+  serializedVersion: 2
+  m_Size: {x: 0.25875223, y: 0.1408717}
+  m_EdgeRadius: 0
 --- !u!1 &1342058475
 GameObject:
   m_ObjectHideFlags: 0
@@ -137860,7 +138705,7 @@ Transform:
   m_LocalScale: {x: 2.1469, y: 2.7004, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 10
+  m_RootOrder: 11
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1566984018
 GameObject:
@@ -138374,6 +139219,8 @@ GameObject:
   - component: {fileID: 1677956182}
   - component: {fileID: 1677956194}
   - component: {fileID: 1677956195}
+  - component: {fileID: 1677956196}
+  - component: {fileID: 1677956197}
   m_Layer: 11
   m_Name: Slime (8)
   m_TagString: Invincible
@@ -138430,6 +139277,7 @@ MonoBehaviour:
   KnockbackY: 3.5
   isHostile: 0
   attack: 5
+  isAttacking: 0
 --- !u!61 &1677956185
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -138486,6 +139334,7 @@ MonoBehaviour:
   edgeDetector: {fileID: 1178933973}
   spawnPoint: {x: 0, y: 0}
   patrolRadius: 5
+  chaseRadius: 0
   jumpPower: 1
   onFloatingPlatform: 0
 --- !u!114 &1677956187
@@ -138500,13 +139349,18 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 35e08246361f1a94483e2bdb0e5e1182, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  mobName: Slime
   hurtDelay: 0.3
   dieDelay: 0.55
   DamagePopup: {fileID: 1923102147109379809, guid: c9d3f3764b4385e4d8779b7b7ee0abaa, type: 3}
+  HealingPopup: {fileID: 2107037215308737033, guid: d318d1de8f80b4e4cbf246af9cf1d3ef, type: 3}
   maxHealth: 100
   currentHealth: 0
+  regenTimer: 0
+  outOfCombatTimer: 0
   isHurting: 0
   isDead: 0
+  attackedBy: {fileID: 0}
 --- !u!114 &1677956188
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -138688,6 +139542,142 @@ MonoBehaviour:
   goldReward: 2
   itemDrops: []
   rewardGiven: 0
+--- !u!114 &1677956196
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1677956181}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a5db922ac8ba6974dabf1846782032a3, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  passiveAggressive: 0
+  instantAggressive: 0
+  target: {fileID: 480833867}
+  speed: 0
+  nextWayPointDistance: 3
+  currentWaypoint: 0
+  reachedEndOfPath: 0
+  rb: {fileID: 1677956189}
+  direction: {x: 0, y: 0}
+  isChasingTarget: 0
+--- !u!114 &1677956197
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1677956181}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 373b52eb9bf8c40f785bb6947a1aee66, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  version: 1
+  drawGizmos: 1
+  detailedGizmos: 0
+  startEndModifier:
+    addPoints: 0
+    exactStartPoint: 3
+    exactEndPoint: 3
+    useRaycasting: 0
+    mask:
+      serializedVersion: 2
+      m_Bits: 4294967295
+    useGraphRaycasting: 0
+  traversableTags: -1
+  tagPenalties: 0000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000
+  graphMask:
+    value: -1
+--- !u!1 &1686443590
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1686443592}
+  - component: {fileID: 1686443591}
+  m_Layer: 0
+  m_Name: A* Pathfinder
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &1686443591
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1686443590}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 78396926cbbfc4ac3b48fc5fc34a87d1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  version: 1
+  data:
+    dataString: UEsDBBQAAAgIAABAIey8iAlHcAIAABQFAAALACQAZ3JhcGgwLmpzb24KACAAAAAAAAEAGAAAgD7V3rGdAQCAPtXesZ0BAIA+1d6xnQFlVMly4jAQ/RVK54GyHQPx3GYcQuaQpUKmcvFFWG2sQkguLQGS4t+nJRvsML5Y7tfL69ctfxEuTQOlVXqpOXtUDMjPEfFn8mPUgw9woBslV/wTzj7vnNnaO9Hg80otV2iPfZhRO7Cal7/kRnjnCI1O8krp3YJtIFfGGjRXVBhASCvroyWavkbkgK9x5kOOeErm/vSJpywanfBYgrSge9ebbJJm+CRpFzGeTfx3Np8lXeQ4niTTeJbN05vFOJqFNE6Wgu4aYL6nPlscT7s0aVtOYrudi2+tVEJw03El9tgELXLaGIedogPjFHsPBL1/DXxTW9/HMPi5qgzYThhNj3dco4RtVvJbtbruqNm2xD6ocL5OMm25t0kf/8PHcYArrXYP57px5GvYmpfbV3osqbED4Yfmu+/EndxTsaVrAe81yCe11MpJhqDVzoc6A8ld/3lpLa+h3Pb2luqV0TW94Oc5R5dZjU6n0P0hF3y39tAkbQ0roYLeYTlA42T+IOGwOqZLgVbP4q+BN7oZ7lgH3HNtLEJdl9LTWyunvStZBM18N87mSksI5o50A5IKe3zBNPZ6hFfYoOwVck/9beqKd9j5klyFBHPvH0VX0IvaX4ZlarV/BFM/Oyu4hJ60B55Qp1xJ2W7YUJNz2MrpipaDsI3j7PtqkXWWVml1e1OVaRRlcxjfTstkNouTecJYclsxEnaPS+yTipeWaCcPTk32ySXu2fknM1pq2oRtZ5rul/xzpwaSc1mpVakB5HOb4UIcNBbBW8kWjKNAK7CWyzBv8lUQocotsOKSqAidLg5W06LPUpCGfyjrLQXJw1+lICdy+gdQSwMEFAAACAgAAEAh7FJDXlRtAAAAeAAAAAkAJABtZXRhLmpzb24KACAAAAAAAAEAGAAAgD7V3rGdAQCAPtXesZ0BAIA+1d6xnQGrVipLLSrOzM9TslIw0TPSMzTVUVBKL0osyCgGihiCOKWZKSB2tFKSpUmaSZqFcVqyiYGBpXmqroVpspGZmaGRuVFKipFFWopSLFB9SWVBql9ibipET0BiSUZaZl5KZl66nntRZoo7yGil2FoAUEsBAi0AFAAACAgAAEAh7LyICUdwAgAAFAUAAAsAJAAAAAAAAAAAAAAAAAAAAGdyYXBoMC5qc29uCgAgAAAAAAABABgAAIA+1d6xnQEAgD7V3rGdAQCAPtXesZ0BUEsBAi0AFAAACAgAAEAh7FJDXlRtAAAAeAAAAAkAJAAAAAAAAAAAAAAAvQIAAG1ldGEuanNvbgoAIAAAAAAAAQAYAACAPtXesZ0BAIA+1d6xnQEAgD7V3rGdAVBLBQYAAAAAAgACALgAAAB1AwAAAAA=
+    upgradeData: 
+    file_cachedStartup: {fileID: 0}
+    data_cachedStartup: 
+    cacheStartup: 0
+  showNavGraphs: 1
+  showUnwalkableNodes: 1
+  debugMode: 0
+  debugFloor: 0
+  debugRoof: 1
+  manualDebugFloorRoof: 0
+  showSearchTree: 0
+  unwalkableNodeDebugSize: 0.3
+  logPathResults: 1
+  maxNearestNodeDistance: 100
+  scanOnStartup: 1
+  fullGetNearestSearch: 0
+  prioritizeGraphs: 0
+  prioritizeGraphsLimit: 1
+  colorSettings:
+    _SolidColor: {r: 0.11764706, g: 0.4, b: 0.7882353, a: 0.9}
+    _UnwalkableNode: {r: 1, g: 0, b: 0, a: 0.5}
+    _BoundsHandles: {r: 0.29, g: 0.454, b: 0.741, a: 0.9}
+    _ConnectionLowLerp: {r: 0, g: 1, b: 0, a: 0.5}
+    _ConnectionHighLerp: {r: 1, g: 0, b: 0, a: 0.5}
+    _MeshEdgeColor: {r: 0, g: 0, b: 0, a: 0.5}
+    _AreaColors:
+    - {r: 0, g: 0, b: 0, a: 0}
+  tagNames: []
+  heuristic: 2
+  heuristicScale: 1
+  threadCount: 1
+  maxFrameTime: 1
+  batchGraphUpdates: 0
+  graphUpdateBatchingInterval: 0.2
+  euclideanEmbedding:
+    mode: 0
+    seed: 0
+    pivotPointRoot: {fileID: 0}
+    spreadOutCount: 1
+  showGraphs: 1
+--- !u!4 &1686443592
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1686443590}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 55.661762, y: -18.891537, z: -29.400566}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 2
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1699034471
 GameObject:
   m_ObjectHideFlags: 0
@@ -139350,6 +140340,8 @@ GameObject:
   - component: {fileID: 1752370801}
   - component: {fileID: 1752370813}
   - component: {fileID: 1752370814}
+  - component: {fileID: 1752370815}
+  - component: {fileID: 1752370816}
   m_Layer: 11
   m_Name: Slime (6)
   m_TagString: Invincible
@@ -139406,6 +140398,7 @@ MonoBehaviour:
   KnockbackY: 3.5
   isHostile: 0
   attack: 5
+  isAttacking: 0
 --- !u!61 &1752370804
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -139462,6 +140455,7 @@ MonoBehaviour:
   edgeDetector: {fileID: 1878020826}
   spawnPoint: {x: 0, y: 0}
   patrolRadius: 5
+  chaseRadius: 0
   jumpPower: 1
   onFloatingPlatform: 0
 --- !u!114 &1752370806
@@ -139476,13 +140470,18 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 35e08246361f1a94483e2bdb0e5e1182, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  mobName: Slime
   hurtDelay: 0.3
   dieDelay: 0.55
   DamagePopup: {fileID: 1923102147109379809, guid: c9d3f3764b4385e4d8779b7b7ee0abaa, type: 3}
+  HealingPopup: {fileID: 2107037215308737033, guid: d318d1de8f80b4e4cbf246af9cf1d3ef, type: 3}
   maxHealth: 100
   currentHealth: 0
+  regenTimer: 0
+  outOfCombatTimer: 0
   isHurting: 0
   isDead: 0
+  attackedBy: {fileID: 0}
 --- !u!114 &1752370807
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -139664,6 +140663,56 @@ MonoBehaviour:
   goldReward: 2
   itemDrops: []
   rewardGiven: 0
+--- !u!114 &1752370815
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1752370800}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a5db922ac8ba6974dabf1846782032a3, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  passiveAggressive: 0
+  instantAggressive: 0
+  target: {fileID: 480833867}
+  speed: 0
+  nextWayPointDistance: 3
+  currentWaypoint: 0
+  reachedEndOfPath: 0
+  rb: {fileID: 1752370808}
+  direction: {x: 0, y: 0}
+  isChasingTarget: 0
+--- !u!114 &1752370816
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1752370800}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 373b52eb9bf8c40f785bb6947a1aee66, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  version: 1
+  drawGizmos: 1
+  detailedGizmos: 0
+  startEndModifier:
+    addPoints: 0
+    exactStartPoint: 3
+    exactEndPoint: 3
+    useRaycasting: 0
+    mask:
+      serializedVersion: 2
+      m_Bits: 4294967295
+    useGraphRaycasting: 0
+  traversableTags: -1
+  tagPenalties: 0000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000
+  graphMask:
+    value: -1
 --- !u!1 &1771549143
 GameObject:
   m_ObjectHideFlags: 0
@@ -140260,6 +141309,8 @@ GameObject:
   - component: {fileID: 1869643273}
   - component: {fileID: 1869643285}
   - component: {fileID: 1869643286}
+  - component: {fileID: 1869643287}
+  - component: {fileID: 1869643288}
   m_Layer: 11
   m_Name: Slime (4)
   m_TagString: Invincible
@@ -140316,6 +141367,7 @@ MonoBehaviour:
   KnockbackY: 3.5
   isHostile: 0
   attack: 5
+  isAttacking: 0
 --- !u!61 &1869643276
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -140372,6 +141424,7 @@ MonoBehaviour:
   edgeDetector: {fileID: 1574791159}
   spawnPoint: {x: 0, y: 0}
   patrolRadius: 5
+  chaseRadius: 0
   jumpPower: 1
   onFloatingPlatform: 1
 --- !u!114 &1869643278
@@ -140386,13 +141439,18 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 35e08246361f1a94483e2bdb0e5e1182, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  mobName: Slime
   hurtDelay: 0.3
   dieDelay: 0.55
   DamagePopup: {fileID: 1923102147109379809, guid: c9d3f3764b4385e4d8779b7b7ee0abaa, type: 3}
+  HealingPopup: {fileID: 2107037215308737033, guid: d318d1de8f80b4e4cbf246af9cf1d3ef, type: 3}
   maxHealth: 100
   currentHealth: 0
+  regenTimer: 0
+  outOfCombatTimer: 0
   isHurting: 0
   isDead: 0
+  attackedBy: {fileID: 0}
 --- !u!114 &1869643279
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -140574,6 +141632,56 @@ MonoBehaviour:
   goldReward: 2
   itemDrops: []
   rewardGiven: 0
+--- !u!114 &1869643287
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1869643272}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a5db922ac8ba6974dabf1846782032a3, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  passiveAggressive: 0
+  instantAggressive: 0
+  target: {fileID: 480833867}
+  speed: 0
+  nextWayPointDistance: 3
+  currentWaypoint: 0
+  reachedEndOfPath: 0
+  rb: {fileID: 1869643280}
+  direction: {x: 0, y: 0}
+  isChasingTarget: 0
+--- !u!114 &1869643288
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1869643272}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 373b52eb9bf8c40f785bb6947a1aee66, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  version: 1
+  drawGizmos: 1
+  detailedGizmos: 0
+  startEndModifier:
+    addPoints: 0
+    exactStartPoint: 3
+    exactEndPoint: 3
+    useRaycasting: 0
+    mask:
+      serializedVersion: 2
+      m_Bits: 4294967295
+    useGraphRaycasting: 0
+  traversableTags: -1
+  tagPenalties: 0000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000
+  graphMask:
+    value: -1
 --- !u!1 &1878020825
 GameObject:
   m_ObjectHideFlags: 0
@@ -140776,6 +141884,8 @@ GameObject:
   - component: {fileID: 1905384444}
   - component: {fileID: 1905384456}
   - component: {fileID: 1905384457}
+  - component: {fileID: 1905384458}
+  - component: {fileID: 1905384459}
   m_Layer: 11
   m_Name: Slime (7)
   m_TagString: Invincible
@@ -140832,6 +141942,7 @@ MonoBehaviour:
   KnockbackY: 3.5
   isHostile: 0
   attack: 5
+  isAttacking: 0
 --- !u!61 &1905384447
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -140888,6 +141999,7 @@ MonoBehaviour:
   edgeDetector: {fileID: 1560059980}
   spawnPoint: {x: 0, y: 0}
   patrolRadius: 5
+  chaseRadius: 0
   jumpPower: 1
   onFloatingPlatform: 0
 --- !u!114 &1905384449
@@ -140902,13 +142014,18 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 35e08246361f1a94483e2bdb0e5e1182, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  mobName: Slime
   hurtDelay: 0.3
   dieDelay: 0.55
   DamagePopup: {fileID: 1923102147109379809, guid: c9d3f3764b4385e4d8779b7b7ee0abaa, type: 3}
+  HealingPopup: {fileID: 2107037215308737033, guid: d318d1de8f80b4e4cbf246af9cf1d3ef, type: 3}
   maxHealth: 100
   currentHealth: 0
+  regenTimer: 0
+  outOfCombatTimer: 0
   isHurting: 0
   isDead: 0
+  attackedBy: {fileID: 0}
 --- !u!114 &1905384450
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -141090,6 +142207,56 @@ MonoBehaviour:
   goldReward: 2
   itemDrops: []
   rewardGiven: 0
+--- !u!114 &1905384458
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1905384443}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a5db922ac8ba6974dabf1846782032a3, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  passiveAggressive: 0
+  instantAggressive: 0
+  target: {fileID: 480833867}
+  speed: 0
+  nextWayPointDistance: 3
+  currentWaypoint: 0
+  reachedEndOfPath: 0
+  rb: {fileID: 1905384451}
+  direction: {x: 0, y: 0}
+  isChasingTarget: 0
+--- !u!114 &1905384459
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1905384443}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 373b52eb9bf8c40f785bb6947a1aee66, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  version: 1
+  drawGizmos: 1
+  detailedGizmos: 0
+  startEndModifier:
+    addPoints: 0
+    exactStartPoint: 3
+    exactEndPoint: 3
+    useRaycasting: 0
+    mask:
+      serializedVersion: 2
+      m_Bits: 4294967295
+    useGraphRaycasting: 0
+  traversableTags: -1
+  tagPenalties: 0000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000
+  graphMask:
+    value: -1
 --- !u!1 &1910379474
 GameObject:
   m_ObjectHideFlags: 0
@@ -141300,6 +142467,36 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1912856751}
   m_CullTransparentMesh: 1
+--- !u!1 &1916728407
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1916728408}
+  m_Layer: 11
+  m_Name: EdgeDetector
+  m_TagString: Untagged
+  m_Icon: {fileID: 4162164826716764455, guid: 0000000000000000d000000000000000, type: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1916728408
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1916728407}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0.128, y: -0.114, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 1301909802}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &1931539782 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 4322237880941822279, guid: 53583bf3984895145a044066b1de28a7, type: 3}
@@ -141450,7 +142647,7 @@ Transform:
   m_LocalScale: {x: 7.9952197, y: 7.356983, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 4
+  m_RootOrder: 5
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &1935753133
 MonoBehaviour:
@@ -141584,6 +142781,8 @@ GameObject:
   - component: {fileID: 1943814908}
   - component: {fileID: 1943814920}
   - component: {fileID: 1943814921}
+  - component: {fileID: 1943814922}
+  - component: {fileID: 1943814923}
   m_Layer: 11
   m_Name: Slime (12)
   m_TagString: Invincible
@@ -141640,6 +142839,7 @@ MonoBehaviour:
   KnockbackY: 3.5
   isHostile: 0
   attack: 5
+  isAttacking: 0
 --- !u!61 &1943814911
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -141696,6 +142896,7 @@ MonoBehaviour:
   edgeDetector: {fileID: 1004742899}
   spawnPoint: {x: 0, y: 0}
   patrolRadius: 5
+  chaseRadius: 0
   jumpPower: 1
   onFloatingPlatform: 0
 --- !u!114 &1943814913
@@ -141710,13 +142911,18 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 35e08246361f1a94483e2bdb0e5e1182, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  mobName: Slime
   hurtDelay: 0.3
   dieDelay: 0.55
   DamagePopup: {fileID: 1923102147109379809, guid: c9d3f3764b4385e4d8779b7b7ee0abaa, type: 3}
+  HealingPopup: {fileID: 2107037215308737033, guid: d318d1de8f80b4e4cbf246af9cf1d3ef, type: 3}
   maxHealth: 100
   currentHealth: 0
+  regenTimer: 0
+  outOfCombatTimer: 0
   isHurting: 0
   isDead: 0
+  attackedBy: {fileID: 0}
 --- !u!114 &1943814914
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -141898,6 +143104,56 @@ MonoBehaviour:
   goldReward: 2
   itemDrops: []
   rewardGiven: 0
+--- !u!114 &1943814922
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1943814907}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a5db922ac8ba6974dabf1846782032a3, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  passiveAggressive: 0
+  instantAggressive: 0
+  target: {fileID: 480833867}
+  speed: 0
+  nextWayPointDistance: 3
+  currentWaypoint: 0
+  reachedEndOfPath: 0
+  rb: {fileID: 1943814915}
+  direction: {x: 0, y: 0}
+  isChasingTarget: 0
+--- !u!114 &1943814923
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1943814907}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 373b52eb9bf8c40f785bb6947a1aee66, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  version: 1
+  drawGizmos: 1
+  detailedGizmos: 0
+  startEndModifier:
+    addPoints: 0
+    exactStartPoint: 3
+    exactEndPoint: 3
+    useRaycasting: 0
+    mask:
+      serializedVersion: 2
+      m_Bits: 4294967295
+    useGraphRaycasting: 0
+  traversableTags: -1
+  tagPenalties: 0000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000
+  graphMask:
+    value: -1
 --- !u!1 &1960185698
 GameObject:
   m_ObjectHideFlags: 0
@@ -143058,7 +144314,7 @@ Transform:
   - {fileID: 1089219556}
   - {fileID: 450594398}
   m_Father: {fileID: 0}
-  m_RootOrder: 14
+  m_RootOrder: 15
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &2106026250
 GameObject:
@@ -143245,7 +144501,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 171027649447050906, guid: 10ea64dda7f88af458f4b14147c6ffb6, type: 3}
       propertyPath: m_RootOrder
-      value: 9
+      value: 10
       objectReference: {fileID: 0}
     - target: {fileID: 171027649447050906, guid: 10ea64dda7f88af458f4b14147c6ffb6, type: 3}
       propertyPath: m_LocalPosition.x
@@ -143314,7 +144570,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1006995982435724505, guid: ff15275cfa20de24cbe96c37ee8c715c, type: 3}
       propertyPath: m_RootOrder
-      value: 8
+      value: 9
       objectReference: {fileID: 0}
     - target: {fileID: 1006995982435724505, guid: ff15275cfa20de24cbe96c37ee8c715c, type: 3}
       propertyPath: m_LocalPosition.x
@@ -143428,7 +144684,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 1741894005712853331, guid: 78326512d367be9468cf6cc6b3dad883, type: 3}
       propertyPath: m_RootOrder
-      value: 7
+      value: 8
       objectReference: {fileID: 0}
     - target: {fileID: 1741894005712853331, guid: 78326512d367be9468cf6cc6b3dad883, type: 3}
       propertyPath: m_LocalPosition.x
@@ -143608,9 +144864,13 @@ PrefabInstance:
       propertyPath: player
       value: 
       objectReference: {fileID: 480833867}
+    - target: {fileID: 5232583707257192596, guid: 87601ccd21befa94d92bb77967e83d09, type: 3}
+      propertyPath: mobName
+      value: Slime
+      objectReference: {fileID: 0}
     - target: {fileID: 5232583707257192598, guid: 87601ccd21befa94d92bb77967e83d09, type: 3}
       propertyPath: m_RootOrder
-      value: 13
+      value: 14
       objectReference: {fileID: 0}
     - target: {fileID: 5232583707257192598, guid: 87601ccd21befa94d92bb77967e83d09, type: 3}
       propertyPath: m_LocalPosition.x
@@ -143652,7 +144912,9 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: 5232583707257192595, guid: 87601ccd21befa94d92bb77967e83d09, type: 3}
+    - {fileID: 5232583707257192597, guid: 87601ccd21befa94d92bb77967e83d09, type: 3}
   m_SourcePrefab: {fileID: 100100000, guid: 87601ccd21befa94d92bb77967e83d09, type: 3}
 --- !u!1001 &8316542597176214069
 PrefabInstance:
@@ -143749,17 +145011,21 @@ PrefabInstance:
       propertyPath: Wallet.Array.data[0]
       value: 
       objectReference: {fileID: 467786775}
+    - target: {fileID: 8316542597656949627, guid: 3c902716b1dec4341898e3f99721ae9d, type: 3}
+      propertyPath: Wallet.Array.data[1]
+      value: 
+      objectReference: {fileID: 1149236287}
     - target: {fileID: 8316542597656949630, guid: 3c902716b1dec4341898e3f99721ae9d, type: 3}
       propertyPath: m_RootOrder
-      value: 2
+      value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 8316542597656949630, guid: 3c902716b1dec4341898e3f99721ae9d, type: 3}
       propertyPath: m_LocalPosition.x
-      value: -4.6
+      value: 47.49
       objectReference: {fileID: 0}
     - target: {fileID: 8316542597656949630, guid: 3c902716b1dec4341898e3f99721ae9d, type: 3}
       propertyPath: m_LocalPosition.y
-      value: -3.15
+      value: -18.28
       objectReference: {fileID: 0}
     - target: {fileID: 8316542597656949630, guid: 3c902716b1dec4341898e3f99721ae9d, type: 3}
       propertyPath: m_LocalPosition.z

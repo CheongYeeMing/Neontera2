@@ -50,7 +50,6 @@ public class MobMovement : MonoBehaviour
             gameObject.GetComponent<MobPathfindingAI>().isChasingTarget = true;
             return;
         }
-        gameObject.GetComponent<MobAnimation>().ChangeAnimationState(MOB_MOVE);
 
         if (gameObject.GetComponent<MobHealth>().isDead)
         {
@@ -78,6 +77,7 @@ public class MobMovement : MonoBehaviour
 
     void Patrol()
     {
+        gameObject.GetComponent<MobAnimation>().ChangeAnimationState(MOB_MOVE);
         if (onFloatingPlatform)
         {
             if (isAtEdge)

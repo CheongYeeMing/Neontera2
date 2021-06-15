@@ -8,6 +8,7 @@ public class MobHealth : MonoBehaviour, Health
     [SerializeField] public float hurtDelay;
     [SerializeField] public float dieDelay;
     [SerializeField] public Transform DamagePopup;
+    [SerializeField] public Transform HealingPopup;
     [SerializeField] public float maxHealth;
     
 
@@ -57,12 +58,8 @@ public class MobHealth : MonoBehaviour, Health
                     if (currentHealth > maxHealth)
                     {
                         currentHealth = maxHealth;
-                        // HealingPopUp Text
                     }
-                    else
-                    {
-                        // HealingPopUp Text
-                    }
+                    HealingPopUp.Create(gameObject, maxHealth / 10);
                     regenTimer = 0;
                 }
             }
@@ -88,17 +85,33 @@ public class MobHealth : MonoBehaviour, Health
         Invoke("HurtComplete", hurtDelay);
     }
 
-    public void KnockBack(GameObject character)
+    public void KnockBack(GameObject something)
     {
         Debug.Log("Knockbacked???");
         Rigidbody2D body = gameObject.GetComponent<MobMovement>().rb;
-        if (character.transform.position.x > gameObject.transform.position.x)
+        CharacterAttack character;
+        if (something.transform.position.x > gameObject.transform.position.x)
         {
-            body.velocity += new Vector2(-character.GetComponent<CharacterAttack>().KnockbackX, character.GetComponent<CharacterAttack>().KnockbackY);
+            
+            if (TryGetComponent<CharacterAttack>(out character))
+            {
+                body.velocity += new Vector2(-character.GetComponent<CharacterAttack>().KnockbackX, character.GetComponent<CharacterAttack>().KnockbackY);
+            } 
+            else
+            {
+                body.velocity += new Vector2(-3, 3.5f);
+            }
         }
         else
         {
-            body.velocity += new Vector2(character.GetComponent<CharacterAttack>().KnockbackX, character.GetComponent<CharacterAttack>().KnockbackY);
+            if (TryGetComponent<CharacterAttack>(out character))
+            {
+                body.velocity += new Vector2(character.GetComponent<CharacterAttack>().KnockbackX, character.GetComponent<CharacterAttack>().KnockbackY);
+            }
+            else
+            {
+                body.velocity += new Vector2(3, 3.5f);
+            }
         }
     }
 

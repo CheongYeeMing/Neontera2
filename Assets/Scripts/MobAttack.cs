@@ -22,6 +22,7 @@ public class MobAttack : MonoBehaviour
         {
             if (isAttacking == false)
             {
+                Debug.Log("attack animation called");
                 isAttacking = true;
                 gameObject.GetComponent<MobAnimation>().ChangeAnimationState(MOB_ATTACK);
             }
