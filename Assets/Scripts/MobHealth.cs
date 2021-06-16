@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class MobHealth : MonoBehaviour, Health
 {
@@ -10,7 +11,6 @@ public class MobHealth : MonoBehaviour, Health
     [SerializeField] public Transform DamagePopup;
     [SerializeField] public Transform HealingPopup;
     [SerializeField] public float maxHealth;
-    
 
     public float currentHealth;
     public float regenTimer; // Default 10%maxHP/second
