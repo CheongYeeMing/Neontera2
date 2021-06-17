@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using TMPro;
 
 public class MobHealth : MonoBehaviour, Health
 {
@@ -10,7 +11,21 @@ public class MobHealth : MonoBehaviour, Health
     [SerializeField] public float dieDelay;
     [SerializeField] public Transform DamagePopup;
     [SerializeField] public Transform HealingPopup;
+    [SerializeField] public Transform RewardPopUp;
     [SerializeField] public float maxHealth;
+
+    [SerializeField] public GameObject mobDetails;
+    [SerializeField] public float hpOffsetY;
+    [SerializeField] public float nameOffsetY;
+
+    [SerializeField] public GameObject levelName;
+    [SerializeField] public float mobLevel;
+    public Image levelNameBG;
+    public TextMeshProUGUI levelNameText;
+
+    public Slider slider;
+    public Color low;
+    public Color high;
 
     public float currentHealth;
     public float regenTimer; // Default 10%maxHP/second
@@ -29,7 +44,16 @@ public class MobHealth : MonoBehaviour, Health
     // Start is called before the first frame update
     public void Start()
     {
+        slider = mobDetails.GetComponentInChildren<Slider>();
+        levelNameBG = levelName.GetComponentInChildren<Image>();
+        levelNameText = levelName.GetComponentInChildren<TextMeshProUGUI>();
+        levelNameText.SetText("Lv" + mobLevel + " " + mobName);
         currentHealth = maxHealth;
+        low = Color.red;
+        high = Color.green;
+        low.a = 255;
+        high.a = 255;
+        SetMobDetails(currentHealth, maxHealth);
         isHurting = false;
         isDead = false;
         regenTimer = 0;
@@ -44,6 +68,9 @@ public class MobHealth : MonoBehaviour, Health
 
     public void Update()
     {
+        SetMobDetails(currentHealth, maxHealth);
+        levelName.transform.position = new Vector2(gameObject.transform.position.x, gameObject.transform.position.y + nameOffsetY);
+        slider.transform.position = new Vector2(gameObject.transform.position.x, gameObject.transform.position.y + hpOffsetY);
         if (isHurting || isDead ||gameObject.GetComponent<MobPathfindingAI>().isChasingTarget)
         {
             outOfCombatTimer = 0;
@@ -66,6 +93,14 @@ public class MobHealth : MonoBehaviour, Health
         }
         regenTimer += Time.deltaTime;
         outOfCombatTimer += Time.deltaTime;
+    }
+
+    public void SetMobDetails(float currentHealth, float maxHealth)
+    {
+        mobDetails.SetActive(currentHealth != maxHealth && currentHealth > 0);
+        slider.value = currentHealth;
+        slider.maxValue = maxHealth;
+        slider.fillRect.GetComponentInChildren<Image>().color = Color.Lerp(low, high, slider.normalizedValue);
     }
 
     public void TakeDamage(float damage)
@@ -119,6 +154,8 @@ public class MobHealth : MonoBehaviour, Health
     {
         gameObject.GetComponent<MobSpawner>().deathTimer = 0;
         isDead = true;
+        gameObject.GetComponent<MobMovement>().rb.velocity = Vector2.zero;
+        RewardsPopUp.Create(gameObject);
         Debug.Log("Mob is dead!!!");
         gameObject.GetComponent<MobAnimation>().ChangeAnimationState(MOB_DIE);
         gameObject.GetComponent<Rigidbody2D>().gravityScale = 0;
