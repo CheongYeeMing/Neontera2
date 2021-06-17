@@ -55,32 +55,68 @@ public class CharacterAttack : MonoBehaviour
 
         foreach (Collider2D mob in hitMobs)
         {
-            if (!mob.GetComponent<MobHealth>().isHurting)
+            MobHealth mobHealth;
+            if (mob.TryGetComponent<MobHealth>(out mobHealth))
             {
-                mob.GetComponent<MobHealth>().attackedBy = gameObject;
-                mob.GetComponent<MobHealth>().TakeDamage(attack);
+                if (!mob.GetComponent<MobHealth>().isHurting)
+                {
+                    mob.GetComponent<MobHealth>().attackedBy = gameObject;
+                    mob.GetComponent<MobHealth>().TakeDamage(attack);
+                }
+            }
+            BossHealth bossHealth;
+            if (mob.TryGetComponent<BossHealth>(out bossHealth))
+            {
+                if (!mob.GetComponent<BossHealth>().isHurting)
+                {
+                    mob.GetComponent<BossHealth>().attackedBy = gameObject;
+                    mob.GetComponent<BossHealth>().TakeDamage(attack);
+                }
             }
         }
         foreach (Collider2D mob in hitMobs)
         {
-            if (mob.GetComponent<MobHealth>().isDead && mob.GetComponent<MobReward>().rewardGiven == false)
+            MobHealth mobHealth;
+            if (mob.TryGetComponent<MobHealth>(out mobHealth))
             {
-                foreach (Quest quest in gameObject.GetComponent<Character>().questList.quests)
+                if (mobHealth.isDead && mob.GetComponent<MobReward>().rewardGiven == false)
                 {
-                    if (quest.questCriteria.criteriaType == CriteriaType.Kill)
+                    foreach (Quest quest in gameObject.GetComponent<Character>().questList.quests)
                     {
-                        if (quest.questCriteria.Target == mob.GetComponent<MobHealth>().mobName)
+                        if (quest.questCriteria.criteriaType == CriteriaType.Kill)
                         {
-                            quest.questCriteria.Execute();
-                            quest.Update();
+                            if (quest.questCriteria.Target == mobHealth.mobName)
+                            {
+                                quest.questCriteria.Execute();
+                                quest.Update();
+                            }
                         }
                     }
+                    // Rewards for Mob kill
+                    mob.GetComponent<MobReward>().GetReward(gameObject.GetComponent<CharacterLevel>(), gameObject.GetComponent<CharacterWallet>());
                 }
-                // Rewards for Mob kill
-                mob.GetComponent<MobReward>().GetReward(gameObject.GetComponent<CharacterLevel>(), gameObject.GetComponent<CharacterWallet>());
+            }
+            BossHealth bossHealth;
+            if (mob.TryGetComponent<BossHealth>(out bossHealth))
+            {
+                if (bossHealth.isDead && mob.GetComponent<BossReward>().rewardGiven == false)
+                {
+                    foreach (Quest quest in gameObject.GetComponent<Character>().questList.quests)
+                    {
+                        if (quest.questCriteria.criteriaType == CriteriaType.Kill)
+                        {
+                            if (quest.questCriteria.Target == bossHealth.mobName)
+                            {
+                                quest.questCriteria.Execute();
+                                quest.Update();
+                            }
+                        }
+                    }
+                    // Rewards for Mob kill
+                    mob.GetComponent<BossReward>().GetReward(gameObject.GetComponent<CharacterLevel>(), gameObject.GetComponent<CharacterWallet>());
+                }
             }
         }
-
         Invoke("AttackComplete", attackDelay);
     }
     public void AttackComplete()

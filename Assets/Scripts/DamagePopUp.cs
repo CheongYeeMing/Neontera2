@@ -16,10 +16,25 @@ public class DamagePopUp : MonoBehaviour
 
     public static DamagePopUp Create(GameObject mob, float damage)
     {
-        Transform damagePopUpTransform = Instantiate(mob.GetComponent<MobHealth>().DamagePopup, mob.transform.position, Quaternion.identity);
-        DamagePopUp damagePopUp = damagePopUpTransform.GetComponent<DamagePopUp>();
-        damagePopUp.Setup(damage);
-        return damagePopUp;
+        Transform damagePopUpTransform;
+        DamagePopUp damagePopUp;
+        MobHealth mobHealth;
+        if (mob.TryGetComponent<MobHealth>(out mobHealth))
+        {
+            damagePopUpTransform = Instantiate(mobHealth.DamagePopup, mob.transform.position, Quaternion.identity);
+            damagePopUp = damagePopUpTransform.GetComponent<DamagePopUp>();
+            damagePopUp.Setup(damage);
+            return damagePopUp;
+        }
+        else
+        {
+            BossHealth bossHealth;
+            mob.TryGetComponent<BossHealth>(out bossHealth);
+            damagePopUpTransform = Instantiate(bossHealth.DamagePopup, mob.transform.position, Quaternion.identity);
+            damagePopUp = damagePopUpTransform.GetComponent<DamagePopUp>();
+            damagePopUp.Setup(damage);
+            return damagePopUp;
+        }
     }
 
     public void Setup(float damageAmount)

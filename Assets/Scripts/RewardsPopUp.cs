@@ -16,10 +16,25 @@ public class RewardsPopUp : MonoBehaviour
 
     public static RewardsPopUp Create(GameObject mob)
     {
-        Transform rewardPopUpTransform = Instantiate(mob.GetComponent<MobHealth>().RewardPopUp, mob.transform.position, Quaternion.identity);
-        RewardsPopUp rewardPopup = rewardPopUpTransform.GetComponent<RewardsPopUp>();
-        rewardPopup.Setup(mob.GetComponent<MobReward>().expReward, mob.GetComponent<MobReward>().goldReward);
-        return rewardPopup;
+        Transform rewardPopUpTransform;
+        RewardsPopUp rewardPopup;
+        MobHealth mobHealth;
+        if (mob.TryGetComponent<MobHealth>(out mobHealth))
+        {
+            rewardPopUpTransform = Instantiate(mobHealth.RewardPopUp, mob.transform.position, Quaternion.identity);
+            rewardPopup = rewardPopUpTransform.GetComponent<RewardsPopUp>();
+            rewardPopup.Setup(mob.GetComponent<MobReward>().expReward, mob.GetComponent<MobReward>().goldReward);
+            return rewardPopup;
+        }
+        else
+        {
+            BossHealth bossHealth;
+            mob.TryGetComponent<BossHealth>(out bossHealth);
+            rewardPopUpTransform = Instantiate(bossHealth.RewardPopUp, mob.transform.position, Quaternion.identity);
+            rewardPopup = rewardPopUpTransform.GetComponent<RewardsPopUp>();
+            rewardPopup.Setup(mob.GetComponent<BossReward>().expReward, mob.GetComponent<BossReward>().goldReward);
+            return rewardPopup;
+        }
     }
 
     public void Setup(float expAmount, float goldAmount)

@@ -42,7 +42,7 @@ public class Projectile : MonoBehaviour
                 mobHealth.attackedBy = gameObject;
                 mobHealth.TakeDamage(damage);
             }
-            if (mobHealth.gameObject.GetComponent<MobHealth>().isDead && mobHealth.gameObject.GetComponent<MobReward>().rewardGiven == false)
+            if (mobHealth.isDead && mobHealth.gameObject.GetComponent<MobReward>().rewardGiven == false)
             {
                 Character character = FindObjectOfType<Character>();
                 foreach (Quest quest in character.questList.quests)
@@ -58,6 +58,32 @@ public class Projectile : MonoBehaviour
                 }
                 // Rewards for Mob kill
                 mobHealth.gameObject.GetComponent<MobReward>().GetReward(character.GetComponent<CharacterLevel>(), character.GetComponent<CharacterWallet>());
+            }
+        }
+        BossHealth bossHealth;
+        if (collidedObject.TryGetComponent<BossHealth>(out bossHealth))
+        {
+            if (!bossHealth.isHurting)
+            {
+                bossHealth.attackedBy = gameObject;
+                bossHealth.TakeDamage(damage);
+            }
+            if (bossHealth.isDead && bossHealth.gameObject.GetComponent<BossReward>().rewardGiven == false)
+            {
+                Character character = FindObjectOfType<Character>();
+                foreach (Quest quest in character.questList.quests)
+                {
+                    if (quest.questCriteria.criteriaType == CriteriaType.Kill)
+                    {
+                        if (quest.questCriteria.Target == bossHealth.mobName)
+                        {
+                            quest.questCriteria.Execute();
+                            quest.Update();
+                        }
+                    }
+                }
+                // Rewards for Mob kill
+                bossHealth.gameObject.GetComponent<BossReward>().GetReward(character.GetComponent<CharacterLevel>(), character.GetComponent<CharacterWallet>());
             }
         }
         yield return new WaitForSeconds(0.3f);
