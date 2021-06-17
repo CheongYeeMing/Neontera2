@@ -16,10 +16,25 @@ public class HealingPopUp : MonoBehaviour
 
     public static HealingPopUp Create(GameObject mob, float heal)
     {
-        Transform healingPopUpTransform = Instantiate(mob.GetComponent<MobHealth>().HealingPopup, mob.transform.position, Quaternion.identity);
-        HealingPopUp healingPopup = healingPopUpTransform.GetComponent<HealingPopUp>();
-        healingPopup.Setup(heal);
-        return healingPopup;
+        Transform healingPopUpTransform;
+        HealingPopUp healingPopup;
+        MobHealth mobHealth;
+        if (mob.TryGetComponent<MobHealth>(out mobHealth))
+        {
+            healingPopUpTransform = Instantiate(mobHealth.HealingPopup, mob.transform.position, Quaternion.identity);
+            healingPopup = healingPopUpTransform.GetComponent<HealingPopUp>();
+            healingPopup.Setup(heal);
+            return healingPopup;
+        }
+        else
+        {
+            BossHealth bossHealth;
+            mob.TryGetComponent<BossHealth>(out bossHealth);
+            healingPopUpTransform = Instantiate(bossHealth.HealingPopup, mob.transform.position, Quaternion.identity);
+            healingPopup = healingPopUpTransform.GetComponent<HealingPopUp>();
+            healingPopup.Setup(heal);
+            return healingPopup;
+        }
     }
 
     public void Setup(float healAmount)

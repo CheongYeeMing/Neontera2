@@ -95,13 +95,31 @@ public class CharacterHealth : MonoBehaviour, Health
     public void KnockBack(GameObject mob)
     {
         Rigidbody2D body = gameObject.GetComponent<CharacterMovement>().body;
-        if (mob.transform.position.x > gameObject.transform.position.x)
+        MobAttack mobAttack;
+        if (mob.TryGetComponent<MobAttack>(out mobAttack))
         {
-            body.velocity = new Vector2(body.velocity.x - mob.GetComponent<MobAttack>().KnockbackX, body.velocity.y + mob.GetComponent<MobAttack>().KnockbackY);
+            if (mob.transform.position.x > gameObject.transform.position.x)
+            {
+
+                body.velocity = new Vector2(body.velocity.x - mob.GetComponent<MobAttack>().KnockbackX, body.velocity.y + mob.GetComponent<MobAttack>().KnockbackY);
+            }
+            else
+            {
+                body.velocity = new Vector2(body.velocity.x + mob.GetComponent<MobAttack>().KnockbackX, body.velocity.y + mob.GetComponent<MobAttack>().KnockbackY);
+            }
         }
-        else
+        BossAttack bossAttack;
+        if (mob.TryGetComponent<BossAttack>(out bossAttack))
         {
-            body.velocity = new Vector2(body.velocity.x + mob.GetComponent<MobAttack>().KnockbackX, body.velocity.y + mob.GetComponent<MobAttack>().KnockbackY);
+            if (mob.transform.position.x > gameObject.transform.position.x)
+            {
+
+                body.velocity = new Vector2(body.velocity.x - mob.GetComponent<BossAttack>().KnockbackX, body.velocity.y + mob.GetComponent<BossAttack>().KnockbackY);
+            }
+            else
+            {
+                body.velocity = new Vector2(body.velocity.x + mob.GetComponent<BossAttack>().KnockbackX, body.velocity.y + mob.GetComponent<BossAttack>().KnockbackY);
+            }
         }
     }
 
