@@ -4,19 +4,22 @@ using UnityEngine;
 
 public class Character : MonoBehaviour
 {
-    public CharacterStat Attack;
-    public CharacterStat Health;
-    public CharacterStat Speed;
-
     [SerializeField] public Inventory inventory;
     [SerializeField] public EquipmentPanel equipmentPanel;
     [SerializeField] public StatPanel statPanel;
     [SerializeField] public SelectedItemPanel selectedItemPanel;
     [SerializeField] public QuestList questList;
     [SerializeField] public SelectedQuestWindow selectedQuestWindow;
+    [SerializeField] public BuffWindow buffWindow;
+
+    public CharacterStat Attack;
+    public CharacterStat Health;
+    public CharacterStat Speed;
 
     private void Awake()
     {
+        Attack.SetBaseValue(100);
+        Speed.SetBaseValue(6);
         statPanel.SetStats(Attack, Health, Speed);
         statPanel.UpdateStatValues();
         inventory.OnItemRightClickedEvent += EquipFromInventory;
@@ -41,7 +44,7 @@ public class Character : MonoBehaviour
         }
         if (item.itemType == Item.ItemType.Consumables)
         {
-            selectedItemPanel.SelectedConsumableItem(item);
+            selectedItemPanel.SelectedConsumableItem((ConsumableItem)item);
         }
         if (item.itemType == Item.ItemType.Quest)
         {
@@ -104,5 +107,41 @@ public class Character : MonoBehaviour
         equipmentPanel.RemoveItem(item);
         item.Unequip(this);
         statPanel.UpdateStatValues();
+    }
+
+    public void Consume(ConsumableItem item)
+    {
+        if (!buffWindow.IsFull() && inventory.RemoveItem(item))
+        {
+            
+            item.Consume(this);
+            if (item.consumableType == ConsumableType.FadeOverTime)
+            {
+                buffWindow.AddItem(item);
+            }
+            statPanel.UpdateStatValues();
+        }
+    }
+
+    public void ConsumeEffectFaded(ConsumableItem item)
+    {
+        item.Debuff(this);
+        buffWindow.RemoveItem(item);
+        statPanel.UpdateStatValues();
+    }
+
+    public CharacterStat GetAttack()
+    {
+        return Attack;
+    }
+
+    public CharacterStat GetHealth()
+    {
+        return Health;
+    }
+
+    public CharacterStat GetSpeed()
+    {
+        return Speed;
     }
 }

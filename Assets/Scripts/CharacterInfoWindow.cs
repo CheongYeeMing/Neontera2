@@ -18,8 +18,8 @@ public class CharacterInfoWindow : MonoBehaviour
 
     public void UpdateCharInfoWindow(CharacterLevel characterLevel)
     {
-        charLevel.text = "Level " + characterLevel.level.ToString();
-        charExp.text = "Exp: " + characterLevel.currentExp + "/" + characterLevel.requiredExp;
+        charLevel.text = "Level " + characterLevel.GetLevel().ToString();
+        charExp.text = "Exp: " + characterLevel.GetCurrentExp() + "/" + characterLevel.GetRequiredExp();
     }
 
 }

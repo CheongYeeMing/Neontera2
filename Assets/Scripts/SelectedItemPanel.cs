@@ -44,12 +44,23 @@ public class SelectedItemPanel : MonoBehaviour
         gameObject.SetActive(true);
     }
 
-    public void SelectedConsumableItem(Item item)
+    public void SelectedConsumableItem(ConsumableItem item)
     {
         ItemName.text = item.ItemName;
         Icon.sprite = item.Icon;
         DescriptionText.text = item.descriptionText;
         StatsText.text = "";
+        if (item.consumableType == ConsumableType.Instant)
+        {
+            StatsText.text += "Heal Amount: " + item.healAmount.ToString();
+        }
+        if (item.consumableType == ConsumableType.FadeOverTime)
+        {
+            StatsText.text += "AttackPercent: " + item.AttackPercentBonus.ToString() + "\n";
+            StatsText.text += "HealthPercent: " + item.HealthPercentBonus.ToString() + "\n";
+            StatsText.text += "SpeedPercent: " + item.SpeedPercentBonus.ToString() + "\n" + "\n";
+            StatsText.text += "Duration: " + item.duration + " seconds";
+        }
         InteractButton.GetComponentInChildren<Text>().text = "Use";
         DeleteWindow.item = item;
         StatsText.gameObject.SetActive(true);
@@ -81,9 +92,10 @@ public class SelectedItemPanel : MonoBehaviour
             FindObjectOfType<Character>().Equip((EquipableItem)item);
             gameObject.SetActive(false);
         }
-        else if (item.itemType == Item.ItemType.Consumables)
+        else if (item is ConsumableItem)
         {
-            Debug.Log("Item Consumed");
+            FindObjectOfType<Character>().Consume((ConsumableItem)item);
+            gameObject.SetActive(false);
         }
     }
 }

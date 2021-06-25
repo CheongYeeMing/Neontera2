@@ -4,54 +4,54 @@ using UnityEngine;
 
 public class BossMovement : MonoBehaviour
 {
-    public float moveSpeed;
-    public float distFromPlayer;
-
-    public bool isPatrolling;
-    public bool isAtEdge;
-    public bool inPatrolRange;
-
-    public Rigidbody2D rb;
-
-    public Collider2D boxCollider;
-    public Collider2D jumpBoxCollider;
-
-    public LayerMask groundLayer;
-    public LayerMask wallLayer;
-
-    public Transform player;
-    public Transform edgeDetector;
-
-    public Vector2 spawnPoint;
-
+    [SerializeField] public Transform player;
+    [SerializeField] public Transform edgeDetector;
+    [SerializeField] public Collider2D boxCollider;
+    [SerializeField] public Collider2D jumpBoxCollider;
+    [SerializeField] public LayerMask groundLayer;
+    [SerializeField] public LayerMask wallLayer;
+    [SerializeField] public float moveSpeed;
     [SerializeField] public float patrolRadius;
     [SerializeField] public float chaseRadius;
     [SerializeField] public float jumpPower;
     [SerializeField] public bool onFloatingPlatform;
 
+    protected Rigidbody2D rb;
+
+    protected bool isPatrolling;
+    protected bool isAtEdge;
+    protected bool inPatrolRange;
+
+    protected Vector2 spawnPoint;
+
     // Mob Animation States
-    public const string BOSS_IDLE = "Idle";
-    public const string BOSS_MOVE = "Move";
+    protected const string BOSS_IDLE = "Idle";
+    protected const string BOSS_MOVE = "Move";
 
     // Start is called before the first frame update
-    void Start()
+    public virtual void Start()
     {
         isPatrolling = true;
+        rb = gameObject.GetComponent<Rigidbody2D>();
         spawnPoint = new Vector2(transform.position.x, transform.position.y);
     }
 
     // Update is called once per frame
-    void Update()
+    public virtual void Update()
     {
-        if (!CanPatrol()) return;
+        if (!CanMove())
+        {
+            StopPatrol();
+            return;
+        }
         Patrol();
         if (gameObject.GetComponent<BossPathfindingAI>().instantAggressive && InChaseRange())
         {
-            gameObject.GetComponent<BossPathfindingAI>().isChasingTarget = true;
+            gameObject.GetComponent<BossPathfindingAI>().SetIsChasingTarget(true);
             return;
         }
 
-        if (gameObject.GetComponent<BossHealth>().isDead)
+        if (gameObject.GetComponent<BossHealth>().IsDead())
         {
             StopPatrol();
         }
@@ -66,7 +66,7 @@ public class BossMovement : MonoBehaviour
         }
     }
 
-    void FixedUpdate()
+    public void FixedUpdate()
     {
         if (isPatrolling && onFloatingPlatform)
         //this uses the groundCheckPosition to check if the platform ends
@@ -75,7 +75,7 @@ public class BossMovement : MonoBehaviour
         }
     }
 
-    void Patrol()
+    public virtual void Patrol()
     {
         gameObject.GetComponent<BossAnimation>().ChangeAnimationState(BOSS_MOVE);
         if (onFloatingPlatform)
@@ -105,29 +105,25 @@ public class BossMovement : MonoBehaviour
         rb.velocity = new Vector2(0, rb.velocity.y);
     }
 
-    public bool CanPatrol()
+    public virtual bool CanMove()
     {
         bool can = true;
-        if (gameObject.GetComponent<BossHealth>().isHurting)
+        if (gameObject.GetComponent<BossHealth>().IsHurting())
         {
             can = false;
         }
-        else if (gameObject.GetComponent<BossHealth>().isDead)
+        else if (gameObject.GetComponent<BossHealth>().IsDead())
         {
             can = false;
         }
-        else if (gameObject.GetComponent<BossAttack>().isAttacking)
-        {
-            can = false;
-        }
-        else if (gameObject.GetComponent<BossPathfindingAI>().isChasingTarget)
+        else if (gameObject.GetComponent<BossAttack>().IsAttacking())
         {
             can = false;
         }
         return can;
     }
 
-    private bool isGrounded()
+    public bool isGrounded()
     {
         RaycastHit2D raycastHit = Physics2D.BoxCast(boxCollider.bounds.center, boxCollider.bounds.size, 0, Vector2.down, 0.03f, groundLayer);
         return raycastHit.collider != null;
@@ -165,12 +161,12 @@ public class BossMovement : MonoBehaviour
         isAtEdge = false;
     }
 
-    public void ChaseTarget(Vector2 direction)
+    public virtual void ChaseTarget(Vector2 direction)
     {
         gameObject.GetComponent<BossAnimation>().ChangeAnimationState(BOSS_MOVE);
-        if (!InChaseRange() || player.gameObject.GetComponent<CharacterHealth>().isDead)
+        if (!InChaseRange() || player.gameObject.GetComponent<CharacterHealth>().IsDead())
         {
-            gameObject.GetComponent<BossPathfindingAI>().isChasingTarget = false;
+            gameObject.GetComponent<BossPathfindingAI>().SetIsChasingTarget(false);
             return;
         }
 
@@ -187,5 +183,15 @@ public class BossMovement : MonoBehaviour
     public bool InChaseRange()
     {
         return Vector2.Distance(spawnPoint, player.position) < chaseRadius;
+    }
+
+    public Rigidbody2D GetRigidbody()
+    {
+        return rb;
+    }
+
+    public Vector2 GetSpawnPoint()
+    {
+        return spawnPoint;
     }
 }

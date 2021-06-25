@@ -21,7 +21,7 @@ GameObject:
   - component: {fileID: 5232583707257192605}
   - component: {fileID: 5232583707257192602}
   m_Layer: 11
-  m_Name: Slime 1
+  m_Name: BlueSlime
   m_TagString: Invincible
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -153,18 +153,18 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 35e08246361f1a94483e2bdb0e5e1182, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  mobName: Slime
+  mobName: Blue Slime
   hurtDelay: 0.3
   dieDelay: 0.55
   DamagePopup: {fileID: 1923102147109379809, guid: c9d3f3764b4385e4d8779b7b7ee0abaa, type: 3}
   HealingPopup: {fileID: 2107037215308737033, guid: d318d1de8f80b4e4cbf246af9cf1d3ef, type: 3}
+  RewardPopUp: {fileID: 0}
   maxHealth: 100
-  currentHealth: 0
-  regenTimer: 0
-  outOfCombatTimer: 0
-  isHurting: 0
-  isDead: 0
-  attackedBy: {fileID: 0}
+  mobDetails: {fileID: 0}
+  hpOffsetY: 0
+  nameOffsetY: 0
+  levelName: {fileID: 0}
+  mobLevel: 0
 --- !u!114 &5232583707257192592
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -177,12 +177,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2093c2cc65f5f3c49952d371a8222764, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  moveSpeed: 150
-  distFromPlayer: 0
-  isPatrolling: 1
-  isAtEdge: 0
-  inPatrolRange: 0
-  rb: {fileID: 5232583707257192594}
+  player: {fileID: 0}
+  edgeDetector: {fileID: 5232583708358680668}
   boxCollider: {fileID: 5232583707257192599}
   jumpBoxCollider: {fileID: 5232583707257192593}
   groundLayer:
@@ -191,9 +187,7 @@ MonoBehaviour:
   wallLayer:
     serializedVersion: 2
     m_Bits: 512
-  player: {fileID: 0}
-  edgeDetector: {fileID: 5232583708358680668}
-  spawnPoint: {x: 0, y: 0}
+  moveSpeed: 150
   patrolRadius: 5
   chaseRadius: 0
   jumpPower: 1
@@ -239,9 +233,7 @@ MonoBehaviour:
   attackDelay: 1
   KnockbackX: 3
   KnockbackY: 3.5
-  isHostile: 0
   attack: 5
-  isAttacking: 0
 --- !u!95 &5232583707257192607
 Animator:
   serializedVersion: 3
@@ -288,7 +280,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   canRespawn: 1
   respawnTime: 5
-  deathTimer: 0
 --- !u!114 &5232583707257192602
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -303,8 +294,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   expReward: 5
   goldReward: 2
-  itemDrops: []
-  rewardGiven: 0
 --- !u!1 &5232583708358680671
 GameObject:
   m_ObjectHideFlags: 0

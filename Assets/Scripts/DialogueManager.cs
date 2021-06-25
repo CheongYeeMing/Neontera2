@@ -3,19 +3,20 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.UI;
+using TMPro;
 
 public class DialogueManager : MonoBehaviour
 {
     public NPC npc;
 
     public bool isTalking = false;
-    public bool storyTime;
 
     public float distance;
     public float currResponseTracker = 0;
 
     public GameObject character;
     public GameObject dialogueWindow;
+    [SerializeField] TextMeshProUGUI enterToContinue;
 
     public Text npcName;
     public Image npcFace;
@@ -26,6 +27,10 @@ public class DialogueManager : MonoBehaviour
     [SerializeField] DialogueFocus dialogueFocus;
 
     [SerializeField] QuestList questList;
+
+    public Quest quest;
+    [SerializeField] public SelectedQuestWindow selectedQuestWindow;
+    [SerializeField] public ShopSelectedItemPanel shopSelectedItemPanel;
 
     // Start is called before the first frame update
     void Start()
@@ -39,9 +44,9 @@ public class DialogueManager : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.DownArrow))
         {
             currResponseTracker++;
-            if (currResponseTracker >= npc.characterDialogue.Length - 1)
+            if (currResponseTracker >= npc.Sequences[npc.sequenceNumber].characterDialogue.Length - 1)
             {
-                currResponseTracker = npc.characterDialogue.Length - 1;
+                currResponseTracker = npc.Sequences[npc.sequenceNumber].characterDialogue.Length - 1;
             }
         }
         else if (Input.GetKeyDown(KeyCode.UpArrow))
@@ -54,12 +59,66 @@ public class DialogueManager : MonoBehaviour
         }
         if (Input.GetKeyDown(KeyCode.Return))
         {
-            //npcDialogueBox.text = npc.dialogue[(int)currResponseTracker+1];
-            StopAllCoroutines();
-            StartCoroutine(TypeSentence(npc.dialogue[(int)currResponseTracker + 1]));
-            if (storyTime == true)
+            if (npc.Sequences[npc.sequenceNumber].isStory)
             {
-                currResponseTracker++;
+                if (currResponseTracker < npc.Sequences[npc.sequenceNumber].dialogue.Length - 1)
+                {
+                    StopAllCoroutines();
+                    StartCoroutine(TypeSentence(npc.Sequences[npc.sequenceNumber].dialogue[(int)currResponseTracker + 1]));
+                    currResponseTracker++;
+                }
+                else
+                {
+                    npc.sequenceNumber++;
+                    StartConversation();
+                }
+            }
+            else if (npc.Sequences[npc.sequenceNumber].hasShop)
+            {
+                if (currResponseTracker < npc.Sequences[npc.sequenceNumber].dialogue.Length)
+                {
+                    StopAllCoroutines();
+                    StartCoroutine(TypeSentence(npc.Sequences[npc.sequenceNumber].dialogue[(int)currResponseTracker + 1]));
+                    HideCharacterResponseOption();
+                    OpenShop();
+                }
+                else
+                {
+                    TriggerDialogue();
+                }
+            }
+            else if (npc.Sequences[npc.sequenceNumber].hasQuest)
+            {
+                if (currResponseTracker < npc.Sequences[npc.sequenceNumber].dialogue.Length)
+                {
+                    StopAllCoroutines();
+                    StartCoroutine(TypeSentence(npc.Sequences[npc.sequenceNumber].dialogue[(int)currResponseTracker + 1]));
+                    HideCharacterResponseOption();
+                    OpenQuestWindow();
+                }
+                else
+                {
+                    TriggerDialogue();
+                }
+            }
+            else if (npc.Sequences[npc.sequenceNumber].waitingQuest)
+            {
+                TriggerDialogue();
+            }
+            else if (npc.Sequences[npc.sequenceNumber].justDialogue)
+            {
+                if (currResponseTracker < npc.Sequences[npc.sequenceNumber].dialogue.Length)
+                {
+                    StopAllCoroutines();
+                    StartCoroutine(TypeSentence(npc.Sequences[npc.sequenceNumber].dialogue[(int)currResponseTracker + 1]));
+                    HideCharacterResponseOption();
+                    currResponseTracker = npc.Sequences[npc.sequenceNumber].dialogue.Length;
+                }
+                else
+                {
+                    npc.sequenceNumber++;
+                    StartConversation();
+                }
             }
         }
     }
@@ -84,13 +143,12 @@ public class DialogueManager : MonoBehaviour
         currResponseTracker = 0;
         npcName.text = npc.npcName;
         npcFace.sprite = npc.icon;
-        //npcDialogueBox.text = npc.dialogue[0]; // Set to greeting message
         StopAllCoroutines();
-        StartCoroutine(TypeSentence(npc.dialogue[0]));
-        for (int i = 0; i < npc.characterDialogue.Length; i++)
+        StartCoroutine(TypeSentence(npc.Sequences[npc.sequenceNumber].dialogue[0]));
+        for (int i = 0; i < npc.Sequences[npc.sequenceNumber].characterDialogue.Length; i++)
         {
             characterResponses[i].gameObject.SetActive(true);
-            characterResponses[i].GetComponentInChildren<Text>().text = npc.characterDialogue[i];  
+            characterResponses[i].GetComponentInChildren<Text>().text = npc.Sequences[npc.sequenceNumber].characterDialogue[i];  
         }
         // Clear selcted object
         EventSystem.current.SetSelectedGameObject(null);
@@ -101,6 +159,8 @@ public class DialogueManager : MonoBehaviour
         {
             if (quest.questCriteria.criteriaType == CriteriaType.Talk)
             {
+                Debug.Log(quest.questCriteria.Target);
+                Debug.Log(npc.npcName);
                 if (quest.questCriteria.Target == npc.npcName)
                 {
                     quest.questCriteria.Execute();
@@ -112,7 +172,7 @@ public class DialogueManager : MonoBehaviour
 
     public void HideCharacterResponseOption()
     {
-        for (int i = 0; i < npc.characterDialogue.Length; i++)
+        for (int i = 0; i < npc.Sequences[npc.sequenceNumber].characterDialogue.Length; i++)
         {
             characterResponses[i].gameObject.SetActive(false);
         }
@@ -121,7 +181,7 @@ public class DialogueManager : MonoBehaviour
     public void EndDialogue()
     {
         animator.SetBool("IsOpen", false);
-        for (int i = 0; i < npc.characterDialogue.Length; i++)
+        for (int i = 0; i < npc.Sequences[npc.sequenceNumber].characterDialogue.Length; i++)
         {
             characterResponses[i].gameObject.SetActive(false);
         }
@@ -130,25 +190,26 @@ public class DialogueManager : MonoBehaviour
         CloseQuestWindow();
     }
 
-    IEnumerator TypeSentence(string sentence)
+    public IEnumerator TypeSentence(string sentence)
     {
+        enterToContinue.gameObject.SetActive(false);
         npcDialogueBox.text = "";
         foreach (char letter in sentence.ToCharArray())
         {
             npcDialogueBox.text += letter;
             yield return null;
         }
+        enterToContinue.gameObject.SetActive(true);
     }
 
     public void OpenShop()
     {
-        Debug.Log("PASS");
         if (!isTalking) return;
         
         ShopManager shopManager;
-        if (currResponseTracker == 0 && gameObject.TryGetComponent<ShopManager>(out shopManager) == true)
+        if (currResponseTracker == 0 && gameObject.TryGetComponent<ShopManager>(out shopManager) == true && npc.Sequences[npc.sequenceNumber].hasShop)
         {
-            shopManager.ShopWindow.GetComponentInChildren<Shop>().SetItems(npc.items);
+            shopManager.ShopWindow.GetComponentInChildren<Shop>().SetItems(npc.Sequences[npc.sequenceNumber].Items);
             shopManager.ShopWindow.gameObject.SetActive(true);
         }
     }
@@ -161,24 +222,37 @@ public class DialogueManager : MonoBehaviour
             shopManager.shopSelectedItemPanel.gameObject.SetActive(false);
             shopManager.ShopWindow.gameObject.SetActive(false);
         }
+        currResponseTracker = npc.Sequences[npc.sequenceNumber].dialogue.Length;
+        StopAllCoroutines();
+        StartCoroutine(TypeSentence(npc.Sequences[npc.sequenceNumber].dialogue[(int)currResponseTracker - 1]));
     }
 
     public void OpenQuestWindow()
     {
         if (!isTalking) return;
-        QuestGiver questGiver;
-        if (currResponseTracker == 0 && gameObject.TryGetComponent<QuestGiver>(out questGiver) == true)
-        {
-            questGiver.quest = npc.quests[questGiver.questNumber];
-            questGiver.OpenQuestWindow();
-        }
+        quest = npc.Sequences[npc.sequenceNumber].Quest;
+        quest.npc = npc;
+        quest.Reset();
+        selectedQuestWindow.gameObject.SetActive(true);
+        selectedQuestWindow.dialogueManager = this;
+        selectedQuestWindow.QuestSelected(quest);
     }
 
     public void CloseQuestWindow()
     {
-        QuestGiver questGiver;
-        if (gameObject.TryGetComponent<QuestGiver>(out questGiver) == true)
-            questGiver.CloseQuestWindow();
+        selectedQuestWindow.gameObject.SetActive(false);
+    }
 
+    public void QuestAccepted()
+    {
+        currResponseTracker = npc.Sequences[npc.sequenceNumber].dialogue.Length - 2;
+        StartCoroutine(TypeSentence(npc.Sequences[npc.sequenceNumber].dialogue[(int)currResponseTracker]));
+        npc.sequenceNumber++;
+    }
+
+    public void QuestDeclined()
+    {
+        currResponseTracker = npc.Sequences[npc.sequenceNumber].dialogue.Length - 1;
+        StartCoroutine(TypeSentence(npc.Sequences[npc.sequenceNumber].dialogue[(int)currResponseTracker]));
     }
 }

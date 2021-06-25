@@ -7,6 +7,7 @@ public class Inventory : MonoBehaviour
     [SerializeField] List<Item> items;
     [SerializeField] Transform itemsParent;
     [SerializeField] ItemSlot[] itemSlots;
+    [SerializeField] QuestList questList;
 
     public event Action<Item> OnItemRightClickedEvent;
     public event Action<Item> OnItemLeftClickedEvent;
@@ -51,15 +52,38 @@ public class Inventory : MonoBehaviour
         }
         items.Add(item);
         RefreshUI();
+        foreach (Quest quest in questList.quests)
+        {
+            if (quest.questCriteria.criteriaType == CriteriaType.Collect)
+            {
+                if (quest.questCriteria.Target == item.ItemName)
+                {
+                    quest.questCriteria.UpdateCollectedCount(1);
+                    quest.Update();
+                }
+            }
+        }
         return true;
     }
 
     public bool RemoveItem(Item item)
     {
-        if (items.Remove(item))
+        Debug.Log(items.Contains(item));
+        if (items.Contains(item) && items.Remove(item))
         {
             RefreshUI();
             return true;
+        }
+        foreach (Quest quest in questList.quests)
+        {
+            if (quest.questCriteria.criteriaType == CriteriaType.Collect)
+            {
+                if (quest.questCriteria.Target == item.ItemName)
+                {
+                    quest.questCriteria.UpdateCollectedCount(-1);
+                    quest.Update();
+                }
+            }
         }
         return false;
     }
@@ -67,5 +91,17 @@ public class Inventory : MonoBehaviour
     public bool IsFull()
     {
         return items.Count >= itemSlots.Length;
+    }
+
+    public bool ContainsItem(Item item)
+    {
+        foreach (Item i in items)
+        {
+            if (i.ItemName == item.ItemName)
+            {
+                return true;
+            }
+        }
+        return false;
     }
 }

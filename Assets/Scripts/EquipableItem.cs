@@ -28,35 +28,35 @@ public class EquipableItem : Item
         isEquipped = true;
         if (AttackBonus != 0)
         {
-            c.Attack.AddModifier(new StatModifier(AttackBonus, StatModType.Flat, this));
+            c.GetAttack().AddModifier(new StatModifier(AttackBonus, StatModType.Flat, this));
         }
         if (HealthBonus != 0)
         {
-            c.Health.AddModifier(new StatModifier(HealthBonus, StatModType.Flat, this));
+            c.GetHealth().AddModifier(new StatModifier(HealthBonus, StatModType.Flat, this));
         }
         if (SpeedBonus != 0)
         {
-            c.Speed.AddModifier(new StatModifier(SpeedBonus, StatModType.Flat, this));
+            c.GetSpeed().AddModifier(new StatModifier(SpeedBonus, StatModType.Flat, this));
         }
         if (AttackPercentBonus != 0)
         {
-            c.Attack.AddModifier(new StatModifier(AttackPercentBonus, StatModType.PercentMult, this));
+            c.GetAttack().AddModifier(new StatModifier(AttackPercentBonus, StatModType.PercentMult, this));
         }
         if (HealthPercentBonus != 0)
         {
-            c.Health.AddModifier(new StatModifier(HealthPercentBonus, StatModType.PercentMult, this));
+            c.GetHealth().AddModifier(new StatModifier(HealthPercentBonus, StatModType.PercentMult, this));
         }
         if (SpeedPercentBonus != 0)
         {
-            c.Speed.AddModifier(new StatModifier(SpeedPercentBonus, StatModType.PercentMult, this));
+            c.GetSpeed().AddModifier(new StatModifier(SpeedPercentBonus, StatModType.PercentMult, this));
         }
     }
 
     public void Unequip(Character c)
     {
         isEquipped = false;
-        c.Attack.RemoveAllModifiersFromSource(this);
-        c.Health.RemoveAllModifiersFromSource(this);
-        c.Speed.RemoveAllModifiersFromSource(this);
+        c.GetAttack().RemoveAllModifiersFromSource(this);
+        c.GetHealth().RemoveAllModifiersFromSource(this);
+        c.GetSpeed().RemoveAllModifiersFromSource(this);
     }
 }

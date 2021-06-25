@@ -16,7 +16,8 @@ public class InventorySystem : MonoBehaviour
     {
         if (Input.GetKeyDown(KeyCode.I))
         {
-            ToggleInventory();
+            if (isOpen || !isOpen && CanOpen())
+                ToggleInventory();
         }
     }
 
@@ -40,5 +41,29 @@ public class InventorySystem : MonoBehaviour
         {
             inventory.AddItem(item2);
         }
+    }
+
+    public bool CanOpen()
+    {
+        bool can = true;
+        Monologue[] monologues = FindObjectsOfType<Monologue>();
+        foreach (Monologue mono in monologues)
+        {
+            if (mono.IsExamining())
+            {
+                can = false;
+                break;
+            }
+        }
+        DialogueManager[] npc = FindObjectsOfType<DialogueManager>();
+        for (int i = 0; i < npc.Length; i++)
+        {
+            if (npc[i].isTalking)
+            {
+                can = false;
+                break;
+            }
+        }
+        return can;
     }
 }

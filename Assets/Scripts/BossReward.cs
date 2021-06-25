@@ -2,25 +2,16 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class BossReward : MonoBehaviour
+public class BossReward : MobReward
 {
-    [SerializeField] public float expReward; // Auto added through CharacterLevel
-    [SerializeField] public float goldReward; // Auto added through CharacterWallet
+    // Boss Can drop certain items
     [SerializeField] public Item[] itemDrops; // A single item will be dropped from the list of items with a certain percentage
 
-    public bool rewardGiven;
-
-    public void Start()
+    public override void GetReward(CharacterLevel characterLevel, CharacterWallet characterWallet)
     {
-        rewardGiven = false;
-    }
-
-    // Rewards accordingly
-    public void GetReward(CharacterLevel characterLevel, CharacterWallet characterWallet)
-    {
-        rewardGiven = true;
+        if (isRewardGiven) return;
+        isRewardGiven = true;
         characterLevel.GainExperience(expReward);
         characterWallet.AddGold(goldReward);
-
     }
 }

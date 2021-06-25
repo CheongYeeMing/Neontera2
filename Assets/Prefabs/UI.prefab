@@ -8083,6 +8083,7 @@ MonoBehaviour:
   - {fileID: 4322237881569348004}
   - {fileID: 4322237880389808051}
   - {fileID: 4322237881214594461}
+  questList: {fileID: 0}
 --- !u!1 &4322237880544849283
 GameObject:
   m_ObjectHideFlags: 0
@@ -14003,7 +14004,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &4322237881362016864
 RectTransform:
   m_ObjectHideFlags: 0

@@ -6,9 +6,9 @@ using UnityEngine.UI;
 [SerializeField]
 public class CharacterWallet : MonoBehaviour
 {
-    [SerializeField] public List<Wallet> Wallet;
+    [SerializeField] private List<Wallet> Wallet;
     
-    public float GoldAmount;
+    private float GoldAmount;
 
     public void Awake()
     {
@@ -39,6 +39,16 @@ public class CharacterWallet : MonoBehaviour
 
     public bool HasEnoughGold(float goldAmount)
     {
-        return goldAmount <= GoldAmount;
+        return goldAmount <= GetGoldAmount();
+    }
+
+    public List<Wallet> GetListWallet()
+    {
+        return Wallet;
+    }
+
+    public float GetGoldAmount()
+    {
+        return GoldAmount;
     }
 }

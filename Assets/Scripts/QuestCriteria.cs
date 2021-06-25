@@ -13,8 +13,6 @@ public class QuestCriteria
     public int requiredAmount;
     public int currentAmount;
 
-
-
     public bool IsFufilled()
     {
         return currentAmount >= requiredAmount;
@@ -26,10 +24,6 @@ public class QuestCriteria
         {
             UpdateKillCount();
         }
-        else if (criteriaType == CriteriaType.Collect)
-        {
-            UpdateCollectedCount();
-        }
         else if (criteriaType == CriteriaType.Talk)
         {
             UpdateTalkCount();
@@ -38,17 +32,19 @@ public class QuestCriteria
 
     public void UpdateKillCount()
     {
-        currentAmount++;
+        if (currentAmount < requiredAmount)
+            currentAmount++;
     }
 
-    public void UpdateCollectedCount()
+    public void UpdateCollectedCount(int amouunt)
     {
-        currentAmount++;
+        currentAmount += amouunt;
     }
 
     public void UpdateTalkCount()
     {
-        currentAmount++;
+        if (currentAmount < requiredAmount)
+            currentAmount++;
     }
 
 }

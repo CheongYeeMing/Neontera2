@@ -20,26 +20,26 @@ public class MobHealth : MonoBehaviour, Health
 
     [SerializeField] public GameObject levelName;
     [SerializeField] public float mobLevel;
-    public Image levelNameBG;
-    public TextMeshProUGUI levelNameText;
+    
+    private Image levelNameBG;
+    private TextMeshProUGUI levelNameText;
 
-    public Slider slider;
-    public Color low;
-    public Color high;
+    private Slider slider;
+    private Color low;
+    private Color high;
 
-    public float currentHealth;
-    public float regenTimer; // Default 10%maxHP/second
-    public float outOfCombatTimer; // Default set to 5 seconds
+    private float currentHealth;
+    private float regenTimer; // Default 10%maxHP/second
+    private float outOfCombatTimer; // Default set to 5 seconds
 
-    public bool isHurting;
-    public bool isDead;
+    private bool isHurting;
+    private bool isDead;
 
-
-    public GameObject attackedBy;
+    private GameObject attackedBy;
 
     // Mob Animation States
-    public const string MOB_HURT = "Hurt";
-    public const string MOB_DIE = "Die";
+    private const string MOB_HURT = "Hurt";
+    private const string MOB_DIE = "Die";
 
     // Start is called before the first frame update
     public void Start()
@@ -71,7 +71,7 @@ public class MobHealth : MonoBehaviour, Health
         SetMobDetails(currentHealth, maxHealth);
         levelName.transform.position = new Vector2(gameObject.transform.position.x, gameObject.transform.position.y + nameOffsetY);
         slider.transform.position = new Vector2(gameObject.transform.position.x, gameObject.transform.position.y + hpOffsetY);
-        if (isHurting || isDead ||gameObject.GetComponent<MobPathfindingAI>().isChasingTarget)
+        if (isHurting || isDead ||gameObject.GetComponent<MobPathfindingAI>().GetIsChasingTarget())
         {
             outOfCombatTimer = 0;
         }
@@ -123,7 +123,7 @@ public class MobHealth : MonoBehaviour, Health
     public void KnockBack(GameObject something)
     {
         Debug.Log("Knockbacked???");
-        Rigidbody2D body = gameObject.GetComponent<MobMovement>().rb;
+        Rigidbody2D body = gameObject.GetComponent<MobMovement>().GetRigidbody();
         CharacterAttack character;
         if (something.transform.position.x > gameObject.transform.position.x)
         {
@@ -152,9 +152,9 @@ public class MobHealth : MonoBehaviour, Health
 
     public void Die()
     {
-        gameObject.GetComponent<MobSpawner>().deathTimer = 0;
+        gameObject.GetComponent<MobSpawner>().SetDeathTimer(0);
         isDead = true;
-        gameObject.GetComponent<MobMovement>().rb.velocity = Vector2.zero;
+        gameObject.GetComponent<MobMovement>().GetRigidbody().velocity = Vector2.zero;
         RewardsPopUp.Create(gameObject);
         Debug.Log("Mob is dead!!!");
         gameObject.GetComponent<MobAnimation>().ChangeAnimationState(MOB_DIE);
@@ -171,12 +171,32 @@ public class MobHealth : MonoBehaviour, Health
         isHurting = false;
         if (gameObject.GetComponent<MobPathfindingAI>().passiveAggressive)
         {
-            gameObject.GetComponent<MobPathfindingAI>().isChasingTarget = true;
+            gameObject.GetComponent<MobPathfindingAI>().SetIsChasingTarget(true);
         }
     }
 
     public void DieComplete()
     {
         gameObject.GetComponent<SpriteRenderer>().enabled = false;
+    }
+
+    public bool IsHurting()
+    {
+        return isHurting;
+    }
+
+    public bool IsDead()
+    {
+        return isDead;
+    }
+
+    public GameObject GetAttackedBy()
+    {
+        return attackedBy;
+    }
+
+    public void SetAttackedBy(GameObject attackedBy)
+    {
+        this.attackedBy = attackedBy;
     }
 }

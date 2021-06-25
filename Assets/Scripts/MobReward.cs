@@ -7,21 +7,29 @@ public class MobReward : MonoBehaviour
 {
     [SerializeField] public float expReward; // Auto added through CharacterLevel
     [SerializeField] public float goldReward; // Auto added through CharacterWallet
-    [SerializeField] public Item[] itemDrops; // A single item will be dropped from the list of items with a certain percentage
 
-    public bool rewardGiven;
+    protected bool isRewardGiven;
 
     public void Start()
     {
-        rewardGiven = false;
+        isRewardGiven = false;
     }
 
     // Rewards accordingly
-    public void GetReward(CharacterLevel characterLevel, CharacterWallet characterWallet)
+    public virtual void GetReward(CharacterLevel characterLevel, CharacterWallet characterWallet)
     {
-        rewardGiven = true;
+        isRewardGiven = true;
         characterLevel.GainExperience(expReward);
         characterWallet.AddGold(goldReward);
+    }
 
+    public bool GetIsRewardGiven()
+    {
+        return isRewardGiven;
+    }
+
+    public void SetIsRewardGiven(bool isRewardGiven)
+    {
+        this.isRewardGiven = isRewardGiven;        
     }
 }

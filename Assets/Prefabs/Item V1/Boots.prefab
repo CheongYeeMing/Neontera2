@@ -28,7 +28,7 @@ Transform:
   m_GameObject: {fileID: 1645576359943562434}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: -1.54, y: -3.67, z: 0}
-  m_LocalScale: {x: 2.41, y: 2.41, z: 1}
+  m_LocalScale: {x: 3, y: 3, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 0
@@ -138,9 +138,9 @@ MonoBehaviour:
   cost: 2
   AttackBonus: 0
   HealthBonus: 0
-  SpeedBonus: 100
+  SpeedBonus: 1
   AttackPercentBonus: 0
   HealthPercentBonus: 0
-  SpeedPercentBonus: 30
+  SpeedPercentBonus: 0
   EquipmentType: 2
   isEquipped: 0

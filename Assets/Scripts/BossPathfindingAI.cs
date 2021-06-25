@@ -5,36 +5,36 @@ using Pathfinding;
 
 public class BossPathfindingAI : MonoBehaviour
 {
+    [SerializeField] public Transform target;
     [SerializeField] public bool passiveAggressive; // Will only chase when is attacked
     [SerializeField] public bool instantAggressive; // Chase once target enters radius
 
-    public Transform target;
+    protected Path path;
+    protected Rigidbody2D rb;
+    protected Seeker seeker;
 
-    public float speed;
-    public float nextWayPointDistance = 3f;
+    protected Vector2 direction;
 
-    private Path path;
-    public int currentWaypoint = 0;
-    public bool reachedEndOfPath;
+    protected bool reachedEndOfPath;
+    protected bool isChasingTarget;
 
-    public Rigidbody2D rb;
-    private Seeker seeker;
+    protected float speed;
+    protected float nextWayPointDistance = 3f;
 
-    public Vector2 direction;
-
-    public bool isChasingTarget;
+    protected int currentWaypoint = 0;
 
     // Start is called before the first frame update
-    void Start()
+    public virtual void Start()
     {
         isChasingTarget = false;
         if (instantAggressive)
         {
             isChasingTarget = true;
         }
-        speed = gameObject.GetComponent<BossMovement>().moveSpeed;
-        seeker = gameObject.GetComponent<Seeker>();
-        rb = gameObject.GetComponent<BossMovement>().rb;
+        speed = GetComponent<BossMovement>().moveSpeed;
+        seeker = GetComponent<Seeker>();
+        //rb = gameObject.GetComponent<BossMovement>().GetRigidbody();
+        rb = GetComponent<Rigidbody2D>();
         InvokeRepeating("UpdatePath", 0f, 0.5f);
     }
 
@@ -56,7 +56,7 @@ public class BossPathfindingAI : MonoBehaviour
     }
 
     // Update is called once per frame
-    void FixedUpdate()
+    public virtual void FixedUpdate()
     {
         if (!isChasingTarget) return;
 
@@ -77,17 +77,15 @@ public class BossPathfindingAI : MonoBehaviour
 
         direction = ((Vector2)path.vectorPath[currentWaypoint] - rb.position);
 
-        if (Mathf.Sign(gameObject.GetComponent<BossMovement>().moveSpeed) != Mathf.Sign(direction.x) && Mathf.Abs(direction.x) > 0.1)
-        {
+        if (Mathf.Sign(GetComponent<BossMovement>().moveSpeed) != Mathf.Sign(direction.x) && Mathf.Abs(direction.x) > 0.1)
+        {/*
             Debug.Log("Why u flip again cb");
             Debug.Log("Movespeed: " + gameObject.GetComponent<BossMovement>().moveSpeed);
             Debug.Log("Movespeed Sign: " + Mathf.Sign(gameObject.GetComponent<BossMovement>().moveSpeed));
             Debug.Log("Direction X: " + direction.x);
-            Debug.Log("Direction X Sign: " + Mathf.Sign(direction.x));
-            gameObject.GetComponent<BossMovement>().Flip();
+            Debug.Log("Direction X Sign: " + Mathf.Sign(direction.x));*/
+            GetComponent<BossMovement>().Flip();
         }
-
-
 
         float distance = Vector2.Distance(rb.position, path.vectorPath[currentWaypoint]);
 
@@ -97,13 +95,23 @@ public class BossPathfindingAI : MonoBehaviour
         }
     }
 
-    public void Update()
+    public virtual void Update()
     {
         if (!isChasingTarget) return;
 
-        if (!gameObject.GetComponent<BossHealth>().isHurting && !gameObject.GetComponent<BossHealth>().isDead)
+        if (!gameObject.GetComponent<BossHealth>().IsHurting() && !gameObject.GetComponent<BossHealth>().IsDead())
         {
             gameObject.GetComponent<BossMovement>().ChaseTarget(direction);
         }
+    }
+
+    public bool GetIsChasingTarget()
+    {
+        return isChasingTarget;
+    }
+
+    public void SetIsChasingTarget(bool isChasingTarget)
+    {
+        this.isChasingTarget = isChasingTarget;
     }
 }

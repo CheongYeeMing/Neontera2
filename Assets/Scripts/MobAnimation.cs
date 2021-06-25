@@ -4,18 +4,18 @@ using UnityEngine;
 
 public class MobAnimation : MonoBehaviour, Animation
 {
-    public Animator animator;
+    [SerializeField] public Animator animator;
     
-    private string currentState;
+    protected string currentState;
 
-    public const string MOB_IDLE = "Idle";
-    public const string MOB_MOVE = "Move";
-    public const string MOB_ATTACK = "Attack";
-    public const string MOB_HURT = "Hurt";
-    public const string MOB_DIE = "Die";
+    protected const string MOB_IDLE = "Idle";
+    protected const string MOB_MOVE = "Move";
+    protected const string MOB_ATTACK = "Attack";
+    protected const string MOB_HURT = "Hurt";
+    protected const string MOB_DIE = "Die";
 
     // Start is called before the first frame update
-    public void Start()
+    public virtual void Start()
     {
         ChangeAnimationState(MOB_IDLE);
     }

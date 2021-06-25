@@ -42,10 +42,10 @@ public class Item : MonoBehaviour
                 // Delete the object
                 gameObject.SetActive(false);
                 break;
-            case InteractionType.Examine:
-                // Call the Examine item in the interaction system
-                FindObjectOfType<Interactable>().ExamineItem(this);
-                break;
+            //case InteractionType.Examine:
+            //    // Call the Examine item in the interaction system
+            //    FindObjectOfType<Interactable>().ExamineItem(this);
+            //    break;
             default:
                 Debug.Log("NULL ITEM");
                 break;

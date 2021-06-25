@@ -14,43 +14,195 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   npcName: Johnson
   icon: {fileID: 21300000, guid: ac159a9ac0cfe2c48b57e67f70c74c32, type: 3}
-  items: []
-  quests:
-  - isActive: 1
-    canRepeat: 0
-    status: 1
-    title: Slime Manefestation
-    description: There has been a uprise in slimes, we need you to help reduce their
-      numbers!
-    questCriteria:
-      criteriaType: 0
-      action: Kill 5 Slimes
-      Target: Slime
-      requiredAmount: 5
-      currentAmount: 2
-    expReward: 100
-    goldReward: 100
-    itemReward: {fileID: 0}
-  - isActive: 1
-    canRepeat: 1
-    status: 2
-    title: 'Talk to Martin '
-    description: Martin is the Weaponsmith in this town, he has some amazing items
-      in his shop. Go talk to him and then come back to me.
-    questCriteria:
-      criteriaType: 2
-      action: Talk to Martin
-      Target: Martin
-      requiredAmount: 1
-      currentAmount: 0
-    expReward: 100
-    goldReward: 100
-    itemReward: {fileID: 0}
-  dialogue:
-  - Hey, what is up?
-  - Let me give you a quest!
-  - See you later.
-  - I already gave you a quest... come back for more when you have completed it!
-  characterDialogue:
-  - I'm ready for some quests!
-  - Goodbye!
+  Sequences:
+  - Items: []
+    Quest:
+      npc: {fileID: 0}
+      isActive: 0
+      canRepeat: 0
+      status: 0
+      title: 
+      description: 
+      questCriteria:
+        criteriaType: 0
+        action: 
+        Target: 
+        requiredAmount: 0
+        currentAmount: 0
+      expReward: 0
+      goldReward: 0
+      itemReward: {fileID: 0}
+      questItem: {fileID: 0}
+      location: {x: 0, y: 0, z: 0}
+    hasShop: 0
+    hasQuest: 0
+    isStory: 0
+    waitingQuest: 0
+    justDialogue: 1
+    dialogue:
+    - 'Morning Soldier! It''s your first day out in the field. You nervous? '
+    - Great! That is the way young blood. Ahh, this reminds me of my first field
+      trip. At the time, I had to fight to death with vulcans using my bare hands.
+    - Quit your whinning! When you join the army, the field becomes your second home.
+    characterDialogue:
+    - Yea, I'm a little nervous but hella excited!
+    - I'm scared...
+  - Items: []
+    Quest:
+      npc: {fileID: 0}
+      isActive: 0
+      canRepeat: 0
+      status: 0
+      title: 
+      description: 
+      questCriteria:
+        criteriaType: 0
+        action: 
+        Target: 
+        requiredAmount: 0
+        currentAmount: 0
+      expReward: 0
+      goldReward: 0
+      itemReward: {fileID: 0}
+      questItem: {fileID: 0}
+      location: {x: 0, y: 0, z: 0}
+    hasShop: 0
+    hasQuest: 0
+    isStory: 0
+    waitingQuest: 0
+    justDialogue: 1
+    dialogue:
+    - Let's begin. Xenonians out in the field communicate with a rock called Radio.
+      Its attached to your helmet so I can talk to you from a distance throughout
+      your exercise.
+    - Straight to the point. I like your spirit!
+    - That's too loud! You gonna make me lose my hearing 10 years earlier ...
+    characterDialogue:
+    - Alright, what's the job today?
+    - TESTING! TESTING ONE TWO THREE!!!
+  - Items: []
+    Quest:
+      npc: {fileID: 0}
+      isActive: 0
+      canRepeat: 0
+      status: 0
+      title: 
+      description: 
+      questCriteria:
+        criteriaType: 0
+        action: 
+        Target: 
+        requiredAmount: 0
+        currentAmount: 0
+      expReward: 0
+      goldReward: 0
+      itemReward: {fileID: 0}
+      questItem: {fileID: 0}
+      location: {x: 0, y: 0, z: 0}
+    hasShop: 0
+    hasQuest: 0
+    isStory: 1
+    waitingQuest: 0
+    justDialogue: 0
+    dialogue:
+    - Anyways, we are out here today to locate a missing person from our village.
+    - This person is Dr Aaron, the pride of the village as a scientist. He was the
+      one that invented the radio for the military.
+    - 'A child from the village reported that he might have seen the scientist in
+      a cave near this area. '
+    - I will assess your fitness and competence based on how you go about the mission.
+      Use the left and right arrow keys to move around. Space/up arrow key to jump.
+    characterDialogue: []
+  - Items: []
+    Quest:
+      npc: {fileID: 11400000}
+      isActive: 1
+      canRepeat: 0
+      status: 1
+      title: Save The Scientist
+      description: The intel seems to tell us that Dr Aaron somewhere in this cave
+        nearby. We got to act fast before something bad happens.
+      questCriteria:
+        criteriaType: 2
+        action: Find Dr Aaron
+        Target: Dr Aaron
+        requiredAmount: 1
+        currentAmount: 0
+      expReward: 100
+      goldReward: 30
+      itemReward: {fileID: 0}
+      questItem: {fileID: 0}
+      location: {x: 0, y: 0, z: 0}
+    hasShop: 0
+    hasQuest: 1
+    isStory: 0
+    waitingQuest: 0
+    justDialogue: 0
+    dialogue:
+    - "That's pretty much the current situation. \nAre you ready for the mission?"
+    - Excellent. I like that attitude!
+    - I hope you'll reconsider the decision, young one.
+    - Good luck on your first mission! I'll be waiting for your return with Dr Aaron.
+    - I hope you'll reconsider the decision, young one.
+    characterDialogue:
+    - Yes, let's do this!
+    - No. I want to go home...
+  - Items: []
+    Quest:
+      npc: {fileID: 11400000}
+      isActive: 0
+      canRepeat: 0
+      status: 2
+      title: Save The Scientist
+      description: The intel seems to tell us that Dr Aaron somewhere in this cave
+        nearby. We got to act fast before something bad happens.
+      questCriteria:
+        criteriaType: 2
+        action: Find Dr Aaron
+        Target: Dr Aaron
+        requiredAmount: 1
+        currentAmount: 0
+      expReward: 100
+      goldReward: 30
+      itemReward: {fileID: 0}
+      questItem: {fileID: 0}
+      location: {x: 0, y: 0, z: 0}
+    hasShop: 0
+    hasQuest: 0
+    isStory: 0
+    waitingQuest: 1
+    justDialogue: 0
+    dialogue:
+    - Go on! There's no time to waste!
+    characterDialogue: []
+  - Items: []
+    Quest:
+      npc: {fileID: 11400000}
+      isActive: 0
+      canRepeat: 0
+      status: 2
+      title: Save The Scientist
+      description: The intel seems to tell us that Dr Aaron somewhere in this cave
+        nearby. We got to act fast before something bad happens.
+      questCriteria:
+        criteriaType: 2
+        action: Find Dr Aaron
+        Target: Dr Aaron
+        requiredAmount: 1
+        currentAmount: 0
+      expReward: 100
+      goldReward: 30
+      itemReward: {fileID: 0}
+      questItem: {fileID: 0}
+      location: {x: 0, y: 0, z: 0}
+    hasShop: 0
+    hasQuest: 0
+    isStory: 1
+    waitingQuest: 0
+    justDialogue: 0
+    dialogue:
+    - 'Great work soldier! You fought well. '
+    - 
+    - 
+    characterDialogue: []
+  sequenceNumber: 0

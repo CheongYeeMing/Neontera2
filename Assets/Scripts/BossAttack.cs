@@ -8,14 +8,16 @@ public class BossAttack : MonoBehaviour
     [SerializeField] public float KnockbackX;
     [SerializeField] public float KnockbackY;
 
-    public float attack;
+    // Boss Damage
+    [SerializeField] public float attack;
 
-    public bool isAttacking;
+    protected bool isAttacking;
 
     // Boss Animation States
-    public const string BOSS_ATTACK = "Attack";
+    protected const string BOSS_ATTACK = "Attack";
 
-    public void OnCollisionEnter2D(Collision2D collision)
+    // Boss Auto Attack
+    public virtual void OnCollisionEnter2D(Collision2D collision)
     {
         if (collision.gameObject.CompareTag("Character"))
         {
@@ -25,14 +27,19 @@ public class BossAttack : MonoBehaviour
                 isAttacking = true;
                 gameObject.GetComponent<BossAnimation>().ChangeAnimationState(BOSS_ATTACK);
             }
-            collision.gameObject.GetComponent<CharacterHealth>().attackedBy = gameObject;
+            collision.gameObject.GetComponent<CharacterHealth>().SetAttackedBy(gameObject);
             collision.gameObject.GetComponent<CharacterHealth>().TakeDamage(attack);
             Invoke("AttackComplete", attackDelay);
         }
     }
 
-    public void AttackComplete()
+    public virtual void AttackComplete()
     {
         isAttacking = false;
+    }
+
+    public bool IsAttacking()
+    {
+        return isAttacking;
     }
 }

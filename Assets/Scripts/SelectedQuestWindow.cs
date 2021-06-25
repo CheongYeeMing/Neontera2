@@ -7,9 +7,11 @@ public class SelectedQuestWindow : MonoBehaviour
 {
     [SerializeField] public GameObject AcceptedQuestWindow;
     [SerializeField] public QuestList questList;
+    [SerializeField] public Inventory inventory;
 
     public Quest quest;
     public Item item;
+    public DialogueManager dialogueManager;
 
     [SerializeField] public Text questName;
     [SerializeField] public Text questDescription;
@@ -66,21 +68,33 @@ public class SelectedQuestWindow : MonoBehaviour
 
     public void AcceptQuest()
     {
+        dialogueManager.QuestAccepted();
         questList.AddQuest(quest);
         quest.status = Quest.Status.ONGOING;
         gameObject.SetActive(false);
+        if (quest.questItem != null)
+            item = Instantiate(quest.questItem, quest.location, Quaternion.identity);
     }
 
     public void DeclineQuest()
     {
+        dialogueManager.QuestDeclined();
         gameObject.SetActive(false);
     }
 
     public void AbandonQuest()
     {
+        if (quest.questCriteria.criteriaType == CriteriaType.Collect && item != null)
+            inventory.RemoveItem(item);
         quest.Start();
         questList.RemoveQuest(quest);
         gameObject.SetActive(false);
+        if (item != null)
+        {
+            Destroy(item.gameObject);
+        }
+        quest.npc.sequenceNumber--;
+
     }
 
     public void ContinueQuest()
@@ -90,6 +104,9 @@ public class SelectedQuestWindow : MonoBehaviour
 
     public void CompleteQuest()
     {
+        if (quest.questCriteria.criteriaType == CriteriaType.Collect && item != null)
+            inventory.RemoveItem(item);
+        quest.npc.sequenceNumber++;
         questList.RemoveQuest(quest);
         FindObjectOfType<CharacterLevel>().GainExperience(quest.expReward);
         FindObjectOfType<CharacterWallet>().AddGold(quest.goldReward);

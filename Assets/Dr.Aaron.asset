@@ -12,15 +12,164 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3fbed15bb973d6c468a3d7d0e6c11e7a, type: 3}
   m_Name: Dr.Aaron
   m_EditorClassIdentifier: 
-  npcName: Dr.Aaron
+  npcName: Dr Aaron
   icon: {fileID: 21300000, guid: ac159a9ac0cfe2c48b57e67f70c74c32, type: 3}
-  items: []
-  dialogue:
-  - 
-  - 
-  - 
-  - 
-  characterDialogue:
-  - 
-  - 
-  - 
+  Sequences:
+  - Items: []
+    Quest:
+      npc: {fileID: 0}
+      isActive: 0
+      canRepeat: 0
+      status: 0
+      title: 
+      description: 
+      questCriteria:
+        criteriaType: 0
+        action: 
+        Target: 
+        requiredAmount: 0
+        currentAmount: 0
+      expReward: 0
+      goldReward: 0
+      itemReward: {fileID: 0}
+      questItem: {fileID: 0}
+      location: {x: 0, y: 0, z: 0}
+    hasShop: 0
+    hasQuest: 0
+    isStory: 0
+    waitingQuest: 0
+    justDialogue: 1
+    dialogue:
+    - Oh my god! What are you doing here? It's very dangerous down here !!
+    - 'Thank god you''re here. You must have already defeated the Slime King right? '
+    - You must have been strong enough to make it this far! I am thankful you came
+      for me.
+    characterDialogue:
+    - I'm here to save you!!
+    - I didn't want to come here...
+  - Items: []
+    Quest:
+      npc: {fileID: 0}
+      isActive: 0
+      canRepeat: 0
+      status: 0
+      title: 
+      description: 
+      questCriteria:
+        criteriaType: 0
+        action: 
+        Target: 
+        requiredAmount: 0
+        currentAmount: 0
+      expReward: 0
+      goldReward: 0
+      itemReward: {fileID: 0}
+      questItem: {fileID: 0}
+      location: {x: 0, y: 0, z: 0}
+    hasShop: 0
+    hasQuest: 0
+    isStory: 1
+    waitingQuest: 0
+    justDialogue: 0
+    dialogue:
+    - I was doing some field research for the army on portal systems about a day
+      ago or so. Things were as per normal at first.
+    - But I was suddenly attacked by a group of slimes and one of them managed to
+      steal my bag which contained an important artifact...
+    - The artifact is crucial for advancements of portal system. Without the artifact,
+      I will not be able to complete the task set by the army.
+    characterDialogue: []
+  - Items: []
+    Quest:
+      npc: {fileID: 11400000}
+      isActive: 1
+      canRepeat: 0
+      status: 0
+      title: Lost Artifact
+      description: This artifact seems to be the core of the portal system... Now
+        where did I spot those red slimes...
+      questCriteria:
+        criteriaType: 1
+        action: Found Artifact
+        Target: Artifact
+        requiredAmount: 1
+        currentAmount: 1
+      expReward: 100
+      goldReward: 25
+      itemReward: {fileID: 0}
+      questItem: {fileID: 1006995982435724486, guid: ff15275cfa20de24cbe96c37ee8c715c, type: 3}
+      location: {x: 11.34, y: 9.8, z: 0}
+    hasShop: 0
+    hasQuest: 1
+    isStory: 0
+    waitingQuest: 0
+    justDialogue: 0
+    dialogue:
+    - Would you mind helping me to retrieve back that artifact? If I remember correctly,
+      it was a red slime that stole by bag...
+    - 'Really?? Thank you so much! '
+    - 'What am I going to do ... '
+    - Do let me know when you find it... I will be waiting for your return!
+    - What am I going to do ...
+    characterDialogue:
+    - Ofcourse I'm going to help you!
+    - I'm not your slave...
+  - Items: []
+    Quest:
+      npc: {fileID: 0}
+      isActive: 0
+      canRepeat: 0
+      status: 0
+      title: 
+      description: 
+      questCriteria:
+        criteriaType: 0
+        action: 
+        Target: 
+        requiredAmount: 0
+        currentAmount: 0
+      expReward: 0
+      goldReward: 0
+      itemReward: {fileID: 0}
+      questItem: {fileID: 0}
+      location: {x: 0, y: 0, z: 0}
+    hasShop: 0
+    hasQuest: 0
+    isStory: 0
+    waitingQuest: 1
+    justDialogue: 0
+    dialogue:
+    - If only I hadn't let it slip from me...
+    characterDialogue: []
+  - Items: []
+    Quest:
+      npc: {fileID: 0}
+      isActive: 0
+      canRepeat: 0
+      status: 0
+      title: 
+      description: 
+      questCriteria:
+        criteriaType: 0
+        action: 
+        Target: 
+        requiredAmount: 0
+        currentAmount: 0
+      expReward: 0
+      goldReward: 0
+      itemReward: {fileID: 0}
+      questItem: {fileID: 0}
+      location: {x: 0, y: 0, z: 0}
+    hasShop: 0
+    hasQuest: 0
+    isStory: 1
+    waitingQuest: 0
+    justDialogue: 0
+    dialogue:
+    - Oh my god! You found the artifact! I am deeply thankful for your help. This
+      means a lot to me and the army.
+    - God knows what they were going to do to me if I had lost this artifact. I might
+      have even lost my life...
+    - Alrighty, let's go back and meet up with Johnson!!
+    characterDialogue: []
+  sequenceNumber: 0

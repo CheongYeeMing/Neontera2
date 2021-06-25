@@ -12,6 +12,7 @@ TagManager:
   - NPC
   - Invincible
   - Character
+  - Monologue
   layers:
   - Default
   - TransparentFX

@@ -4,23 +4,22 @@ using UnityEngine;
 
 public class CharacterMovement : MonoBehaviour
 {
-    
-    [SerializeField] private float speed;
-    [SerializeField] private float jumpPower;
+    [SerializeField] private CharacterAttack characterAttack;
     [SerializeField] private LayerMask groundLayer;
     [SerializeField] private LayerMask wallLayer;
-    [SerializeField] public CharacterAttack characterAttack;
+    [SerializeField] private float speed;
+    [SerializeField] private float jumpPower;
 
     private BoxCollider2D boxCollider;
-    public Rigidbody2D body;
+    private Rigidbody2D body;
 
     private float wallJumpCooldown; // Prevent instant teleportation up wall
     private float horizontalInput;
 
     // Mob Animation States
-    public const string CHARACTER_IDLE = "Idle";
-    public const string CHARACTER_RUN = "Run";
-    public const string CHARACTER_JUMP = "Jump";
+    private const string CHARACTER_IDLE = "Idle";
+    private const string CHARACTER_RUN = "Run";
+    private const string CHARACTER_JUMP = "Jump";
     
 
     private void Awake()
@@ -31,8 +30,13 @@ public class CharacterMovement : MonoBehaviour
 
     private void FixedUpdate()
     {
-        if (CanMove() == false) return;
-
+        speed = GetComponent<Character>().GetSpeed().CalculateFinalValue();
+        if (CanMove() == false)
+        {
+            GetComponent<CharacterAnimation>().ChangeAnimationState(CHARACTER_IDLE);
+            body.velocity = Vector2.zero;
+            return;
+        }
         horizontalInput = Input.GetAxis("Horizontal");
 
         // Flip player when moving
@@ -48,7 +52,7 @@ public class CharacterMovement : MonoBehaviour
         // Set animator parameters
         //animator.SetBool("run", horizontalInput != 0);
         //animator.SetBool("grounded", isGrounded());
-        if (isGrounded() && !characterAttack.isAttacking)
+        if (isGrounded() && !characterAttack.GetIsAttacking())
         {
             if (horizontalInput != 0)
             {
@@ -131,18 +135,24 @@ public class CharacterMovement : MonoBehaviour
     public bool CanMove()
     {
         bool can = true;
-        if (FindObjectOfType<Interactable>().isExamining)
+        Monologue[] monologues = FindObjectsOfType<Monologue>();
+        foreach(Monologue mono in monologues)
         {
-            can = false;
+            if (mono.IsExamining())
+            {
+                can = false;
+                break;
+            }
         }
         if (FindObjectOfType<InventorySystem>().isOpen)
         {
             can = false;
         }
-        if (gameObject.GetComponent<CharacterHealth>().isHurting || gameObject.GetComponent<CharacterHealth>().isDead)
+        if (gameObject.GetComponent<CharacterHealth>().IsHurting() || gameObject.GetComponent<CharacterHealth>().IsDead())
         {
             can = false;
         }
+        
         DialogueManager[] npc = FindObjectsOfType<DialogueManager>();
         for (int i = 0; i < npc.Length; i++)
         {
@@ -153,5 +163,10 @@ public class CharacterMovement : MonoBehaviour
             }
         }
         return can;
+    }
+
+    public Rigidbody2D GetRigidBody()
+    {
+        return body;
     }
 }

@@ -37,12 +37,12 @@ public class Projectile : MonoBehaviour
         MobHealth mobHealth;
         if (collidedObject.TryGetComponent<MobHealth>(out mobHealth))
         {
-            if (!mobHealth.isHurting)
+            if (!mobHealth.IsHurting())
             {
-                mobHealth.attackedBy = gameObject;
+                mobHealth.SetAttackedBy(gameObject);
                 mobHealth.TakeDamage(damage);
             }
-            if (mobHealth.isDead && mobHealth.gameObject.GetComponent<MobReward>().rewardGiven == false)
+            if (mobHealth.IsDead() && mobHealth.gameObject.GetComponent<MobReward>().GetIsRewardGiven() == false)
             {
                 Character character = FindObjectOfType<Character>();
                 foreach (Quest quest in character.questList.quests)
@@ -63,12 +63,12 @@ public class Projectile : MonoBehaviour
         BossHealth bossHealth;
         if (collidedObject.TryGetComponent<BossHealth>(out bossHealth))
         {
-            if (!bossHealth.isHurting)
+            if (!bossHealth.IsHurting())
             {
-                bossHealth.attackedBy = gameObject;
+                bossHealth.SetAttackedBy(gameObject);
                 bossHealth.TakeDamage(damage);
             }
-            if (bossHealth.isDead && bossHealth.gameObject.GetComponent<BossReward>().rewardGiven == false)
+            if (bossHealth.IsDead() && bossHealth.gameObject.GetComponent<BossReward>().GetIsRewardGiven() == false)
             {
                 Character character = FindObjectOfType<Character>();
                 foreach (Quest quest in character.questList.quests)
