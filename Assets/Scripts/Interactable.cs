@@ -36,6 +36,10 @@ public class Interactable : MonoBehaviour
                 {
                     detectedObject.GetComponent<DialogueManager>().TriggerDialogue();
                 }
+                else if (detectedObject.CompareTag("Portal"))
+                {
+                    detectedObject.GetComponent<Portal>().Teleport();
+                }
             }
             if (detectedObject.CompareTag("Monologue") && !detectedObject.GetComponent<Monologue>().IsExamining())
             {

@@ -21,6 +21,11 @@ public class NPC : ScriptableObject
         public bool isStory;
         public bool waitingQuest;
         public bool justDialogue;
+        public bool hasTeleportNPC;
+        public Vector3 npcV3;
+        public bool hasTeleportCharacter;
+        public Vector3 characterV3;
+        
         [TextArea(3, 15)]
         public string[] dialogue;
         [TextArea(3, 15)]

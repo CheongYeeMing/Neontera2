@@ -32,6 +32,8 @@ public class DialogueManager : MonoBehaviour
     [SerializeField] public SelectedQuestWindow selectedQuestWindow;
     [SerializeField] public ShopSelectedItemPanel shopSelectedItemPanel;
 
+    [SerializeField] public Image transition;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -69,6 +71,14 @@ public class DialogueManager : MonoBehaviour
                 }
                 else
                 {
+                    if (npc.Sequences[npc.sequenceNumber].hasTeleportCharacter)
+                    {
+                        character.transform.position = npc.Sequences[npc.sequenceNumber].characterV3;
+                    }
+                    if (npc.Sequences[npc.sequenceNumber].hasTeleportNPC)
+                    {
+                        gameObject.transform.position = npc.Sequences[npc.sequenceNumber].npcV3;
+                    }
                     npc.sequenceNumber++;
                     StartConversation();
                 }
