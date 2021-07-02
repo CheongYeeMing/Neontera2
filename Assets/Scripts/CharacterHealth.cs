@@ -10,12 +10,12 @@ public class CharacterHealth : MonoBehaviour, Health
     [SerializeField] public Image frontHealthBar;
     [SerializeField] public Image backHealthBar;
     [SerializeField] public float hurtDelay;
-    
+
     private GameObject attackedBy;
 
     private float health;
     private float lerpTimer;
-    private float maxHealth = 100;
+    private float maxHealth;
     private float chipSpeed = 2f;
 
     private bool isHurting;
@@ -28,9 +28,17 @@ public class CharacterHealth : MonoBehaviour, Health
     // Start is called before the first frame update
     void Start()
     {
-        health = maxHealth;    
+        maxHealth = Data.maxHealth;
+        if (Data.currentHealth == 0) 
+        { 
+            health = maxHealth;
+            Data.currentHealth = health;
+        }
+        else
+        {
+            health = Data.currentHealth;
+        }
     }
-
     // Update is called once per frame
     void Update()
     {
@@ -81,8 +89,10 @@ public class CharacterHealth : MonoBehaviour, Health
         lerpTimer = 0f;
         if (health <= 0)
         {
+            health = 0;
             Die();
         }
+        Data.currentHealth = health;
         Invoke("HurtComplete", hurtDelay);
     }
 
@@ -126,16 +136,20 @@ public class CharacterHealth : MonoBehaviour, Health
     {
         health += healAmount;
         lerpTimer = 0f;
+        Data.currentHealth = health;
     }
 
     public void IncreaseHealth(int level)
     {
         maxHealth += (health * 0.01f) * ((100 - level) * 0.1f);
         health = maxHealth;
+        Data.currentHealth = health;
+        Data.maxHealth = maxHealth;
     }
 
     public void Die()
     {
+        Data.currentHealth = 0;
         isDead = true;
         gameObject.GetComponent<CharacterAnimation>().ChangeAnimationState(CHARACTER_DIE);
         Debug.Log("Character is dead!!!");

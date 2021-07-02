@@ -12,7 +12,7 @@ public class CharacterWallet : MonoBehaviour
 
     public void Awake()
     {
-        GoldAmount = 10; // to be replaced with saved stats
+        GoldAmount = Data.gold;
         UpdateWallet();
     }
     
@@ -22,7 +22,7 @@ public class CharacterWallet : MonoBehaviour
         {
             wallet.goldAmountText.text = GoldAmount.ToString();
         }
-        
+        Data.gold = GoldAmount;
     }
 
     public void AddGold(float goldAmount)

@@ -5,6 +5,11 @@ using UnityEngine.SceneManagement;
 
 public class Portal : MonoBehaviour
 {
+    [SerializeField] Portal Destination;
+    [SerializeField] string Location;
+
+    bool isActivated;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -17,18 +22,9 @@ public class Portal : MonoBehaviour
         
     }
 
-    public void Teleport()
+    public void Teleport(GameObject Character)
     {
-        TeleportToTown();
-    }
-
-    public void TeleportToTown()
-    {
-        SceneManager.LoadScene(3);
-    }
-
-    public void TeleportToForest()
-    {
-        SceneManager.LoadScene(4);
+        StopAllCoroutines();
+        StartCoroutine(Character.GetComponent<ParallaxBackgroundManager>().ChangeBackground(Destination.Location, Character, Destination));
     }
 }

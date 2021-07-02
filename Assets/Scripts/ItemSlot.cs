@@ -11,7 +11,7 @@ public class ItemSlot : MonoBehaviour, IPointerClickHandler
     public event Action<Item> OnRightClickEvent;
     public event Action<Item> OnLeftClickEvent;
 
-    private Item _item;
+    public Item _item;
 
     public Item Item
     {

@@ -8,6 +8,15 @@ public class BuffWindow : MonoBehaviour
     [SerializeField] Transform buffParent;
     [SerializeField] public Buff[] buffSlots;
 
+    public void Start()
+    {
+        foreach (ConsumableItem consumableItem in Data.consumableItems)
+        {
+            AddItem(consumableItem);
+        }
+        OnValidate();
+    }
+
     private void OnValidate()
     {
         if (buffParent != null)
@@ -29,6 +38,7 @@ public class BuffWindow : MonoBehaviour
         {
             buffSlots[i].NoItem();
         }
+        Data.consumableItems = consumableItems;
     }
 
     public bool AddItem(ConsumableItem item)
@@ -54,6 +64,8 @@ public class BuffWindow : MonoBehaviour
 
     public bool IsFull()
     {
+        Debug.Log(consumableItems.Count);
+        Debug.Log(buffSlots.Length);
         return consumableItems.Count >= buffSlots.Length;
     }
 }

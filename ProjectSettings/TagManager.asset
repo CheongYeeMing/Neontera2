@@ -13,6 +13,7 @@ TagManager:
   - Invincible
   - Character
   - Monologue
+  - Portal
   layers:
   - Default
   - TransparentFX

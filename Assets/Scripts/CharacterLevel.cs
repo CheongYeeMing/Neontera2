@@ -31,9 +31,11 @@ public class CharacterLevel : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        level = Data.level;
+        currentExp = Data.currentExp;
+        requiredExp = CalculateRequiredExp();
         frontExpBar.fillAmount = currentExp / requiredExp;    
         backExpBar.fillAmount = currentExp / requiredExp;
-        requiredExp = CalculateRequiredExp();
         levelText.text = "Level " + level;
         charInfoWindow.UpdateCharInfoWindow(this);
     }
@@ -77,6 +79,7 @@ public class CharacterLevel : MonoBehaviour
         currentExp += expGained;
         lerpTimer = 0f;
         delayTimer = 0f;
+        Data.currentExp = currentExp;
     }
 
     public void LevelUp()
@@ -88,6 +91,8 @@ public class CharacterLevel : MonoBehaviour
         GetComponent<CharacterHealth>().IncreaseHealth(level);
         requiredExp = CalculateRequiredExp();
         levelText.text = "Level " + level;
+        Data.level = level;
+        Data.currentExp = currentExp;
     }
 
     public int CalculateRequiredExp()

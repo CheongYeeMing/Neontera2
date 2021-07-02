@@ -4,7 +4,6 @@ using UnityEngine;
 
 public class CharacterMovement : MonoBehaviour
 {
-    [SerializeField] private CharacterAttack characterAttack;
     [SerializeField] private LayerMask groundLayer;
     [SerializeField] private LayerMask wallLayer;
     [SerializeField] private float speed;
@@ -52,7 +51,7 @@ public class CharacterMovement : MonoBehaviour
         // Set animator parameters
         //animator.SetBool("run", horizontalInput != 0);
         //animator.SetBool("grounded", isGrounded());
-        if (isGrounded() && !characterAttack.GetIsAttacking())
+        if (isGrounded() && !GetComponent<CharacterAttack>().GetIsAttacking())
         {
             if (horizontalInput != 0)
             {

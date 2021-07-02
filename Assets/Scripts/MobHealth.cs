@@ -16,6 +16,7 @@ public class MobHealth : MonoBehaviour, Health
 
     [SerializeField] public GameObject mobDetails;
     [SerializeField] public float hpOffsetY;
+    [SerializeField] public float nameOffsetX;
     [SerializeField] public float nameOffsetY;
 
     [SerializeField] public GameObject levelName;
@@ -69,7 +70,7 @@ public class MobHealth : MonoBehaviour, Health
     public void Update()
     {
         SetMobDetails(currentHealth, maxHealth);
-        levelName.transform.position = new Vector2(gameObject.transform.position.x, gameObject.transform.position.y + nameOffsetY);
+        levelName.transform.position = new Vector2(gameObject.transform.position.x + nameOffsetX, gameObject.transform.position.y + nameOffsetY);
         slider.transform.position = new Vector2(gameObject.transform.position.x, gameObject.transform.position.y + hpOffsetY);
         if (isHurting || isDead ||gameObject.GetComponent<MobPathfindingAI>().GetIsChasingTarget())
         {
