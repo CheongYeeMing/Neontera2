@@ -10,12 +10,12 @@ public class ParallaxBackgroundManager : MonoBehaviour
     [SerializeField] GameObject TownFG;
     [SerializeField] GameObject ForestBG;
     [SerializeField] GameObject ForestFG;
-    //[SerializeField] GameObject CaveBG;
-    //[SerializeField] GameObject CaveFG;
-    //[SerializeField] GameObject BSBG;
-    //[SerializeField] GameObject BSFG;
-    //[SerializeField] GameObject SSBG;
-    //[SerializeField] GameObject SSFG;
+    [SerializeField] GameObject CaveBG;
+    [SerializeField] GameObject CaveFG;
+    [SerializeField] GameObject BSBG;
+    [SerializeField] GameObject BSFG;
+    [SerializeField] GameObject SSBG;
+    [SerializeField] GameObject SSFG;
 
     [SerializeField] TransitionManager Transition;
 
@@ -36,12 +36,12 @@ public class ParallaxBackgroundManager : MonoBehaviour
         TownFG.SetActive(false);
         ForestBG.SetActive(false);
         ForestFG.SetActive(false);
-        //CaveBG.SetActive(false);
-        //CaveFG.SetActive(false);
-        //BSBG.SetActive(false);
-        //BSFG.SetActive(false);
-        //SSBG.SetActive(false);
-        //SSFG.SetActive(false);
+        CaveBG.SetActive(false);
+        CaveFG.SetActive(false);
+        BSBG.SetActive(false);
+        BSFG.SetActive(false);
+        SSBG.SetActive(false);
+        SSFG.SetActive(false);
         currentBackground = Data.location;
         SetBackground(currentBackground);
     }
@@ -65,21 +65,21 @@ public class ParallaxBackgroundManager : MonoBehaviour
             ForestBG.SetActive(true);
             ForestFG.SetActive(true);
         }
-        //else if (newBackground == CAVE)
-        //{
-        //    CaveBG.SetActive(true);
-        //    CaveFG.SetActive(true);
-        //}
-        //else if (newBackground == BASE_STATION)
-        //{
-        //    BSBG.SetActive(true);
-        //    BSFG.SetActive(true);
-        //}
-        //else if (newBackground == SPACE_STATION)
-        //{
-        //    SSBG.SetActive(true);
-        //    SSFG.SetActive(true);
-        //}
+        else if (newBackground == CAVE)
+        {
+            CaveBG.SetActive(true);
+            CaveFG.SetActive(true);
+        }
+        else if (newBackground == BASE_STATION)
+        {
+            BSBG.SetActive(true);
+            BSFG.SetActive(true);
+        }
+        else if (newBackground == SPACE_STATION)
+        {
+            SSBG.SetActive(true);
+            SSFG.SetActive(true);
+        }
         Transition.Deactivate();
     }
 
@@ -103,21 +103,21 @@ public class ParallaxBackgroundManager : MonoBehaviour
             ForestBG.SetActive(false);
             ForestFG.SetActive(false);
         }
-        //else if (currentBackground == CAVE)
-        //{
-        //    CaveBG.SetActive(false);
-        //    CaveFG.SetActive(false);
-        //}
-        //else if (currentBackground == BASE_STATION)
-        //{
-        //    BSBG.SetActive(false);
-        //    BSFG.SetActive(false);
-        //}
-        //else if (currentBackground == SPACE_STATION)
-        //{
-        //    SSBG.SetActive(false);
-        //    SSFG.SetActive(false);
-        //}
+        else if (currentBackground == CAVE)
+        {
+            CaveBG.SetActive(false);
+            CaveFG.SetActive(false);
+        }
+        else if (currentBackground == BASE_STATION)
+        {
+            BSBG.SetActive(false);
+            BSFG.SetActive(false);
+        }
+        else if (currentBackground == SPACE_STATION)
+        {
+            SSBG.SetActive(false);
+            SSFG.SetActive(false);
+        }
         SetBackground(newBackground);
     }
 }
