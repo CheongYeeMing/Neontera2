@@ -67,6 +67,7 @@ public class ParallaxBackgroundManager : MonoBehaviour
         }
         else if (newBackground == CAVE)
         {
+            CaveFG.transform.position = new Vector2(553.63f, -2.55f);
             CaveBG.SetActive(true);
             CaveFG.SetActive(true);
         }
