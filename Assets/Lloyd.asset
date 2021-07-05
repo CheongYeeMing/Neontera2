@@ -14,12 +14,43 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   npcName: Lloyd
   icon: {fileID: 21300000, guid: 93ab110d8610e3f468d7d72975db6f4d, type: 3}
-  items: []
-  quests: []
-  dialogue:
-  - 'Hello there! My name is Lloyd and I am the ultimate simp for Hannah. My special
-    skill is tilt and its quite a consistent skill. '
-  - I will always use it every night before I sleep and then make myself cannot sleep.
-    Then I will find my best friend Yee Ming to rant for at least one hour.
-  - Thanks for listening!!
-  characterDialogue: []
+  Sequences:
+  - Items: []
+    Quest:
+      npc: {fileID: 0}
+      isActive: 0
+      canRepeat: 0
+      status: 0
+      title: 
+      description: 
+      questCriteria:
+        criteriaType: 0
+        action: 
+        Target: 
+        requiredAmount: 0
+        currentAmount: 0
+      expReward: 0
+      goldReward: 0
+      itemReward: {fileID: 0}
+      questItem: {fileID: 0}
+      location: {x: 0, y: 0, z: 0}
+    hasShop: 0
+    hasQuest: 0
+    isStory: 0
+    waitingQuest: 0
+    justDialogue: 1
+    hasTeleportNPC: 0
+    npcV3: {x: 0, y: 0, z: 0}
+    hasTeleportCharacter: 0
+    characterV3: {x: 0, y: 0, z: 0}
+    dialogue:
+    - Hi,  my name is Lloyd and I am the keeper of this forest. It is rare to see
+      someone this young come here all alone from the Town. What are you doing here?
+    - Ahh I see, so you have been sent by Johnson. My old pal, he has always had
+      a good eye on people. I'm sure you will survive the harsh terrain.
+    - 'Looks like you''re not very willing. But Johnson must have his reasons for
+      sending you here. My old pal always has a reason for his actions. '
+    characterDialogue:
+    - Johnson sent me here on a msision!
+    - IDK WHY IM HERE BUT JOHNSON SENT ME
+  sequenceNumber: 0

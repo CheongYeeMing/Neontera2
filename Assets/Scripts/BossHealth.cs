@@ -20,28 +20,30 @@ public class BossHealth : MonoBehaviour, Health
 
     [SerializeField] public GameObject levelName;
     [SerializeField] public float mobLevel;
-    public Image levelNameBG;
-    public TextMeshProUGUI levelNameText;
 
-    public Slider slider;
-    public Color low;
-    public Color high;
+    protected Image levelNameBG;
+    protected TextMeshProUGUI levelNameText;
 
-    public float currentHealth;
-    public float regenTimer; // Default 10%maxHP/second
-    public float outOfCombatTimer; // Default set to 5 seconds
+    protected Slider slider;
+    protected Color low;
+    protected Color high;
 
-    public bool isHurting;
-    public bool isDead;
+    protected float currentHealth;
+    protected float regenTimer; // Default 10%maxHP/second
+    protected float outOfCombatTimer; // Default set to 5 seconds
 
-    public GameObject attackedBy;
+    protected bool isHurting;
+    protected bool isDead;
+    protected bool isInvulnerable;
+
+    protected GameObject attackedBy;
 
     // Mob Animation States
-    public const string BOSS_HURT = "Hurt";
-    public const string BOSS_DIE = "Die";
+    protected const string BOSS_HURT = "Hurt";
+    protected const string BOSS_DIE = "Die";
 
     // Start is called before the first frame update
-    public void Start()
+    public virtual void Start()
     {
         slider = mobDetails.GetComponentInChildren<Slider>();
         levelNameBG = levelName.GetComponentInChildren<Image>();
@@ -55,6 +57,7 @@ public class BossHealth : MonoBehaviour, Health
         SetBossDetails(currentHealth, maxHealth);
         isHurting = false;
         isDead = false;
+        isInvulnerable = false;
         regenTimer = 0;
         outOfCombatTimer = 0;
         gameObject.GetComponent<Rigidbody2D>().gravityScale = 3;
@@ -65,12 +68,12 @@ public class BossHealth : MonoBehaviour, Health
         gameObject.GetComponent<SpriteRenderer>().enabled = true;
     }
 
-    public void Update()
+    public virtual void Update()
     {
         SetBossDetails(currentHealth, maxHealth);
         levelName.transform.position = new Vector2(gameObject.transform.position.x, gameObject.transform.position.y + nameOffsetY);
         slider.transform.position = new Vector2(gameObject.transform.position.x, gameObject.transform.position.y + hpOffsetY);
-        if (isHurting || isDead || gameObject.GetComponent<BossPathfindingAI>().isChasingTarget)
+        if (isHurting || isDead || gameObject.GetComponent<BossPathfindingAI>().GetIsChasingTarget())
         {
             outOfCombatTimer = 0;
         }
@@ -102,8 +105,9 @@ public class BossHealth : MonoBehaviour, Health
         slider.fillRect.GetComponentInChildren<Image>().color = Color.Lerp(low, high, slider.normalizedValue);
     }
 
-    public void TakeDamage(float damage)
+    public virtual void TakeDamage(float damage)
     {
+        if (isInvulnerable) return;
         isHurting = true;
         gameObject.GetComponent<BossMovement>().StopPatrol();
         DamagePopUp.Create(gameObject, damage);
@@ -122,7 +126,7 @@ public class BossHealth : MonoBehaviour, Health
     public void KnockBack(GameObject something)
     {
         Debug.Log("Knockbacked???");
-        Rigidbody2D body = gameObject.GetComponent<BossMovement>().rb;
+        Rigidbody2D body = gameObject.GetComponent<BossMovement>().GetRigidbody();
         CharacterAttack character;
         if (something.transform.position.x > gameObject.transform.position.x)
         {
@@ -149,11 +153,11 @@ public class BossHealth : MonoBehaviour, Health
         }
     }
 
-    public void Die()
+    public virtual void Die()
     {
-        gameObject.GetComponent<BossSpawner>().deathTimer = 0;
+        gameObject.GetComponent<BossSpawner>().SetDeathTimer(0);
         isDead = true;
-        gameObject.GetComponent<BossMovement>().rb.velocity = Vector2.zero;
+        gameObject.GetComponent<BossMovement>().GetRigidbody().velocity = Vector2.zero;
         RewardsPopUp.Create(gameObject);
         Debug.Log("Mob is dead!!!");
         gameObject.GetComponent<BossAnimation>().ChangeAnimationState(BOSS_DIE);
@@ -170,12 +174,42 @@ public class BossHealth : MonoBehaviour, Health
         isHurting = false;
         if (gameObject.GetComponent<BossPathfindingAI>().passiveAggressive)
         {
-            gameObject.GetComponent<BossPathfindingAI>().isChasingTarget = true;
+            gameObject.GetComponent<BossPathfindingAI>().SetIsChasingTarget(true);
         }
     }
 
     public void DieComplete()
     {
         gameObject.GetComponent<SpriteRenderer>().enabled = false;
+    }
+
+    public bool IsHurting()
+    {
+        return isHurting;
+    }
+
+    public bool IsDead()
+    {
+        return isDead;
+    }
+
+    public GameObject GetAttackedBy()
+    {
+        return attackedBy;
+    }
+
+    public void SetAttackedBy(GameObject attackedBy)
+    {
+        this.attackedBy = attackedBy;
+    }
+
+    public bool IsInvulnerable()
+    {
+        return isInvulnerable;
+    }
+
+    public void SetIsInvulnerable(bool isInvulnerable)
+    {
+        this.isInvulnerable = isInvulnerable;
     }
 }

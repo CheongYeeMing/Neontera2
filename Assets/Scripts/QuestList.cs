@@ -14,6 +14,10 @@ public class QuestList : MonoBehaviour
 
     public event Action<Quest> OnItemLeftClickedEvent;
 
+    public void Start()
+    {
+        quests = Data.quests;
+    }
     private void Awake()
     {
         for (int i = 0; i < questSlots.Length; i++)
@@ -53,6 +57,7 @@ public class QuestList : MonoBehaviour
         }
         quests.Add(quest);
         RefreshUI();
+        Data.quests = quests;
         return true;
     }
 
@@ -63,6 +68,7 @@ public class QuestList : MonoBehaviour
             RefreshUI();
             return true;
         }
+        Data.quests = quests;
         return false;
     }
 

@@ -7,13 +7,13 @@ public class MobSpawner : MonoBehaviour
     [SerializeField] public bool canRespawn;
     [SerializeField] public float respawnTime;
 
-    public float deathTimer;
+    private float deathTimer;
 
     // Update is called once per frame
     void Update()
     {
         if (!canRespawn) return;
-        if (gameObject.GetComponent<MobHealth>().isDead)
+        if (gameObject.GetComponent<MobHealth>().IsDead())
         {
             if (deathTimer > respawnTime)
             {
@@ -25,9 +25,14 @@ public class MobSpawner : MonoBehaviour
 
     public void Respawn()
     {
-        gameObject.transform.position = gameObject.GetComponent<MobMovement>().spawnPoint;
+        gameObject.transform.position = gameObject.GetComponent<MobMovement>().GetSpawnPoint();
         gameObject.GetComponent<MobHealth>().Start();
         gameObject.GetComponent<MobReward>().Start();
         gameObject.GetComponent<MobAnimation>().Start();
+    }
+
+    public void SetDeathTimer(float deathTimer)
+    {
+        this.deathTimer = deathTimer;
     }
 }

@@ -6,7 +6,6 @@ using UnityEngine.UI;
 public class QuestGiver : MonoBehaviour
 {
     public Quest quest;
-    public int questNumber;
 
     public Character character;
 
@@ -16,11 +15,6 @@ public class QuestGiver : MonoBehaviour
     public Text expTest;
     public Text goldText;
     public Text itemText;
-
-    public void Start()
-    {
-        questNumber = 0; // To be replaced with saved data
-    }
 
     public void OpenQuestWindow()
     {

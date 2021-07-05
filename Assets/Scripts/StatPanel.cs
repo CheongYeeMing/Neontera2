@@ -35,6 +35,7 @@ public class StatPanel : MonoBehaviour
         for (int i = 0; i < stats.Length; i++)
         {
             statDisplays[i].ValueText.text = stats[i].Value.ToString();
+            
         }
     }
 

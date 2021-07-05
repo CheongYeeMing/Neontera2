@@ -12,6 +12,8 @@ TagManager:
   - NPC
   - Invincible
   - Character
+  - Monologue
+  - Portal
   layers:
   - Default
   - TransparentFX

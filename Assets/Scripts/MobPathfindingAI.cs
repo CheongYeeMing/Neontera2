@@ -5,27 +5,26 @@ using Pathfinding;
 
 public class MobPathfindingAI : MonoBehaviour
 {
+    [SerializeField] public Transform target;
     [SerializeField] public bool passiveAggressive; // Will only chase when is attacked
     [SerializeField] public bool instantAggressive; // Chase once target enters radius
 
-    public Transform target;
-
-    public float speed;
-    public float nextWayPointDistance = 3f;
-
     private Path path;
-    public int currentWaypoint = 0;
-    public bool reachedEndOfPath;
-
-    public Rigidbody2D rb;
+    private Rigidbody2D rb;
     private Seeker seeker;
 
-    public Vector2 direction;
+    private Vector2 direction;
 
-    public bool isChasingTarget;
+    private bool reachedEndOfPath;
+    private bool isChasingTarget;
+
+    private float speed;
+    private float nextWayPointDistance = 3f;
+
+    private int currentWaypoint = 0;
 
     // Start is called before the first frame update
-    void Start()
+    private void Start()
     {
         isChasingTarget = false;
         if (instantAggressive)
@@ -34,7 +33,7 @@ public class MobPathfindingAI : MonoBehaviour
         }
         speed = gameObject.GetComponent<MobMovement>().moveSpeed;
         seeker = gameObject.GetComponent<Seeker>();
-        rb = gameObject.GetComponent<MobMovement>().rb;
+        rb = GetComponent<Rigidbody2D>();
         InvokeRepeating("UpdatePath", 0f, 0.5f);
     }
 
@@ -79,11 +78,11 @@ public class MobPathfindingAI : MonoBehaviour
 
         if (Mathf.Sign(gameObject.GetComponent<MobMovement>().moveSpeed) != Mathf.Sign(direction.x) && Mathf.Abs(direction.x) > 0.1)
         {
-            Debug.Log("Why u flip again cb");
-            Debug.Log("Movespeed: " + gameObject.GetComponent<MobMovement>().moveSpeed);
-            Debug.Log("Movespeed Sign: " + Mathf.Sign(gameObject.GetComponent<MobMovement>().moveSpeed));
-            Debug.Log("Direction X: " + direction.x);
-            Debug.Log("Direction X Sign: " + Mathf.Sign(direction.x));
+            //Debug.Log("Why u flip again cb");
+            //Debug.Log("Movespeed: " + gameObject.GetComponent<MobMovement>().moveSpeed);
+            //Debug.Log("Movespeed Sign: " + Mathf.Sign(gameObject.GetComponent<MobMovement>().moveSpeed));
+            //Debug.Log("Direction X: " + direction.x);
+            //Debug.Log("Direction X Sign: " + Mathf.Sign(direction.x));
             gameObject.GetComponent<MobMovement>().Flip();
         }
 
@@ -101,9 +100,19 @@ public class MobPathfindingAI : MonoBehaviour
     {
         if (!isChasingTarget) return;
 
-        if (!gameObject.GetComponent<MobHealth>().isHurting && !gameObject.GetComponent<MobHealth>().isDead)
+        if (!gameObject.GetComponent<MobHealth>().IsHurting() && !gameObject.GetComponent<MobHealth>().IsDead())
         {
             gameObject.GetComponent<MobMovement>().ChaseTarget(direction);
         }
+    }
+
+    public bool GetIsChasingTarget()
+    {
+        return isChasingTarget;
+    }
+    
+    public void SetIsChasingTarget(bool isChasingTarget)
+    {
+        this.isChasingTarget = isChasingTarget;
     }
 }

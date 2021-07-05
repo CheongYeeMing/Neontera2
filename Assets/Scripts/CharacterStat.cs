@@ -7,9 +7,7 @@ using System;
 [Serializable]
 public class CharacterStat
 {
-    public float BaseValue;
-
-
+    private float BaseValue;
     public virtual float Value
     {
         get
@@ -31,6 +29,10 @@ public class CharacterStat
     public readonly List<StatModifier> statModifiers;
     public readonly ReadOnlyCollection<StatModifier> StatModifiers;
 
+    public void SetBaseValue(int baseValue)
+    {
+        BaseValue = baseValue;
+    }
 
     public CharacterStat()
     {
@@ -82,7 +84,7 @@ public class CharacterStat
         return didRemove;
     }
 
-    public virtual float CalculateFinalValue()
+    public float CalculateFinalValue()
     {
         float finalValue = BaseValue;
         float sumPercentAdd = 0;

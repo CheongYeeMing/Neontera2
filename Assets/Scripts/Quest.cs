@@ -6,6 +6,8 @@ using UnityEngine.Events;
 [System.Serializable]
 public class Quest
 {
+    public NPC npc;
+
     public bool isActive;
     public bool canRepeat;
     public enum Status { COMPLETED, ONGOING, WAITING}
@@ -19,6 +21,9 @@ public class Quest
     public int expReward;
     public int goldReward;
     public Item itemReward;
+
+    public Item questItem;
+    public Vector3 location;
 
     public void Start()
     {

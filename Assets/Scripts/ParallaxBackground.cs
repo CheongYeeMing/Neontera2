@@ -4,16 +4,16 @@ using UnityEngine;
 
 public class ParallaxBackground : MonoBehaviour
 {
-    [SerializeField] private Vector2 parallaxEffectMultiplier;
-    [SerializeField] private bool infiniteHorizontal;
-    [SerializeField] private bool infiniteVertical;
-    private Transform cameraTransform;
-    private Vector3 lastCameraPosition;
-    private float textureUnitSizeX;
-    private float textureUnitSizeY;
+    [SerializeField] protected Vector2 parallaxEffectMultiplier;
+    [SerializeField] protected bool infiniteHorizontal;
+    [SerializeField] protected bool infiniteVertical;
+    protected Transform cameraTransform;
+    protected Vector3 lastCameraPosition;
+    protected float textureUnitSizeX;
+    protected float textureUnitSizeY;
 
     // Start is called before the first frame update
-    void Start()
+    public virtual void Start()
     {
         cameraTransform = Camera.main.transform;
         lastCameraPosition = cameraTransform.position;
@@ -24,10 +24,10 @@ public class ParallaxBackground : MonoBehaviour
     }
 
     // Update is called once per frame
-    void FixedUpdate()
+    public virtual void FixedUpdate()
     {
         Vector3 deltaMovement = cameraTransform.position - lastCameraPosition;
-        transform.position += new Vector3(deltaMovement.x * parallaxEffectMultiplier.x, deltaMovement.y * parallaxEffectMultiplier.y);
+        transform.position += new Vector3(deltaMovement.x * parallaxEffectMultiplier.x, deltaMovement.y /* parallaxEffectMultiplier.y*/);
         lastCameraPosition = cameraTransform.position;
 
         if (infiniteHorizontal)
@@ -35,7 +35,7 @@ public class ParallaxBackground : MonoBehaviour
             if (Mathf.Abs(cameraTransform.position.x - transform.position.x) >= textureUnitSizeX)
             {
                 float offsetPositionX =  (cameraTransform.position.x - transform.position.x) % textureUnitSizeX;
-                transform.position = new Vector3(cameraTransform.position.x + offsetPositionX, transform.position.y);
+                transform.position = new Vector3(cameraTransform.position.x + offsetPositionX, cameraTransform.position.y);
             }
         }
         if (infiniteVertical)

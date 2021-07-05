@@ -23,6 +23,7 @@ public class EquipmentPanel : MonoBehaviour
     private void OnValidate()
     {
         equipmentSlots = equipmentSlotsParent.GetComponentsInChildren<EquipmentSlot>();
+        Data.equipmentSlots = equipmentSlots;
     }
 
     public bool AddItem(EquipableItem item, out EquipableItem previousItem)

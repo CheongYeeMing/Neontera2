@@ -10335,6 +10335,7 @@ MonoBehaviour:
   - {fileID: 1181144999360658918}
   - {fileID: 1181144998401039345}
   - {fileID: 1181144999144397279}
+  questList: {fileID: 0}
 --- !u!1 &1181144998760548457
 GameObject:
   m_ObjectHideFlags: 0

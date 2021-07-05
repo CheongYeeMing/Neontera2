@@ -36,30 +36,22 @@ public class Interactable : MonoBehaviour
                 {
                     detectedObject.GetComponent<DialogueManager>().TriggerDialogue();
                 }
-            } 
-            if (OpenShop())
-            { 
-                ShopManager shopManager;
-                if (detectedObject.TryGetComponent<ShopManager>(out shopManager) == true)
+                else if (detectedObject.CompareTag("Portal"))
                 {
-                    detectedObject.GetComponent<DialogueManager>().OpenShop();
+                    detectedObject.GetComponent<Portal>().Teleport(gameObject);
                 }
             }
-            if (OpenQuestWindow())
+            if (detectedObject.CompareTag("Monologue") && !detectedObject.GetComponent<Monologue>().IsExamining())
             {
-                QuestGiver questGiver;
-                if (detectedObject.TryGetComponent<QuestGiver>(out questGiver) == true)
-                {
-                    detectedObject.GetComponent<DialogueManager>().OpenQuestWindow();
-                }
+                detectedObject.GetComponent<Monologue>().ToggleMonologue();
             }
         } 
         else
         {
-            // Hide the Examine Window when walk past game object
-            examineWindow.SetActive(false);
-            // Disable the boolean
-            isExamining = false;
+            //// Hide the Examine Window when walk past game object
+            //examineWindow.SetActive(false);
+            //// Disable the boolean
+            //isExamining = false;
             DialogueManager[] npc = FindObjectsOfType<DialogueManager>();
             for (int i = 0; i < npc.Length; i++)
             {
@@ -107,25 +99,25 @@ public class Interactable : MonoBehaviour
         }
     }
     
-    public void ExamineItem(Item item)
-    {
-        if (isExamining)
-        {
-            // Hide the Examine Window
-            examineWindow.SetActive(false);
-            // Disable the boolean
-            isExamining = false;
-        }
-        else
-        {
-            // Show the item's image on the left side
-            examineImage.sprite = item.GetComponent<SpriteRenderer>().sprite;
-            // Write description text on the right side of image
-            examineText.text = item.examineText;
-            // Display an Examine Window
-            examineWindow.SetActive(true);
-            // Enable the boolean
-            isExamining = true;
-        }
-    }
+    //public void ExamineItem(Item item)
+    //{
+    //    if (isExamining)
+    //    {
+    //        // Hide the Examine Window
+    //        examineWindow.SetActive(false);
+    //        // Disable the boolean
+    //        isExamining = false;
+    //    }
+    //    else
+    //    {
+    //        // Show the item's image on the left side
+    //        examineImage.sprite = item.GetComponent<SpriteRenderer>().sprite;
+    //        // Write description text on the right side of image
+    //        examineText.text = item.examineText;
+    //        // Display an Examine Window
+    //        examineWindow.SetActive(true);
+    //        // Enable the boolean
+    //        isExamining = true;
+    //    }
+    //}
 }

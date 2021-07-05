@@ -9,12 +9,12 @@ public class MobAttack : MonoBehaviour
     [SerializeField] public float KnockbackY;
 
     // Mob Damage
-    public float attack;
+    [SerializeField] public float attack;
 
-    public bool isAttacking;
+    private bool isAttacking;
 
     // Mob Animation States
-    public const string MOB_ATTACK = "Attack";
+    private const string MOB_ATTACK = "Attack";
 
     // Mob Auto Attack
     public void OnCollisionEnter2D(Collision2D collision)
@@ -23,11 +23,10 @@ public class MobAttack : MonoBehaviour
         {
             if (isAttacking == false)
             {
-                Debug.Log("attack animation called");
                 isAttacking = true;
                 gameObject.GetComponent<MobAnimation>().ChangeAnimationState(MOB_ATTACK);
             }
-            collision.gameObject.GetComponent<CharacterHealth>().attackedBy = gameObject;
+            collision.gameObject.GetComponent<CharacterHealth>().SetAttackedBy(gameObject);
             collision.gameObject.GetComponent<CharacterHealth>().TakeDamage(attack);
             Invoke("AttackComplete", attackDelay);
         }
@@ -36,5 +35,10 @@ public class MobAttack : MonoBehaviour
     public void AttackComplete()
     {
         isAttacking = false;
+    }
+
+    public bool IsAttacking()
+    {
+        return isAttacking;
     }
 }

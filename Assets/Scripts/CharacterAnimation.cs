@@ -9,13 +9,13 @@ public class CharacterAnimation : MonoBehaviour, Animation
     private string currentState;
 
     // Charater Animation States
-    public const string CHARACTER_IDLE = "Idle";
-    public const string CHARACTER_RUN = "Run";
-    public const string CHARACTER_JUMP = "Jump";
-    public const string CHARACTER_ATTACK = "Attack";
-    public const string CHARACTER_SPECIAL_ATTACK = "AttackFireball";
-    public const string CHARACTER_HURT = "Hurt";
-    public const string CHARACTER_DIE = "Die";
+    private const string CHARACTER_IDLE = "Idle";
+    private const string CHARACTER_RUN = "Run";
+    private const string CHARACTER_JUMP = "Jump";
+    private const string CHARACTER_ATTACK = "Attack";
+    private const string CHARACTER_SPECIAL_ATTACK = "AttackFireball";
+    private const string CHARACTER_HURT = "Hurt";
+    private const string CHARACTER_DIE = "Die";
 
     public void Start()
     {

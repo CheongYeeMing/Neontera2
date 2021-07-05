@@ -7,7 +7,7 @@ public class QuestManager : MonoBehaviour
 {
     [SerializeField] public GameObject AcceptedQuestWindow;
 
-    public bool isOpen = false;
+    private bool isOpen = false;
 
     private void Update()
     {
@@ -24,6 +24,4 @@ public class QuestManager : MonoBehaviour
             FindObjectOfType<SelectedQuestWindow>().gameObject.SetActive(false);
         AcceptedQuestWindow.SetActive(isOpen);
     }
-
-
 }

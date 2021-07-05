@@ -7,13 +7,13 @@ public class BossSpawner : MonoBehaviour
     [SerializeField] public bool canRespawn;
     [SerializeField] public float respawnTime;
 
-    public float deathTimer;
+    private float deathTimer;
 
     // Update is called once per frame
     void Update()
     {
         if (!canRespawn) return;
-        if (gameObject.GetComponent<BossHealth>().isDead)
+        if (gameObject.GetComponent<BossHealth>().IsDead())
         {
             if (deathTimer > respawnTime)
             {
@@ -25,9 +25,14 @@ public class BossSpawner : MonoBehaviour
 
     public void Respawn()
     {
-        gameObject.transform.position = gameObject.GetComponent<BossMovement>().spawnPoint;
+        gameObject.transform.position = gameObject.GetComponent<BossMovement>().GetSpawnPoint();
         gameObject.GetComponent<BossHealth>().Start();
         gameObject.GetComponent<BossReward>().Start();
         gameObject.GetComponent<BossAnimation>().Start();
+    }
+
+    public void SetDeathTimer(float deathTimer)
+    {
+        this.deathTimer = deathTimer;
     }
 }

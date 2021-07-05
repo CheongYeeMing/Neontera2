@@ -6,35 +6,36 @@ using TMPro;
 
 public class CharacterLevel : MonoBehaviour
 {
-    public int level;
-    public float currentExp;
-    public float requiredExp;
+    [Header("UI")]
+    [SerializeField] public Image frontExpBar;
+    [SerializeField] public Image backExpBar;
+    [SerializeField] public TextMeshProUGUI levelText;
+    [SerializeField] public TextMeshProUGUI expText;
 
-    public float lerpTimer;
-    public float delayTimer;
+    [Header("Multipliers")]
+    [Range(1f, 300f)]
+    [SerializeField] public float additionMultiplier = 300;
+    [Range(2f, 4f)]
+    [SerializeField] public float powerMultiplier = 2;
+    [Range(7f, 14f)]
+    [SerializeField] public float divisionMultiplier = 7;
 
     [SerializeField] public CharacterInfoWindow charInfoWindow;
 
-    [Header("UI")]
-    public Image frontExpBar;
-    public Image backExpBar;
-    public TextMeshProUGUI levelText;
-    public TextMeshProUGUI expText;
-
-    [Header("Multipliers")]
-    [Range(1f,300f)]
-    public float additionMultiplier = 300;
-    [Range(2f,4f)]
-    public float powerMultiplier = 2;
-    [Range(7f,14f)]
-    public float divisionMultiplier = 7;
+    private int level;
+    private float currentExp;
+    private float requiredExp;
+    private float lerpTimer;
+    private float delayTimer;
 
     // Start is called before the first frame update
     void Start()
     {
+        level = Data.level;
+        currentExp = Data.currentExp;
+        requiredExp = CalculateRequiredExp();
         frontExpBar.fillAmount = currentExp / requiredExp;    
         backExpBar.fillAmount = currentExp / requiredExp;
-        requiredExp = CalculateRequiredExp();
         levelText.text = "Level " + level;
         charInfoWindow.UpdateCharInfoWindow(this);
     }
@@ -78,6 +79,7 @@ public class CharacterLevel : MonoBehaviour
         currentExp += expGained;
         lerpTimer = 0f;
         delayTimer = 0f;
+        Data.currentExp = currentExp;
     }
 
     public void LevelUp()
@@ -89,6 +91,8 @@ public class CharacterLevel : MonoBehaviour
         GetComponent<CharacterHealth>().IncreaseHealth(level);
         requiredExp = CalculateRequiredExp();
         levelText.text = "Level " + level;
+        Data.level = level;
+        Data.currentExp = currentExp;
     }
 
     public int CalculateRequiredExp()
@@ -99,5 +103,20 @@ public class CharacterLevel : MonoBehaviour
             solveForRequiredExp += (int)Mathf.Floor(levelCycle + additionMultiplier * Mathf.Pow(powerMultiplier, levelCycle / divisionMultiplier));
         }
         return solveForRequiredExp / 4;
+    }
+
+    public int GetLevel()
+    {
+        return level;
+    }
+
+    public float GetCurrentExp()
+    {
+        return currentExp;
+    }
+
+    public float GetRequiredExp()
+    {
+        return requiredExp;
     }
 }

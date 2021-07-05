@@ -8,10 +8,27 @@ public class NPC : ScriptableObject
 {
     public string npcName;
     public Sprite icon;
-    public List<Item> items;
-    public List<Quest> quests;
-    [TextArea(3, 15)]
-    public string[] dialogue;
-    [TextArea(3, 15)]
-    public string[] characterDialogue;
+    public List<Sequence> Sequences;
+    public int sequenceNumber;
+
+    [System.Serializable]
+    public class Sequence
+    {
+        public List<Item> Items;
+        public Quest Quest;
+        public bool hasShop;
+        public bool hasQuest;
+        public bool isStory;
+        public bool waitingQuest;
+        public bool justDialogue;
+        public bool hasTeleportNPC;
+        public Vector3 npcV3;
+        public bool hasTeleportCharacter;
+        public Vector3 characterV3;
+        
+        [TextArea(3, 15)]
+        public string[] dialogue;
+        [TextArea(3, 15)]
+        public string[] characterDialogue;
+    }
 }

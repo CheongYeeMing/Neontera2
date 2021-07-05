@@ -10,24 +10,25 @@ public class CharacterAttack : MonoBehaviour
     [SerializeField] private GameObject fireball;
     [SerializeField] public float KnockbackX;
     [SerializeField] public float KnockbackY;
-
-    public float attackRange = 0.5f;
+    
     public LayerMask mobLayer;
-    public bool isAttacking;
-   
     private CharacterMovement playerMovement;
-    private float cooldownTimer = Mathf.Infinity;
 
-    public float attack;
+    private float attack;
+    private float cooldownTimer = Mathf.Infinity;
+    private float attackRange = 0.5f;
+
+    private bool isAttacking;
 
     // Character Animation States
-    const string CHARACTER_ATTACK = "Attack";
-    const string CHARACTER_SPECIAL_ATTACK = "AttackFireball";
+    private const string CHARACTER_ATTACK = "Attack";
+    private const string CHARACTER_SPECIAL_ATTACK = "AttackFireball";
 
     private void Awake()
     {
         playerMovement = GetComponent<CharacterMovement>();
-        attack = gameObject.GetComponent<Character>().Attack.CalculateFinalValue();
+        attack = GetComponent<Character>().GetAttack().CalculateFinalValue();
+        
     }
 
     private void Update()
@@ -51,25 +52,25 @@ public class CharacterAttack : MonoBehaviour
         cooldownTimer = 0;
 
         Collider2D[] hitMobs = Physics2D.OverlapCircleAll(attackPoint.position, attackRange, mobLayer);
-        attack = gameObject.GetComponent<Character>().Attack.CalculateFinalValue();
+        attack = gameObject.GetComponent<Character>().GetAttack().CalculateFinalValue();
 
         foreach (Collider2D mob in hitMobs)
         {
             MobHealth mobHealth;
             if (mob.TryGetComponent<MobHealth>(out mobHealth))
             {
-                if (!mob.GetComponent<MobHealth>().isHurting)
+                if (!mob.GetComponent<MobHealth>().IsHurting())
                 {
-                    mob.GetComponent<MobHealth>().attackedBy = gameObject;
+                    mob.GetComponent<MobHealth>().SetAttackedBy(gameObject);
                     mob.GetComponent<MobHealth>().TakeDamage(attack);
                 }
             }
             BossHealth bossHealth;
             if (mob.TryGetComponent<BossHealth>(out bossHealth))
             {
-                if (!mob.GetComponent<BossHealth>().isHurting)
+                if (!mob.GetComponent<BossHealth>().IsHurting())
                 {
-                    mob.GetComponent<BossHealth>().attackedBy = gameObject;
+                    mob.GetComponent<BossHealth>().SetAttackedBy(gameObject);
                     mob.GetComponent<BossHealth>().TakeDamage(attack);
                 }
             }
@@ -79,7 +80,7 @@ public class CharacterAttack : MonoBehaviour
             MobHealth mobHealth;
             if (mob.TryGetComponent<MobHealth>(out mobHealth))
             {
-                if (mobHealth.isDead && mob.GetComponent<MobReward>().rewardGiven == false)
+                if (mobHealth.IsDead() && mob.GetComponent<MobReward>().GetIsRewardGiven() == false)
                 {
                     foreach (Quest quest in gameObject.GetComponent<Character>().questList.quests)
                     {
@@ -99,7 +100,7 @@ public class CharacterAttack : MonoBehaviour
             BossHealth bossHealth;
             if (mob.TryGetComponent<BossHealth>(out bossHealth))
             {
-                if (bossHealth.isDead && mob.GetComponent<BossReward>().rewardGiven == false)
+                if (bossHealth.IsDead() && mob.GetComponent<BossReward>().GetIsRewardGiven() == false)
                 {
                     foreach (Quest quest in gameObject.GetComponent<Character>().questList.quests)
                     {
@@ -137,9 +138,14 @@ public class CharacterAttack : MonoBehaviour
         cooldownTimer = 0;
 
         GameObject fireBall = Instantiate(fireball, firePoint.transform.position, Quaternion.identity) as GameObject;
-        fireBall.GetComponent<Projectile>().damage = (float)(gameObject.GetComponent<Character>().Attack.CalculateFinalValue()*0.75);
+        fireBall.GetComponent<Projectile>().damage = (float)(gameObject.GetComponent<Character>().GetAttack().CalculateFinalValue()*0.75);
         fireBall.GetComponent<Rigidbody2D>().velocity = new Vector2(Mathf.Sign(transform.localScale.x) * 15.0f, 0);
 
         Invoke("AttackComplete", attackDelay);
+    }
+
+    public bool GetIsAttacking()
+    {
+        return isAttacking;
     }
 }

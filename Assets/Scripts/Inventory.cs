@@ -4,12 +4,23 @@ using UnityEngine;
 
 public class Inventory : MonoBehaviour
 {
-    [SerializeField] List<Item> items;
+    //[SerializeField] List<Item> items;
     [SerializeField] Transform itemsParent;
     [SerializeField] ItemSlot[] itemSlots;
+    [SerializeField] QuestList questList;
 
     public event Action<Item> OnItemRightClickedEvent;
     public event Action<Item> OnItemLeftClickedEvent;
+
+    public void Start()
+    {
+        Debug.Log("Start");
+        //items = Data.items;
+        RefreshUI();
+        //Debug.Log(Data.items.Count);
+        //foreach (Item item in Data.items) AddItem(item);
+        //RefreshUI();
+    }
 
     private void Awake()
     {
@@ -32,9 +43,9 @@ public class Inventory : MonoBehaviour
     private void RefreshUI()
     {
         int i = 0;
-        for (; i < items.Count && i < itemSlots.Length; i++)
+        for (; i < Data.items.Count && i < itemSlots.Length; i++)
         {
-            itemSlots[i].Item = items[i];
+            itemSlots[i].Item = Data.items[i];
         }
 
         for (; i < itemSlots.Length; i++)
@@ -49,23 +60,59 @@ public class Inventory : MonoBehaviour
         {
             return false;
         }
-        items.Add(item);
+        Data.items.Add(item);
+        foreach (Quest quest in questList.quests)
+        {
+            if (quest.questCriteria.criteriaType == CriteriaType.Collect)
+            {
+                if (quest.questCriteria.Target == item.ItemName)
+                {
+                    quest.questCriteria.UpdateCollectedCount(1);
+                    quest.Update();
+                }
+            }
+        }
+        //Data.items.Add(item);
         RefreshUI();
         return true;
     }
 
     public bool RemoveItem(Item item)
     {
-        if (items.Remove(item))
+        if (Data.items.Contains(item) && Data.items.Remove(item))
         {
             RefreshUI();
             return true;
         }
+        foreach (Quest quest in questList.quests)
+        {
+            if (quest.questCriteria.criteriaType == CriteriaType.Collect)
+            {
+                if (quest.questCriteria.Target == item.ItemName)
+                {
+                    quest.questCriteria.UpdateCollectedCount(-1);
+                    quest.Update();
+                }
+            }
+        }
+        //Data.items.Remove(item);
         return false;
     }
 
     public bool IsFull()
     {
-        return items.Count >= itemSlots.Length;
+        return Data.items.Count >= itemSlots.Length;
+    }
+
+    public bool ContainsItem(Item item)
+    {
+        foreach (Item i in Data.items)
+        {
+            if (i.ItemName == item.ItemName)
+            {
+                return true;
+            }
+        }
+        return false;
     }
 }

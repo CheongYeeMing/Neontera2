@@ -14,15 +14,24 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   npcName: Martin
   icon: {fileID: 21300000, guid: ac159a9ac0cfe2c48b57e67f70c74c32, type: 3}
-  items:
-  - {fileID: 171027649447050905, guid: 10ea64dda7f88af458f4b14147c6ffb6, type: 3}
-  - {fileID: 1645576359943562433, guid: c3f35dd8affa47e4283d27ae70458bee, type: 3}
-  - {fileID: 4317239124109681369, guid: 9406610717ba9504d975efbc29a00708, type: 3}
-  - {fileID: 227948212008674030, guid: 5059df9dbf3a2f742b6a42b7419613de, type: 3}
-  dialogue:
-  - Hello there, is there anything I can help you with?
-  - C'mon in, let me show you what I have to offer!
-  - Alrighty, have a good day adventurer!
-  characterDialogue:
-  - Yes, I need some equipment!
-  - Its okay, just looking around.
+  Sequences:
+  - Items:
+    - {fileID: 227948212008674030, guid: 5059df9dbf3a2f742b6a42b7419613de, type: 3}
+    - {fileID: 171027649447050905, guid: 10ea64dda7f88af458f4b14147c6ffb6, type: 3}
+    - {fileID: 1645576359943562433, guid: c3f35dd8affa47e4283d27ae70458bee, type: 3}
+    - {fileID: 4317239124109681369, guid: 9406610717ba9504d975efbc29a00708, type: 3}
+    Quests: []
+    questNumber: 0
+    hasShop: 1
+    hasQuest: 0
+    isStory: 0
+    dialogue:
+    - Greetings Traveller! How can I help you?
+    - 'Ofcourse I can! C''mon, let me show you all the equipment I have for sale
+      in my shop! '
+    - Alrighty then. Let me know if you need any assistance.
+    - Have a nice day!
+    characterDialogue:
+    - I would like to get some equipment! Can you show me what you have in your shop?
+    - It's okay. I'll just have a look around myself~
+  sequenceNumber: 0
