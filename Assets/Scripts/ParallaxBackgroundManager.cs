@@ -24,6 +24,7 @@ public class ParallaxBackgroundManager : MonoBehaviour
 
     public void OnValidate()
     {
+        Transition.gameObject.SetActive(true);
         IntroBG.SetActive(false);
         TownBG.SetActive(false);
         ForestBG.SetActive(false);

@@ -16,7 +16,7 @@ public static class Data
 
     public static float Xcoordinate;
     public static float Ycoordinate;
-    public static string location = "Forest";
+    public static string location = "Town";
 
     // Character Equipped Items
     public static EquipmentSlot[] equipmentSlots = new EquipmentSlot[4];

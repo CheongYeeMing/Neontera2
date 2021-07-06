@@ -16,6 +16,7 @@ public class CharacterHealth : MonoBehaviour, Health
 
     private float health;
     private float lerpTimer;
+    private float baseMaxHealth;
     private float maxHealth;
     private float chipSpeed = 2f;
 
@@ -29,10 +30,10 @@ public class CharacterHealth : MonoBehaviour, Health
     // Start is called before the first frame update
     void Start()
     {
-        maxHealth = Data.maxHealth;
+        baseMaxHealth = Data.maxHealth;
         if (Data.currentHealth == 0) 
         { 
-            health = maxHealth;
+            health = baseMaxHealth;
             Data.currentHealth = health;
         }
         else
@@ -43,6 +44,7 @@ public class CharacterHealth : MonoBehaviour, Health
     // Update is called once per frame
     void Update()
     {
+        maxHealth = baseMaxHealth + GetComponent<Character>().GetHealth().CalculateFinalValue();
         health = Mathf.Clamp(health, 0, maxHealth);
         UpdateHealthUI();
         if (Input.GetKeyDown(KeyCode.D))
@@ -140,8 +142,8 @@ public class CharacterHealth : MonoBehaviour, Health
 
     public void IncreaseHealth(int level)
     {
-        maxHealth += (health * 0.01f) * ((100 - level) * 0.1f);
-        health = maxHealth;
+        baseMaxHealth += (health * 0.01f) * ((100 - level) * 0.1f);
+        health = baseMaxHealth;
     }
 
     public void Die()

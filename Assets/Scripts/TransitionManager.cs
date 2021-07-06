@@ -33,4 +33,9 @@ public class TransitionManager : MonoBehaviour
     {
         animator.SetTrigger("FadeOut");
     }
+
+    public void Inactive()
+    {
+        gameObject.SetActive(false);
+    }
 }
