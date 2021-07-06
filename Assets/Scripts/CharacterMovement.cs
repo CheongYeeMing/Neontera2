@@ -128,7 +128,7 @@ public class CharacterMovement : MonoBehaviour
 
     public bool canAttack()
     {
-        return !onWall();
+        return !onWall() && !GetComponent<CharacterHealth>().IsDead();
     }
 
     public bool CanMove()

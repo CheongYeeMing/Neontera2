@@ -6,6 +6,7 @@ using TMPro;
 
 public class CharacterHealth : MonoBehaviour, Health
 {
+    [SerializeField] public GameOver gameOver;
     [SerializeField] public TextMeshProUGUI healthText;
     [SerializeField] public Image frontHealthBar;
     [SerializeField] public Image backHealthBar;
@@ -92,7 +93,6 @@ public class CharacterHealth : MonoBehaviour, Health
             health = 0;
             Die();
         }
-        Data.currentHealth = health;
         Invoke("HurtComplete", hurtDelay);
     }
 
@@ -136,24 +136,27 @@ public class CharacterHealth : MonoBehaviour, Health
     {
         health += healAmount;
         lerpTimer = 0f;
-        Data.currentHealth = health;
     }
 
     public void IncreaseHealth(int level)
     {
         maxHealth += (health * 0.01f) * ((100 - level) * 0.1f);
         health = maxHealth;
-        Data.currentHealth = health;
-        Data.maxHealth = maxHealth;
     }
 
     public void Die()
     {
-        Data.currentHealth = 0;
         isDead = true;
         gameObject.GetComponent<CharacterAnimation>().ChangeAnimationState(CHARACTER_DIE);
         Debug.Log("Character is dead!!!");
-        // Dead Screen, Auto Respawn in Town area??? 
+        // Dead Screen, Auto Respawn in Town area???
+        gameOver.gameObject.SetActive(true);
+    }
+
+    public void Revive()
+    {
+        isDead = false;
+        health = maxHealth;
     }
 
     public bool IsHurting()
