@@ -1,25 +1,16 @@
 fileFormatVersion: 2
-guid: fdb2b4556e403cc469a226b872f69898
+guid: 2fadbd0517739b641b7dad3d03e908f5
 TextureImporter:
   internalIDToNameTable:
   - first:
-      213: 95044405116505353
-    second: arm_projectile_glowing_0
+      213: 5208875100260417357
+    second: mecha_golem_hurt_0
   - first:
-      213: 5053551332890923903
-    second: arm_projectile_glowing_1
+      213: 1576036485644825295
+    second: mecha_golem_hurt_1
   - first:
-      213: 959987844630726459
-    second: arm_projectile_glowing_2
-  - first:
-      213: 8066067344937695706
-    second: arm_projectile_glowing_3
-  - first:
-      213: 8081469474457304709
-    second: arm_projectile_glowing_4
-  - first:
-      213: -4212147560741854503
-    second: arm_projectile_glowing_5
+      213: 6089415203833390329
+    second: mecha_golem_hurt_2
   externalObjects: {}
   serializedVersion: 11
   mipmaps:
@@ -109,13 +100,13 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: arm_projectile_glowing_0
+      name: mecha_golem_hurt_0
       rect:
         serializedVersion: 2
-        x: 60
-        y: 256
-        width: 35
-        height: 14
+        x: 25
+        y: 83
+        width: 48
+        height: 46
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -123,20 +114,20 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 90d8bd4026aa15100800000000000000
-      internalID: 95044405116505353
+      spriteID: d4f366e4e44a94840800000000000000
+      internalID: 5208875100260417357
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: arm_projectile_glowing_1
+      name: mecha_golem_hurt_1
       rect:
         serializedVersion: 2
-        x: 160
-        y: 256
-        width: 35
-        height: 14
+        x: 80
+        y: 84
+        width: 48
+        height: 46
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -144,20 +135,20 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: f735a239922d12640800000000000000
-      internalID: 5053551332890923903
+      spriteID: fc23aef55d43fd510800000000000000
+      internalID: 1576036485644825295
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: arm_projectile_glowing_2
+      name: mecha_golem_hurt_2
       rect:
         serializedVersion: 2
-        x: 260
-        y: 256
-        width: 35
-        height: 14
+        x: 135
+        y: 84
+        width: 48
+        height: 46
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -165,71 +156,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: b3748e3cbdf825d00800000000000000
-      internalID: 959987844630726459
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: arm_projectile_glowing_3
-      rect:
-        serializedVersion: 2
-        x: 60
-        y: 156
-        width: 35
-        height: 14
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: ad9b36da38d60ff60800000000000000
-      internalID: 8066067344937695706
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: arm_projectile_glowing_4
-      rect:
-        serializedVersion: 2
-        x: 160
-        y: 156
-        width: 35
-        height: 14
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: 58eb0386ba5272070800000000000000
-      internalID: 8081469474457304709
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: arm_projectile_glowing_5
-      rect:
-        serializedVersion: 2
-        x: 260
-        y: 156
-        width: 35
-        height: 14
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: 9d224744c127b85c0800000000000000
-      internalID: -4212147560741854503
+      spriteID: 9f42a526dd2f18450800000000000000
+      internalID: 6089415203833390329
       vertices: []
       indices: 
       edges: []
