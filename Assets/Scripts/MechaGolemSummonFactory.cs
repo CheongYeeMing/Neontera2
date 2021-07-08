@@ -14,7 +14,7 @@ public class MechaGolemSummonFactory : MonoBehaviour, BossSummonFactory
                 gameObject.GetComponent<MechaGolemSummonerHeal>().Summon();
                 break;
             case "Laser":
-                gameObject.GetComponent<TurtleKingSummonerBullet2>().Summon();
+                gameObject.GetComponent<MechaGolemSummonerLaserBeam>().Summon();
                 break;
             case "ArmShard":
                 gameObject.GetComponent<MechaGolemSummonerArmShard>().Summon();

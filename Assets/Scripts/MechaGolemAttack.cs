@@ -38,7 +38,7 @@ public class MechaGolemAttack : BossAttack
         GetComponent<MechaGolemMovement>().StopPatrol();
         summonCooldown = Random.Range(2f, 5f);
         string[] skills = mechaGolemSummonFactory.GetSkills();
-        mechaGolemSummonFactory.Summon("Heal");// skills[Random.Range(0, skills.Length)]);
+        mechaGolemSummonFactory.Summon("Laser");// skills[Random.Range(0, skills.Length)]);
     }
 
     public override void OnCollisionEnter2D(Collision2D collision)
