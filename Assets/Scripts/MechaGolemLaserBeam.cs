@@ -16,12 +16,6 @@ public class MechaGolemLaserBeam : MonoBehaviour
     {
         body = GetComponent<Rigidbody2D>();
         lifetime = 1.3f;
-        Debug.Log(transform.localScale.x);
-        //if (GameObject.FindGameObjectWithTag("Character").transform.position.x < transform.position.x && transform.localScale.x > 0) 
-        //    transform.localScale = new Vector3(-transform.localScale.x, transform.localScale.y, transform.localScale.z);
-        Debug.Log(GameObject.FindGameObjectWithTag("Character").transform.position.x);
-        Debug.Log(transform.position.x);
-        Debug.Log(transform.localScale.x);
         yield return new WaitForSeconds(lifetime);
         Destroy(gameObject);
     }

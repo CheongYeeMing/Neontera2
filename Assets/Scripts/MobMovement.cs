@@ -17,17 +17,17 @@ public class MobMovement : MonoBehaviour
     [SerializeField] public float jumpPower;
     [SerializeField] public bool onFloatingPlatform;
 
-    private Rigidbody2D rb;
+    protected Rigidbody2D rb;
 
-    private bool isPatrolling;
-    private bool isAtEdge;
-    private bool inPatrolRange;
+    protected bool isPatrolling;
+    protected bool isAtEdge;
+    protected bool inPatrolRange;
 
-    private Vector2 spawnPoint;
+    protected Vector2 spawnPoint;
 
     // Mob Animation States
-    private const string MOB_IDLE = "Idle";
-    private const string MOB_MOVE = "Move";
+    protected const string MOB_IDLE = "Idle";
+    protected const string MOB_MOVE = "Move";
 
     // Start is called before the first frame update
     void Start()
@@ -40,6 +40,7 @@ public class MobMovement : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        if (!CanMove()) return;
         if (!CanPatrol())
         {
             if (isPatrolling) StopPatrol();
@@ -49,6 +50,10 @@ public class MobMovement : MonoBehaviour
         if (gameObject.GetComponent<MobPathfindingAI>().instantAggressive && InChaseRange())
         {
             gameObject.GetComponent<MobPathfindingAI>().SetIsChasingTarget(true);
+            return;
+        } else if (gameObject.GetComponent<MobPathfindingAI>().instantAggressive && !InChaseRange())
+        {
+            gameObject.GetComponent<MobPathfindingAI>().SetIsChasingTarget(false);
             return;
         }
 
@@ -76,7 +81,7 @@ public class MobMovement : MonoBehaviour
         }
     }
 
-    void Patrol()
+    public virtual void Patrol()
     {
         isPatrolling = true;
         gameObject.GetComponent<MobAnimation>().ChangeAnimationState(MOB_MOVE);
@@ -100,6 +105,24 @@ public class MobMovement : MonoBehaviour
         {
             rb.velocity = new Vector2(moveSpeed * Time.fixedDeltaTime, rb.velocity.y);
         }
+    }
+
+    public bool CanMove()
+    {
+        bool can = true;
+        if (gameObject.GetComponent<MobHealth>().IsHurting())
+        {
+            can = false;
+        }
+        else if (gameObject.GetComponent<MobHealth>().IsDead())
+        {
+            can = false;
+        }
+        else if (gameObject.GetComponent<MobAttack>().IsAttacking())
+        {
+            can = false;
+        }
+        return can;
     }
 
     public void StopPatrol()
@@ -130,7 +153,7 @@ public class MobMovement : MonoBehaviour
         return can;
     }
 
-    private bool isGrounded()
+    protected bool isGrounded()
     {
         RaycastHit2D raycastHit = Physics2D.BoxCast(boxCollider.bounds.center, boxCollider.bounds.size, 0, Vector2.down, 0.03f, groundLayer);
         return raycastHit.collider != null;
@@ -168,7 +191,7 @@ public class MobMovement : MonoBehaviour
         isAtEdge = false;
     }
 
-    public void ChaseTarget(Vector2 direction)
+    public virtual void ChaseTarget(Vector2 direction)
     {
         gameObject.GetComponent<MobAnimation>().ChangeAnimationState(MOB_MOVE);
         if (!InChaseRange() || player.gameObject.GetComponent<CharacterHealth>().IsDead())

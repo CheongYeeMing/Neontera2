@@ -28,6 +28,7 @@ public class MechaGolemSummonerLaserBeam : BossSummoner
                 angle *= -1;
             }
             Quaternion angleAxis = Quaternion.AngleAxis(-angle, Vector3.forward);
+            gameObject.GetComponent<MechaGolemAnimation>().ChangeAnimationState(MECHA_GOLEM_LASER);
             Instantiate(prefab, new Vector3((float)(transform.position.x + Mathf.Sign(transform.localScale.x) * 1), transform.position.y + 0.3f, transform.position.z), angleAxis);
             if (target.position.x < transform.position.x)
             {

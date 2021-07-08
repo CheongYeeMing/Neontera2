@@ -17,8 +17,9 @@ public class MechaGolemArmShard : MonoBehaviour
         body = GetComponent<Rigidbody2D>();
         lifetime = Random.Range(10, 15);
         speed = Random.Range(10, 20);
-        if (GameObject.FindGameObjectWithTag("Character").transform.position.x < transform.position.x) transform.localScale = new Vector2(-transform.localScale.x, transform.localScale.y);
-        body.AddForce(new Vector2(Mathf.Sign(transform.localScale.x) * 400, 0));
+        Transform target = GameObject.FindGameObjectWithTag("Character").transform;
+        Vector3 direction = target.position - transform.position;
+        body.AddForce(direction * 100);
         yield return new WaitForSeconds(lifetime);
         Destroy(gameObject);
     }
