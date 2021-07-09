@@ -15,6 +15,7 @@ public class ShopManager : MonoBehaviour
 
     public void ShowInShopSelectedItem(Item item)
     {
+        Debug.Log(item);
         shopSelectedItemPanel.item = item;
         if (item.itemType == Item.ItemType.Equipment && item is EquipableItem)
         {

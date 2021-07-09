@@ -15,8 +15,10 @@ public class BossHealth : MonoBehaviour, Health
     [SerializeField] public float maxHealth;
 
     [SerializeField] public GameObject mobDetails;
+    [SerializeField] public float hpOffsetX;
     [SerializeField] public float hpOffsetY;
     [SerializeField] public float nameOffsetY;
+    [SerializeField] public float nameOffsetX;
 
     [SerializeField] public GameObject levelName;
     [SerializeField] public float mobLevel;
@@ -71,8 +73,8 @@ public class BossHealth : MonoBehaviour, Health
     public virtual void Update()
     {
         SetBossDetails(currentHealth, maxHealth);
-        levelName.transform.position = new Vector2(gameObject.transform.position.x, gameObject.transform.position.y + nameOffsetY);
-        slider.transform.position = new Vector2(gameObject.transform.position.x, gameObject.transform.position.y + hpOffsetY);
+        levelName.transform.position = new Vector2(gameObject.transform.position.x + nameOffsetX, gameObject.transform.position.y + nameOffsetY);
+        slider.transform.position = new Vector2(gameObject.transform.position.x + hpOffsetX, gameObject.transform.position.y + hpOffsetY);
         if (isHurting || isDead || gameObject.GetComponent<BossPathfindingAI>().GetIsChasingTarget())
         {
             outOfCombatTimer = 0;

@@ -11,13 +11,13 @@ public class MobAttack : MonoBehaviour
     // Mob Damage
     [SerializeField] public float attack;
 
-    private bool isAttacking;
+    protected bool isAttacking;
 
     // Mob Animation States
-    private const string MOB_ATTACK = "Attack";
+    protected const string MOB_ATTACK = "Attack";
 
     // Mob Auto Attack
-    public void OnCollisionEnter2D(Collision2D collision)
+    public virtual void OnCollisionEnter2D(Collision2D collision)
     {
         if (collision.gameObject.CompareTag("Character"))
         {

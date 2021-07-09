@@ -6,11 +6,15 @@ using UnityEngine.UI;
 public class TransitionManager : MonoBehaviour
 {
     Animator animator;
-    
+
     // Start is called before the first frame update
-    void Start()
+    private void OnValidate()
     {
         animator = gameObject.GetComponent<Animator>();
+    }
+
+    void Start()
+    {
         Deactivate();
     }
 
@@ -28,5 +32,10 @@ public class TransitionManager : MonoBehaviour
     public void Deactivate()
     {
         animator.SetTrigger("FadeOut");
+    }
+
+    public void Inactive()
+    {
+        gameObject.SetActive(false);
     }
 }

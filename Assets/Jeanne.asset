@@ -13,11 +13,6 @@ MonoBehaviour:
   m_Name: Jeanne
   m_EditorClassIdentifier: 
   npcName: Jeanne
-  icon: {fileID: 21300000, guid: ac159a9ac0cfe2c48b57e67f70c74c32, type: 3}
-  items: []
-  dialogue:
-  - "I'm here to tell you my grandmother story.\t"
-  - The sprites in this game were designed by yeeming.
-  - The scripts in this game were written by yeeming.
-  - The whole game was done by yeeming alone.
-  characterDialogue: []
+  icon: {fileID: 21300000, guid: 3a11bf297dd8b1440974140a29cb7589, type: 3}
+  Sequences: []
+  sequenceNumber: 0

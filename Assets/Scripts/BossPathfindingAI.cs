@@ -77,7 +77,7 @@ public class BossPathfindingAI : MonoBehaviour
 
         direction = ((Vector2)path.vectorPath[currentWaypoint] - rb.position);
 
-        if (Mathf.Sign(GetComponent<BossMovement>().moveSpeed) != Mathf.Sign(direction.x) && Mathf.Abs(direction.x) > 0.1)
+        if (Mathf.Sign(GetComponent<BossMovement>().moveSpeed) != Mathf.Sign(direction.x) && Mathf.Abs(direction.x) > 0.5)
         {/*
             Debug.Log("Why u flip again cb");
             Debug.Log("Movespeed: " + gameObject.GetComponent<BossMovement>().moveSpeed);

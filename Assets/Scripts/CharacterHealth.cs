@@ -6,6 +6,7 @@ using TMPro;
 
 public class CharacterHealth : MonoBehaviour, Health
 {
+    [SerializeField] public GameOver gameOver;
     [SerializeField] public TextMeshProUGUI healthText;
     [SerializeField] public Image frontHealthBar;
     [SerializeField] public Image backHealthBar;
@@ -15,6 +16,7 @@ public class CharacterHealth : MonoBehaviour, Health
 
     private float health;
     private float lerpTimer;
+    private float baseMaxHealth;
     private float maxHealth;
     private float chipSpeed = 2f;
 
@@ -28,10 +30,10 @@ public class CharacterHealth : MonoBehaviour, Health
     // Start is called before the first frame update
     void Start()
     {
-        maxHealth = Data.maxHealth;
+        baseMaxHealth = Data.maxHealth;
         if (Data.currentHealth == 0) 
         { 
-            health = maxHealth;
+            health = baseMaxHealth;
             Data.currentHealth = health;
         }
         else
@@ -42,6 +44,7 @@ public class CharacterHealth : MonoBehaviour, Health
     // Update is called once per frame
     void Update()
     {
+        maxHealth = baseMaxHealth + GetComponent<Character>().GetHealth().CalculateFinalValue();
         health = Mathf.Clamp(health, 0, maxHealth);
         UpdateHealthUI();
         if (Input.GetKeyDown(KeyCode.D))
@@ -92,7 +95,6 @@ public class CharacterHealth : MonoBehaviour, Health
             health = 0;
             Die();
         }
-        Data.currentHealth = health;
         Invoke("HurtComplete", hurtDelay);
     }
 
@@ -120,6 +122,7 @@ public class CharacterHealth : MonoBehaviour, Health
         BossAttack bossAttack;
         if (mob.TryGetComponent<BossAttack>(out bossAttack))
         {
+            Debug.Log("okay its working");
             if (mob.transform.position.x > gameObject.transform.position.x)
             {
 
@@ -136,24 +139,29 @@ public class CharacterHealth : MonoBehaviour, Health
     {
         health += healAmount;
         lerpTimer = 0f;
-        Data.currentHealth = health;
     }
 
     public void IncreaseHealth(int level)
     {
-        maxHealth += (health * 0.01f) * ((100 - level) * 0.1f);
-        health = maxHealth;
-        Data.currentHealth = health;
-        Data.maxHealth = maxHealth;
+        baseMaxHealth += (health * 0.01f) * ((100 - level) * 0.1f);
+        health = baseMaxHealth;
     }
 
     public void Die()
     {
-        Data.currentHealth = 0;
         isDead = true;
         gameObject.GetComponent<CharacterAnimation>().ChangeAnimationState(CHARACTER_DIE);
+        GetComponent<BoxCollider2D>().enabled = false;
         Debug.Log("Character is dead!!!");
-        // Dead Screen, Auto Respawn in Town area??? 
+        // Dead Screen, Auto Respawn in Town area???
+        gameOver.gameObject.SetActive(true);
+    }
+
+    public void Revive()
+    {
+        isDead = false;
+        health = maxHealth;
+        GetComponent<BoxCollider2D>().enabled = true;
     }
 
     public bool IsHurting()

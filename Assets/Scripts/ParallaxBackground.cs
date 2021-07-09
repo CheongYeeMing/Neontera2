@@ -17,6 +17,7 @@ public class ParallaxBackground : MonoBehaviour
     {
         cameraTransform = Camera.main.transform;
         lastCameraPosition = cameraTransform.position;
+        transform.position = new Vector2(lastCameraPosition.x, lastCameraPosition.y);
         Sprite sprite = GetComponent<SpriteRenderer>().sprite;
         Texture2D texture = sprite.texture;
         textureUnitSizeX = texture.width / sprite.pixelsPerUnit;

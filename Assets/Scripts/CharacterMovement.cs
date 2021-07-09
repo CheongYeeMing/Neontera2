@@ -33,7 +33,7 @@ public class CharacterMovement : MonoBehaviour
         if (CanMove() == false)
         {
             GetComponent<CharacterAnimation>().ChangeAnimationState(CHARACTER_IDLE);
-            body.velocity = Vector2.zero;
+            //body.velocity = Vector2.zero;
             return;
         }
         horizontalInput = Input.GetAxis("Horizontal");
@@ -128,7 +128,7 @@ public class CharacterMovement : MonoBehaviour
 
     public bool canAttack()
     {
-        return !onWall();
+        return !onWall() && !GetComponent<CharacterHealth>().IsDead();
     }
 
     public bool CanMove()

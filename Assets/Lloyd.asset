@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: Lloyd
   m_EditorClassIdentifier: 
   npcName: Lloyd
-  icon: {fileID: 21300000, guid: 93ab110d8610e3f468d7d72975db6f4d, type: 3}
+  icon: {fileID: 21300000, guid: 37ce511f539146a46950b40ece29d719, type: 3}
   Sequences:
   - Items: []
     Quest:
