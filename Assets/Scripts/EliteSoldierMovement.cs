@@ -8,7 +8,6 @@ public class EliteSoldierMovement : MobMovement
 
     public override void Patrol()
     {
-        isPatrolling = true;
         gameObject.GetComponent<MobAnimation>().ChangeAnimationState(MOB_MOVE);
         if (onFloatingPlatform)
         {
@@ -35,6 +34,7 @@ public class EliteSoldierMovement : MobMovement
 
     public override void ChaseTarget(Vector2 direction)
     {
+        if (!CanMove()) return;
         gameObject.GetComponent<MobAnimation>().ChangeAnimationState(MOB_MOVE);
         if (!InChaseRange() || player.gameObject.GetComponent<CharacterHealth>().IsDead())
         {

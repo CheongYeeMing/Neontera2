@@ -30,7 +30,7 @@ public class EliteSoldierAttack : MobAttack
     public void Attack()
     {
         isAttacking = true;
-        GetComponent<MobMovement>().StopPatrol();
+        GetComponent<EliteSoldierMovement>().StopPatrol();
         summonCooldown = Random.Range(1f, 2f);
         eliteSoldierSummonLaser.Summon();
     }
@@ -40,7 +40,7 @@ public class EliteSoldierAttack : MobAttack
         if (collision.gameObject.CompareTag("Character"))
         {
             isAttacking = true;
-            GetComponent<MobMovement>().StopPatrol();
+            GetComponent<EliteSoldierMovement>().StopPatrol();
             Debug.Log("attack animation called");
             GetComponent<MobAnimation>().ChangeAnimationState(MOB_ATTACK);
             collision.gameObject.GetComponent<CharacterHealth>().SetAttackedBy(gameObject);

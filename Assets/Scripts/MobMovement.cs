@@ -40,7 +40,7 @@ public class MobMovement : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (!CanMove()) return;
+        if (!CanMove())  return;
         if (!CanPatrol())
         {
             if (isPatrolling) StopPatrol();
@@ -51,10 +51,10 @@ public class MobMovement : MonoBehaviour
         {
             gameObject.GetComponent<MobPathfindingAI>().SetIsChasingTarget(true);
             return;
-        } else if (gameObject.GetComponent<MobPathfindingAI>().instantAggressive && !InChaseRange())
+        }
+        else if (gameObject.GetComponent<MobPathfindingAI>().instantAggressive && !InChaseRange())
         {
             gameObject.GetComponent<MobPathfindingAI>().SetIsChasingTarget(false);
-            return;
         }
 
         if (gameObject.GetComponent<MobHealth>().IsDead())
@@ -70,6 +70,7 @@ public class MobMovement : MonoBehaviour
         {
             inPatrolRange = true;
         }
+        //Patrol();
     }
 
     void FixedUpdate()
@@ -193,6 +194,7 @@ public class MobMovement : MonoBehaviour
 
     public virtual void ChaseTarget(Vector2 direction)
     {
+        if (!CanMove()) return;
         gameObject.GetComponent<MobAnimation>().ChangeAnimationState(MOB_MOVE);
         if (!InChaseRange() || player.gameObject.GetComponent<CharacterHealth>().IsDead())
         {

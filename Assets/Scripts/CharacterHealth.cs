@@ -152,7 +152,6 @@ public class CharacterHealth : MonoBehaviour, Health
         isDead = true;
         gameObject.GetComponent<CharacterAnimation>().ChangeAnimationState(CHARACTER_DIE);
         GetComponent<BoxCollider2D>().enabled = false;
-        GetComponent<Rigidbody2D>().gravityScale = 0;
         Debug.Log("Character is dead!!!");
         // Dead Screen, Auto Respawn in Town area???
         gameOver.gameObject.SetActive(true);
@@ -163,7 +162,6 @@ public class CharacterHealth : MonoBehaviour, Health
         isDead = false;
         health = maxHealth;
         GetComponent<BoxCollider2D>().enabled = true;
-        GetComponent<Rigidbody2D>().gravityScale = 1;
     }
 
     public bool IsHurting()

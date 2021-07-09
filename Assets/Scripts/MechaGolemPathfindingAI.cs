@@ -40,7 +40,7 @@ public class MechaGolemPathfindingAI : BossPathfindingAI
 
         direction = ((Vector2)path.vectorPath[currentWaypoint] - rb.position);
 
-        if (Mathf.Sign(GetComponent<MechaGolemMovement>().moveSpeed) != Mathf.Sign(direction.x) && Mathf.Abs(direction.x) > 0.1)
+        if (Mathf.Sign(GetComponent<MechaGolemMovement>().moveSpeed) != Mathf.Sign(direction.x) && Mathf.Abs(direction.x) > 0.5)
         {
             GetComponent<MechaGolemMovement>().Flip();
         }

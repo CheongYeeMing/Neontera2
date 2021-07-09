@@ -12,7 +12,7 @@ public class EliteSoldierSummonLaser : MobSummoner
 
     private IEnumerator SummonLaser()
     {
-        yield return new WaitForSeconds(0.2f);
+        yield return new WaitForSeconds(0.5f);
         for (int i = 0; i < 3; i++)
         {
             Transform target = GameObject.FindGameObjectWithTag("Character").transform;
@@ -34,7 +34,7 @@ public class EliteSoldierSummonLaser : MobSummoner
             {
                 prefab.transform.localScale = new Vector2(-prefab.transform.localScale.x, prefab.transform.localScale.y);
             }
-            yield return new WaitForSeconds(0.2f);
+            yield return new WaitForSeconds(0.3f);
         }
         gameObject.GetComponent<EliteSoldierAttack>().SummonComplete();
     }
