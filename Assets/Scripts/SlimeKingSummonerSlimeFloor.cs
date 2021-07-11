@@ -11,6 +11,8 @@ public class SlimeKingSummonerSlimeFloor : BossSummoner
 
     private IEnumerator SummonSlimeFloor()
     {
+        FindObjectOfType<AudioManager>().StopEffect("SlimeRain");
+        FindObjectOfType<AudioManager>().PlayEffect("SlimeRain");
         yield return new WaitForSeconds(1f);
         CinemachineShake.Instance.Shaking = true;
         for (int i = 1; i < 20; i++)

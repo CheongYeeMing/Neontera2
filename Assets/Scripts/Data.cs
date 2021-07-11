@@ -20,7 +20,7 @@ public static class Data
 
     public static float Xcoordinate;
     public static float Ycoordinate;
-    public static string location = "Base Station";
+    public static string location = "Intro";
 
     // Character Equipped Items
     public static EquipmentSlot[] equipmentSlots = new EquipmentSlot[4];

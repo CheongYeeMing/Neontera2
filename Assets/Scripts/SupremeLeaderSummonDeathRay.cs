@@ -17,6 +17,8 @@ public class SupremeLeaderSummonDeathRay : BossSummoner
         CinemachineShake.Instance.Shaking = true;
         for (int i = 1; i < 5; i++)
         {
+            FindObjectOfType<AudioManager>().StopEffect("DeathRay");
+            FindObjectOfType<AudioManager>().PlayEffect("DeathRay");
             Transform target = GameObject.FindGameObjectWithTag("Character").transform;
             gameObject.GetComponent<SupremeLeaderAnimation>().ChangeAnimationState(SUPREME_LEADER_DEATHRAY);
             yield return new WaitForSeconds(0.1f);

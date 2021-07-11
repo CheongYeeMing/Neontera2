@@ -27,6 +27,8 @@ public class CharacterWallet : MonoBehaviour
 
     public void AddGold(float goldAmount)
     {
+        FindObjectOfType<AudioManager>().StopEffect("GainGold");
+        FindObjectOfType<AudioManager>().PlayEffect("GainGold");
         GoldAmount += goldAmount;
         UpdateWallet();
     }

@@ -17,6 +17,8 @@ public class MechaGolemSummonerHeal : BossSummoner
         for (int i = 1; i < 4; i++)
         {
             GetComponent<MechaGolemHealth>().Heal();
+            FindObjectOfType<AudioManager>().StopEffect("MechaGolemHeal");
+            FindObjectOfType<AudioManager>().PlayEffect("MechaGolemHeal");
             yield return new WaitForSeconds(1.9f);
         }
         gameObject.GetComponent<MechaGolemAttack>().SummonComplete();

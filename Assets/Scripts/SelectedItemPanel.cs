@@ -105,6 +105,8 @@ public class SelectedItemPanel : MonoBehaviour
     {
         FindObjectOfType<AudioManager>().StopEffect("Click");
         FindObjectOfType<AudioManager>().PlayEffect("Click");
+        FindObjectOfType<AudioManager>().StopEffect("Warning");
+        FindObjectOfType<AudioManager>().PlayEffect("Warning");
         DeleteWindow.gameObject.SetActive(true);
     }
 }

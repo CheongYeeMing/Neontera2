@@ -16,6 +16,8 @@ public class TurtleKingSummonerBullet3 : BossSummoner
         for (int i = 1; i < 9; i++)
         {
             yield return new WaitForSeconds(0.5f);
+            FindObjectOfType<AudioManager>().StopEffect("TurtleBullet");
+            FindObjectOfType<AudioManager>().PlayEffect("TurtleBullet");
             gameObject.GetComponent<TurtleKingAnimation>().ChangeAnimationState(ATTACK_BULLET_3);
             Instantiate(prefab, new Vector3((float)(transform.position.x + Mathf.Sign(transform.localScale.x) * 0.5f), transform.position.y + 1.5f, transform.position.z), Quaternion.identity);
         }

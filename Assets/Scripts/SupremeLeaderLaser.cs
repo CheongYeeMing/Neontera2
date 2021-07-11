@@ -27,18 +27,20 @@ public class SupremeLeaderLaser : MonoBehaviour
 
     public virtual void OnTriggerEnter2D(Collider2D collision)
     {
-        Instantiate(particle, collision.gameObject.transform.position, transform.rotation);
         if (collision.gameObject.tag == "Character")
         {
+            Instantiate(particle, collision.gameObject.transform.position, transform.rotation);
             StopAllCoroutines();
             StartCoroutine(CollideCharacter(collision.gameObject));
         }
         else if (collision.gameObject.tag == "Invincible" && collision.gameObject.layer == 8)
         {
+            Instantiate(particle, transform.position, transform.rotation);
             CollideGround(collision.gameObject);
         }
         else if (collision.gameObject.tag == "Invincible" && collision.gameObject.layer == 9)
         {
+            Instantiate(particle, transform.position, transform.rotation);
             CollideWall(collision.gameObject);
         }
     }

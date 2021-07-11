@@ -35,12 +35,12 @@ public class EliteSoldierLaser : MonoBehaviour
         }
         else if (collision.gameObject.tag == "Invincible" && collision.gameObject.layer == 8)
         {
-            Instantiate(particle, collision.gameObject.transform.position, transform.rotation);
+            Instantiate(particle, transform.position, transform.rotation);
             CollideGround(collision.gameObject);
         }
         else if (collision.gameObject.tag == "Invincible" && collision.gameObject.layer == 9)
         {
-            Instantiate(particle, collision.gameObject.transform.position, transform.rotation);
+            Instantiate(particle, transform.position, transform.rotation);
             CollideWall(collision.gameObject);
         }
     }

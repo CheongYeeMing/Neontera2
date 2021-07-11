@@ -36,7 +36,7 @@ public class TurtleKingAttack : BossAttack
         isAttacking = true;
         GetComponent<TurtleKingHealth>().SetIsInvulnerable(true);
         GetComponent<TurtleKingMovement>().StopPatrol();
-        summonCooldown = Random.Range(3f, 7f);
+        summonCooldown = Random.Range(3f, 5f);
         string[] skills = turtleKingSummonFactory.GetSkills();
         turtleKingSummonFactory.Summon(skills[Random.Range(0, skills.Length)]);
     }

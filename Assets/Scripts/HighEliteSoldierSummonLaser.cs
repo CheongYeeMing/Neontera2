@@ -29,6 +29,8 @@ public class HighEliteSoldierSummonLaser : MobSummoner
             }
             Quaternion angleAxis = Quaternion.AngleAxis(-angle, Vector3.forward);
             gameObject.GetComponent<MobAnimation>().ChangeAnimationState(SHOOT_LASER);
+            FindObjectOfType<AudioManager>().StopEffect("Laser");
+            FindObjectOfType<AudioManager>().PlayEffect("Laser");
             Instantiate(prefab, new Vector3((float)(transform.position.x + Mathf.Sign(transform.localScale.x) * 1f), transform.position.y, transform.position.z), angleAxis);
             if (target.position.x < transform.position.x)
             {

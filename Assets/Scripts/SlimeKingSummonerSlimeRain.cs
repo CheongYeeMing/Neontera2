@@ -11,6 +11,8 @@ public class SlimeKingSummonerSlimeRain : BossSummoner
 
     private IEnumerator SummonSlimeRain()
     {
+        FindObjectOfType<AudioManager>().StopEffect("SlimeRain");
+        FindObjectOfType<AudioManager>().PlayEffect("SlimeRain");
         yield return new WaitForSeconds(1f);
         SummonRainWave();
         yield return new WaitForSeconds(0.5f);

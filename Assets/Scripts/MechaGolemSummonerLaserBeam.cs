@@ -30,6 +30,8 @@ public class MechaGolemSummonerLaserBeam : BossSummoner
             }
             Quaternion angleAxis = Quaternion.AngleAxis(-angle, Vector3.forward);
             gameObject.GetComponent<MechaGolemAnimation>().ChangeAnimationState(MECHA_GOLEM_LASER);
+            FindObjectOfType<AudioManager>().StopEffect("DeathRay");
+            FindObjectOfType<AudioManager>().PlayEffect("DeathRay");
             Instantiate(prefab, new Vector3((float)(transform.position.x + Mathf.Sign(transform.localScale.x) * 1), transform.position.y + 0.3f, transform.position.z), angleAxis);
             if (target.position.x < transform.position.x)
             {
