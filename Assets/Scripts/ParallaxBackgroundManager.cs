@@ -105,4 +105,37 @@ public class ParallaxBackgroundManager : MonoBehaviour
         
         SetBackground(newBackground);
     }
+
+    public IEnumerator Teleport(string newBackground, GameObject Character, Vector2 Destination)
+    {
+        Transition.Activate();
+        yield return new WaitForSeconds(1.3f);
+        Character.transform.position = Destination;
+        if (currentBackground == INTRO)
+        {
+            IntroBG.SetActive(false);
+        }
+        else if (currentBackground == TOWN)
+        {
+            TownBG.SetActive(false);
+        }
+        else if (currentBackground == FOREST)
+        {
+            ForestBG.SetActive(false);
+        }
+        else if (currentBackground == CAVE)
+        {
+            CaveBG.SetActive(false);
+        }
+        else if (currentBackground == BASE_STATION)
+        {
+            BSBG.SetActive(false);
+        }
+        else if (currentBackground == SPACE_STATION)
+        {
+            SSBG.SetActive(false);
+        }
+
+        SetBackground(newBackground);
+    }
 }

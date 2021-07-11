@@ -75,16 +75,16 @@ public class DialogueManager : MonoBehaviour
                 }
                 else
                 {
-                    if (npc.Sequences[npc.sequenceNumber].hasTeleportCharacter)
+                    if (npc.Sequences[npc.sequenceNumber].teleport)
                     {
-                        character.transform.position = npc.Sequences[npc.sequenceNumber].characterV3;
+                        StopAllCoroutines();
+                        StartCoroutine(FindObjectOfType<ParallaxBackgroundManager>().Teleport(npc.Sequences[npc.sequenceNumber].newBG, character, npc.Sequences[npc.sequenceNumber].characterV2));
                     }
-                    if (npc.Sequences[npc.sequenceNumber].hasTeleportNPC)
+                    else
                     {
-                        gameObject.transform.position = npc.Sequences[npc.sequenceNumber].npcV3;
+                        npc.sequenceNumber++;
+                        StartConversation();
                     }
-                    npc.sequenceNumber++;
-                    StartConversation();
                 }
             }
             else if (npc.Sequences[npc.sequenceNumber].hasShop)

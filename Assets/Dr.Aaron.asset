@@ -39,10 +39,10 @@ MonoBehaviour:
     isStory: 0
     waitingQuest: 0
     justDialogue: 1
-    hasTeleportNPC: 0
-    npcV3: {x: 0, y: 0, z: 0}
-    hasTeleportCharacter: 0
-    characterV3: {x: 0, y: 0, z: 0}
+    hasHeal: 0
+    teleport: 0
+    newBG: 
+    characterV2: {x: 0, y: 0}
     dialogue:
     - Oh my god! What are you doing here? It's very dangerous down here !!
     - 'Thank god you''re here. You must have already defeated the Slime King right? '
@@ -75,10 +75,10 @@ MonoBehaviour:
     isStory: 1
     waitingQuest: 0
     justDialogue: 0
-    hasTeleportNPC: 0
-    npcV3: {x: 0, y: 0, z: 0}
-    hasTeleportCharacter: 0
-    characterV3: {x: 0, y: 0, z: 0}
+    hasHeal: 0
+    teleport: 0
+    newBG: 
+    characterV2: {x: 0, y: 0}
     dialogue:
     - I was doing some field research for the army on portal systems about a day
       ago or so. Things were as per normal at first.
@@ -112,10 +112,10 @@ MonoBehaviour:
     isStory: 0
     waitingQuest: 0
     justDialogue: 0
-    hasTeleportNPC: 0
-    npcV3: {x: 0, y: 0, z: 0}
-    hasTeleportCharacter: 0
-    characterV3: {x: 0, y: 0, z: 0}
+    hasHeal: 0
+    teleport: 0
+    newBG: 
+    characterV2: {x: 0, y: 0}
     dialogue:
     - Would you mind helping me to retrieve back that artifact? If I remember correctly,
       it was a red slime that stole by bag...
@@ -150,10 +150,10 @@ MonoBehaviour:
     isStory: 0
     waitingQuest: 1
     justDialogue: 0
-    hasTeleportNPC: 0
-    npcV3: {x: 0, y: 0, z: 0}
-    hasTeleportCharacter: 0
-    characterV3: {x: 0, y: 0, z: 0}
+    hasHeal: 0
+    teleport: 0
+    newBG: 
+    characterV2: {x: 0, y: 0}
     dialogue:
     - If only I hadn't let it slip from me...
     characterDialogue: []
@@ -181,16 +181,16 @@ MonoBehaviour:
     isStory: 1
     waitingQuest: 0
     justDialogue: 0
-    hasTeleportNPC: 1
-    npcV3: {x: -9.65, y: -1.26, z: 0}
-    hasTeleportCharacter: 1
-    characterV3: {x: -11.878, y: -1.444, z: 0}
+    hasHeal: 0
+    teleport: 1
+    newBG: Town
+    characterV2: {x: 171.4, y: -21.71}
     dialogue:
     - Oh my god! You found the artifact! I am deeply thankful for your help. This
       means a lot to me and the army.
     - God knows what they were going to do to me if I had lost this artifact. I might
       have even lost my life...
-    - Alrighty, let's go back and meet up with Johnson!!
+    - Alrighty, let's head back to Town !
     characterDialogue: []
   - Items: []
     Quest:
@@ -216,10 +216,10 @@ MonoBehaviour:
     isStory: 0
     waitingQuest: 1
     justDialogue: 0
-    hasTeleportNPC: 0
-    npcV3: {x: -9.65, y: -1.26, z: 0}
-    hasTeleportCharacter: 0
-    characterV3: {x: -11.878, y: -1.444, z: 0}
+    hasHeal: 0
+    teleport: 0
+    newBG: 
+    characterV2: {x: 0, y: 0}
     dialogue:
     - You should report to Johnson.
     characterDialogue: []

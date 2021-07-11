@@ -39,10 +39,10 @@ MonoBehaviour:
     isStory: 0
     waitingQuest: 0
     justDialogue: 1
-    hasTeleportNPC: 0
-    npcV3: {x: 0, y: 0, z: 0}
-    hasTeleportCharacter: 0
-    characterV3: {x: 0, y: 0, z: 0}
+    hasHeal: 0
+    teleport: 0
+    newBG: 
+    characterV2: {x: 0, y: 0}
     dialogue:
     - 'Morning Soldier! It''s your first day out in the field. You nervous? '
     - Great! That is the way young blood. Ahh, this reminds me of my first field
@@ -75,10 +75,10 @@ MonoBehaviour:
     isStory: 0
     waitingQuest: 0
     justDialogue: 1
-    hasTeleportNPC: 0
-    npcV3: {x: 0, y: 0, z: 0}
-    hasTeleportCharacter: 0
-    characterV3: {x: 0, y: 0, z: 0}
+    hasHeal: 0
+    teleport: 0
+    newBG: 
+    characterV2: {x: 0, y: 0}
     dialogue:
     - Let's begin. Xenonians out in the field communicate with a rock called Radio.
       Its attached to your helmet so I can talk to you from a distance throughout
@@ -112,10 +112,10 @@ MonoBehaviour:
     isStory: 1
     waitingQuest: 0
     justDialogue: 0
-    hasTeleportNPC: 0
-    npcV3: {x: 0, y: 0, z: 0}
-    hasTeleportCharacter: 0
-    characterV3: {x: 0, y: 0, z: 0}
+    hasHeal: 0
+    teleport: 0
+    newBG: 
+    characterV2: {x: 0, y: 0}
     dialogue:
     - Anyways, we are out here today to locate a missing person from our village.
     - This person is Dr Aaron, the pride of the village as a scientist. He was the
@@ -150,10 +150,10 @@ MonoBehaviour:
     isStory: 0
     waitingQuest: 0
     justDialogue: 0
-    hasTeleportNPC: 0
-    npcV3: {x: 0, y: 0, z: 0}
-    hasTeleportCharacter: 0
-    characterV3: {x: 0, y: 0, z: 0}
+    hasHeal: 0
+    teleport: 0
+    newBG: 
+    characterV2: {x: 0, y: 0}
     dialogue:
     - "That's pretty much the current situation. \nAre you ready for the mission?"
     - Excellent. I like that attitude!
@@ -188,10 +188,10 @@ MonoBehaviour:
     isStory: 0
     waitingQuest: 1
     justDialogue: 0
-    hasTeleportNPC: 0
-    npcV3: {x: 0, y: 0, z: 0}
-    hasTeleportCharacter: 0
-    characterV3: {x: 0, y: 0, z: 0}
+    hasHeal: 0
+    teleport: 0
+    newBG: 
+    characterV2: {x: 0, y: 0}
     dialogue:
     - Go on! There's no time to waste!
     characterDialogue: []
@@ -220,10 +220,10 @@ MonoBehaviour:
     isStory: 1
     waitingQuest: 0
     justDialogue: 0
-    hasTeleportNPC: 0
-    npcV3: {x: 0, y: 0, z: 0}
-    hasTeleportCharacter: 0
-    characterV3: {x: 0, y: 0, z: 0}
+    hasHeal: 0
+    teleport: 0
+    newBG: 
+    characterV2: {x: 0, y: 0}
     dialogue:
     - 'Great work soldier! You fought well. I''m glad to see Dr Aaron still alive
       and back with us. '
@@ -258,11 +258,11 @@ MonoBehaviour:
     isStory: 0
     waitingQuest: 1
     justDialogue: 0
-    hasTeleportNPC: 0
-    npcV3: {x: 0, y: 0, z: 0}
-    hasTeleportCharacter: 0
-    characterV3: {x: 0, y: 0, z: 0}
+    hasHeal: 0
+    teleport: 0
+    newBG: 
+    characterV2: {x: 0, y: 0}
     dialogue:
     - Go on, what are you waiting for? HAHA
     characterDialogue: []
-  sequenceNumber: 0
+  sequenceNumber: 4
