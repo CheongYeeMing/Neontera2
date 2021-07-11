@@ -5,6 +5,7 @@ using UnityEngine;
 public class FireWormFireball : MonoBehaviour
 {
     [SerializeField] protected float damage;
+    [SerializeField] protected ParticleSystem particle;
 
     protected Rigidbody2D body;
     private Animator animator;
@@ -28,6 +29,7 @@ public class FireWormFireball : MonoBehaviour
     {
         if (collision.gameObject.tag == "Character")
         {
+            Instantiate(particle, collision.gameObject.transform.position, transform.rotation);
             StartCoroutine(CollideCharacter(collision.gameObject));
         }
         else if (collision.gameObject.tag == "Invincible" && collision.gameObject.layer == 8)

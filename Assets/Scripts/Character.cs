@@ -31,12 +31,16 @@ public class Character : MonoBehaviour
 
     public void ShowInSelectedQuestWindow(Quest quest)
     {
+        FindObjectOfType<AudioManager>().StopEffect("SelectQuest");
+        FindObjectOfType<AudioManager>().PlayEffect("SelectQuest");
         selectedQuestWindow.gameObject.SetActive(true);
         selectedQuestWindow.QuestSelected(quest);
     }
 
     private void ShowInSelectedItemPanel(Item item)
     {
+        FindObjectOfType<AudioManager>().StopEffect("Click");
+        FindObjectOfType<AudioManager>().PlayEffect("Click");
         selectedItemPanel.item = item;
         if (item.itemType == Item.ItemType.Equipment && item is EquipableItem)
         {
@@ -72,6 +76,7 @@ public class Character : MonoBehaviour
 
     public void Equip(EquipableItem item)
     {
+        FindObjectOfType<AudioManager>().PlayEffect("EquipItem");
         if (inventory.RemoveItem(item))
         {
             EquipableItem previousItem;

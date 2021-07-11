@@ -34,6 +34,8 @@ public class Item : MonoBehaviour
 
     public void Interact()
     {
+        FindObjectOfType<AudioManager>().StopEffect("PickUp");
+        FindObjectOfType<AudioManager>().PlayEffect("PickUp");
         switch (interactType)
         {
             case InteractionType.PickUp:

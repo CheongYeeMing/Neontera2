@@ -84,6 +84,7 @@ public class CharacterLevel : MonoBehaviour
 
     public void LevelUp()
     {
+        FindObjectOfType<AudioManager>().PlayEffect("LevelUp");
         level++;
         frontExpBar.fillAmount = 0f;
         backExpBar.fillAmount = 0f;

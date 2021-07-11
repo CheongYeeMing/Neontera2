@@ -29,6 +29,8 @@ public class MechaGolemSummonerArmShard : BossSummoner
             }
             Quaternion angleAxis = Quaternion.AngleAxis(-angle, Vector3.forward);
             gameObject.GetComponent<MechaGolemAnimation>().ChangeAnimationState(MECHA_GOLEM_SHOOT);
+            FindObjectOfType<AudioManager>().StopEffect("MechaGolemArmShard");
+            FindObjectOfType<AudioManager>().PlayEffect("MechaGolemArmShard");
             Instantiate(prefab, new Vector3((float)(transform.position.x + Mathf.Sign(transform.localScale.x) * 2), transform.position.y - 0.8f, transform.position.z), angleAxis);
             if (target.position.x < transform.position.x)
             {

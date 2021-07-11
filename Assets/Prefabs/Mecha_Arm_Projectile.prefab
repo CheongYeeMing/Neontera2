@@ -166,3 +166,4 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   damage: 10
+  particle: {fileID: 5552541464811642879, guid: a116efb9dbb01ff4abd1b98eab0d947d, type: 3}

@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class SlimeRainProjectile : SlimeProjectile
 {
+    [SerializeField] protected ParticleSystem particle;
     // Start is called before the first frame update
     public override IEnumerator Start()
     {
@@ -19,7 +20,7 @@ public class SlimeRainProjectile : SlimeProjectile
     {
         if (collision.gameObject.tag == "Character")
         {
-            Debug.Log("Collided");
+            Instantiate(particle, collision.gameObject.transform.position, transform.rotation);
             StartCoroutine(CollideCharacter(collision.gameObject));
         }
         else if (collision.gameObject.tag == "Invincible" && collision.gameObject.layer == 8)

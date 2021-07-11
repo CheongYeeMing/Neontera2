@@ -23,6 +23,8 @@ public class InventorySystem : MonoBehaviour
 
     public void ToggleInventory()
     {
+        FindObjectOfType<AudioManager>().StopEffect("Open");
+        FindObjectOfType<AudioManager>().PlayEffect("Open");
         isOpen = !isOpen;
         if (FindObjectOfType<SelectedItemPanel>())
             FindObjectOfType<SelectedItemPanel>().gameObject.SetActive(false);

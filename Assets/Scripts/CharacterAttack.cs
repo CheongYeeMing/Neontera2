@@ -49,6 +49,7 @@ public class CharacterAttack : MonoBehaviour
     {
         isAttacking = true;
         gameObject.GetComponent<CharacterAnimation>().ChangeAnimationState(CHARACTER_ATTACK);
+        FindObjectOfType<AudioManager>().PlayEffect("CharacterNormalAttack");
         cooldownTimer = 0;
 
         Collider2D[] hitMobs = Physics2D.OverlapCircleAll(attackPoint.position, attackRange, mobLayer);
@@ -123,6 +124,7 @@ public class CharacterAttack : MonoBehaviour
     public void AttackComplete()
     {
         isAttacking = false;
+        FindObjectOfType<AudioManager>().StopEffect("CharacterNormalAttack");
     }
 
     public void OnDrawGizmosSelected()

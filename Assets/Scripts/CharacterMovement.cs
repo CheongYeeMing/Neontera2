@@ -8,6 +8,8 @@ public class CharacterMovement : MonoBehaviour
     [SerializeField] private LayerMask wallLayer;
     [SerializeField] private float speed;
     [SerializeField] private float jumpPower;
+    [SerializeField] ParticleSystem jumpDust;
+    [SerializeField] ParticleSystem walkDust;
 
     private BoxCollider2D boxCollider;
     private Rigidbody2D body;
@@ -29,6 +31,8 @@ public class CharacterMovement : MonoBehaviour
 
     private void FixedUpdate()
     {
+        if (isGrounded()) walkDust.gameObject.SetActive(true);
+        else walkDust.gameObject.SetActive(false);
         speed = GetComponent<Character>().GetSpeed().CalculateFinalValue();
         if (CanMove() == false)
         {
@@ -37,6 +41,14 @@ public class CharacterMovement : MonoBehaviour
             return;
         }
         horizontalInput = Input.GetAxis("Horizontal");
+
+        // Audio
+        if (isGrounded() && horizontalInput != 0)
+        {
+            FindObjectOfType<AudioManager>().PlayEffect("Run");
+        }
+        else FindObjectOfType<AudioManager>().StopEffect("Run");
+        if (isGrounded()) FindObjectOfType<AudioManager>().StopEffect("Jump");
 
         // Flip player when moving
         if (horizontalInput > 0.01f)
@@ -89,6 +101,11 @@ public class CharacterMovement : MonoBehaviour
         } 
     }
 
+    public void CreateDust()
+    {
+        jumpDust.Play();
+    }
+
     private void Jump()
     {
         if (isGrounded())
@@ -96,6 +113,8 @@ public class CharacterMovement : MonoBehaviour
             body.velocity = new Vector2(body.velocity.x, jumpPower);
             //animator.SetTrigger("jump");
             gameObject.GetComponent<CharacterAnimation>().ChangeAnimationState(CHARACTER_JUMP);
+            CreateDust();
+            FindObjectOfType<AudioManager>().PlayEffect("Jump");
         }
         else if (onWall() && !isGrounded())
         {
@@ -105,6 +124,8 @@ public class CharacterMovement : MonoBehaviour
             {
                 body.velocity = new Vector2(-Mathf.Sign(transform.localScale.x) * 10, jumpPower);
                 transform.localScale= new Vector3(-Mathf.Sign(transform.localScale.x) * 0.3f, transform.localScale.y, transform.localScale.z);
+                CreateDust();
+                FindObjectOfType<AudioManager>().PlayEffect("Jump");
             }
             else
             {

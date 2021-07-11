@@ -8,6 +8,7 @@ using TMPro;
 public class DialogueManager : MonoBehaviour
 {
     public NPC npc;
+    [SerializeField] GameObject NpcNameTag;
 
     public bool isTalking = false;
 
@@ -32,7 +33,7 @@ public class DialogueManager : MonoBehaviour
     [SerializeField] public SelectedQuestWindow selectedQuestWindow;
     [SerializeField] public ShopSelectedItemPanel shopSelectedItemPanel;
 
-    [SerializeField] public Image transition;
+    [SerializeField] public TransitionManager transition;
 
     // Start is called before the first frame update
     void Start()
@@ -42,6 +43,7 @@ public class DialogueManager : MonoBehaviour
 
     public void Update()
     {
+        NpcNameTag.transform.position = new Vector2(gameObject.transform.position.x, gameObject.transform.position.y - 1);
         if (!isTalking) return;
         if (Input.GetKeyDown(KeyCode.DownArrow))
         {
@@ -61,6 +63,8 @@ public class DialogueManager : MonoBehaviour
         }
         if (Input.GetKeyDown(KeyCode.Return))
         {
+            FindObjectOfType<AudioManager>().StopEffect("RetroClick");
+            FindObjectOfType<AudioManager>().PlayEffect("RetroClick");
             if (npc.Sequences[npc.sequenceNumber].isStory)
             {
                 if (currResponseTracker < npc.Sequences[npc.sequenceNumber].dialogue.Length - 1)
@@ -130,6 +134,21 @@ public class DialogueManager : MonoBehaviour
                     StartConversation();
                 }
             }
+            else if (npc.Sequences[npc.sequenceNumber].hasHeal)
+            {
+                if (currResponseTracker < npc.Sequences[npc.sequenceNumber].dialogue.Length - 1)
+                {
+                    StopAllCoroutines();
+                    StartCoroutine(TypeSentence(npc.Sequences[npc.sequenceNumber].dialogue[(int)currResponseTracker + 1]));
+                    HideCharacterResponseOption();
+                    HealCharacter();
+                    currResponseTracker++;
+                }
+                else
+                {
+                    TriggerDialogue();
+                }
+            }
         }
     }
 
@@ -150,6 +169,10 @@ public class DialogueManager : MonoBehaviour
     {
         animator.SetBool("IsOpen", true);
         isTalking = true;
+        FindObjectOfType<Character>().GetComponent<Rigidbody2D>().velocity = Vector2.zero;
+        FindObjectOfType<AudioManager>().StopEffect("Run");
+        FindObjectOfType<AudioManager>().StopEffect("DialogueMonologue");
+        FindObjectOfType<AudioManager>().PlayEffect("DialogueMonologue");
         currResponseTracker = 0;
         npcName.text = npc.npcName;
         npcFace.sprite = npc.icon;
@@ -215,7 +238,8 @@ public class DialogueManager : MonoBehaviour
     public void OpenShop()
     {
         if (!isTalking) return;
-        
+        FindObjectOfType<AudioManager>().StopEffect("Open");
+        FindObjectOfType<AudioManager>().PlayEffect("Open");
         ShopManager shopManager;
         if (currResponseTracker == 0 && gameObject.TryGetComponent<ShopManager>(out shopManager) == true && npc.Sequences[npc.sequenceNumber].hasShop)
         {
@@ -226,6 +250,8 @@ public class DialogueManager : MonoBehaviour
 
     public void CloseShop()
     {
+        FindObjectOfType<AudioManager>().StopEffect("Open");
+        FindObjectOfType<AudioManager>().PlayEffect("Open");
         ShopManager shopManager;
         if (gameObject.TryGetComponent<ShopManager>(out shopManager) == true)
         {
@@ -264,5 +290,11 @@ public class DialogueManager : MonoBehaviour
     {
         currResponseTracker = npc.Sequences[npc.sequenceNumber].dialogue.Length - 1;
         StartCoroutine(TypeSentence(npc.Sequences[npc.sequenceNumber].dialogue[(int)currResponseTracker]));
+    }
+
+    public void HealCharacter()
+    {
+        if (currResponseTracker != 0) return;
+        FindObjectOfType<CharacterHealth>().FullRestore();
     }
 }

@@ -5,6 +5,7 @@ using UnityEngine;
 public class HighEliteSoldierLaser : MonoBehaviour
 {
     [SerializeField] protected float damage;
+    [SerializeField] protected ParticleSystem particle;
 
     protected Rigidbody2D body;
 
@@ -26,8 +27,10 @@ public class HighEliteSoldierLaser : MonoBehaviour
 
     public virtual void OnTriggerEnter2D(Collider2D collision)
     {
+        Instantiate(particle, collision.gameObject.transform.position, transform.rotation);
         if (collision.gameObject.tag == "Character")
         {
+            StopAllCoroutines();
             StartCoroutine(CollideCharacter(collision.gameObject));
         }
         else if (collision.gameObject.tag == "Invincible" && collision.gameObject.layer == 8)
@@ -45,8 +48,9 @@ public class HighEliteSoldierLaser : MonoBehaviour
         body.velocity = Vector2.zero;
         character.GetComponent<CharacterHealth>().SetAttackedBy(gameObject);
         character.GetComponent<CharacterHealth>().TakeDamage(damage);
-        yield return new WaitForSeconds(0.3f);
+        yield return new WaitForSeconds(0);
         Destroy(gameObject);
+
     }
 
     public void CollideGround(GameObject ground)

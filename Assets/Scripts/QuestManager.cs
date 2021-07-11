@@ -19,9 +19,16 @@ public class QuestManager : MonoBehaviour
 
     public void ToggleQuestList()
     {
+        FindObjectOfType<AudioManager>().StopEffect("Open");
+        FindObjectOfType<AudioManager>().PlayEffect("Open");
         isOpen = !isOpen;
         if (FindObjectOfType<SelectedQuestWindow>())
             FindObjectOfType<SelectedQuestWindow>().gameObject.SetActive(false);
         AcceptedQuestWindow.SetActive(isOpen);
+    }
+
+    public void Close()
+    {
+        ToggleQuestList();
     }
 }

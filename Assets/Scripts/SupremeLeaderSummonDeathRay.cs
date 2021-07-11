@@ -14,6 +14,7 @@ public class SupremeLeaderSummonDeathRay : BossSummoner
     {
         gameObject.GetComponent<SupremeLeaderAnimation>().ChangeAnimationState(SUPREME_LEADER_DEATHRAY);
         yield return new WaitForSeconds(0.3f);
+        CinemachineShake.Instance.Shaking = true;
         for (int i = 1; i < 5; i++)
         {
             Transform target = GameObject.FindGameObjectWithTag("Character").transform;
@@ -22,6 +23,7 @@ public class SupremeLeaderSummonDeathRay : BossSummoner
             Instantiate(prefab, new Vector3(target.position.x, target.position.y, transform.position.z), Quaternion.identity);
             yield return new WaitForSeconds(0.3f);
         }
+        CinemachineShake.Instance.Shaking = false;
         gameObject.GetComponent<SupremeLeaderAttack>().SummonComplete();
     }
 }

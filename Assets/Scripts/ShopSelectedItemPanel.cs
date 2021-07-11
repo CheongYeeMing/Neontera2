@@ -52,6 +52,8 @@ public class ShopSelectedItemPanel : MonoBehaviour
     {
         if (FindObjectOfType<CharacterWallet>().HasEnoughGold(item.cost) && !inventory.IsFull())
         {
+            FindObjectOfType<AudioManager>().StopEffect("BuyItem");
+            FindObjectOfType<AudioManager>().PlayEffect("BuyItem");
             FindObjectOfType<CharacterWallet>().MinusGold(item.cost);
             if (item is EquipableItem)
             {

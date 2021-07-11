@@ -33,10 +33,17 @@ public class ParallaxBackgroundManager : MonoBehaviour
         SSBG.SetActive(false);
         currentBackground = Data.location;
         SetBackground(currentBackground);
+        
+    }
+
+    public void Start()
+    {
+        FindObjectOfType<AudioManager>().PlayMusic(currentBackground);
     }
 
     public void SetBackground(string newBackground)
     {
+        FindObjectOfType<AudioManager>().ChangeMusic(currentBackground, newBackground);
         currentBackground = newBackground;
         Data.location = currentBackground;
         if (newBackground == INTRO)
@@ -95,6 +102,7 @@ public class ParallaxBackgroundManager : MonoBehaviour
         {
             SSBG.SetActive(false);
         }
+        
         SetBackground(newBackground);
     }
 }

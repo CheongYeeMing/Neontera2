@@ -40,7 +40,7 @@ public class TurtleKingPathfindingAI : BossPathfindingAI
 
         direction = ((Vector2)path.vectorPath[currentWaypoint] - rb.position);
 
-        if (Mathf.Sign(GetComponent<TurtleKingMovement>().moveSpeed) != Mathf.Sign(direction.x) && Mathf.Abs(direction.x) > 0.1)
+        if (Mathf.Sign(GetComponent<TurtleKingMovement>().moveSpeed) != Mathf.Sign(direction.x) && Mathf.Abs(direction.x) > 0.5)
         {
             GetComponent<TurtleKingMovement>().Flip();
         }

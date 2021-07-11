@@ -6,6 +6,10 @@ public static class Data
 {
     public static int playerId;
 
+    // Audio Manager
+    public static float musicVolume = 0.5f;
+    public static float effectsVolume = 0.5f;
+
     // Character Stats
     public static int level = 1;
     public static float gold = 10;
@@ -16,7 +20,7 @@ public static class Data
 
     public static float Xcoordinate;
     public static float Ycoordinate;
-    public static string location = "Space Station";
+    public static string location = "Base Station";
 
     // Character Equipped Items
     public static EquipmentSlot[] equipmentSlots = new EquipmentSlot[4];

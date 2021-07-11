@@ -68,6 +68,7 @@ public class SelectedQuestWindow : MonoBehaviour
 
     public void AcceptQuest()
     {
+        FindObjectOfType<AudioManager>().PlayEffect("QuestAccepted");
         dialogueManager.QuestAccepted();
         questList.AddQuest(quest);
         quest.status = Quest.Status.ONGOING;
@@ -99,11 +100,15 @@ public class SelectedQuestWindow : MonoBehaviour
 
     public void ContinueQuest()
     {
+        FindObjectOfType<AudioManager>().StopEffect("Open");
+        FindObjectOfType<AudioManager>().PlayEffect("Open");
         gameObject.SetActive(false);
     }
 
     public void CompleteQuest()
     {
+        FindObjectOfType<AudioManager>().StopEffect("QuestComplete");
+        FindObjectOfType<AudioManager>().PlayEffect("QuestComplete");
         if (quest.questCriteria.criteriaType == CriteriaType.Collect && item != null)
             inventory.RemoveItem(item);
         quest.npc.sequenceNumber++;

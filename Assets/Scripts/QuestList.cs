@@ -76,4 +76,6 @@ public class QuestList : MonoBehaviour
     {
         return quests.Count >= questSlots.Length;
     }
+
+    
 }

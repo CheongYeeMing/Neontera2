@@ -23,6 +23,7 @@ public class ConsumableItem : Item
 
     public void Consume(Character c)
     {
+        FindObjectOfType<AudioManager>().PlayEffect("ConsumeItem");
         if (consumableType == ConsumableType.Instant)
         {
             Heal(c);
@@ -36,6 +37,7 @@ public class ConsumableItem : Item
 
     public void Heal(Character c)
     {
+        FindObjectOfType<AudioManager>().PlayEffect("CharacterHeal");
         c.gameObject.GetComponent<CharacterHealth>().RestoreHealth(healAmount);
     }
 

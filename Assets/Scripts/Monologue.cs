@@ -37,6 +37,8 @@ public class Monologue : MonoBehaviour
         if (!IsExamining()) return;
         if (Input.GetKeyDown(KeyCode.Return))
         {
+            FindObjectOfType<AudioManager>().StopEffect("RetroClick");
+            FindObjectOfType<AudioManager>().PlayEffect("RetroClick");
             if (requireKey)
             {
                 if (!HasKey())
@@ -98,6 +100,10 @@ public class Monologue : MonoBehaviour
         }
         else
         {
+            FindObjectOfType<Character>().GetComponent<Rigidbody2D>().velocity = Vector2.zero;
+            FindObjectOfType<AudioManager>().StopEffect("Run");
+            FindObjectOfType<AudioManager>().StopEffect("DialogueMonologue");
+            FindObjectOfType<AudioManager>().PlayEffect("DialogueMonologue");
             if (!isThoughts)
                 examineImage.sprite = npc.icon;
             // Write description text on the right side of image

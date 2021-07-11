@@ -26,6 +26,7 @@ public class TransitionManager : MonoBehaviour
 
     public void Activate()
     {
+        gameObject.SetActive(true);
         animator.SetTrigger("FadeIn");
     }
 

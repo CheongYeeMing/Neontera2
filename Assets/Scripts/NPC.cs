@@ -25,6 +25,7 @@ public class NPC : ScriptableObject
         public Vector3 npcV3;
         public bool hasTeleportCharacter;
         public Vector3 characterV3;
+        public bool hasHeal;
         
         [TextArea(3, 15)]
         public string[] dialogue;

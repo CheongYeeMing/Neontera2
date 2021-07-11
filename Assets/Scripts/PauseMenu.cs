@@ -20,6 +20,8 @@ public class PauseMenu : MonoBehaviour
     {
         if (Input.GetKeyDown(KeyCode.Escape))
         {
+            FindObjectOfType<AudioManager>().StopEffect("Open");
+            FindObjectOfType<AudioManager>().PlayEffect("Open");
             if (isPaused)
             {
                 isPaused = false;
@@ -36,10 +38,34 @@ public class PauseMenu : MonoBehaviour
     }
     public void Save()
     {
-
+        FindObjectOfType<AudioManager>().StopEffect("Click");
+        FindObjectOfType<AudioManager>().PlayEffect("Click");
     }
     public void Quit()
     {
+        FindObjectOfType<AudioManager>().StopEffect("Click");
+        FindObjectOfType<AudioManager>().PlayEffect("Click");
         SceneManager.LoadScene(1); // Return to Start Menu
+    }
+
+    public void Resume()
+    {
+        FindObjectOfType<AudioManager>().StopEffect("Click");
+        FindObjectOfType<AudioManager>().PlayEffect("Click");
+        FindObjectOfType<AudioManager>().StopEffect("Open");
+        FindObjectOfType<AudioManager>().PlayEffect("Open");
+        if (isPaused)
+        {
+            isPaused = false;
+            pauseMenu.SetActive(false);
+            Time.timeScale = 1f;
+        }
+        else
+        {
+            isPaused = true;
+            pauseMenu.SetActive(true);
+            Time.timeScale = 0f;
+        }
+
     }
 }

@@ -36,6 +36,8 @@ public class Portal : MonoBehaviour
     {
         if (isActivated)
         {
+            FindObjectOfType<AudioManager>().StopEffect("Portal");
+            FindObjectOfType<AudioManager>().PlayEffect("Portal");
             StopAllCoroutines();
             StartCoroutine(Character.GetComponent<ParallaxBackgroundManager>().ChangeBackground(Destination.Location, Character, Destination));
         }
