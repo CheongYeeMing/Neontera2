@@ -9,6 +9,7 @@ public class Portal : MonoBehaviour
     [SerializeField] string Location;
 
     [SerializeField]  bool isActivated;
+    [SerializeField] GameObject PortalNameTag;
 
     Animator animator;
 
@@ -21,6 +22,7 @@ public class Portal : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        PortalNameTag.transform.position = new Vector2(gameObject.transform.position.x, gameObject.transform.position.y - 1.2f);
         if (isActivated)
         {
             animator.SetTrigger("Activate");

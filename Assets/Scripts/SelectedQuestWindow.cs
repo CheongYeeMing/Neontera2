@@ -122,7 +122,7 @@ public class SelectedQuestWindow : MonoBehaviour
         // Some Quest to be reset
         if (quest.canRepeat == true)
         {
-            quest.Reset();
+            quest.FinalReset();
         }
         // Some Quest can only be done once then move on to next Quest already
 

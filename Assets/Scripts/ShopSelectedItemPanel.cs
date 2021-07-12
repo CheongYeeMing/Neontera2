@@ -50,6 +50,8 @@ public class ShopSelectedItemPanel : MonoBehaviour
 
     public void BuyItem()
     {
+        FindObjectOfType<AudioManager>().StopEffect("Click");
+        FindObjectOfType<AudioManager>().PlayEffect("Click");
         if (FindObjectOfType<CharacterWallet>().HasEnoughGold(item.cost) && !inventory.IsFull())
         {
             FindObjectOfType<AudioManager>().StopEffect("BuyItem");
@@ -68,7 +70,17 @@ public class ShopSelectedItemPanel : MonoBehaviour
         }
         else
         {
+            FindObjectOfType<AudioManager>().StopEffect("Warning");
+            FindObjectOfType<AudioManager>().PlayEffect("Warning");
             InsufficientGoldWindow.gameObject.SetActive(true);
         }
+    }
+
+    public void CloseInsufficientGoldWindow()
+    {
+        FindObjectOfType<AudioManager>().StopEffect("Warning");
+        FindObjectOfType<AudioManager>().StopEffect("Click");
+        FindObjectOfType<AudioManager>().PlayEffect("Click");
+        InsufficientGoldWindow.gameObject.SetActive(false);
     }
 }

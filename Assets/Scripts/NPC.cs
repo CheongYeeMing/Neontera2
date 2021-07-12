@@ -19,6 +19,8 @@ public class NPC : ScriptableObject
         public bool hasShop;
         public bool hasQuest;
         public bool isStory;
+        public bool isEnd;
+        public bool repeatableQuest;
         public bool waitingQuest;
         public bool justDialogue;
         public bool hasHeal;

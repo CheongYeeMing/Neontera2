@@ -37,6 +37,7 @@ MonoBehaviour:
     hasShop: 0
     hasQuest: 0
     isStory: 0
+    isEnd: 0
     waitingQuest: 0
     justDialogue: 1
     hasHeal: 0
@@ -73,6 +74,7 @@ MonoBehaviour:
     hasShop: 0
     hasQuest: 0
     isStory: 0
+    isEnd: 0
     waitingQuest: 0
     justDialogue: 1
     hasHeal: 0
@@ -90,10 +92,10 @@ MonoBehaviour:
     - TESTING! TESTING ONE TWO THREE!!!
   - Items: []
     Quest:
-      npc: {fileID: 0}
+      npc: {fileID: 11400000, guid: 08dec4fb2fb6af941af76cf46a2464dc, type: 2}
       isActive: 0
       canRepeat: 0
-      status: 0
+      status: 2
       title: 
       description: 
       questCriteria:
@@ -110,6 +112,7 @@ MonoBehaviour:
     hasShop: 0
     hasQuest: 0
     isStory: 1
+    isEnd: 0
     waitingQuest: 0
     justDialogue: 0
     hasHeal: 0
@@ -130,7 +133,7 @@ MonoBehaviour:
       npc: {fileID: 11400000}
       isActive: 1
       canRepeat: 0
-      status: 1
+      status: 2
       title: Save The Scientist
       description: The intel seems to tell us that Dr Aaron somewhere in this cave
         nearby. We got to act fast before something bad happens.
@@ -148,6 +151,7 @@ MonoBehaviour:
     hasShop: 0
     hasQuest: 1
     isStory: 0
+    isEnd: 0
     waitingQuest: 0
     justDialogue: 0
     hasHeal: 0
@@ -186,6 +190,7 @@ MonoBehaviour:
     hasShop: 0
     hasQuest: 0
     isStory: 0
+    isEnd: 0
     waitingQuest: 1
     justDialogue: 0
     hasHeal: 0
@@ -218,6 +223,7 @@ MonoBehaviour:
     hasShop: 0
     hasQuest: 0
     isStory: 1
+    isEnd: 0
     waitingQuest: 0
     justDialogue: 0
     hasHeal: 0
@@ -256,6 +262,7 @@ MonoBehaviour:
     hasShop: 0
     hasQuest: 0
     isStory: 0
+    isEnd: 0
     waitingQuest: 1
     justDialogue: 0
     hasHeal: 0
@@ -265,4 +272,4 @@ MonoBehaviour:
     dialogue:
     - Go on, what are you waiting for? HAHA
     characterDialogue: []
-  sequenceNumber: 4
+  sequenceNumber: 0

@@ -52,4 +52,11 @@ public class Quest
         status = Status.WAITING;
         questCriteria.currentAmount = 0;
     }
+
+    public void FinalReset()
+    {
+        status = Status.WAITING;
+        questCriteria.currentAmount = 0;
+        npc.sequenceNumber -= 2;
+    }
 }

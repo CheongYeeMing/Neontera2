@@ -149,6 +149,27 @@ public class DialogueManager : MonoBehaviour
                     TriggerDialogue();
                 }
             }
+            else if (npc.Sequences[npc.sequenceNumber].isEnd)
+            {
+                if (npc.Sequences[npc.sequenceNumber].repeatableQuest)
+                {
+                    if (currResponseTracker < npc.Sequences[npc.sequenceNumber].dialogue.Length)
+                    {
+                        StopAllCoroutines();
+                        StartCoroutine(TypeSentence(npc.Sequences[npc.sequenceNumber].dialogue[(int)currResponseTracker + 1]));
+                        HideCharacterResponseOption();
+                        OpenQuestWindow();
+                    }
+                    else
+                    {
+                        TriggerDialogue();
+                    }
+                }
+                else // Just story
+                {
+
+                }
+            }
         }
     }
 
@@ -252,6 +273,8 @@ public class DialogueManager : MonoBehaviour
     {
         FindObjectOfType<AudioManager>().StopEffect("Open");
         FindObjectOfType<AudioManager>().PlayEffect("Open");
+        FindObjectOfType<AudioManager>().StopEffect("Click");
+        FindObjectOfType<AudioManager>().PlayEffect("Click");
         ShopManager shopManager;
         if (gameObject.TryGetComponent<ShopManager>(out shopManager) == true)
         {
@@ -282,6 +305,8 @@ public class DialogueManager : MonoBehaviour
     public void QuestAccepted()
     {
         currResponseTracker = npc.Sequences[npc.sequenceNumber].dialogue.Length - 2;
+        Debug.Log(npc.Sequences[npc.sequenceNumber].dialogue.Length);
+        Debug.Log(npc.sequenceNumber);
         StartCoroutine(TypeSentence(npc.Sequences[npc.sequenceNumber].dialogue[(int)currResponseTracker]));
         npc.sequenceNumber++;
     }
