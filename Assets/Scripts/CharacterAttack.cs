@@ -138,7 +138,8 @@ public class CharacterAttack : MonoBehaviour
     {
         gameObject.GetComponent<CharacterAnimation>().ChangeAnimationState(CHARACTER_SPECIAL_ATTACK);
         cooldownTimer = 0;
-
+        FindObjectOfType<AudioManager>().StopEffect("CharacterLaser");
+        FindObjectOfType<AudioManager>().PlayEffect("CharacterLaser");
         GameObject fireBall = Instantiate(fireball, firePoint.transform.position, Quaternion.identity) as GameObject;
         fireBall.GetComponent<Projectile>().damage = (float)(gameObject.GetComponent<Character>().GetAttack().CalculateFinalValue()*0.75);
         fireBall.GetComponent<Rigidbody2D>().velocity = new Vector2(Mathf.Sign(transform.localScale.x) * 15.0f, 0);

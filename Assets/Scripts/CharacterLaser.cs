@@ -12,6 +12,9 @@ public class CharacterLaser : Projectile
         {
             if (collision.gameObject.layer == 11) Instantiate(particle, collision.gameObject.transform.position, transform.rotation);
             else Instantiate(particle, transform.position, transform.rotation);
+            FindObjectOfType<AudioManager>().StopEffect("CharacterLaser");
+            FindObjectOfType<AudioManager>().StopEffect("CharacterLaserExplode");
+            FindObjectOfType<AudioManager>().PlayEffect("CharacterLaserExplode");
             StartCoroutine(Collide(collision.gameObject));
         }
     }
