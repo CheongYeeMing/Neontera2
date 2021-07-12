@@ -58,11 +58,14 @@ public class SelectedQuestWindow : MonoBehaviour
         }
         else if (quest.status == Quest.Status.COMPLETED)
         {
-            AbandonQuestButton.gameObject.SetActive(true);
-            ContinueQuestButton.gameObject.SetActive(false);
-            CompleteQuestButton.gameObject.SetActive(true);
-            AcceptQuestButton.gameObject.SetActive(false);
-            DeclineQuestButton.gameObject.SetActive(false);
+            //AbandonQuestButton.gameObject.SetActive(true);
+            //ContinueQuestButton.gameObject.SetActive(false);
+            //CompleteQuestButton.gameObject.SetActive(true);
+            //AcceptQuestButton.gameObject.SetActive(false);
+            //DeclineQuestButton.gameObject.SetActive(false);
+
+            //Auto Complete Quest
+            CompleteQuest();
         }
     }
 

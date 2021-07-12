@@ -37,12 +37,21 @@ MonoBehaviour:
     hasShop: 0
     hasQuest: 0
     isStory: 1
+    isEnd: 0
+    repeatableQuest: 0
     waitingQuest: 0
     justDialogue: 0
     hasHeal: 0
+    backToNormal: 0
+    sequenceNum: 0
+    activatePortal: 0
+    destination: 
+    triggerBoss: 0
     teleport: 0
     newBG: 
     characterV2: {x: 0, y: 0}
+    removeItem: 0
+    itemName: 
     dialogue:
     - Oh hello, good to see you! It's rare that we get any visitors up here... as
       you can see it's not very accessible...
@@ -75,12 +84,21 @@ MonoBehaviour:
     hasShop: 1
     hasQuest: 0
     isStory: 0
+    isEnd: 0
+    repeatableQuest: 0
     waitingQuest: 0
     justDialogue: 0
     hasHeal: 0
+    backToNormal: 0
+    sequenceNum: 0
+    activatePortal: 0
+    destination: 
+    triggerBoss: 0
     teleport: 0
     newBG: 
     characterV2: {x: 0, y: 0}
+    removeItem: 0
+    itemName: 
     dialogue:
     - Welcome to the Well-Ordered Lab. Are you looking for any consmables or potions?
     - C'mon in, I'll show you my latest concoctions >:)
@@ -89,4 +107,231 @@ MonoBehaviour:
     characterDialogue:
     - Yes, please show me your creation!
     - Nope, just looking around ~
+  - Items:
+    - {fileID: 8177623600617057691, guid: f4cd1c3d359f38743ba95f19bc13ac24, type: 3}
+    Quest:
+      npc: {fileID: 0}
+      isActive: 0
+      canRepeat: 0
+      status: 0
+      title: 
+      description: 
+      questCriteria:
+        criteriaType: 0
+        action: 
+        Target: 
+        requiredAmount: 0
+        currentAmount: 0
+      expReward: 0
+      goldReward: 0
+      itemReward: {fileID: 0}
+      questItem: {fileID: 0}
+      location: {x: 0, y: 0, z: 0}
+    hasShop: 0
+    hasQuest: 0
+    isStory: 0
+    isEnd: 0
+    repeatableQuest: 0
+    waitingQuest: 0
+    justDialogue: 1
+    hasHeal: 0
+    backToNormal: 0
+    sequenceNum: 0
+    activatePortal: 0
+    destination: 
+    triggerBoss: 0
+    teleport: 0
+    newBG: 
+    characterV2: {x: 0, y: 0}
+    removeItem: 0
+    itemName: 
+    dialogue:
+    - Hey, you here to look for supplements for your next mission?
+    - No? Oh what's that red thing you got there?? Looks like some ancient artifact
+      I've yet to encounter in my years of study!!
+    - No? Oh what's that red thing you got there?? Looks like some ancient artifact
+      I've yet to encounter in my years of study!!
+    characterDialogue:
+    - No, I found a red stone in the cave.
+    - I have something you need to see.
+  - Items:
+    - {fileID: 8177623600617057691, guid: f4cd1c3d359f38743ba95f19bc13ac24, type: 3}
+    Quest:
+      npc: {fileID: 0}
+      isActive: 0
+      canRepeat: 0
+      status: 0
+      title: 
+      description: 
+      questCriteria:
+        criteriaType: 0
+        action: 
+        Target: 
+        requiredAmount: 0
+        currentAmount: 0
+      expReward: 0
+      goldReward: 0
+      itemReward: {fileID: 0}
+      questItem: {fileID: 0}
+      location: {x: 0, y: 0, z: 0}
+    hasShop: 0
+    hasQuest: 0
+    isStory: 1
+    isEnd: 0
+    repeatableQuest: 0
+    waitingQuest: 0
+    justDialogue: 0
+    hasHeal: 0
+    backToNormal: 0
+    sequenceNum: 0
+    activatePortal: 0
+    destination: 
+    triggerBoss: 0
+    teleport: 0
+    newBG: 
+    characterV2: {x: 0, y: 0}
+    removeItem: 0
+    itemName: 
+    dialogue:
+    - On closer inspection, this seems like an artifact that has the effect to affect
+      one's emotions. I think this might have triggered the animals in the forest...
+      which resulted in increased aggression.
+    - I'd very much like to do more research on that artifact... but the army is
+      chasing me for portal technology. I'm afraid I cannot help you just yet.
+    characterDialogue: []
+  - Items:
+    - {fileID: 8177623600617057691, guid: f4cd1c3d359f38743ba95f19bc13ac24, type: 3}
+    Quest:
+      npc: {fileID: 11400000}
+      isActive: 0
+      canRepeat: 0
+      status: 1
+      title: Red Artifact
+      description: This mysterious stone seems to be manipulating the emotions of
+        the forest animals. Better to hand it over to Dr Aaron...
+      questCriteria:
+        criteriaType: 1
+        action: Red Artifact
+        Target: Red Artifact
+        requiredAmount: 1
+        currentAmount: 1
+      expReward: 0
+      goldReward: 0
+      itemReward: {fileID: 0}
+      questItem: {fileID: 0}
+      location: {x: 0, y: 0, z: 0}
+    hasShop: 0
+    hasQuest: 0
+    isStory: 1
+    isEnd: 0
+    repeatableQuest: 0
+    waitingQuest: 0
+    justDialogue: 0
+    hasHeal: 0
+    backToNormal: 0
+    sequenceNum: 1
+    activatePortal: 0
+    destination: 
+    triggerBoss: 0
+    teleport: 0
+    newBG: 
+    characterV2: {x: 0, y: 0}
+    removeItem: 1
+    itemName: 
+    dialogue:
+    - If you dont mind, will you hand over the Red Artifact, I will make sure to
+      keep it safe here.
+    - 'Excellent! '
+    - I hope you change your mind...
+    - I promise to keep it safe in my lab!
+    - I hope you change your mind...
+    characterDialogue:
+    - Sure, I have no use for this piece of rock anyways..
+    - No, it's mine why should I hand it over??
+  - Items:
+    - {fileID: 8177623600617057691, guid: f4cd1c3d359f38743ba95f19bc13ac24, type: 3}
+    Quest:
+      npc: {fileID: 0}
+      isActive: 0
+      canRepeat: 0
+      status: 0
+      title: 
+      description: 
+      questCriteria:
+        criteriaType: 0
+        action: 
+        Target: 
+        requiredAmount: 0
+        currentAmount: 0
+      expReward: 0
+      goldReward: 0
+      itemReward: {fileID: 0}
+      questItem: {fileID: 0}
+      location: {x: 0, y: 0, z: 0}
+    hasShop: 0
+    hasQuest: 0
+    isStory: 1
+    isEnd: 0
+    repeatableQuest: 0
+    waitingQuest: 0
+    justDialogue: 0
+    hasHeal: 0
+    backToNormal: 1
+    sequenceNum: 1
+    activatePortal: 0
+    destination: 
+    triggerBoss: 0
+    teleport: 0
+    newBG: 
+    characterV2: {x: 0, y: 0}
+    removeItem: 0
+    itemName: 
+    dialogue:
+    - Don't worry, the artifact will be safe in my hands!
+    characterDialogue: []
+  - Items:
+    - {fileID: 8177623600617057691, guid: f4cd1c3d359f38743ba95f19bc13ac24, type: 3}
+    Quest:
+      npc: {fileID: 0}
+      isActive: 0
+      canRepeat: 0
+      status: 0
+      title: 
+      description: 
+      questCriteria:
+        criteriaType: 0
+        action: 
+        Target: 
+        requiredAmount: 0
+        currentAmount: 0
+      expReward: 0
+      goldReward: 0
+      itemReward: {fileID: 0}
+      questItem: {fileID: 0}
+      location: {x: 0, y: 0, z: 0}
+    hasShop: 0
+    hasQuest: 0
+    isStory: 0
+    isEnd: 0
+    repeatableQuest: 0
+    waitingQuest: 0
+    justDialogue: 1
+    hasHeal: 0
+    backToNormal: 0
+    sequenceNum: 0
+    activatePortal: 0
+    destination: 
+    triggerBoss: 0
+    teleport: 0
+    newBG: 
+    characterV2: {x: 0, y: 0}
+    removeItem: 0
+    itemName: 
+    dialogue:
+    - Oh thank god you're here!
+    - I lost the artifact... the one where you retrieved for me back at slime forest...
+    - 'Thank you for coming up here! The artifact has been stolen by someone... '
+    characterDialogue:
+    - What happened?? I heard you lost something...
+    - Johnson sent me here again...
   sequenceNumber: 1

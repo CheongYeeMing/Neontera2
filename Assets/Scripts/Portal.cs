@@ -5,10 +5,10 @@ using UnityEngine.SceneManagement;
 
 public class Portal : MonoBehaviour
 {
-    [SerializeField] Portal Destination;
-    [SerializeField] string Location;
+    [SerializeField] public Portal Destination;
+    [SerializeField] public string Location;
 
-    [SerializeField]  bool isActivated;
+    [SerializeField] public bool isActivated;
     [SerializeField] GameObject PortalNameTag;
 
     Animator animator;

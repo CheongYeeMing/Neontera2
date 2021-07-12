@@ -25,6 +25,9 @@ public class Monologue : MonoBehaviour
     [SerializeField] bool triggerAgain;
     int currTextNumber;
 
+    [SerializeField] bool activateBoss;
+    [SerializeField] GameObject boss;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -97,6 +100,12 @@ public class Monologue : MonoBehaviour
         {
             examineWindow.SetActive(false);
             isExamining = false;
+            if (activateBoss)
+            {
+                boss.GetComponent<BossAttack>().enabled = true;
+                boss.GetComponent<BossHealth>().enabled = true;
+                boss.GetComponent<BossMovement>().enabled = true;
+            }
         }
         else
         {
@@ -113,8 +122,16 @@ public class Monologue : MonoBehaviour
             examineWindow.SetActive(true);
             // Enable the boolean
             isExamining = true;
+            if (activateBoss)
+            {
+                boss.gameObject.SetActive(true);
+                boss.GetComponent<BossAttack>().enabled = false;
+                boss.GetComponent<BossHealth>().enabled = false;
+                boss.GetComponent<BossMovement>().enabled = false;
+            }
         }
     }
+
 
     public IEnumerator TypeSentence(string sentence)
     {

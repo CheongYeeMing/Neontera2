@@ -25,9 +25,20 @@ public class NPC : ScriptableObject
         public bool justDialogue;
         public bool hasHeal;
 
+        public bool backToNormal;
+        public int sequenceNum;
+
+        public bool activatePortal;
+        public string destination;
+
+        public bool triggerBoss;
+
         public bool teleport;
         public string newBG;
         public Vector2 characterV2;
+
+        public bool removeItem;
+        public Item item;
 
         [TextArea(3, 15)]
         public string[] dialogue;

@@ -6,6 +6,9 @@ using TMPro;
 
 public class TurtleKingHealth : BossHealth
 {
+    [SerializeField] NPC DrAaron;
+    [SerializeField] Monologue RedArtifactMonologue;
+
     // Start is called before the first frame update
     public override void Start()
     {
@@ -89,6 +92,9 @@ public class TurtleKingHealth : BossHealth
         Debug.Log("Mob is dead!!!");
         gameObject.GetComponent<TurtleKingAnimation>().ChangeAnimationState(BOSS_DIE);
         gameObject.GetComponent<Rigidbody2D>().gravityScale = 0;
+        RedArtifactMonologue.gameObject.transform.position = FindObjectOfType<Character>().gameObject.transform.position;
+        RedArtifactMonologue.gameObject.SetActive(true);
+        DrAaron.sequenceNumber = 2;
         foreach (Collider2D collider in GetComponents<Collider2D>())
         {
             collider.enabled = false;

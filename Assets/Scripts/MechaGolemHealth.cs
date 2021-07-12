@@ -6,6 +6,8 @@ using TMPro;
 
 public class MechaGolemHealth : BossHealth
 {
+    [SerializeField] GameObject injuredSoldier;
+    [SerializeField] NPC DrAaron;
     // Start is called before the first frame update
     public override void Start()
     {
@@ -89,6 +91,8 @@ public class MechaGolemHealth : BossHealth
         Debug.Log("Mob is dead!!!");
         gameObject.GetComponent<MechaGolemAnimation>().ChangeAnimationState(BOSS_DIE);
         gameObject.GetComponent<Rigidbody2D>().gravityScale = 0;
+        injuredSoldier.gameObject.SetActive(false);
+        DrAaron.sequenceNumber = 4;
         foreach (Collider2D collider in GetComponents<Collider2D>())
         {
             collider.enabled = false;

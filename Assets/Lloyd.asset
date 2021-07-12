@@ -42,9 +42,16 @@ MonoBehaviour:
     waitingQuest: 0
     justDialogue: 1
     hasHeal: 0
+    backToNormal: 0
+    sequenceNum: 0
+    activatePortal: 0
+    destination: 
+    triggerBoss: 0
     teleport: 0
     newBG: 
     characterV2: {x: 0, y: 0}
+    removeItem: 0
+    itemName: 
     dialogue:
     - Hi,  my name is Lloyd and I am the keeper of this forest. It is rare to see
       someone this young come here all alone from the Town. What are you doing here?
@@ -82,9 +89,16 @@ MonoBehaviour:
     waitingQuest: 0
     justDialogue: 0
     hasHeal: 0
+    backToNormal: 0
+    sequenceNum: 0
+    activatePortal: 0
+    destination: 
+    triggerBoss: 0
     teleport: 0
     newBG: 
     characterV2: {x: 0, y: 0}
+    removeItem: 0
+    itemName: 
     dialogue:
     - I'm sure you've heard about the situation here. It's not looking too good at
       the moment.
@@ -121,9 +135,16 @@ MonoBehaviour:
     waitingQuest: 0
     justDialogue: 0
     hasHeal: 0
+    backToNormal: 0
+    sequenceNum: 0
+    activatePortal: 0
+    destination: 
+    triggerBoss: 0
     teleport: 0
     newBG: 
     characterV2: {x: 0, y: 0}
+    removeItem: 0
+    itemName: 
     dialogue:
     - I will need you to take out some centipedes first. Their numbers seem to have
       sky rocketed recently. You ready for the first task?
@@ -162,9 +183,16 @@ MonoBehaviour:
     waitingQuest: 1
     justDialogue: 0
     hasHeal: 0
+    backToNormal: 0
+    sequenceNum: 0
+    activatePortal: 0
+    destination: 
+    triggerBoss: 0
     teleport: 0
     newBG: 
     characterV2: {x: 0, y: 0}
+    removeItem: 0
+    itemName: 
     dialogue:
     - We need to be quick before their numbers increase anymore!!!
     characterDialogue: []
@@ -196,9 +224,16 @@ MonoBehaviour:
     waitingQuest: 0
     justDialogue: 0
     hasHeal: 0
+    backToNormal: 0
+    sequenceNum: 0
+    activatePortal: 0
+    destination: 
+    triggerBoss: 0
     teleport: 0
     newBG: 
     characterV2: {x: 0, y: 0}
+    removeItem: 0
+    itemName: 
     dialogue:
     - Wow, that was pretty quick I must say. You are really efficient!
     - Now that we have cleared the way, we can dive deeper into the forest.
@@ -234,9 +269,16 @@ MonoBehaviour:
     waitingQuest: 0
     justDialogue: 0
     hasHeal: 0
+    backToNormal: 0
+    sequenceNum: 0
+    activatePortal: 0
+    destination: 
+    triggerBoss: 0
     teleport: 0
     newBG: 
     characterV2: {x: 0, y: 0}
+    removeItem: 0
+    itemName: 
     dialogue:
     - 'I will need you to help me retrieve my staff. If I remember correctly, I dropped
       it before leaving a high platform. '
@@ -275,9 +317,16 @@ MonoBehaviour:
     waitingQuest: 1
     justDialogue: 0
     hasHeal: 0
+    backToNormal: 0
+    sequenceNum: 0
+    activatePortal: 0
+    destination: 
+    triggerBoss: 0
     teleport: 0
     newBG: 
     characterV2: {x: 0, y: 0}
+    removeItem: 0
+    itemName: 
     dialogue:
     - I am useless without my staff...
     characterDialogue: []
@@ -309,9 +358,16 @@ MonoBehaviour:
     waitingQuest: 0
     justDialogue: 0
     hasHeal: 0
+    backToNormal: 0
+    sequenceNum: 0
+    activatePortal: 0
+    destination: 
+    triggerBoss: 1
     teleport: 0
     newBG: 
     characterV2: {x: 0, y: 0}
+    removeItem: 0
+    itemName: 
     dialogue:
     - 'OH THANK GOD YOU RETRIEVED IT! '
     characterDialogue: []
@@ -344,9 +400,16 @@ MonoBehaviour:
     waitingQuest: 0
     justDialogue: 0
     hasHeal: 0
+    backToNormal: 0
+    sequenceNum: 0
+    activatePortal: 0
+    destination: 
+    triggerBoss: 0
     teleport: 0
     newBG: 
     characterV2: {x: 0, y: 0}
+    removeItem: 0
+    itemName: 
     dialogue:
     - There seems to be a Turtle King in the forest cave to the east side. I need
       you to take it out before it completely disrupts the balance here.
@@ -386,9 +449,16 @@ MonoBehaviour:
     waitingQuest: 1
     justDialogue: 0
     hasHeal: 0
+    backToNormal: 0
+    sequenceNum: 0
+    activatePortal: 0
+    destination: 
+    triggerBoss: 0
     teleport: 0
     newBG: 
     characterV2: {x: 0, y: 0}
+    removeItem: 0
+    itemName: 
     dialogue:
     - Do be careful. Remember to stock up on potions incase your health falls low...
     characterDialogue: []
@@ -420,9 +490,16 @@ MonoBehaviour:
     waitingQuest: 0
     justDialogue: 0
     hasHeal: 0
+    backToNormal: 0
+    sequenceNum: 0
+    activatePortal: 0
+    destination: 
+    triggerBoss: 0
     teleport: 0
     newBG: 
     characterV2: {x: 0, y: 0}
+    removeItem: 0
+    itemName: 
     dialogue:
     - You have proven yourself worthy as a soldier of the Army. I am truly grateful
       for your help.
@@ -458,9 +535,16 @@ MonoBehaviour:
     waitingQuest: 0
     justDialogue: 0
     hasHeal: 0
+    backToNormal: 0
+    sequenceNum: 0
+    activatePortal: 0
+    destination: 
+    triggerBoss: 0
     teleport: 0
     newBG: 
     characterV2: {x: 0, y: 0}
+    removeItem: 0
+    itemName: 
     dialogue:
     - Hey, looks like you're back for more. Ready to exteminate some centipedes?
     - That's the spirit! Glad to have someone to help me :D
@@ -498,10 +582,17 @@ MonoBehaviour:
     waitingQuest: 1
     justDialogue: 0
     hasHeal: 0
+    backToNormal: 0
+    sequenceNum: 0
+    activatePortal: 0
+    destination: 
+    triggerBoss: 0
     teleport: 0
     newBG: 
     characterV2: {x: 0, y: 0}
+    removeItem: 0
+    itemName: 
     dialogue:
     - Too many centipedes around...
     characterDialogue: []
-  sequenceNumber: 11
+  sequenceNumber: 0

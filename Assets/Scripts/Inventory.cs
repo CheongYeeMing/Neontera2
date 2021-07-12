@@ -14,7 +14,6 @@ public class Inventory : MonoBehaviour
 
     public void Start()
     {
-        Debug.Log("Start");
         //items = Data.items;
         RefreshUI();
         //Debug.Log(Data.items.Count);
@@ -76,10 +75,21 @@ public class Inventory : MonoBehaviour
         RefreshUI();
         return true;
     }
-
+    public bool RemoveItemHelper(Item item)
+    {
+        foreach(Item i in Data.items)
+        {
+            if (i.ItemName == item.ItemName)
+            {
+                Data.items.Remove(i);
+                return true;
+            }
+        }
+        return false;
+    }
     public bool RemoveItem(Item item)
     {
-        if (Data.items.Contains(item) && Data.items.Remove(item))
+        if (ContainsItem(item) && RemoveItemHelper(item))
         {
             RefreshUI();
             return true;
@@ -114,5 +124,18 @@ public class Inventory : MonoBehaviour
             }
         }
         return false;
+    }
+
+    public int ItemCount(String item)
+    {
+        int count = 0;
+        foreach (Item i in Data.items)
+        {
+            if (i.ItemName == item)
+            {
+                count++;
+            }
+        }
+        return count;
     }
 }

@@ -34,7 +34,8 @@ public class DialogueManager : MonoBehaviour
     [SerializeField] public ShopSelectedItemPanel shopSelectedItemPanel;
 
     [SerializeField] public TransitionManager transition;
-
+    [SerializeField] public GameObject boss;
+    [SerializeField] Inventory inventory;
     // Start is called before the first frame update
     void Start()
     {
@@ -75,10 +76,36 @@ public class DialogueManager : MonoBehaviour
                 }
                 else
                 {
+                    if (npc.Sequences[npc.sequenceNumber].activatePortal)
+                    {
+                        foreach(Portal portal in FindObjectsOfType<Portal>())
+                        {
+                            if (portal.Destination.Location == npc.Sequences[npc.sequenceNumber].destination)
+                            {
+                                portal.isActivated = true;
+                            }
+                        }
+                    }
+
+                    if (npc.Sequences[npc.sequenceNumber].triggerBoss)
+                    {
+                        boss.gameObject.SetActive(true);
+                    }
+
+                    if (npc.Sequences[npc.sequenceNumber].removeItem)
+                    {
+                        inventory.RemoveItem(npc.Sequences[npc.sequenceNumber].item);
+                    }
+
                     if (npc.Sequences[npc.sequenceNumber].teleport)
                     {
                         StopAllCoroutines();
                         StartCoroutine(FindObjectOfType<ParallaxBackgroundManager>().Teleport(npc.Sequences[npc.sequenceNumber].newBG, character, npc.Sequences[npc.sequenceNumber].characterV2));
+                    }
+                    else if (npc.Sequences[npc.sequenceNumber].backToNormal)
+                    {
+                        npc.sequenceNumber = npc.Sequences[npc.sequenceNumber].sequenceNum;
+                        TriggerDialogue();
                     }
                     else
                     {
@@ -315,6 +342,7 @@ public class DialogueManager : MonoBehaviour
     {
         currResponseTracker = npc.Sequences[npc.sequenceNumber].dialogue.Length - 1;
         StartCoroutine(TypeSentence(npc.Sequences[npc.sequenceNumber].dialogue[(int)currResponseTracker]));
+        currResponseTracker++;
     }
 
     public void HealCharacter()
