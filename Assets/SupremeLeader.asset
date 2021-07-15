@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3fbed15bb973d6c468a3d7d0e6c11e7a, type: 3}
   m_Name: SupremeLeader
   m_EditorClassIdentifier: 
-  npcName: 
-  icon: {fileID: 0}
+  npcName: Supreme Leader
+  icon: {fileID: 21300000, guid: 52728e9420017f54e8ee76a157389f9d, type: 3}
   Sequences: []
   sequenceNumber: 0

@@ -4,34 +4,30 @@ using UnityEngine;
 
 public static class Data
 {
-    public static int playerId;
-
     // Audio Manager
     public static float musicVolume = 0.5f;
     public static float effectsVolume = 0.5f;
 
-    // Character Stats
+    // Character
     public static int level = 1;
     public static float gold = 10;
     public static float currentExp;
-    public static float currentHealth;
-    public static float maxHealth = 100;
-    
-
-    public static float Xcoordinate;
-    public static float Ycoordinate;
-    public static string location = "Space Station";
+    public static float currentHealth = 0;
+    public static float maxHealth;
+    public static float Xcoordinate = -10.2f;
+    public static float Ycoordinate = -1.39f;
+    //public static float Xcoordinate = 140.47f;
+    //public static float Ycoordinate = -18.02f;
+    //public static float Xcoordinate = 552.08f;
+    //public static float Ycoordinate = -20.19f;
+    public static string location = "Intro";
 
     // Character Equipped Items
-    public static EquipmentSlot[] equipmentSlots = new EquipmentSlot[4];
+    public static List<int> equippedItems = new List<int>();
 
     // Character Inventory
-    public static List<Item> items = new List<Item>();
+    public static List<int> items = new List<int>();
 
     // Character Quests
     public static List<Quest> quests = new List<Quest>();
-
-    // Character Buffs
-    public static List<ConsumableItem> consumableItems = new List<ConsumableItem>();
-
 }

@@ -22,7 +22,7 @@ public class GameOver : MonoBehaviour
         {
             RespawnMonologueTown.gameObject.SetActive(true);
             character.GetComponent<ParallaxBackgroundManager>().SetBackground("Town");
-            character.GetComponent<ParallaxBackgroundManager>().OnValidate();
+            //character.GetComponent<ParallaxBackgroundManager>().OnValidate();
             character.transform.position = RespawnPointTown.position;
         }
         gameObject.SetActive(false);

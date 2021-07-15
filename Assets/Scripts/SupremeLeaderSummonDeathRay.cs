@@ -21,7 +21,7 @@ public class SupremeLeaderSummonDeathRay : BossSummoner
             FindObjectOfType<AudioManager>().PlayEffect("DeathRay");
             Transform target = GameObject.FindGameObjectWithTag("Character").transform;
             gameObject.GetComponent<SupremeLeaderAnimation>().ChangeAnimationState(SUPREME_LEADER_DEATHRAY);
-            yield return new WaitForSeconds(0.1f);
+            yield return new WaitForSeconds(0.5f);
             Instantiate(prefab, new Vector3(target.position.x, target.position.y, transform.position.z), Quaternion.identity);
             yield return new WaitForSeconds(0.3f);
         }

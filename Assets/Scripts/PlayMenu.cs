@@ -10,6 +10,16 @@ public class PlayMenu : MonoBehaviour
         SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1); // Proceed to Intro Level scene
     }
 
+    public void LoadGame()
+    {
+        
+    }
+
+    public void NewGame()
+    {
+
+    }
+
     public void QuitGame()
     {
         SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex - 1); // Return to GameMenu scene

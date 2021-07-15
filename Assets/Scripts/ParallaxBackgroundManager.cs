@@ -4,12 +4,18 @@ using UnityEngine;
 
 public class ParallaxBackgroundManager : MonoBehaviour
 {
-    [SerializeField] GameObject IntroBG;
-    [SerializeField] GameObject TownBG;
-    [SerializeField] GameObject ForestBG;
-    [SerializeField] GameObject CaveBG;
-    [SerializeField] GameObject BSBG;
-    [SerializeField] GameObject SSBG;
+    [SerializeField] GameObject Intro;
+    [SerializeField] GameObject IntroDetails;
+    [SerializeField] GameObject Town;
+    [SerializeField] GameObject TownDetails;
+    [SerializeField] GameObject Forest;
+    [SerializeField] GameObject ForestDetails;
+    [SerializeField] GameObject Cave;
+    [SerializeField] GameObject CaveDetails;
+    [SerializeField] GameObject BS;
+    [SerializeField] GameObject BSDetails;
+    [SerializeField] GameObject SS;
+    [SerializeField] GameObject SSDetails;
 
     [SerializeField] TransitionManager Transition;
 
@@ -22,22 +28,23 @@ public class ParallaxBackgroundManager : MonoBehaviour
 
     private string currentBackground;
 
-    public void OnValidate()
-    {
-        Transition.gameObject.SetActive(true);
-        IntroBG.SetActive(false);
-        TownBG.SetActive(false);
-        ForestBG.SetActive(false);
-        CaveBG.SetActive(false);
-        BSBG.SetActive(false);
-        SSBG.SetActive(false);
-        currentBackground = Data.location;
-        SetBackground(currentBackground);
-        
-    }
-
     public void Start()
     {
+        Transition.gameObject.SetActive(true);
+        Intro.SetActive(false);
+        IntroDetails.SetActive(false);
+        Town.SetActive(false);
+        TownDetails.SetActive(false);
+        Forest.SetActive(false);
+        ForestDetails.SetActive(false);
+        Cave.SetActive(false);
+        CaveDetails.SetActive(false);
+        BS.SetActive(false);
+        BSDetails.SetActive(false);
+        SS.SetActive(false);
+        SSDetails.SetActive(false);
+        currentBackground = Data.location;
+        SetBackground(currentBackground);
         FindObjectOfType<AudioManager>().PlayMusic(currentBackground);
     }
 
@@ -45,30 +52,36 @@ public class ParallaxBackgroundManager : MonoBehaviour
     {
         FindObjectOfType<AudioManager>().ChangeMusic(currentBackground, newBackground);
         currentBackground = newBackground;
-        Data.location = currentBackground;
+        GetComponent<CharacterMovement>().location = currentBackground;
         if (newBackground == INTRO)
         {
-            IntroBG.SetActive(true);
+            Intro.SetActive(true);
+            IntroDetails.SetActive(true);
         }
         else if (newBackground == TOWN)
         {
-            TownBG.SetActive(true);
+            Town.SetActive(true);
+            TownDetails.SetActive(true);
         }
         else if (newBackground == FOREST)
         {
-            ForestBG.SetActive(true);
+            Forest.SetActive(true);
+            ForestDetails.SetActive(true);
         }
         else if (newBackground == CAVE)
         {
-            CaveBG.SetActive(true);
+            Cave.SetActive(true);
+            CaveDetails.SetActive(true);
         }
         else if (newBackground == BASE_STATION)
         {
-            BSBG.SetActive(true);
+            BS.SetActive(true);
+            BSDetails.SetActive(true);
         }
         else if (newBackground == SPACE_STATION)
         {
-            SSBG.SetActive(true);
+            SS.SetActive(true);
+            SSDetails.SetActive(true);
         }
         Transition.Deactivate();
     }
@@ -80,27 +93,33 @@ public class ParallaxBackgroundManager : MonoBehaviour
         Character.transform.position = Destination.transform.position;
         if (currentBackground == INTRO)
         {
-            IntroBG.SetActive(false);
+            Intro.SetActive(false);
+            IntroDetails.SetActive(false);
         }
         else if (currentBackground == TOWN)
         {
-            TownBG.SetActive(false);
+            Town.SetActive(false);
+            TownDetails.SetActive(false);
         }
         else if (currentBackground == FOREST)
         {
-            ForestBG.SetActive(false);
+            Forest.SetActive(false);
+            ForestDetails.SetActive(false);
         }
         else if (currentBackground == CAVE)
         {
-            CaveBG.SetActive(false);
+            Cave.SetActive(false);
+            CaveDetails.SetActive(false);
         }
         else if (currentBackground == BASE_STATION)
         {
-            BSBG.SetActive(false);
+            BS.SetActive(false);
+            BSDetails.SetActive(false);
         }
         else if (currentBackground == SPACE_STATION)
         {
-            SSBG.SetActive(false);
+            SS.SetActive(false);
+            SSDetails.SetActive(false);
         }
         
         SetBackground(newBackground);
@@ -113,27 +132,33 @@ public class ParallaxBackgroundManager : MonoBehaviour
         Character.transform.position = Destination;
         if (currentBackground == INTRO)
         {
-            IntroBG.SetActive(false);
+            Intro.SetActive(false);
+            IntroDetails.SetActive(false);
         }
         else if (currentBackground == TOWN)
         {
-            TownBG.SetActive(false);
+            Town.SetActive(false);
+            TownDetails.SetActive(false);
         }
         else if (currentBackground == FOREST)
         {
-            ForestBG.SetActive(false);
+            Forest.SetActive(false);
+            ForestDetails.SetActive(false);
         }
         else if (currentBackground == CAVE)
         {
-            CaveBG.SetActive(false);
+            Cave.SetActive(false);
+            CaveDetails.SetActive(false);
         }
         else if (currentBackground == BASE_STATION)
         {
-            BSBG.SetActive(false);
+            BS.SetActive(false);
+            BSDetails.SetActive(false);
         }
         else if (currentBackground == SPACE_STATION)
         {
-            SSBG.SetActive(false);
+            SS.SetActive(false);
+            SSDetails.SetActive(false);
         }
 
         SetBackground(newBackground);

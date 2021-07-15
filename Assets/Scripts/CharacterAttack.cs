@@ -28,7 +28,6 @@ public class CharacterAttack : MonoBehaviour
     {
         playerMovement = GetComponent<CharacterMovement>();
         attack = GetComponent<Character>().GetAttack().CalculateFinalValue();
-        
     }
 
     private void Update()
@@ -41,7 +40,6 @@ public class CharacterAttack : MonoBehaviour
         {
             SpecialAttack();
         }
-
         cooldownTimer += Time.deltaTime;
     }
 

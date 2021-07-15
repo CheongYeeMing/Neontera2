@@ -123,6 +123,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 183ff6d80168a9d46bd268ed0ccec3e2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  id: 72
   interactType: 1
   itemType: 3
   examineText: 

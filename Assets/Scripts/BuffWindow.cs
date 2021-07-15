@@ -10,11 +10,11 @@ public class BuffWindow : MonoBehaviour
 
     public void Start()
     {
-        foreach (ConsumableItem consumableItem in Data.consumableItems)
-        {
-            AddItem(consumableItem);
-        }
-        OnValidate();
+        //foreach (ConsumableItem consumableItem in Data.consumableItems)
+        //{
+        //    AddItem(consumableItem);
+        //}
+        //OnValidate();
     }
 
     private void OnValidate()
@@ -38,7 +38,7 @@ public class BuffWindow : MonoBehaviour
         {
             buffSlots[i].NoItem();
         }
-        Data.consumableItems = consumableItems;
+        //Data.consumableItems = consumableItems;
     }
 
     public bool AddItem(ConsumableItem item)

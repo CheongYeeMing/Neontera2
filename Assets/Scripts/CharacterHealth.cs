@@ -14,10 +14,10 @@ public class CharacterHealth : MonoBehaviour, Health
 
     private GameObject attackedBy;
 
-    private float health;
+    public float health;
     private float lerpTimer;
     private float baseMaxHealth;
-    private float maxHealth;
+    public float maxHealth;
     private float chipSpeed = 2f;
 
     private bool isHurting;
@@ -30,10 +30,11 @@ public class CharacterHealth : MonoBehaviour, Health
     // Start is called before the first frame update
     void Start()
     {
-        baseMaxHealth = Data.maxHealth;
+        maxHealth = Data.maxHealth;
         if (Data.currentHealth == 0) 
         { 
-            health = baseMaxHealth;
+            if (Data.maxHealth == 0) maxHealth = baseMaxHealth + GetComponent<Character>().GetHealth().CalculateFinalValue();
+            health = maxHealth;
             Data.currentHealth = health;
         }
         else
@@ -142,7 +143,8 @@ public class CharacterHealth : MonoBehaviour, Health
     public void IncreaseHealth(int level)
     {
         baseMaxHealth += (health * 0.01f) * ((100 - level) * 0.1f);
-        health = baseMaxHealth;
+        health += (health * 0.01f) * ((100 - level) * 0.1f);
+        maxHealth += (health * 0.01f) * ((100 - level) * 0.1f);
     }
 
     public void Die()
@@ -153,8 +155,6 @@ public class CharacterHealth : MonoBehaviour, Health
         GetComponent<BoxCollider2D>().enabled = false;
         GetComponent<Rigidbody2D>().velocity = Vector2.zero;
         GetComponent<Rigidbody2D>().gravityScale = 0;
-        Debug.Log("Character is dead!!!");
-        // Dead Screen, Auto Respawn in Town area???
         gameOver.gameObject.SetActive(true);
     }
 
@@ -190,5 +190,15 @@ public class CharacterHealth : MonoBehaviour, Health
     {
         health = maxHealth;
         FindObjectOfType<AudioManager>().PlayEffect("CharacterHeal");
+    }
+
+    public float GetCurrentHealth()
+    {
+        return health;
+    }
+
+    public float GetMaxHealth()
+    {
+        return maxHealth;
     }
 }

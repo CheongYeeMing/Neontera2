@@ -51,7 +51,7 @@ MonoBehaviour:
     newBG: 
     characterV2: {x: 0, y: 0}
     removeItem: 0
-    itemName: 
+    item: {fileID: 0}
     dialogue:
     - Hello, I am Seargeant Trina. Which squad are you from and what are you doing
       here???
@@ -98,7 +98,7 @@ MonoBehaviour:
     newBG: 
     characterV2: {x: 0, y: 0}
     removeItem: 0
-    itemName: 
+    item: {fileID: 0}
     dialogue:
     - 'We thought it will be a simple clearing mission since they did not request
       for High Elite Soldiers. '
@@ -110,9 +110,9 @@ MonoBehaviour:
   - Items: []
     Quest:
       npc: {fileID: 11400000}
-      isActive: 0
+      isActive: 1
       canRepeat: 0
-      status: 2
+      status: 0
       title: Fireworm Killer
       description: Sergeant Trina's whole squad of training soldiers have been taken
         out. I wonder just how strong these monsters are...
@@ -121,7 +121,7 @@ MonoBehaviour:
         action: FIreworm Exterminated
         Target: Fire Worm
         requiredAmount: 15
-        currentAmount: 0
+        currentAmount: 15
       expReward: 3000
       goldReward: 300
       itemReward: {fileID: 0}
@@ -144,7 +144,7 @@ MonoBehaviour:
     newBG: 
     characterV2: {x: 0, y: 0}
     removeItem: 0
-    itemName: 
+    item: {fileID: 0}
     dialogue:
     - There are too many fireworms here. We need to take them out fast. Are you ready
       to carry out the mission?
@@ -192,7 +192,7 @@ MonoBehaviour:
     newBG: 
     characterV2: {x: 0, y: 0}
     removeItem: 0
-    itemName: 
+    item: {fileID: 0}
     dialogue:
     - If I remember correctly, the fireballs that hit the ground seemed to bounce
       right back up... weird.
@@ -233,7 +233,7 @@ MonoBehaviour:
     newBG: 
     characterV2: {x: 0, y: 0}
     removeItem: 0
-    itemName: 
+    item: {fileID: 0}
     dialogue:
     - Wow that was impressive young one. Some of my training soldiers couldn't even
       take out a single Fire Worm before going down.
@@ -248,7 +248,7 @@ MonoBehaviour:
       npc: {fileID: 11400000}
       isActive: 0
       canRepeat: 0
-      status: 2
+      status: 1
       title: Trina's Device
       description: Trina dropped her communication device at the far end of this
         cave in a trench. Surely there are going to be a ton of fireworms on the
@@ -262,8 +262,8 @@ MonoBehaviour:
       expReward: 2000
       goldReward: 150
       itemReward: {fileID: 0}
-      questItem: {fileID: 0}
-      location: {x: 0, y: 0, z: 0}
+      questItem: {fileID: 8118475526843008118, guid: bfd188af789a60d4cb41433fe1bd0ddd, type: 3}
+      location: {x: 738.73, y: -5.57, z: 0}
     hasShop: 0
     hasQuest: 1
     isStory: 0
@@ -281,7 +281,7 @@ MonoBehaviour:
     newBG: 
     characterV2: {x: 0, y: 0}
     removeItem: 0
-    itemName: 
+    item: {fileID: 0}
     dialogue:
     - Head to the east side of this cave and retrieve my communication device. You
       got the energy to go now?
@@ -329,7 +329,7 @@ MonoBehaviour:
     newBG: 
     characterV2: {x: 0, y: 0}
     removeItem: 0
-    itemName: 
+    item: {fileID: 0}
     dialogue:
     - If only I hadn't dropped my device... I could have called for more backup ...
     characterDialogue: []
@@ -369,7 +369,7 @@ MonoBehaviour:
     newBG: 
     characterV2: {x: 0, y: 0}
     removeItem: 0
-    itemName: 
+    item: {fileID: 0}
     dialogue:
     - WOW looks like you managed to retrieve it with ease huh... you are definitely
       one of the most talented trainee soldier I've ever seen.
@@ -414,7 +414,7 @@ MonoBehaviour:
     newBG: 
     characterV2: {x: 0, y: 0}
     removeItem: 0
-    itemName: 
+    item: {fileID: 0}
     dialogue:
     - This is a good chance for you to prove yourself as a soldier. I want you to
       take out that monster deep in the cave. You up for it?
@@ -461,7 +461,7 @@ MonoBehaviour:
     newBG: 
     characterV2: {x: 0, y: 0}
     removeItem: 0
-    itemName: 
+    item: {fileID: 0}
     dialogue:
     - Do prepare well before you go!
     characterDialogue: []
@@ -501,7 +501,7 @@ MonoBehaviour:
     newBG: 
     characterV2: {x: 0, y: 0}
     removeItem: 0
-    itemName: 
+    item: {fileID: 0}
     dialogue:
     - Excellent! Excellent. I am beyond impressed at what you have accomplished here.
     - Wow... young talent nowadays are hard to come by. I dare say you have the potential
@@ -547,7 +547,7 @@ MonoBehaviour:
     newBG: 
     characterV2: {x: 0, y: 0}
     removeItem: 0
-    itemName: 
+    item: {fileID: 0}
     dialogue:
     - Your job here is done. I thank you once again, on behalf of HQ for helping
       me and my squad out. We are indebted to you!
@@ -594,7 +594,7 @@ MonoBehaviour:
     newBG: 
     characterV2: {x: 0, y: 0}
     removeItem: 0
-    itemName: 
+    item: {fileID: 0}
     dialogue:
     - Looks like you're back to take out more fireworms for me huh ;)  Are you ready
       to carry out the mission?
@@ -644,8 +644,8 @@ MonoBehaviour:
     newBG: 
     characterV2: {x: 0, y: 0}
     removeItem: 0
-    itemName: 
+    item: {fileID: 0}
     dialogue:
     - These fireworms are so annoying... why did HQ post me here... *cries*
     characterDialogue: []
-  sequenceNumber: 8
+  sequenceNumber: 6

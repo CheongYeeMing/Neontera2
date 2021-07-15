@@ -32,8 +32,8 @@ public class SelectedQuestWindow : MonoBehaviour
         questName.text = quest.title;
         questDescription.text = quest.description;
         questCriteria.text = quest.questCriteria.action + ": " + quest.questCriteria.currentAmount + "/" + quest.questCriteria.requiredAmount;
-        questExpReward.text = quest.expReward.ToString();
-        questGoldReward.text = quest.goldReward.ToString();
+        questExpReward.text = "Exp: " + quest.expReward.ToString();
+        questGoldReward.text = "Gold: " +quest.goldReward.ToString();
         if (quest.itemReward != null)
             questItemReward.text = quest.itemReward.name.ToString();
     }

@@ -16,9 +16,12 @@ public class Character : MonoBehaviour
     public CharacterStat Health;
     public CharacterStat Speed;
 
+    [SerializeField] ItemList itemList;
+
     private void Awake()
     {
-        Attack.SetBaseValue(100);
+        Attack.SetBaseValue(10);
+        Health.SetBaseValue(100);
         Speed.SetBaseValue(6);
         statPanel.SetStats(Attack, Health, Speed);
         statPanel.UpdateStatValues();
@@ -27,6 +30,11 @@ public class Character : MonoBehaviour
         inventory.OnItemLeftClickedEvent += ShowInSelectedItemPanel;
         equipmentPanel.OnItemLeftClickedEvent += ShowInSelectedItemPanel;
         questList.OnItemLeftClickedEvent += ShowInSelectedQuestWindow;
+    }
+
+    public void Start()
+    {
+        foreach (int item in Data.equippedItems) LoadEquip((EquipableItem)(itemList.GetItem(item)));
     }
 
     public void ShowInSelectedQuestWindow(Quest quest)
@@ -71,6 +79,22 @@ public class Character : MonoBehaviour
         if (item is EquipableItem)
         {
             Unequip((EquipableItem)item);
+        }
+    }
+
+    public void LoadEquip(EquipableItem item)
+    {
+        EquipableItem previousItem;
+        if (equipmentPanel.AddItem(item, out previousItem))
+        {
+            if (previousItem != null)
+            {
+                inventory.AddItem(previousItem);
+                previousItem.Unequip(this);
+                statPanel.UpdateStatValues();
+            }
+            item.Equip(this);
+            statPanel.UpdateStatValues();
         }
     }
 

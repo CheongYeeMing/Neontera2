@@ -9,6 +9,8 @@ public class PauseMenu : MonoBehaviour
     public string mainMenuScene;
     public GameObject pauseMenu;
     public bool isPaused;
+
+    public GameObject character;
     // Start is called before the first frame update
     void Start()
     {
@@ -40,11 +42,28 @@ public class PauseMenu : MonoBehaviour
     {
         FindObjectOfType<AudioManager>().StopEffect("Click");
         FindObjectOfType<AudioManager>().PlayEffect("Click");
+
+        Data.level = character.GetComponent<CharacterLevel>().GetLevel();
+        Data.gold = character.GetComponent<CharacterWallet>().GetGoldAmount();
+        Data.currentExp = character.GetComponent<CharacterLevel>().GetCurrentExp();
+        Data.currentHealth = character.GetComponent<CharacterHealth>().GetCurrentHealth();
+        Data.maxHealth = character.GetComponent<CharacterHealth>().GetMaxHealth();
+
+        Data.Xcoordinate = character.transform.position.x;
+        Data.Ycoordinate = character.transform.position.y;
+        Data.location = character.GetComponent<CharacterMovement>().location;
+
+        foreach (Item item in character.GetComponent<Character>().inventory.GetItems()) Data.items.Add(item.id);
+        //Data.itemSlot = character.GetComponent<Character>().inventory.GetItemSlots();
+
+        foreach (Item item in character.GetComponent<Character>().equipmentPanel.GetEquippedItems()) Data.equippedItems.Add(item.id);
+            //Data.equippedItems = character.GetComponent<Character>().equipmentPanel.GetEquippedItems();
     }
     public void Quit()
     {
         FindObjectOfType<AudioManager>().StopEffect("Click");
         FindObjectOfType<AudioManager>().PlayEffect("Click");
+        Time.timeScale = 1;
         SceneManager.LoadScene(1); // Return to Start Menu
     }
 

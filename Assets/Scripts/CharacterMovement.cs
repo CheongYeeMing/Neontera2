@@ -17,16 +17,25 @@ public class CharacterMovement : MonoBehaviour
     private float wallJumpCooldown; // Prevent instant teleportation up wall
     private float horizontalInput;
 
+    // Location
+    public string location;
+
     // Mob Animation States
     private const string CHARACTER_IDLE = "Idle";
     private const string CHARACTER_RUN = "Run";
     private const string CHARACTER_JUMP = "Jump";
-    
+
 
     private void Awake()
     {
         body = GetComponent<Rigidbody2D>();
         boxCollider = GetComponent<BoxCollider2D>();
+    }
+
+    public void Start()
+    {
+        location = Data.location;
+        gameObject.transform.position = new Vector2(Data.Xcoordinate,Data.Ycoordinate);
     }
 
     private void FixedUpdate()

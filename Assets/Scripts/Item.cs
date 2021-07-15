@@ -6,6 +6,7 @@ using UnityEngine.Events;
 [RequireComponent(typeof(BoxCollider2D))] // Adds BoxCollider2D to whatever object this script is attached to 
 public class Item : MonoBehaviour
 {
+    [SerializeField] public int id;
     public enum InteractionType { NONE, PickUp, Examine}
     public enum ItemType { Consumables, Equipment, Currency, Quest}
     [Header("Attributes")]

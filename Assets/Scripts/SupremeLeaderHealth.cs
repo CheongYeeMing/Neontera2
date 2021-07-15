@@ -6,6 +6,7 @@ using TMPro;
 
 public class SupremeLeaderHealth : BossHealth
 {
+    [SerializeField] Monologue GameCompleteMonologue;
     // Start is called before the first frame update
     public override void Start()
     {
@@ -89,6 +90,8 @@ public class SupremeLeaderHealth : BossHealth
         Debug.Log("Mob is dead!!!");
         gameObject.GetComponent<SupremeLeaderAnimation>().ChangeAnimationState(BOSS_DIE);
         gameObject.GetComponent<Rigidbody2D>().gravityScale = 0;
+        GameCompleteMonologue.gameObject.transform.position = FindObjectOfType<Character>().gameObject.transform.position;
+        GameCompleteMonologue.gameObject.SetActive(true);
         foreach (Collider2D collider in GetComponents<Collider2D>())
         {
             collider.enabled = false;
