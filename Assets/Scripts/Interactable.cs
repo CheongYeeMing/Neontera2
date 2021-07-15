@@ -21,13 +21,21 @@ public class Interactable : MonoBehaviour
     public Text examineText;
     public bool isExamining = false;
 
+    [SerializeField] GameObject DetectedHint;
+
     // Update is called once per frame
     void Update()
     {
         if (DetectObject())
         {
+            if (detectedObject.CompareTag("Monologue") && !detectedObject.GetComponent<Monologue>().IsExamining())
+            {
+                detectedObject.GetComponent<Monologue>().ToggleMonologue();
+            }
+            if (GetComponent<CharacterMovement>().CanMove()) DetectedHint.gameObject.SetActive(true);
             if (InteractInput())
             {
+                DetectedHint.gameObject.SetActive(false);
                 if (detectedObject.CompareTag("Item"))
                 {
                     detectedObject.GetComponent<Item>().Interact();
@@ -41,13 +49,10 @@ public class Interactable : MonoBehaviour
                     detectedObject.GetComponent<Portal>().Teleport(gameObject);
                 }
             }
-            if (detectedObject.CompareTag("Monologue") && !detectedObject.GetComponent<Monologue>().IsExamining())
-            {
-                detectedObject.GetComponent<Monologue>().ToggleMonologue();
-            }
         } 
         else
         {
+            DetectedHint.gameObject.SetActive(false);
             //// Hide the Examine Window when walk past game object
             //examineWindow.SetActive(false);
             //// Disable the boolean

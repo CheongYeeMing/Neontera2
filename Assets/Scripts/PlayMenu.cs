@@ -12,12 +12,14 @@ public class PlayMenu : MonoBehaviour
 
     public void LoadGame()
     {
-        
+        Data.LoadGame();
+        PlayGame();
     }
 
     public void NewGame()
     {
-
+        Data.NewGame();
+        PlayGame();
     }
 
     public void QuitGame()

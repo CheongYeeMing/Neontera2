@@ -17,6 +17,7 @@ MonoBehaviour:
   Sequences:
   - Items: []
     Quest:
+      ID: 0
       npc: {fileID: 0}
       isActive: 0
       canRepeat: 0
@@ -51,7 +52,7 @@ MonoBehaviour:
     newBG: 
     characterV2: {x: 0, y: 0}
     removeItem: 0
-    itemName: 
+    item: {fileID: 0}
     dialogue:
     - Hi,  my name is Lloyd and I am the keeper of this forest. It is rare to see
       someone this young come here all alone from the Town. What are you doing here?
@@ -64,6 +65,7 @@ MonoBehaviour:
     - IDK WHY IM HERE BUT JOHNSON SENT ME
   - Items: []
     Quest:
+      ID: 0
       npc: {fileID: 0}
       isActive: 0
       canRepeat: 0
@@ -98,7 +100,7 @@ MonoBehaviour:
     newBG: 
     characterV2: {x: 0, y: 0}
     removeItem: 0
-    itemName: 
+    item: {fileID: 0}
     dialogue:
     - I'm sure you've heard about the situation here. It's not looking too good at
       the moment.
@@ -109,6 +111,7 @@ MonoBehaviour:
     characterDialogue: []
   - Items: []
     Quest:
+      ID: 4
       npc: {fileID: 11400000}
       isActive: 1
       canRepeat: 0
@@ -144,7 +147,7 @@ MonoBehaviour:
     newBG: 
     characterV2: {x: 0, y: 0}
     removeItem: 0
-    itemName: 
+    item: {fileID: 0}
     dialogue:
     - I will need you to take out some centipedes first. Their numbers seem to have
       sky rocketed recently. You ready for the first task?
@@ -157,6 +160,7 @@ MonoBehaviour:
     - I think I'm going to head back to town...
   - Items: []
     Quest:
+      ID: 4
       npc: {fileID: 11400000}
       isActive: 0
       canRepeat: 0
@@ -192,12 +196,13 @@ MonoBehaviour:
     newBG: 
     characterV2: {x: 0, y: 0}
     removeItem: 0
-    itemName: 
+    item: {fileID: 0}
     dialogue:
     - We need to be quick before their numbers increase anymore!!!
     characterDialogue: []
   - Items: []
     Quest:
+      ID: 0
       npc: {fileID: 11400000}
       isActive: 0
       canRepeat: 0
@@ -233,7 +238,7 @@ MonoBehaviour:
     newBG: 
     characterV2: {x: 0, y: 0}
     removeItem: 0
-    itemName: 
+    item: {fileID: 0}
     dialogue:
     - Wow, that was pretty quick I must say. You are really efficient!
     - Now that we have cleared the way, we can dive deeper into the forest.
@@ -243,6 +248,7 @@ MonoBehaviour:
     characterDialogue: []
   - Items: []
     Quest:
+      ID: 5
       npc: {fileID: 11400000}
       isActive: 1
       canRepeat: 0
@@ -278,7 +284,7 @@ MonoBehaviour:
     newBG: 
     characterV2: {x: 0, y: 0}
     removeItem: 0
-    itemName: 
+    item: {fileID: 0}
     dialogue:
     - 'I will need you to help me retrieve my staff. If I remember correctly, I dropped
       it before leaving a high platform. '
@@ -291,6 +297,7 @@ MonoBehaviour:
     - I'm not your slave...
   - Items: []
     Quest:
+      ID: 0
       npc: {fileID: 11400000}
       isActive: 1
       canRepeat: 0
@@ -326,12 +333,13 @@ MonoBehaviour:
     newBG: 
     characterV2: {x: 0, y: 0}
     removeItem: 0
-    itemName: 
+    item: {fileID: 0}
     dialogue:
     - I am useless without my staff...
     characterDialogue: []
   - Items: []
     Quest:
+      ID: 0
       npc: {fileID: 11400000}
       isActive: 1
       canRepeat: 0
@@ -367,12 +375,13 @@ MonoBehaviour:
     newBG: 
     characterV2: {x: 0, y: 0}
     removeItem: 0
-    itemName: 
+    item: {fileID: 0}
     dialogue:
     - 'OH THANK GOD YOU RETRIEVED IT! '
     characterDialogue: []
   - Items: []
     Quest:
+      ID: 6
       npc: {fileID: 11400000}
       isActive: 1
       canRepeat: 0
@@ -409,7 +418,7 @@ MonoBehaviour:
     newBG: 
     characterV2: {x: 0, y: 0}
     removeItem: 0
-    itemName: 
+    item: {fileID: 0}
     dialogue:
     - There seems to be a Turtle King in the forest cave to the east side. I need
       you to take it out before it completely disrupts the balance here.
@@ -423,6 +432,7 @@ MonoBehaviour:
     - I think I'm going to head back to town...
   - Items: []
     Quest:
+      ID: 0
       npc: {fileID: 11400000}
       isActive: 0
       canRepeat: 0
@@ -458,12 +468,13 @@ MonoBehaviour:
     newBG: 
     characterV2: {x: 0, y: 0}
     removeItem: 0
-    itemName: 
+    item: {fileID: 0}
     dialogue:
     - Do be careful. Remember to stock up on potions incase your health falls low...
     characterDialogue: []
   - Items: []
     Quest:
+      ID: 0
       npc: {fileID: 11400000}
       isActive: 0
       canRepeat: 0
@@ -499,7 +510,7 @@ MonoBehaviour:
     newBG: 
     characterV2: {x: 0, y: 0}
     removeItem: 0
-    itemName: 
+    item: {fileID: 0}
     dialogue:
     - You have proven yourself worthy as a soldier of the Army. I am truly grateful
       for your help.
@@ -509,6 +520,7 @@ MonoBehaviour:
     characterDialogue: []
   - Items: []
     Quest:
+      ID: 0
       npc: {fileID: 11400000}
       isActive: 1
       canRepeat: 1
@@ -544,7 +556,7 @@ MonoBehaviour:
     newBG: 
     characterV2: {x: 0, y: 0}
     removeItem: 0
-    itemName: 
+    item: {fileID: 0}
     dialogue:
     - Hey, looks like you're back for more. Ready to exteminate some centipedes?
     - That's the spirit! Glad to have someone to help me :D
@@ -556,6 +568,7 @@ MonoBehaviour:
     - I'm just passing by haha~
   - Items: []
     Quest:
+      ID: 0
       npc: {fileID: 11400000}
       isActive: 1
       canRepeat: 0
@@ -591,7 +604,7 @@ MonoBehaviour:
     newBG: 
     characterV2: {x: 0, y: 0}
     removeItem: 0
-    itemName: 
+    item: {fileID: 0}
     dialogue:
     - Too many centipedes around...
     characterDialogue: []

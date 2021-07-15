@@ -17,6 +17,7 @@ MonoBehaviour:
   Sequences:
   - Items: []
     Quest:
+      ID: 0
       npc: {fileID: 0}
       isActive: 0
       canRepeat: 0
@@ -74,6 +75,7 @@ MonoBehaviour:
     characterDialogue: []
   - Items: []
     Quest:
+      ID: 0
       npc: {fileID: 0}
       isActive: 0
       canRepeat: 0
@@ -118,6 +120,7 @@ MonoBehaviour:
     - I want to sleep.....
   - Items: []
     Quest:
+      ID: 0
       npc: {fileID: 0}
       isActive: 0
       canRepeat: 0
@@ -169,6 +172,7 @@ MonoBehaviour:
     characterDialogue: []
   - Items: []
     Quest:
+      ID: 3
       npc: {fileID: 11400000, guid: dded4d2a027a93e40b20cdffe5da2185, type: 2}
       isActive: 1
       canRepeat: 0
@@ -217,6 +221,7 @@ MonoBehaviour:
     - No. I want to go home...
   - Items: []
     Quest:
+      ID: 0
       npc: {fileID: 11400000, guid: dded4d2a027a93e40b20cdffe5da2185, type: 2}
       isActive: 1
       canRepeat: 0
@@ -258,6 +263,7 @@ MonoBehaviour:
     characterDialogue: []
   - Items: []
     Quest:
+      ID: 0
       npc: {fileID: 11400000, guid: dded4d2a027a93e40b20cdffe5da2185, type: 2}
       isActive: 1
       canRepeat: 0
@@ -303,6 +309,7 @@ MonoBehaviour:
     - I wanted to go home the whole time :(
   - Items: []
     Quest:
+      ID: 0
       npc: {fileID: 11400000, guid: dded4d2a027a93e40b20cdffe5da2185, type: 2}
       isActive: 1
       canRepeat: 0
@@ -348,6 +355,7 @@ MonoBehaviour:
     - IDK it was there when the Turtle King died...
   - Items: []
     Quest:
+      ID: 7
       npc: {fileID: 11400000, guid: dded4d2a027a93e40b20cdffe5da2185, type: 2}
       isActive: 1
       canRepeat: 0
@@ -397,6 +405,7 @@ MonoBehaviour:
     - The climb to the lab is too far....
   - Items: []
     Quest:
+      ID: 0
       npc: {fileID: 11400000, guid: dded4d2a027a93e40b20cdffe5da2185, type: 2}
       isActive: 1
       canRepeat: 0
@@ -438,6 +447,7 @@ MonoBehaviour:
     characterDialogue: []
   - Items: []
     Quest:
+      ID: 0
       npc: {fileID: 11400000, guid: dded4d2a027a93e40b20cdffe5da2185, type: 2}
       isActive: 1
       canRepeat: 0
@@ -481,6 +491,7 @@ MonoBehaviour:
     characterDialogue: []
   - Items: []
     Quest:
+      ID: 8
       npc: {fileID: 11400000}
       isActive: 1
       canRepeat: 0
@@ -530,6 +541,7 @@ MonoBehaviour:
     - I need to prepare first!
   - Items: []
     Quest:
+      ID: 0
       npc: {fileID: 11400000, guid: dded4d2a027a93e40b20cdffe5da2185, type: 2}
       isActive: 1
       canRepeat: 0
@@ -571,6 +583,7 @@ MonoBehaviour:
     characterDialogue: []
   - Items: []
     Quest:
+      ID: 0
       npc: {fileID: 11400000, guid: dded4d2a027a93e40b20cdffe5da2185, type: 2}
       isActive: 1
       canRepeat: 0
@@ -616,6 +629,7 @@ MonoBehaviour:
     characterDialogue: []
   - Items: []
     Quest:
+      ID: 12
       npc: {fileID: 11400000, guid: dded4d2a027a93e40b20cdffe5da2185, type: 2}
       isActive: 1
       canRepeat: 0
@@ -663,6 +677,7 @@ MonoBehaviour:
     - I'm tired... must I climb to the lab again???
   - Items: []
     Quest:
+      ID: 0
       npc: {fileID: 11400000, guid: dded4d2a027a93e40b20cdffe5da2185, type: 2}
       isActive: 1
       canRepeat: 0
@@ -704,6 +719,7 @@ MonoBehaviour:
     characterDialogue: []
   - Items: []
     Quest:
+      ID: 0
       npc: {fileID: 11400000, guid: dded4d2a027a93e40b20cdffe5da2185, type: 2}
       isActive: 1
       canRepeat: 0
@@ -755,6 +771,7 @@ MonoBehaviour:
     characterDialogue: []
   - Items: []
     Quest:
+      ID: 0
       npc: {fileID: 11400000, guid: dded4d2a027a93e40b20cdffe5da2185, type: 2}
       isActive: 1
       canRepeat: 0
@@ -803,6 +820,7 @@ MonoBehaviour:
     - Wait what?! Me alone? Against an entire army???
   - Items: []
     Quest:
+      ID: 0
       npc: {fileID: 11400000, guid: dded4d2a027a93e40b20cdffe5da2185, type: 2}
       isActive: 1
       canRepeat: 0
@@ -847,6 +865,7 @@ MonoBehaviour:
     characterDialogue: []
   - Items: []
     Quest:
+      ID: 13
       npc: {fileID: 11400000, guid: dded4d2a027a93e40b20cdffe5da2185, type: 2}
       isActive: 1
       canRepeat: 0
@@ -896,6 +915,7 @@ MonoBehaviour:
     - It's impossible, I'm not going.
   - Items: []
     Quest:
+      ID: 0
       npc: {fileID: 11400000, guid: dded4d2a027a93e40b20cdffe5da2185, type: 2}
       isActive: 1
       canRepeat: 0
@@ -936,4 +956,4 @@ MonoBehaviour:
     dialogue:
     - We're counting on you!
     characterDialogue: []
-  sequenceNumber: 10
+  sequenceNumber: 0

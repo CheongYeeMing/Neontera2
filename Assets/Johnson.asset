@@ -17,6 +17,7 @@ MonoBehaviour:
   Sequences:
   - Items: []
     Quest:
+      ID: 0
       npc: {fileID: 0}
       isActive: 0
       canRepeat: 0
@@ -38,12 +39,20 @@ MonoBehaviour:
     hasQuest: 0
     isStory: 0
     isEnd: 0
+    repeatableQuest: 0
     waitingQuest: 0
     justDialogue: 1
     hasHeal: 0
+    backToNormal: 0
+    sequenceNum: 0
+    activatePortal: 0
+    destination: 
+    triggerBoss: 0
     teleport: 0
     newBG: 
     characterV2: {x: 0, y: 0}
+    removeItem: 0
+    item: {fileID: 0}
     dialogue:
     - 'Morning Soldier! It''s your first day out in the field. You nervous? '
     - Great! That is the way young blood. Ahh, this reminds me of my first field
@@ -54,6 +63,7 @@ MonoBehaviour:
     - I'm scared...
   - Items: []
     Quest:
+      ID: 0
       npc: {fileID: 0}
       isActive: 0
       canRepeat: 0
@@ -75,12 +85,20 @@ MonoBehaviour:
     hasQuest: 0
     isStory: 0
     isEnd: 0
+    repeatableQuest: 0
     waitingQuest: 0
     justDialogue: 1
     hasHeal: 0
+    backToNormal: 0
+    sequenceNum: 0
+    activatePortal: 0
+    destination: 
+    triggerBoss: 0
     teleport: 0
     newBG: 
     characterV2: {x: 0, y: 0}
+    removeItem: 0
+    item: {fileID: 0}
     dialogue:
     - Let's begin. Xenonians out in the field communicate with a rock called Radio.
       Its attached to your helmet so I can talk to you from a distance throughout
@@ -92,6 +110,7 @@ MonoBehaviour:
     - TESTING! TESTING ONE TWO THREE!!!
   - Items: []
     Quest:
+      ID: 1
       npc: {fileID: 11400000, guid: 08dec4fb2fb6af941af76cf46a2464dc, type: 2}
       isActive: 0
       canRepeat: 0
@@ -113,12 +132,20 @@ MonoBehaviour:
     hasQuest: 0
     isStory: 1
     isEnd: 0
+    repeatableQuest: 0
     waitingQuest: 0
     justDialogue: 0
     hasHeal: 0
+    backToNormal: 0
+    sequenceNum: 0
+    activatePortal: 0
+    destination: 
+    triggerBoss: 0
     teleport: 0
     newBG: 
     characterV2: {x: 0, y: 0}
+    removeItem: 0
+    item: {fileID: 0}
     dialogue:
     - Anyways, we are out here today to locate a missing person from our village.
     - This person is Dr Aaron, the pride of the village as a scientist. He was the
@@ -130,10 +157,11 @@ MonoBehaviour:
     characterDialogue: []
   - Items: []
     Quest:
+      ID: 1
       npc: {fileID: 11400000}
       isActive: 1
       canRepeat: 0
-      status: 2
+      status: 1
       title: Save The Scientist
       description: The intel seems to tell us that Dr Aaron somewhere in this cave
         nearby. We got to act fast before something bad happens.
@@ -152,12 +180,20 @@ MonoBehaviour:
     hasQuest: 1
     isStory: 0
     isEnd: 0
+    repeatableQuest: 0
     waitingQuest: 0
     justDialogue: 0
     hasHeal: 0
+    backToNormal: 0
+    sequenceNum: 0
+    activatePortal: 0
+    destination: 
+    triggerBoss: 0
     teleport: 0
     newBG: 
     characterV2: {x: 0, y: 0}
+    removeItem: 0
+    item: {fileID: 0}
     dialogue:
     - "That's pretty much the current situation. \nAre you ready for the mission?"
     - Excellent. I like that attitude!
@@ -169,6 +205,7 @@ MonoBehaviour:
     - No. I want to go home...
   - Items: []
     Quest:
+      ID: 0
       npc: {fileID: 11400000}
       isActive: 0
       canRepeat: 0
@@ -191,17 +228,26 @@ MonoBehaviour:
     hasQuest: 0
     isStory: 0
     isEnd: 0
+    repeatableQuest: 0
     waitingQuest: 1
     justDialogue: 0
     hasHeal: 0
+    backToNormal: 0
+    sequenceNum: 0
+    activatePortal: 0
+    destination: 
+    triggerBoss: 0
     teleport: 0
     newBG: 
     characterV2: {x: 0, y: 0}
+    removeItem: 0
+    item: {fileID: 0}
     dialogue:
     - Go on! There's no time to waste!
     characterDialogue: []
   - Items: []
     Quest:
+      ID: 0
       npc: {fileID: 11400000}
       isActive: 0
       canRepeat: 0
@@ -224,12 +270,20 @@ MonoBehaviour:
     hasQuest: 0
     isStory: 1
     isEnd: 0
+    repeatableQuest: 0
     waitingQuest: 0
     justDialogue: 0
     hasHeal: 0
+    backToNormal: 0
+    sequenceNum: 0
+    activatePortal: 0
+    destination: 
+    triggerBoss: 0
     teleport: 0
     newBG: 
     characterV2: {x: 0, y: 0}
+    removeItem: 0
+    item: {fileID: 0}
     dialogue:
     - 'Great work soldier! You fought well. I''m glad to see Dr Aaron still alive
       and back with us. '
@@ -241,6 +295,7 @@ MonoBehaviour:
     characterDialogue: []
   - Items: []
     Quest:
+      ID: 0
       npc: {fileID: 11400000}
       isActive: 0
       canRepeat: 0
@@ -263,13 +318,21 @@ MonoBehaviour:
     hasQuest: 0
     isStory: 0
     isEnd: 0
+    repeatableQuest: 0
     waitingQuest: 1
     justDialogue: 0
     hasHeal: 0
+    backToNormal: 0
+    sequenceNum: 0
+    activatePortal: 0
+    destination: 
+    triggerBoss: 0
     teleport: 0
     newBG: 
     characterV2: {x: 0, y: 0}
+    removeItem: 0
+    item: {fileID: 0}
     dialogue:
     - Go on, what are you waiting for? HAHA
     characterDialogue: []
-  sequenceNumber: 0
+  sequenceNumber: 5

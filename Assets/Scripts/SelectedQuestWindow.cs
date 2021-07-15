@@ -58,11 +58,11 @@ public class SelectedQuestWindow : MonoBehaviour
         }
         else if (quest.status == Quest.Status.COMPLETED)
         {
-            //AbandonQuestButton.gameObject.SetActive(true);
-            //ContinueQuestButton.gameObject.SetActive(false);
-            //CompleteQuestButton.gameObject.SetActive(true);
-            //AcceptQuestButton.gameObject.SetActive(false);
-            //DeclineQuestButton.gameObject.SetActive(false);
+            AbandonQuestButton.gameObject.SetActive(true);
+            ContinueQuestButton.gameObject.SetActive(false);
+            CompleteQuestButton.gameObject.SetActive(true);
+            AcceptQuestButton.gameObject.SetActive(false);
+            DeclineQuestButton.gameObject.SetActive(false);
 
             //Auto Complete Quest
             CompleteQuest();
@@ -73,8 +73,8 @@ public class SelectedQuestWindow : MonoBehaviour
     {
         FindObjectOfType<AudioManager>().PlayEffect("QuestAccepted");
         dialogueManager.QuestAccepted();
-        questList.AddQuest(quest);
-        quest.status = Quest.Status.ONGOING;
+        questList.AddQuest(quest);           //
+        quest.status = Quest.Status.ONGOING; //
         gameObject.SetActive(false);
         if (quest.questItem != null)
             item = Instantiate(quest.questItem, quest.location, Quaternion.identity);

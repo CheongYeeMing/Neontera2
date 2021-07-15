@@ -11,6 +11,7 @@ public class PauseMenu : MonoBehaviour
     public bool isPaused;
 
     public GameObject character;
+    [SerializeField] NPCManager npcManager;
     // Start is called before the first frame update
     void Start()
     {
@@ -43,21 +44,34 @@ public class PauseMenu : MonoBehaviour
         FindObjectOfType<AudioManager>().StopEffect("Click");
         FindObjectOfType<AudioManager>().PlayEffect("Click");
 
+        // Character Stats
         Data.level = character.GetComponent<CharacterLevel>().GetLevel();
         Data.gold = character.GetComponent<CharacterWallet>().GetGoldAmount();
         Data.currentExp = character.GetComponent<CharacterLevel>().GetCurrentExp();
         Data.currentHealth = character.GetComponent<CharacterHealth>().GetCurrentHealth();
         Data.maxHealth = character.GetComponent<CharacterHealth>().GetMaxHealth();
 
+        // Character Position
         Data.Xcoordinate = character.transform.position.x;
         Data.Ycoordinate = character.transform.position.y;
         Data.location = character.GetComponent<CharacterMovement>().location;
 
+        // Save Inventory
+        Data.items.Clear();
         foreach (Item item in character.GetComponent<Character>().inventory.GetItems()) Data.items.Add(item.id);
-        //Data.itemSlot = character.GetComponent<Character>().inventory.GetItemSlots();
 
+        // Save Equipped Items
+        Data.equippedItems.Clear();
         foreach (Item item in character.GetComponent<Character>().equipmentPanel.GetEquippedItems()) Data.equippedItems.Add(item.id);
-            //Data.equippedItems = character.GetComponent<Character>().equipmentPanel.GetEquippedItems();
+
+        // Save Quest 
+        Data.quests.Clear();
+        foreach (Quest quest in character.GetComponent<Character>().questList.quests) Data.quests.Add(quest.ID);
+
+        // Save NPC Sequence Number
+        npcManager.Save();
+
+        Data.SaveGame();
     }
     public void Quit()
     {

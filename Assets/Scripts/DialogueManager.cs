@@ -332,8 +332,6 @@ public class DialogueManager : MonoBehaviour
     public void QuestAccepted()
     {
         currResponseTracker = npc.Sequences[npc.sequenceNumber].dialogue.Length - 2;
-        Debug.Log(npc.Sequences[npc.sequenceNumber].dialogue.Length);
-        Debug.Log(npc.sequenceNumber);
         StartCoroutine(TypeSentence(npc.Sequences[npc.sequenceNumber].dialogue[(int)currResponseTracker]));
         npc.sequenceNumber++;
     }

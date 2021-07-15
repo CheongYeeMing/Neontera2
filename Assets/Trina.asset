@@ -17,6 +17,7 @@ MonoBehaviour:
   Sequences:
   - Items: []
     Quest:
+      ID: 0
       npc: {fileID: 0}
       isActive: 0
       canRepeat: 0
@@ -64,6 +65,7 @@ MonoBehaviour:
     - You don't need to know.
   - Items: []
     Quest:
+      ID: 0
       npc: {fileID: 0}
       isActive: 0
       canRepeat: 0
@@ -109,6 +111,7 @@ MonoBehaviour:
     characterDialogue: []
   - Items: []
     Quest:
+      ID: 9
       npc: {fileID: 11400000}
       isActive: 1
       canRepeat: 0
@@ -158,6 +161,7 @@ MonoBehaviour:
     - I want to go back to Town...
   - Items: []
     Quest:
+      ID: 0
       npc: {fileID: 0}
       isActive: 0
       canRepeat: 0
@@ -199,6 +203,7 @@ MonoBehaviour:
     characterDialogue: []
   - Items: []
     Quest:
+      ID: 0
       npc: {fileID: 0}
       isActive: 0
       canRepeat: 0
@@ -245,6 +250,7 @@ MonoBehaviour:
     - 
   - Items: []
     Quest:
+      ID: 10
       npc: {fileID: 11400000}
       isActive: 0
       canRepeat: 0
@@ -295,6 +301,7 @@ MonoBehaviour:
     - I'm tired after fighting 15 fireworms...
   - Items: []
     Quest:
+      ID: 0
       npc: {fileID: 0}
       isActive: 0
       canRepeat: 0
@@ -335,6 +342,7 @@ MonoBehaviour:
     characterDialogue: []
   - Items: []
     Quest:
+      ID: 0
       npc: {fileID: 0}
       isActive: 0
       canRepeat: 0
@@ -379,6 +387,7 @@ MonoBehaviour:
     characterDialogue: []
   - Items: []
     Quest:
+      ID: 11
       npc: {fileID: 11400000}
       isActive: 0
       canRepeat: 0
@@ -427,6 +436,7 @@ MonoBehaviour:
     - I think we should wait for backup.
   - Items: []
     Quest:
+      ID: 0
       npc: {fileID: 0}
       isActive: 0
       canRepeat: 0
@@ -467,6 +477,7 @@ MonoBehaviour:
     characterDialogue: []
   - Items: []
     Quest:
+      ID: 0
       npc: {fileID: 0}
       isActive: 0
       canRepeat: 0
@@ -513,6 +524,7 @@ MonoBehaviour:
     - I could've lost my life...
   - Items: []
     Quest:
+      ID: 0
       npc: {fileID: 0}
       isActive: 0
       canRepeat: 0
@@ -559,6 +571,7 @@ MonoBehaviour:
     characterDialogue: []
   - Items: []
     Quest:
+      ID: 0
       npc: {fileID: 11400000}
       isActive: 0
       canRepeat: 1
@@ -610,6 +623,7 @@ MonoBehaviour:
     - I just wanted to come say hi !!
   - Items: []
     Quest:
+      ID: 0
       npc: {fileID: 0}
       isActive: 0
       canRepeat: 0
@@ -648,4 +662,4 @@ MonoBehaviour:
     dialogue:
     - These fireworms are so annoying... why did HQ post me here... *cries*
     characterDialogue: []
-  sequenceNumber: 6
+  sequenceNumber: 0

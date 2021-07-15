@@ -40,15 +40,15 @@ public class EquipableItem : Item
         }
         if (AttackPercentBonus != 0)
         {
-            c.GetAttack().AddModifier(new StatModifier(AttackPercentBonus, StatModType.PercentMult, this));
+            c.GetAttack().AddModifier(new StatModifier(AttackPercentBonus, StatModType.PercentAdd, this));
         }
         if (HealthPercentBonus != 0)
         {
-            c.GetHealth().AddModifier(new StatModifier(HealthPercentBonus, StatModType.PercentMult, this));
+            c.GetHealth().AddModifier(new StatModifier(HealthPercentBonus, StatModType.PercentAdd, this));
         }
         if (SpeedPercentBonus != 0)
         {
-            c.GetSpeed().AddModifier(new StatModifier(SpeedPercentBonus, StatModType.PercentMult, this));
+            c.GetSpeed().AddModifier(new StatModifier(SpeedPercentBonus, StatModType.PercentAdd, this));
         }
     }
 
