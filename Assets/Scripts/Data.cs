@@ -91,6 +91,6 @@ public static class Data
 
     public static void NewGame()
     {
-
+        PlayerPrefs.DeleteAll();
     }
 }
