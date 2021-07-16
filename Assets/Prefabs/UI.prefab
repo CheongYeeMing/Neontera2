@@ -754,6 +754,7 @@ MonoBehaviour:
   - {fileID: 812654842}
   - {fileID: 1454392145}
   selectedQuestWindow: {fileID: 0}
+  acceptedQuestWindow: {fileID: 0}
 --- !u!1 &34741877
 GameObject:
   m_ObjectHideFlags: 0

@@ -14,6 +14,7 @@ public class QuestManager : MonoBehaviour
 
     public void Start()
     {
+        //AcceptedQuestWindow.SetActive(true);
         animator.SetBool("IsOpen", false);
     }
 
@@ -30,6 +31,7 @@ public class QuestManager : MonoBehaviour
         FindObjectOfType<AudioManager>().StopEffect("Open");
         FindObjectOfType<AudioManager>().PlayEffect("Open");
         isOpen = !isOpen;
+        //AcceptedQuestWindow.SetActive(isOpen);
         animator.SetBool("IsOpen", isOpen);
         selectedQuestWindow.gameObject.SetActive(false);
         //if (FindObjectOfType<SelectedQuestWindow>())

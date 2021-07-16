@@ -12,12 +12,16 @@ public class QuestList : MonoBehaviour
     [SerializeField] Transform questsParent;
     [SerializeField] QuestSlot[] questSlots;
     [SerializeField] SelectedQuestWindow selectedQuestWindow;
+    [SerializeField] GameObject acceptedQuestWindow;
 
     public event Action<Quest> OnItemLeftClickedEvent;
 
     public void Start()
     {
-
+        for (int i = 0; i < questSlots.Length; i++)
+        {
+            questSlots[i].OnLeftClickEvent += OnItemLeftClickedEvent;
+        }
     }
 
     private void Update()
@@ -32,10 +36,10 @@ public class QuestList : MonoBehaviour
     }
     private void Awake()
     {
-        for (int i = 0; i < questSlots.Length; i++)
-        {
-            questSlots[i].OnLeftClickEvent += OnItemLeftClickedEvent;
-        }
+        //for (int i = 0; i < questSlots.Length; i++)
+        //{
+        //    questSlots[i].OnLeftClickEvent += OnItemLeftClickedEvent;
+        //}
     }
 
     private void OnValidate()
@@ -59,6 +63,10 @@ public class QuestList : MonoBehaviour
         {
             questSlots[i].Quest = null;
         }
+
+        
+        acceptedQuestWindow.SetActive(false);
+        acceptedQuestWindow.SetActive(true);
     }
 
     public bool AddQuest(Quest quest)

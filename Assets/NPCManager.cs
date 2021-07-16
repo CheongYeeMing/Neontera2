@@ -27,10 +27,20 @@ public class NPCManager : MonoBehaviour
         LloydForest.sequenceNumber = Data.LloydForest;
         TrinaCave.sequenceNumber = Data.TrinaCave;
 
-        foreach (int i in Data.quests)
+        //foreach (int i in Data.quests)
+        //{
+        //    Quest quest = QuestList.Sequences[i].Quest;
+        //    quest.status = Quest.Status.ONGOING;
+            
+        //    questList.AddQuest(quest);
+        //}
+
+        for (int i = 0; i < Data.quests.Count; i++)
         {
-            Quest quest = QuestList.Sequences[i].Quest;
+            Quest quest = QuestList.Sequences[Data.quests[i]].Quest;
+            quest.Reset();
             quest.status = Quest.Status.ONGOING;
+            quest.questCriteria.currentAmount = Data.questProgress[i];
             questList.AddQuest(quest);
         }
     }

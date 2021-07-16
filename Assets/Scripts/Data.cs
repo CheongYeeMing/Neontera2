@@ -14,13 +14,13 @@ public static class Data
     public static float currentExp;
     public static float currentHealth = 0;
     public static float maxHealth;
-    public static float Xcoordinate = -10.2f;
-    public static float Ycoordinate = -1.39f;
+    //public static float Xcoordinate = -10.2f;
+    //public static float Ycoordinate = -1.39f;
     //public static float Xcoordinate = 140.47f;
     //public static float Ycoordinate = -18.02f;
-    //public static float Xcoordinate = 552.08f;
-    //public static float Ycoordinate = -20.19f;
-    public static string location = "Intro";
+    public static float Xcoordinate = 552.08f;
+    public static float Ycoordinate = -20.19f;
+    public static string location = "Cave";
 
     // Character Equipped Items
     public static List<int> equippedItems = new List<int>();
@@ -30,6 +30,7 @@ public static class Data
 
     // Character Quests
     public static List<int> quests = new List<int>();
+    public static List<int> questProgress = new List<int>();
 
     // NPC Sequence Number
     public static int JohnsonIntro = 0;
@@ -64,6 +65,11 @@ public static class Data
 
         PlayerPrefs.SetInt("numQuests", quests.Count);
         for (int i = 0; i < quests.Count; i++) PlayerPrefs.SetInt("quests" + (i + 1), quests[i]);
+
+        PlayerPrefs.SetInt("questProgress", questProgress.Count);
+        for (int i = 0; i < questProgress.Count; i++) PlayerPrefs.SetInt("questProgress" + (i + 1), questProgress[i]);
+
+        PlayerPrefs.Save();
     }
 
     public static void LoadGame()
@@ -87,6 +93,8 @@ public static class Data
         for (int i = 0; i < PlayerPrefs.GetInt("numItems"); i++) items.Add(PlayerPrefs.GetInt("items" + (i + 1)));
         
         for (int i = 0; i < PlayerPrefs.GetInt("numQuests"); i++) quests.Add(PlayerPrefs.GetInt("quests" + (i + 1)));
+
+        for (int i = 0; i < PlayerPrefs.GetInt("questProgress"); i++) questProgress.Add(PlayerPrefs.GetInt("questProgress" + (i + 1)));
     }
 
     public static void NewGame()

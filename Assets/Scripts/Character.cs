@@ -39,9 +39,9 @@ public class Character : MonoBehaviour
 
     public void ShowInSelectedQuestWindow(Quest quest)
     {
+        Debug.Log("Here???");
         FindObjectOfType<AudioManager>().StopEffect("SelectQuest");
         FindObjectOfType<AudioManager>().PlayEffect("SelectQuest");
-        selectedQuestWindow.gameObject.SetActive(true);
         selectedQuestWindow.QuestSelected(quest);
     }
 
