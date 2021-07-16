@@ -43,9 +43,10 @@ public class CharacterMovement : MonoBehaviour
         if (isGrounded()) walkDust.gameObject.SetActive(true);
         else walkDust.gameObject.SetActive(false);
         speed = GetComponent<Character>().GetSpeed().CalculateFinalValue();
+        if (GetComponent<CharacterAttack>().GetIsAttacking() && isGrounded()) return;
         if (CanMove() == false)
         {
-            if (!GetComponent<CharacterAttack>().GetIsAttacking()) GetComponent<CharacterAnimation>().ChangeAnimationState(CHARACTER_IDLE);
+            GetComponent<CharacterAnimation>().ChangeAnimationState(CHARACTER_IDLE);
             //body.velocity = Vector2.zero;
             return;
         }
@@ -144,7 +145,7 @@ public class CharacterMovement : MonoBehaviour
         }
     }
 
-    private bool isGrounded()
+    public bool isGrounded()
     {
         RaycastHit2D raycastHit = Physics2D.BoxCast(boxCollider.bounds.center, boxCollider.bounds.size, 0, Vector2.down, 0.03f, groundLayer);
         return raycastHit.collider != null;
@@ -158,6 +159,24 @@ public class CharacterMovement : MonoBehaviour
 
     public bool canAttack()
     {
+        //bool can = true;
+        //Monologue[] monologues = FindObjectsOfType<Monologue>();
+        //foreach (Monologue mono in monologues)
+        //{
+        //    if (mono.IsExamining())
+        //    {
+        //        can = false;
+        //        break;
+        //    }
+        //}
+        //if (FindObjectOfType<InventorySystem>().isOpen)
+        //{
+        //    can = false;
+        //}
+        //if (gameObject.GetComponent<CharacterHealth>().IsHurting() || gameObject.GetComponent<CharacterHealth>().IsDead())
+        //{
+        //    can = false;
+        //}
         return !onWall() && !GetComponent<CharacterHealth>().IsDead();
     }
 
@@ -181,7 +200,6 @@ public class CharacterMovement : MonoBehaviour
         {
             can = false;
         }
-        if (GetComponent<CharacterAttack>().GetIsAttacking()) can = false;
         DialogueManager[] npc = FindObjectsOfType<DialogueManager>();
         for (int i = 0; i < npc.Length; i++)
         {

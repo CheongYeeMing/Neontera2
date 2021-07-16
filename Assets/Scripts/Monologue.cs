@@ -109,7 +109,8 @@ public class Monologue : MonoBehaviour
         }
         else
         {
-            FindObjectOfType<Character>().GetComponent<Rigidbody2D>().velocity = Vector2.zero;
+            character.GetComponent<CharacterAnimation>().ChangeAnimationState("Idle");
+            character.GetComponent<Rigidbody2D>().velocity = Vector2.zero;
             FindObjectOfType<AudioManager>().StopEffect("Run");
             FindObjectOfType<AudioManager>().StopEffect("DialogueMonologue");
             FindObjectOfType<AudioManager>().PlayEffect("DialogueMonologue");
