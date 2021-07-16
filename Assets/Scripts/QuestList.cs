@@ -11,12 +11,24 @@ public class QuestList : MonoBehaviour
     [SerializeField] public List<Quest> quests;
     [SerializeField] Transform questsParent;
     [SerializeField] QuestSlot[] questSlots;
+    [SerializeField] SelectedQuestWindow selectedQuestWindow;
 
     public event Action<Quest> OnItemLeftClickedEvent;
 
     public void Start()
     {
 
+    }
+
+    private void Update()
+    {
+        foreach(Quest quest in quests)
+        {
+            if (quest.status == Quest.Status.COMPLETED)
+            {
+                selectedQuestWindow.QuestSelected(quest);
+            }
+        }
     }
     private void Awake()
     {
