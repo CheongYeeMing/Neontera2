@@ -45,7 +45,7 @@ public class CharacterMovement : MonoBehaviour
         speed = GetComponent<Character>().GetSpeed().CalculateFinalValue();
         if (CanMove() == false)
         {
-            GetComponent<CharacterAnimation>().ChangeAnimationState(CHARACTER_IDLE);
+            if (!GetComponent<CharacterAttack>().GetIsAttacking()) GetComponent<CharacterAnimation>().ChangeAnimationState(CHARACTER_IDLE);
             //body.velocity = Vector2.zero;
             return;
         }
@@ -181,7 +181,7 @@ public class CharacterMovement : MonoBehaviour
         {
             can = false;
         }
-        
+        if (GetComponent<CharacterAttack>().GetIsAttacking()) can = false;
         DialogueManager[] npc = FindObjectsOfType<DialogueManager>();
         for (int i = 0; i < npc.Length; i++)
         {

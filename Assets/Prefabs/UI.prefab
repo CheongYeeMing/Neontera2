@@ -754,7 +754,6 @@ MonoBehaviour:
   - {fileID: 812654842}
   - {fileID: 1454392145}
   selectedQuestWindow: {fileID: 0}
-  questWindow: {fileID: 0}
 --- !u!1 &34741877
 GameObject:
   m_ObjectHideFlags: 0
@@ -69841,6 +69840,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   AcceptedQuestWindow: {fileID: 1275889550}
+  selectedQuestWindow: {fileID: 0}
+  animator: {fileID: 0}
 --- !u!1 &4322237880325318320
 GameObject:
   m_ObjectHideFlags: 0

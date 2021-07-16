@@ -16,7 +16,7 @@ public class CharacterAttack : MonoBehaviour
 
     private float attack;
     private float cooldownTimer = Mathf.Infinity;
-    private float attackRange = 0.5f;
+    private float attackRange = 1.5f;
 
     private bool isAttacking;
 
@@ -24,10 +24,18 @@ public class CharacterAttack : MonoBehaviour
     private const string CHARACTER_ATTACK = "Attack";
     private const string CHARACTER_SPECIAL_ATTACK = "AttackFireball";
 
+    // Combo
+    public int combo;
+    [SerializeField] GameObject Slash_1;
+    [SerializeField] GameObject Slash_2;
+    [SerializeField] GameObject Slash_3;
+    public float comboTimer;
+
     private void Awake()
     {
         playerMovement = GetComponent<CharacterMovement>();
         attack = GetComponent<Character>().GetAttack().CalculateFinalValue();
+        combo = 1;
     }
 
     private void Update()
@@ -41,6 +49,8 @@ public class CharacterAttack : MonoBehaviour
             SpecialAttack();
         }
         cooldownTimer += Time.deltaTime;
+        comboTimer += Time.deltaTime;
+        if (comboTimer > 1f) combo = 1;
     }
 
     private void Attack()
@@ -49,6 +59,30 @@ public class CharacterAttack : MonoBehaviour
         gameObject.GetComponent<CharacterAnimation>().ChangeAnimationState(CHARACTER_ATTACK);
         FindObjectOfType<AudioManager>().PlayEffect("CharacterNormalAttack");
         cooldownTimer = 0;
+        comboTimer = 0;
+        if (combo >= 4) combo = 1;
+        Debug.Log(combo);
+        if (combo == 1)
+        {
+            GameObject Slash1 = Instantiate(Slash_1, new Vector2(attackPoint.position.x, attackPoint.position.y), Quaternion.identity) as GameObject;
+            Slash1.GetComponent<Rigidbody2D>().velocity = new Vector2(Mathf.Sign(transform.localScale.x) * 0.5f, -0.5f);
+        }
+        else if (combo == 2)
+        {
+            GameObject Slash2 = Instantiate(Slash_2, new Vector2(attackPoint.position.x, attackPoint.position.y), Quaternion.identity) as GameObject;
+            Slash2.GetComponent<Rigidbody2D>().velocity = new Vector2(Mathf.Sign(transform.localScale.x) * 0.4f, 0.6f);
+        }
+        else if (combo == 3)
+        {
+            GameObject Slash3 = Instantiate(Slash_3, attackPoint.position, Quaternion.identity) as GameObject;
+            Slash3.GetComponent<Projectile>().damage = (float)(gameObject.GetComponent<Character>().GetAttack().CalculateFinalValue() * 0.75);
+            Slash3.GetComponent<Rigidbody2D>().velocity = new Vector2(Mathf.Sign(transform.localScale.x) * 3f, 0);
+        }
+        //if (combo < 3) GetComponent<Rigidbody2D>().velocity = new Vector2(Mathf.Sign(gameObject.transform.localScale.x) *1f, 0);
+        //else if (combo == 3) GetComponent<Rigidbody2D>().velocity = new Vector2(Mathf.Sign(gameObject.transform.localScale.x) * 3f, 0);
+        if (combo < 3) GetComponent<Rigidbody2D>().AddForce(new Vector2(Mathf.Sign(gameObject.transform.localScale.x) * 30f, 0));
+        else if (combo == 3) GetComponent<Rigidbody2D>().AddForce(new Vector2(Mathf.Sign(gameObject.transform.localScale.x) * 145f, 0));
+        combo++;
 
         Collider2D[] hitMobs = Physics2D.OverlapCircleAll(attackPoint.position, attackRange, mobLayer);
         attack = gameObject.GetComponent<Character>().GetAttack().CalculateFinalValue();
