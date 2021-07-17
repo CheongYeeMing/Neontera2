@@ -21,24 +21,27 @@ public class PauseMenu : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (Input.GetKeyDown(KeyCode.Escape))
+        if (Input.GetKeyDown(KeyCode.Escape)) TogglePause();
+    }
+
+    public void TogglePause()
+    {
+        FindObjectOfType<AudioManager>().StopEffect("Open");
+        FindObjectOfType<AudioManager>().PlayEffect("Open");
+        if (isPaused)
         {
-            FindObjectOfType<AudioManager>().StopEffect("Open");
-            FindObjectOfType<AudioManager>().PlayEffect("Open");
-            if (isPaused)
-            {
-                isPaused = false;
-                pauseMenu.SetActive(false);
-                Time.timeScale = 1f;
-            }
-            else
-            {
-                isPaused = true;
-                pauseMenu.SetActive(true);
-                Time.timeScale = 0f;
-            }
+            isPaused = false;
+            pauseMenu.SetActive(false);
+            Time.timeScale = 1f;
+        }
+        else
+        {
+            isPaused = true;
+            pauseMenu.SetActive(true);
+            Time.timeScale = 0f;
         }
     }
+
     public void Save()
     {
         FindObjectOfType<AudioManager>().StopEffect("Click");

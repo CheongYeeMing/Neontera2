@@ -14,13 +14,13 @@ public static class Data
     public static float currentExp;
     public static float currentHealth = 0;
     public static float maxHealth;
-    //public static float Xcoordinate = -10.2f;
-    //public static float Ycoordinate = -1.39f;
+    public static float Xcoordinate = -10.2f;
+    public static float Ycoordinate = -1.39f;
     //public static float Xcoordinate = 140.47f;
     //public static float Ycoordinate = -18.02f;
-    public static float Xcoordinate = 552.08f;
-    public static float Ycoordinate = -20.19f;
-    public static string location = "Cave";
+    //public static float Xcoordinate = 552.08f;
+    //public static float Ycoordinate = -20.19f;
+    public static string location = "Intro";
 
     // Character Equipped Items
     public static List<int> equippedItems = new List<int>();

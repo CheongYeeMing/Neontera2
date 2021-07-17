@@ -17,6 +17,7 @@ MonoBehaviour:
   Sequences:
   - Items: []
     Quest:
+      ID: 0
       npc: {fileID: 0}
       isActive: 0
       canRepeat: 0
@@ -64,6 +65,7 @@ MonoBehaviour:
   - Items:
     - {fileID: 8177623600617057691, guid: f4cd1c3d359f38743ba95f19bc13ac24, type: 3}
     Quest:
+      ID: 0
       npc: {fileID: 0}
       isActive: 0
       canRepeat: 0
@@ -110,6 +112,7 @@ MonoBehaviour:
   - Items:
     - {fileID: 8177623600617057691, guid: f4cd1c3d359f38743ba95f19bc13ac24, type: 3}
     Quest:
+      ID: 0
       npc: {fileID: 0}
       isActive: 0
       canRepeat: 0
@@ -157,6 +160,7 @@ MonoBehaviour:
   - Items:
     - {fileID: 8177623600617057691, guid: f4cd1c3d359f38743ba95f19bc13ac24, type: 3}
     Quest:
+      ID: 0
       npc: {fileID: 0}
       isActive: 0
       canRepeat: 0
@@ -203,6 +207,7 @@ MonoBehaviour:
   - Items:
     - {fileID: 8177623600617057691, guid: f4cd1c3d359f38743ba95f19bc13ac24, type: 3}
     Quest:
+      ID: 0
       npc: {fileID: 0}
       isActive: 0
       canRepeat: 0
@@ -248,6 +253,7 @@ MonoBehaviour:
   - Items:
     - {fileID: 8177623600617057691, guid: f4cd1c3d359f38743ba95f19bc13ac24, type: 3}
     Quest:
+      ID: 0
       npc: {fileID: 0}
       isActive: 0
       canRepeat: 0
@@ -297,6 +303,7 @@ MonoBehaviour:
   - Items:
     - {fileID: 8177623600617057691, guid: f4cd1c3d359f38743ba95f19bc13ac24, type: 3}
     Quest:
+      ID: 0
       npc: {fileID: 0}
       isActive: 0
       canRepeat: 0
@@ -345,6 +352,7 @@ MonoBehaviour:
   - Items:
     - {fileID: 8177623600617057691, guid: f4cd1c3d359f38743ba95f19bc13ac24, type: 3}
     Quest:
+      ID: 0
       npc: {fileID: 0}
       isActive: 0
       canRepeat: 0
@@ -384,4 +392,4 @@ MonoBehaviour:
     - I think you got all the information you need already. I will pass you the coordinates.
       Do report back to Johnson for more details.
     characterDialogue: []
-  sequenceNumber: 1
+  sequenceNumber: 0
