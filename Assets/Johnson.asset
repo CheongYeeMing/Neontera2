@@ -243,7 +243,8 @@ MonoBehaviour:
     removeItem: 0
     item: {fileID: 0}
     dialogue:
-    - Go on! There's no time to waste!
+    - Go on! There's no time to waste! You can track your progress by clicking on
+      the Quest Button on the bottom left of the screen or use the shortcut Q.
     characterDialogue: []
   - Items: []
     Quest:

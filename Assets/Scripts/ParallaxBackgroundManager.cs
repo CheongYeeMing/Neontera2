@@ -17,6 +17,11 @@ public class ParallaxBackgroundManager : MonoBehaviour
     [SerializeField] GameObject SS;
     [SerializeField] GameObject SSDetails;
 
+    [SerializeField] GameObject SecretArea1;
+    [SerializeField] GameObject SecretArea1Details;
+    [SerializeField] GameObject SecretArea2;
+    [SerializeField] GameObject SecretArea2Details;
+
     [SerializeField] TransitionManager Transition;
 
     private const string INTRO = "Intro";
@@ -25,6 +30,8 @@ public class ParallaxBackgroundManager : MonoBehaviour
     private const string CAVE = "Cave";
     private const string BASE_STATION = "Base Station";
     private const string SPACE_STATION = "Space Station";
+    private const string SECRET_AREA_1 = "Secret Area 1";
+    private const string SECRET_AREA_2 = "Secret Area 2";
 
     private string currentBackground;
 
@@ -43,6 +50,10 @@ public class ParallaxBackgroundManager : MonoBehaviour
         BSDetails.SetActive(false);
         SS.SetActive(false);
         SSDetails.SetActive(false);
+        SecretArea1.SetActive(false);
+        SecretArea1Details.SetActive(false);
+        SecretArea2.SetActive(false);
+        SecretArea2Details.SetActive(false);
         currentBackground = Data.location;
         SetBackground(currentBackground);
         FindObjectOfType<AudioManager>().PlayMusic(currentBackground);
@@ -83,6 +94,16 @@ public class ParallaxBackgroundManager : MonoBehaviour
             SS.SetActive(true);
             SSDetails.SetActive(true);
         }
+        else if (newBackground == SECRET_AREA_1)
+        {
+            SecretArea1.SetActive(true);
+            SecretArea1Details.SetActive(true);
+        }
+        else if (newBackground == SECRET_AREA_2)
+        {
+            SecretArea2.SetActive(true);
+            SecretArea2Details.SetActive(true);
+        }
         Transition.Deactivate();
     }
 
@@ -121,7 +142,17 @@ public class ParallaxBackgroundManager : MonoBehaviour
             SS.SetActive(false);
             SSDetails.SetActive(false);
         }
-        
+        else if (currentBackground == SECRET_AREA_1)
+        {
+            SecretArea1.SetActive(false);
+            SecretArea1Details.SetActive(false);
+        }
+        else if (currentBackground == SECRET_AREA_2)
+        {
+            SecretArea2.SetActive(false);
+            SecretArea2Details.SetActive(false);
+        }
+
         SetBackground(newBackground);
     }
 
@@ -159,6 +190,16 @@ public class ParallaxBackgroundManager : MonoBehaviour
         {
             SS.SetActive(false);
             SSDetails.SetActive(false);
+        }
+        else if (currentBackground == SECRET_AREA_1)
+        {
+            SecretArea1.SetActive(false);
+            SecretArea1Details.SetActive(false);
+        }
+        else if (currentBackground == SECRET_AREA_2)
+        {
+            SecretArea2.SetActive(false);
+            SecretArea2Details.SetActive(false);
         }
 
         SetBackground(newBackground);
