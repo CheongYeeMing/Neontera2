@@ -47,12 +47,16 @@ public class CharacterHealth : MonoBehaviour, Health
     {
         maxHealth = baseMaxHealth + GetComponent<Character>().GetHealth().CalculateFinalValue();
         health = Mathf.Clamp(health, 0, maxHealth);
-        if (GetComponent<Transform>().position.y < -100) health -= maxHealth * 0.2f; // When fall out of map, slow death.
-        UpdateHealthUI();
-        if (Input.GetKeyDown(KeyCode.F))
+        if (GetComponent<Transform>().position.y < -100)
         {
-            RestoreHealth(50);
+            health -= maxHealth * 0.2f; // When fall out of map, slow death.
+            if (health <= 0)
+            {
+                health = 0;
+                Die();
+            }
         }
+        UpdateHealthUI();
     }
 
     public void UpdateHealthUI()

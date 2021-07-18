@@ -40,6 +40,9 @@ public class NPC : ScriptableObject
         public bool removeItem;
         public Item item;
 
+        public bool addItem;
+        public Item giveItem;
+
         [TextArea(3, 15)]
         public string[] dialogue;
         [TextArea(3, 15)]

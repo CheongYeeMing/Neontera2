@@ -13,6 +13,143 @@ MonoBehaviour:
   m_Name: Nicole
   m_EditorClassIdentifier: 
   npcName: Nicole
-  icon: {fileID: 0}
-  Sequences: []
-  sequenceNumber: 0
+  icon: {fileID: 21300000, guid: bc1823ed5fa2b234aa6325187547d3ad, type: 3}
+  Sequences:
+  - Items: []
+    Quest:
+      ID: 0
+      npc: {fileID: 0}
+      isActive: 0
+      canRepeat: 0
+      status: 0
+      title: 
+      description: 
+      questCriteria:
+        criteriaType: 0
+        action: 
+        Target: 
+        requiredAmount: 0
+        currentAmount: 0
+      expReward: 0
+      goldReward: 0
+      itemReward: {fileID: 0}
+      questItem: {fileID: 0}
+      location: {x: 0, y: 0, z: 0}
+    hasShop: 0
+    hasQuest: 0
+    isStory: 1
+    isEnd: 0
+    repeatableQuest: 0
+    waitingQuest: 0
+    justDialogue: 0
+    hasHeal: 0
+    backToNormal: 0
+    sequenceNum: 0
+    activatePortal: 0
+    destination: 
+    triggerBoss: 0
+    teleport: 0
+    newBG: 
+    characterV2: {x: 0, y: 0}
+    removeItem: 0
+    item: {fileID: 0}
+    addItem: 1
+    giveItem: {fileID: 1645576359943562433, guid: df1c9c1c90bf4f340a821ecba1dc09e5, type: 3}
+    dialogue:
+    - 'Hello, I''m Nicole. Welcome to the Land of Squishies!! '
+    - As you can probably already tell, I'm an avid fan of squishies. I've been collecting
+      these balls of cuteness for the longest time.
+    - Few have witnessed the grandiosity of these cute little puffballs, only VIPs
+      are allowed to even lay their eyes on my cuties <333
+    - 'no one understands the squishy world except me... '
+    - Anyways, I'd like you to take this!
+    characterDialogue: []
+  - Items: []
+    Quest:
+      ID: 0
+      npc: {fileID: 0}
+      isActive: 0
+      canRepeat: 0
+      status: 0
+      title: 
+      description: 
+      questCriteria:
+        criteriaType: 0
+        action: 
+        Target: 
+        requiredAmount: 0
+        currentAmount: 0
+      expReward: 0
+      goldReward: 0
+      itemReward: {fileID: 0}
+      questItem: {fileID: 0}
+      location: {x: 0, y: 0, z: 0}
+    hasShop: 0
+    hasQuest: 0
+    isStory: 1
+    isEnd: 0
+    repeatableQuest: 0
+    waitingQuest: 0
+    justDialogue: 0
+    hasHeal: 0
+    backToNormal: 0
+    sequenceNum: 0
+    activatePortal: 0
+    destination: 
+    triggerBoss: 0
+    teleport: 0
+    newBG: 
+    characterV2: {x: 0, y: 0}
+    removeItem: 0
+    item: {fileID: 0}
+    addItem: 0
+    giveItem: {fileID: 0}
+    dialogue:
+    - It may not be as cute as my cutie little squishies and lovelies but it might
+      just be the strongest pair of boots you'll get in this game :D
+    - Well, good luck with your adventure~
+    characterDialogue: []
+  - Items: []
+    Quest:
+      ID: 0
+      npc: {fileID: 0}
+      isActive: 0
+      canRepeat: 0
+      status: 0
+      title: 
+      description: 
+      questCriteria:
+        criteriaType: 0
+        action: 
+        Target: 
+        requiredAmount: 0
+        currentAmount: 0
+      expReward: 0
+      goldReward: 0
+      itemReward: {fileID: 0}
+      questItem: {fileID: 0}
+      location: {x: 0, y: 0, z: 0}
+    hasShop: 0
+    hasQuest: 0
+    isStory: 0
+    isEnd: 1
+    repeatableQuest: 0
+    waitingQuest: 0
+    justDialogue: 0
+    hasHeal: 0
+    backToNormal: 0
+    sequenceNum: 0
+    activatePortal: 0
+    destination: 
+    triggerBoss: 0
+    teleport: 0
+    newBG: 
+    characterV2: {x: 0, y: 0}
+    removeItem: 0
+    item: {fileID: 0}
+    addItem: 0
+    giveItem: {fileID: 0}
+    dialogue:
+    - ' I LOVE MY SQUISHIES <333'
+    characterDialogue: []
+  sequenceNumber: 2

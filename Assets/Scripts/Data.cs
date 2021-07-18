@@ -69,6 +69,15 @@ public static class Data
         PlayerPrefs.SetInt("questProgress", questProgress.Count);
         for (int i = 0; i < questProgress.Count; i++) PlayerPrefs.SetInt("questProgress" + (i + 1), questProgress[i]);
 
+        PlayerPrefs.SetInt("JohnsonIntro", JohnsonIntro);
+        PlayerPrefs.SetInt("DrAaronIntro", DrAaronIntro);
+        PlayerPrefs.SetInt("JohnsonTown", JohnsonTown);
+        PlayerPrefs.SetInt("DrAaronTown", DrAaronTown);
+        PlayerPrefs.SetInt("JeanneTown", JeanneTown);
+        PlayerPrefs.SetInt("MartinTown", MartinTown);
+        PlayerPrefs.SetInt("LloydForest", LloydForest);
+        PlayerPrefs.SetInt("TrinaCave", TrinaCave);
+
         PlayerPrefs.Save();
     }
 
@@ -95,6 +104,15 @@ public static class Data
         for (int i = 0; i < PlayerPrefs.GetInt("numQuests"); i++) quests.Add(PlayerPrefs.GetInt("quests" + (i + 1)));
 
         for (int i = 0; i < PlayerPrefs.GetInt("questProgress"); i++) questProgress.Add(PlayerPrefs.GetInt("questProgress" + (i + 1)));
+
+        JohnsonIntro = PlayerPrefs.GetInt("JohnsonIntro");
+        DrAaronIntro = PlayerPrefs.GetInt("DrAaronIntro");
+        JohnsonTown = PlayerPrefs.GetInt("JohnsonTown");
+        DrAaronTown = PlayerPrefs.GetInt("DrAaronTown");
+        JeanneTown = PlayerPrefs.GetInt("JeanneTown");
+        MartinTown = PlayerPrefs.GetInt("MartinTown");
+        LloydForest = PlayerPrefs.GetInt("LloydForest");
+        TrinaCave = PlayerPrefs.GetInt("TrinaCave");
     }
 
     public static void NewGame()

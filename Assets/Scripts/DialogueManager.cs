@@ -97,6 +97,11 @@ public class DialogueManager : MonoBehaviour
                         inventory.RemoveItem(npc.Sequences[npc.sequenceNumber].item);
                     }
 
+                    if (npc.Sequences[npc.sequenceNumber].addItem)
+                    {
+                        inventory.AddItem(npc.Sequences[npc.sequenceNumber].giveItem);
+                    }
+
                     if (npc.Sequences[npc.sequenceNumber].teleport)
                     {
                         StopAllCoroutines();
@@ -194,7 +199,16 @@ public class DialogueManager : MonoBehaviour
                 }
                 else // Just story
                 {
-
+                    if (currResponseTracker < npc.Sequences[npc.sequenceNumber].dialogue.Length - 1)
+                    {
+                        StopAllCoroutines();
+                        StartCoroutine(TypeSentence(npc.Sequences[npc.sequenceNumber].dialogue[(int)currResponseTracker + 1]));
+                        currResponseTracker++;
+                    }
+                    else
+                    {
+                        TriggerDialogue();
+                    }
                 }
             }
         }
