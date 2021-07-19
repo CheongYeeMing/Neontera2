@@ -36,8 +36,9 @@ public class Portal : MonoBehaviour
 
     public void Teleport(GameObject Character)
     {
-        if (isActivated)
+        if (isActivated && !Character.GetComponent<ParallaxBackgroundManager>().isTeleporting)
         {
+            Character.GetComponent<ParallaxBackgroundManager>().isTeleporting = true;
             FindObjectOfType<AudioManager>().StopEffect("Portal");
             FindObjectOfType<AudioManager>().PlayEffect("Portal");
             StopAllCoroutines();

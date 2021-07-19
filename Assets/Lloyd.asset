@@ -53,6 +53,8 @@ MonoBehaviour:
     characterV2: {x: 0, y: 0}
     removeItem: 0
     item: {fileID: 0}
+    addItem: 0
+    giveItem: {fileID: 0}
     dialogue:
     - Hi,  my name is Lloyd and I am the keeper of this forest. It is rare to see
       someone this young come here all alone from the Town. What are you doing here?
@@ -101,6 +103,8 @@ MonoBehaviour:
     characterV2: {x: 0, y: 0}
     removeItem: 0
     item: {fileID: 0}
+    addItem: 0
+    giveItem: {fileID: 0}
     dialogue:
     - I'm sure you've heard about the situation here. It's not looking too good at
       the moment.
@@ -125,8 +129,8 @@ MonoBehaviour:
         Target: Centipede
         requiredAmount: 10
         currentAmount: 10
-      expReward: 100
-      goldReward: 150
+      expReward: 250
+      goldReward: 100
       itemReward: {fileID: 0}
       questItem: {fileID: 0}
       location: {x: 0, y: 0, z: 0}
@@ -148,6 +152,8 @@ MonoBehaviour:
     characterV2: {x: 0, y: 0}
     removeItem: 0
     item: {fileID: 0}
+    addItem: 0
+    giveItem: {fileID: 0}
     dialogue:
     - I will need you to take out some centipedes first. Their numbers seem to have
       sky rocketed recently. You ready for the first task?
@@ -197,6 +203,8 @@ MonoBehaviour:
     characterV2: {x: 0, y: 0}
     removeItem: 0
     item: {fileID: 0}
+    addItem: 0
+    giveItem: {fileID: 0}
     dialogue:
     - We need to be quick before their numbers increase anymore!!!
     characterDialogue: []
@@ -239,6 +247,8 @@ MonoBehaviour:
     characterV2: {x: 0, y: 0}
     removeItem: 0
     item: {fileID: 0}
+    addItem: 0
+    giveItem: {fileID: 0}
     dialogue:
     - Wow, that was pretty quick I must say. You are really efficient!
     - Now that we have cleared the way, we can dive deeper into the forest.
@@ -262,8 +272,8 @@ MonoBehaviour:
         Target: Lloyd's Staff
         requiredAmount: 1
         currentAmount: 1
-      expReward: 500
-      goldReward: 50
+      expReward: 250
+      goldReward: 100
       itemReward: {fileID: 0}
       questItem: {fileID: 5639990682529972931, guid: 2d520287ff37b5843950c8d5c1393993, type: 3}
       location: {x: 395.17, y: 2.76, z: 0}
@@ -285,6 +295,8 @@ MonoBehaviour:
     characterV2: {x: 0, y: 0}
     removeItem: 0
     item: {fileID: 0}
+    addItem: 0
+    giveItem: {fileID: 0}
     dialogue:
     - 'I will need you to help me retrieve my staff. If I remember correctly, I dropped
       it before leaving a high platform. '
@@ -334,6 +346,8 @@ MonoBehaviour:
     characterV2: {x: 0, y: 0}
     removeItem: 0
     item: {fileID: 0}
+    addItem: 0
+    giveItem: {fileID: 0}
     dialogue:
     - I am useless without my staff...
     characterDialogue: []
@@ -376,6 +390,8 @@ MonoBehaviour:
     characterV2: {x: 0, y: 0}
     removeItem: 0
     item: {fileID: 0}
+    addItem: 0
+    giveItem: {fileID: 0}
     dialogue:
     - 'OH THANK GOD YOU RETRIEVED IT! '
     characterDialogue: []
@@ -396,8 +412,8 @@ MonoBehaviour:
         Target: Turtle King
         requiredAmount: 1
         currentAmount: 1
-      expReward: 1000
-      goldReward: 200
+      expReward: 500
+      goldReward: 300
       itemReward: {fileID: 0}
       questItem: {fileID: 0}
       location: {x: 0, y: 0, z: 0}
@@ -419,6 +435,8 @@ MonoBehaviour:
     characterV2: {x: 0, y: 0}
     removeItem: 0
     item: {fileID: 0}
+    addItem: 0
+    giveItem: {fileID: 0}
     dialogue:
     - There seems to be a Turtle King in the forest cave to the east side. I need
       you to take it out before it completely disrupts the balance here.
@@ -469,6 +487,8 @@ MonoBehaviour:
     characterV2: {x: 0, y: 0}
     removeItem: 0
     item: {fileID: 0}
+    addItem: 0
+    giveItem: {fileID: 0}
     dialogue:
     - Do be careful. Remember to stock up on potions incase your health falls low...
     characterDialogue: []
@@ -511,6 +531,8 @@ MonoBehaviour:
     characterV2: {x: 0, y: 0}
     removeItem: 0
     item: {fileID: 0}
+    addItem: 0
+    giveItem: {fileID: 0}
     dialogue:
     - You have proven yourself worthy as a soldier of the Army. I am truly grateful
       for your help.
@@ -520,7 +542,7 @@ MonoBehaviour:
     characterDialogue: []
   - Items: []
     Quest:
-      ID: 0
+      ID: 4
       npc: {fileID: 11400000}
       isActive: 1
       canRepeat: 1
@@ -534,7 +556,7 @@ MonoBehaviour:
         Target: Centipede
         requiredAmount: 10
         currentAmount: 0
-      expReward: 100
+      expReward: 350
       goldReward: 150
       itemReward: {fileID: 0}
       questItem: {fileID: 0}
@@ -557,6 +579,8 @@ MonoBehaviour:
     characterV2: {x: 0, y: 0}
     removeItem: 0
     item: {fileID: 0}
+    addItem: 0
+    giveItem: {fileID: 0}
     dialogue:
     - Hey, looks like you're back for more. Ready to exteminate some centipedes?
     - That's the spirit! Glad to have someone to help me :D
@@ -605,6 +629,8 @@ MonoBehaviour:
     characterV2: {x: 0, y: 0}
     removeItem: 0
     item: {fileID: 0}
+    addItem: 0
+    giveItem: {fileID: 0}
     dialogue:
     - Too many centipedes around...
     characterDialogue: []

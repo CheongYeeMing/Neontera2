@@ -53,6 +53,8 @@ MonoBehaviour:
     characterV2: {x: 0, y: 0}
     removeItem: 0
     item: {fileID: 0}
+    addItem: 0
+    giveItem: {fileID: 0}
     dialogue: []
     characterDialogue: []
   - Items: []
@@ -71,8 +73,8 @@ MonoBehaviour:
         Target: Dr Aaron
         requiredAmount: 1
         currentAmount: 1
-      expReward: 100
-      goldReward: 30
+      expReward: 300
+      goldReward: 100
       itemReward: {fileID: 0}
       questItem: {fileID: 0}
       location: {x: 0, y: 0, z: 0}
@@ -94,6 +96,8 @@ MonoBehaviour:
     characterV2: {x: 0, y: 0}
     removeItem: 0
     item: {fileID: 0}
+    addItem: 0
+    giveItem: {fileID: 0}
     dialogue:
     - "That's pretty much the current situation. \nAre you ready for the mission?"
     - Excellent. I like that attitude!
@@ -119,8 +123,8 @@ MonoBehaviour:
         Target: Artifact
         requiredAmount: 1
         currentAmount: 0
-      expReward: 100
-      goldReward: 25
+      expReward: 300
+      goldReward: 100
       itemReward: {fileID: 0}
       questItem: {fileID: 1006995982435724486, guid: ff15275cfa20de24cbe96c37ee8c715c, type: 3}
       location: {x: 11.34, y: 9.8, z: 0}
@@ -142,6 +146,8 @@ MonoBehaviour:
     characterV2: {x: 0, y: 0}
     removeItem: 0
     item: {fileID: 0}
+    addItem: 0
+    giveItem: {fileID: 0}
     dialogue:
     - Would you mind helping me to retrieve back that artifact? If I remember correctly,
       it was a red slime that stole by bag...
@@ -168,8 +174,8 @@ MonoBehaviour:
         Target: Turtle King
         requiredAmount: 1
         currentAmount: 0
-      expReward: 300
-      goldReward: 200
+      expReward: 500
+      goldReward: 300
       itemReward: {fileID: 0}
       questItem: {fileID: 0}
       location: {x: 0, y: 0, z: 0}
@@ -191,6 +197,8 @@ MonoBehaviour:
     characterV2: {x: 0, y: 0}
     removeItem: 0
     item: {fileID: 0}
+    addItem: 0
+    giveItem: {fileID: 0}
     dialogue:
     - I hope you have been listening to me. Are you ready for the mission?
     - Excellent. I like that attitude!
@@ -207,7 +215,7 @@ MonoBehaviour:
       npc: {fileID: 11400000, guid: 7e8cf3dac0c7df24391fb5f37240710b, type: 2}
       isActive: 1
       canRepeat: 0
-      status: 0
+      status: 2
       title: Centipede Extermination
       description: There has been a boom in these creatures. I will need you to take
         out some of them to keep their population in check.
@@ -216,8 +224,8 @@ MonoBehaviour:
         action: Centipede Killed
         Target: Centipede
         requiredAmount: 10
-        currentAmount: 10
-      expReward: 100
+        currentAmount: 0
+      expReward: 350
       goldReward: 150
       itemReward: {fileID: 0}
       questItem: {fileID: 0}
@@ -240,6 +248,8 @@ MonoBehaviour:
     characterV2: {x: 0, y: 0}
     removeItem: 0
     item: {fileID: 0}
+    addItem: 0
+    giveItem: {fileID: 0}
     dialogue:
     - I will need you to take out some centipedes first. Their numbers seem to have
       sky rocketed recently. You ready for the first task?
@@ -256,7 +266,7 @@ MonoBehaviour:
       npc: {fileID: 11400000, guid: 7e8cf3dac0c7df24391fb5f37240710b, type: 2}
       isActive: 1
       canRepeat: 0
-      status: 0
+      status: 2
       title: Lloyd's Staff
       description: Lloyd dropped his staff while escaping from hordes of centipede.
         It should be on a high platform towards the east side of the forest.
@@ -265,9 +275,9 @@ MonoBehaviour:
         action: Found Lloyd's Staff
         Target: Lloyd's Staff
         requiredAmount: 1
-        currentAmount: 1
-      expReward: 500
-      goldReward: 50
+        currentAmount: 0
+      expReward: 250
+      goldReward: 100
       itemReward: {fileID: 0}
       questItem: {fileID: 5639990682529972931, guid: 2d520287ff37b5843950c8d5c1393993, type: 3}
       location: {x: 395.17, y: 2.76, z: 0}
@@ -289,6 +299,8 @@ MonoBehaviour:
     characterV2: {x: 0, y: 0}
     removeItem: 0
     item: {fileID: 0}
+    addItem: 0
+    giveItem: {fileID: 0}
     dialogue:
     - 'I will need you to help me retrieve my staff. If I remember correctly, I dropped
       it before leaving a high platform. '
@@ -305,7 +317,7 @@ MonoBehaviour:
       npc: {fileID: 11400000, guid: 7e8cf3dac0c7df24391fb5f37240710b, type: 2}
       isActive: 1
       canRepeat: 0
-      status: 0
+      status: 2
       title: Root of Aggression
       description: Seems like the appearance of this monster has driven the centipedes
         out of their home. We have to get rid of this monster and return balance
@@ -316,8 +328,8 @@ MonoBehaviour:
         Target: Turtle King
         requiredAmount: 1
         currentAmount: 1
-      expReward: 1000
-      goldReward: 200
+      expReward: 500
+      goldReward: 300
       itemReward: {fileID: 0}
       questItem: {fileID: 0}
       location: {x: 0, y: 0, z: 0}
@@ -339,6 +351,8 @@ MonoBehaviour:
     characterV2: {x: 0, y: 0}
     removeItem: 0
     item: {fileID: 0}
+    addItem: 0
+    giveItem: {fileID: 0}
     dialogue:
     - There seems to be a Turtle King in the forest cave to the east side. I need
       you to take it out before it completely disrupts the balance here.
@@ -367,8 +381,8 @@ MonoBehaviour:
         Target: Dr Aaron
         requiredAmount: 1
         currentAmount: 0
-      expReward: 300
-      goldReward: 200
+      expReward: 250
+      goldReward: 100
       itemReward: {fileID: 0}
       questItem: {fileID: 0}
       location: {x: 0, y: 0, z: 0}
@@ -390,6 +404,8 @@ MonoBehaviour:
     characterV2: {x: 0, y: 0}
     removeItem: 0
     item: {fileID: 0}
+    addItem: 0
+    giveItem: {fileID: 0}
     dialogue:
     - You should look for Dr Aaron and seek his advice on this. We do not want to
       mess with things we are unsure about...
@@ -416,8 +432,8 @@ MonoBehaviour:
         Target: Mecha Golem
         requiredAmount: 1
         currentAmount: 0
-      expReward: 1000
-      goldReward: 200
+      expReward: 3000
+      goldReward: 500
       itemReward: {fileID: 0}
       questItem: {fileID: 0}
       location: {x: 0, y: 0, z: 0}
@@ -439,6 +455,8 @@ MonoBehaviour:
     characterV2: {x: 0, y: 0}
     removeItem: 0
     item: {fileID: 0}
+    addItem: 0
+    giveItem: {fileID: 0}
     dialogue:
     - The portal to the cave is behind the weapons shop. Head towards the north of
       the town to find the portal leaving to the cave. Are you ready for your next
@@ -466,8 +484,8 @@ MonoBehaviour:
         Target: Fire Worm
         requiredAmount: 15
         currentAmount: 15
-      expReward: 3000
-      goldReward: 300
+      expReward: 2000
+      goldReward: 250
       itemReward: {fileID: 0}
       questItem: {fileID: 0}
       location: {x: 0, y: 0, z: 0}
@@ -489,6 +507,8 @@ MonoBehaviour:
     characterV2: {x: 0, y: 0}
     removeItem: 0
     item: {fileID: 0}
+    addItem: 0
+    giveItem: {fileID: 0}
     dialogue:
     - There are too many fireworms here. We need to take them out fast. Are you ready
       to carry out the mission?
@@ -517,8 +537,8 @@ MonoBehaviour:
         Target: Trina's Device
         requiredAmount: 1
         currentAmount: 0
-      expReward: 2000
-      goldReward: 150
+      expReward: 1500
+      goldReward: 200
       itemReward: {fileID: 0}
       questItem: {fileID: 8118475526843008118, guid: bfd188af789a60d4cb41433fe1bd0ddd, type: 3}
       location: {x: 738.73, y: -5.57, z: 0}
@@ -540,6 +560,8 @@ MonoBehaviour:
     characterV2: {x: 0, y: 0}
     removeItem: 0
     item: {fileID: 0}
+    addItem: 0
+    giveItem: {fileID: 0}
     dialogue:
     - Head to the east side of this cave and retrieve my communication device. You
       got the energy to go now?
@@ -567,8 +589,8 @@ MonoBehaviour:
         Target: Mecha Golem
         requiredAmount: 1
         currentAmount: 0
-      expReward: 5000
-      goldReward: 300
+      expReward: 3000
+      goldReward: 500
       itemReward: {fileID: 0}
       questItem: {fileID: 0}
       location: {x: 0, y: 0, z: 0}
@@ -590,6 +612,8 @@ MonoBehaviour:
     characterV2: {x: 0, y: 0}
     removeItem: 0
     item: {fileID: 0}
+    addItem: 0
+    giveItem: {fileID: 0}
     dialogue:
     - This is a good chance for you to prove yourself as a soldier. I want you to
       take out that monster deep in the cave. You up for it?
@@ -616,8 +640,8 @@ MonoBehaviour:
         Target: Dr Aaron
         requiredAmount: 1
         currentAmount: 0
-      expReward: 300
-      goldReward: 200
+      expReward: 2500
+      goldReward: 400
       itemReward: {fileID: 0}
       questItem: {fileID: 0}
       location: {x: 0, y: 0, z: 0}
@@ -639,6 +663,8 @@ MonoBehaviour:
     characterV2: {x: 0, y: 0}
     removeItem: 0
     item: {fileID: 0}
+    addItem: 0
+    giveItem: {fileID: 0}
     dialogue:
     - Go up to the lab and find Dr Aaron. You ready?
     - 'Good to hear! '
@@ -665,8 +691,8 @@ MonoBehaviour:
         Target: Supreme Leader
         requiredAmount: 1
         currentAmount: 0
-      expReward: 300
-      goldReward: 200
+      expReward: 10000
+      goldReward: 2000
       itemReward: {fileID: 0}
       questItem: {fileID: 0}
       location: {x: 0, y: 0, z: 0}
@@ -688,6 +714,8 @@ MonoBehaviour:
     characterV2: {x: 0, y: 0}
     removeItem: 0
     item: {fileID: 0}
+    addItem: 0
+    giveItem: {fileID: 0}
     dialogue:
     - We don't have time to spare. HQ will only dispatch troops once they are done
       with the other war!
@@ -736,6 +764,8 @@ MonoBehaviour:
     characterV2: {x: 0, y: 0}
     removeItem: 0
     item: {fileID: 0}
+    addItem: 0
+    giveItem: {fileID: 0}
     dialogue: []
     characterDialogue: []
   - Items: []
@@ -776,6 +806,8 @@ MonoBehaviour:
     characterV2: {x: 0, y: 0}
     removeItem: 0
     item: {fileID: 0}
+    addItem: 0
+    giveItem: {fileID: 0}
     dialogue: []
     characterDialogue: []
   sequenceNumber: 0

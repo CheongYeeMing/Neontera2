@@ -21,7 +21,9 @@ public class GameOver : MonoBehaviour
         else
         {
             RespawnMonologueTown.gameObject.SetActive(true);
+            character.GetComponent<ParallaxBackgroundManager>().OffBackground();
             character.GetComponent<ParallaxBackgroundManager>().SetBackground("Town");
+            //character.GetComponent<ParallaxBackgroundManager>().Teleport("Town", character.gameObject, RespawnPointTown.position);
             //character.GetComponent<ParallaxBackgroundManager>().OnValidate();
             character.transform.position = RespawnPointTown.position;
         }

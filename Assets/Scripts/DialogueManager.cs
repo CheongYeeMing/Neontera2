@@ -36,10 +36,14 @@ public class DialogueManager : MonoBehaviour
     [SerializeField] public TransitionManager transition;
     [SerializeField] public GameObject boss;
     [SerializeField] Inventory inventory;
+
+    [SerializeField] Button Close;
+
     // Start is called before the first frame update
     void Start()
     {
         animator.SetBool("IsOpen", false);
+        Close.onClick.AddListener(CloseShop);
     }
 
     public void Update()
@@ -48,6 +52,7 @@ public class DialogueManager : MonoBehaviour
         if (!isTalking) return;
         if (Input.GetKeyDown(KeyCode.DownArrow))
         {
+            Debug.Log("Down");
             currResponseTracker++;
             if (currResponseTracker >= npc.Sequences[npc.sequenceNumber].characterDialogue.Length - 1)
             {
@@ -56,6 +61,7 @@ public class DialogueManager : MonoBehaviour
         }
         else if (Input.GetKeyDown(KeyCode.UpArrow))
         {
+            Debug.Log("Up");
             currResponseTracker--;
             if (currResponseTracker < 0)
             {
@@ -104,6 +110,7 @@ public class DialogueManager : MonoBehaviour
 
                     if (npc.Sequences[npc.sequenceNumber].teleport)
                     {
+                        TriggerDialogue();
                         StopAllCoroutines();
                         StartCoroutine(FindObjectOfType<ParallaxBackgroundManager>().Teleport(npc.Sequences[npc.sequenceNumber].newBG, character, npc.Sequences[npc.sequenceNumber].characterV2));
                     }
@@ -126,7 +133,7 @@ public class DialogueManager : MonoBehaviour
                     StopAllCoroutines();
                     StartCoroutine(TypeSentence(npc.Sequences[npc.sequenceNumber].dialogue[(int)currResponseTracker + 1]));
                     HideCharacterResponseOption();
-                    OpenShop();
+                    if (!OpenShop()) currResponseTracker = npc.Sequences[npc.sequenceNumber].dialogue.Length;
                 }
                 else
                 {
@@ -140,7 +147,7 @@ public class DialogueManager : MonoBehaviour
                     StopAllCoroutines();
                     StartCoroutine(TypeSentence(npc.Sequences[npc.sequenceNumber].dialogue[(int)currResponseTracker + 1]));
                     HideCharacterResponseOption();
-                    OpenQuestWindow();
+                    if (!OpenQuestWindow()) currResponseTracker = npc.Sequences[npc.sequenceNumber].dialogue.Length;
                 }
                 else
                 {
@@ -190,7 +197,7 @@ public class DialogueManager : MonoBehaviour
                         StopAllCoroutines();
                         StartCoroutine(TypeSentence(npc.Sequences[npc.sequenceNumber].dialogue[(int)currResponseTracker + 1]));
                         HideCharacterResponseOption();
-                        OpenQuestWindow();
+                        if (!OpenQuestWindow()) currResponseTracker = npc.Sequences[npc.sequenceNumber].dialogue.Length;
                     }
                     else
                     {
@@ -297,9 +304,9 @@ public class DialogueManager : MonoBehaviour
         enterToContinue.gameObject.SetActive(true);
     }
 
-    public void OpenShop()
+    public bool OpenShop()
     {
-        if (!isTalking) return;
+        if (!isTalking) return false;
         FindObjectOfType<AudioManager>().StopEffect("Open");
         FindObjectOfType<AudioManager>().PlayEffect("Open");
         ShopManager shopManager;
@@ -307,11 +314,14 @@ public class DialogueManager : MonoBehaviour
         {
             shopManager.ShopWindow.GetComponentInChildren<Shop>().SetItems(npc.Sequences[npc.sequenceNumber].Items);
             shopManager.ShopWindow.gameObject.SetActive(true);
+            return true;
         }
+        return false;
     }
 
     public void CloseShop()
     {
+        if (!gameObject.activeSelf || !isTalking) return;
         FindObjectOfType<AudioManager>().StopEffect("Open");
         FindObjectOfType<AudioManager>().PlayEffect("Open");
         FindObjectOfType<AudioManager>().StopEffect("Click");
@@ -327,15 +337,16 @@ public class DialogueManager : MonoBehaviour
         StartCoroutine(TypeSentence(npc.Sequences[npc.sequenceNumber].dialogue[(int)currResponseTracker - 1]));
     }
 
-    public void OpenQuestWindow()
+    public bool OpenQuestWindow()
     {
-        if (!isTalking) return;
+        if (!isTalking || currResponseTracker == 1) return false;
         quest = npc.Sequences[npc.sequenceNumber].Quest;
         quest.npc = npc;
         quest.Reset();
         selectedQuestWindow.gameObject.SetActive(true);
         selectedQuestWindow.dialogueManager = this;
         selectedQuestWindow.QuestSelected(quest);
+        return true;
     }
 
     public void CloseQuestWindow()

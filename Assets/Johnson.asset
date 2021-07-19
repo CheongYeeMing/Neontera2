@@ -53,6 +53,8 @@ MonoBehaviour:
     characterV2: {x: 0, y: 0}
     removeItem: 0
     item: {fileID: 0}
+    addItem: 0
+    giveItem: {fileID: 0}
     dialogue:
     - 'Morning Soldier! It''s your first day out in the field. You nervous? '
     - Great! That is the way young blood. Ahh, this reminds me of my first field
@@ -99,6 +101,8 @@ MonoBehaviour:
     characterV2: {x: 0, y: 0}
     removeItem: 0
     item: {fileID: 0}
+    addItem: 0
+    giveItem: {fileID: 0}
     dialogue:
     - Let's begin. Xenonians out in the field communicate with a rock called Radio.
       Its attached to your helmet so I can talk to you from a distance throughout
@@ -146,6 +150,8 @@ MonoBehaviour:
     characterV2: {x: 0, y: 0}
     removeItem: 0
     item: {fileID: 0}
+    addItem: 0
+    giveItem: {fileID: 0}
     dialogue:
     - Anyways, we are out here today to locate a missing person from our village.
     - This person is Dr Aaron, the pride of the village as a scientist. He was the
@@ -171,8 +177,8 @@ MonoBehaviour:
         Target: Dr Aaron
         requiredAmount: 1
         currentAmount: 0
-      expReward: 100
-      goldReward: 30
+      expReward: 300
+      goldReward: 100
       itemReward: {fileID: 0}
       questItem: {fileID: 0}
       location: {x: 0, y: 0, z: 0}
@@ -194,6 +200,8 @@ MonoBehaviour:
     characterV2: {x: 0, y: 0}
     removeItem: 0
     item: {fileID: 0}
+    addItem: 0
+    giveItem: {fileID: 0}
     dialogue:
     - "That's pretty much the current situation. \nAre you ready for the mission?"
     - Excellent. I like that attitude!
@@ -242,6 +250,8 @@ MonoBehaviour:
     characterV2: {x: 0, y: 0}
     removeItem: 0
     item: {fileID: 0}
+    addItem: 0
+    giveItem: {fileID: 0}
     dialogue:
     - Go on! There's no time to waste! You can track your progress by clicking on
       the Quest Button on the bottom left of the screen or use the shortcut Q.
@@ -285,6 +295,8 @@ MonoBehaviour:
     characterV2: {x: 0, y: 0}
     removeItem: 0
     item: {fileID: 0}
+    addItem: 0
+    giveItem: {fileID: 0}
     dialogue:
     - 'Great work soldier! You fought well. I''m glad to see Dr Aaron still alive
       and back with us. '
@@ -333,6 +345,8 @@ MonoBehaviour:
     characterV2: {x: 0, y: 0}
     removeItem: 0
     item: {fileID: 0}
+    addItem: 0
+    giveItem: {fileID: 0}
     dialogue:
     - Go on, what are you waiting for? HAHA
     characterDialogue: []

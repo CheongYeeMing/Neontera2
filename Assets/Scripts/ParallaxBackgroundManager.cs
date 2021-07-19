@@ -24,6 +24,8 @@ public class ParallaxBackgroundManager : MonoBehaviour
 
     [SerializeField] TransitionManager Transition;
 
+    public bool isTeleporting;
+
     private const string INTRO = "Intro";
     private const string TOWN = "Town";
     private const string FOREST = "Forest";
@@ -57,6 +59,7 @@ public class ParallaxBackgroundManager : MonoBehaviour
         currentBackground = Data.location;
         SetBackground(currentBackground);
         FindObjectOfType<AudioManager>().PlayMusic(currentBackground);
+        isTeleporting = false;
     }
 
     public void SetBackground(string newBackground)
@@ -105,6 +108,51 @@ public class ParallaxBackgroundManager : MonoBehaviour
             SecretArea2Details.SetActive(true);
         }
         Transition.Deactivate();
+        isTeleporting = false;
+    }
+
+    public void OffBackground()
+    {
+        if (currentBackground == INTRO)
+        {
+            Intro.SetActive(false);
+            IntroDetails.SetActive(false);
+        }
+        else if (currentBackground == TOWN)
+        {
+            Town.SetActive(false);
+            TownDetails.SetActive(false);
+        }
+        else if (currentBackground == FOREST)
+        {
+            Forest.SetActive(false);
+            ForestDetails.SetActive(false);
+        }
+        else if (currentBackground == CAVE)
+        {
+            Cave.SetActive(false);
+            CaveDetails.SetActive(false);
+        }
+        else if (currentBackground == BASE_STATION)
+        {
+            BS.SetActive(false);
+            BSDetails.SetActive(false);
+        }
+        else if (currentBackground == SPACE_STATION)
+        {
+            SS.SetActive(false);
+            SSDetails.SetActive(false);
+        }
+        else if (currentBackground == SECRET_AREA_1)
+        {
+            SecretArea1.SetActive(false);
+            SecretArea1Details.SetActive(false);
+        }
+        else if (currentBackground == SECRET_AREA_2)
+        {
+            SecretArea2.SetActive(false);
+            SecretArea2Details.SetActive(false);
+        }
     }
 
     public IEnumerator ChangeBackground(string newBackground, GameObject Character, Portal Destination)

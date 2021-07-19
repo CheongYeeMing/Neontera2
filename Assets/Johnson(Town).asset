@@ -53,6 +53,8 @@ MonoBehaviour:
     characterV2: {x: 0, y: 0}
     removeItem: 0
     item: {fileID: 0}
+    addItem: 0
+    giveItem: {fileID: 0}
     dialogue:
     - Hello, good job back there on saving Dr Aaron, the people are grateful for
       you.
@@ -111,6 +113,8 @@ MonoBehaviour:
     characterV2: {x: 0, y: 0}
     removeItem: 0
     item: {fileID: 0}
+    addItem: 0
+    giveItem: {fileID: 0}
     dialogue:
     - Alright. Now back to business, you ready for the next mission?
     - That's what I'd like to hear!
@@ -156,6 +160,8 @@ MonoBehaviour:
     characterV2: {x: 0, y: 0}
     removeItem: 0
     item: {fileID: 0}
+    addItem: 0
+    giveItem: {fileID: 0}
     dialogue:
     - The forest keeper, Lloyd, has reported that the forest animals are behaving
       abnormally.
@@ -186,8 +192,8 @@ MonoBehaviour:
         Target: Turtle King
         requiredAmount: 1
         currentAmount: 0
-      expReward: 300
-      goldReward: 200
+      expReward: 500
+      goldReward: 300
       itemReward: {fileID: 0}
       questItem: {fileID: 0}
       location: {x: 0, y: 0, z: 0}
@@ -209,6 +215,8 @@ MonoBehaviour:
     characterV2: {x: 0, y: 0}
     removeItem: 0
     item: {fileID: 0}
+    addItem: 0
+    giveItem: {fileID: 0}
     dialogue:
     - I hope you have been listening to me. Are you ready for the mission?
     - Excellent. I like that attitude!
@@ -258,6 +266,8 @@ MonoBehaviour:
     characterV2: {x: 0, y: 0}
     removeItem: 0
     item: {fileID: 0}
+    addItem: 0
+    giveItem: {fileID: 0}
     dialogue:
     - Do send my regards to Lloyd! Now get going already !!
     characterDialogue: []
@@ -300,6 +310,8 @@ MonoBehaviour:
     characterV2: {x: 0, y: 0}
     removeItem: 0
     item: {fileID: 0}
+    addItem: 0
+    giveItem: {fileID: 0}
     dialogue:
     - Good job on helping out with Lloyd. It wasn't tough at all for you wasn't it?
     - Haha that is good to hear!
@@ -346,6 +358,8 @@ MonoBehaviour:
     characterV2: {x: 0, y: 0}
     removeItem: 0
     item: {fileID: 0}
+    addItem: 0
+    giveItem: {fileID: 0}
     dialogue:
     - Anyways, what's that rock you got on your hands?
     - Hmm, it doesn't seem like an ordinary piece of stone.
@@ -370,8 +384,8 @@ MonoBehaviour:
         Target: Dr Aaron
         requiredAmount: 1
         currentAmount: 0
-      expReward: 300
-      goldReward: 200
+      expReward: 250
+      goldReward: 100
       itemReward: {fileID: 0}
       questItem: {fileID: 0}
       location: {x: 0, y: 0, z: 0}
@@ -393,6 +407,8 @@ MonoBehaviour:
     characterV2: {x: 0, y: 0}
     removeItem: 0
     item: {fileID: 0}
+    addItem: 0
+    giveItem: {fileID: 0}
     dialogue:
     - You should look for Dr Aaron and seek his advice on this. We do not want to
       mess with things we are unsure about...
@@ -442,6 +458,8 @@ MonoBehaviour:
     characterV2: {x: 0, y: 0}
     removeItem: 0
     item: {fileID: 0}
+    addItem: 0
+    giveItem: {fileID: 0}
     dialogue:
     - I have intel incoming, we might have to move out soon. Be quick!
     characterDialogue: []
@@ -484,6 +502,8 @@ MonoBehaviour:
     characterV2: {x: 0, y: 0}
     removeItem: 0
     item: {fileID: 0}
+    addItem: 0
+    giveItem: {fileID: 0}
     dialogue:
     - 'Okay, you''re finally back. I hope you''re well rested. HQ reported that there
       is a cave near here where fireworms have been attacking passing villagers. '
@@ -505,8 +525,8 @@ MonoBehaviour:
         Target: Mecha Golem
         requiredAmount: 1
         currentAmount: 0
-      expReward: 1000
-      goldReward: 200
+      expReward: 3000
+      goldReward: 500
       itemReward: {fileID: 0}
       questItem: {fileID: 0}
       location: {x: 0, y: 0, z: 0}
@@ -528,6 +548,8 @@ MonoBehaviour:
     characterV2: {x: 0, y: 0}
     removeItem: 0
     item: {fileID: 0}
+    addItem: 0
+    giveItem: {fileID: 0}
     dialogue:
     - The portal to the cave is behind the weapons shop. Head towards the north of
       the town to find the portal leaving to the cave. Are you ready for your next
@@ -578,6 +600,8 @@ MonoBehaviour:
     characterV2: {x: 0, y: 0}
     removeItem: 0
     item: {fileID: 0}
+    addItem: 0
+    giveItem: {fileID: 0}
     dialogue:
     - Sergeant Trina is waiting. Be quick!
     characterDialogue: []
@@ -620,6 +644,8 @@ MonoBehaviour:
     characterV2: {x: 0, y: 0}
     removeItem: 0
     item: {fileID: 0}
+    addItem: 0
+    giveItem: {fileID: 0}
     dialogue:
     - 'Good to see you back in one piece. I''ve heard nothing but praises from Sergeant
       Trina...  didn''t expect you to already be able to handle monsters of that
@@ -643,8 +669,8 @@ MonoBehaviour:
         Target: Dr Aaron
         requiredAmount: 1
         currentAmount: 0
-      expReward: 300
-      goldReward: 200
+      expReward: 2500
+      goldReward: 400
       itemReward: {fileID: 0}
       questItem: {fileID: 0}
       location: {x: 0, y: 0, z: 0}
@@ -666,6 +692,8 @@ MonoBehaviour:
     characterV2: {x: 0, y: 0}
     removeItem: 0
     item: {fileID: 0}
+    addItem: 0
+    giveItem: {fileID: 0}
     dialogue:
     - Go up to the lab and find Dr Aaron. You ready?
     - 'Good to hear! '
@@ -714,6 +742,8 @@ MonoBehaviour:
     characterV2: {x: 0, y: 0}
     removeItem: 0
     item: {fileID: 0}
+    addItem: 0
+    giveItem: {fileID: 0}
     dialogue:
     - You should climb to the lab more often! The view there is amazing haha!
     characterDialogue: []
@@ -756,6 +786,8 @@ MonoBehaviour:
     characterV2: {x: 0, y: 0}
     removeItem: 0
     item: {fileID: 0}
+    addItem: 0
+    giveItem: {fileID: 0}
     dialogue:
     - Ah, so you know the details already. Seems like the military has stolen the
       artifact. From the coordinates given by Dr Aaron, its a base station headed
@@ -808,6 +840,8 @@ MonoBehaviour:
     characterV2: {x: 0, y: 0}
     removeItem: 0
     item: {fileID: 0}
+    addItem: 0
+    giveItem: {fileID: 0}
     dialogue:
     - Anyways, you should leave soon before they discover the tracker placed on the
       artifact.
@@ -857,6 +891,8 @@ MonoBehaviour:
     characterV2: {x: 0, y: 0}
     removeItem: 0
     item: {fileID: 0}
+    addItem: 0
+    giveItem: {fileID: 0}
     dialogue:
     - Don't worry. Your abilities have improved greatly, you may have even surpassed
       the level of a High Elite Soldier!
@@ -880,8 +916,8 @@ MonoBehaviour:
         Target: Supreme Leader
         requiredAmount: 1
         currentAmount: 0
-      expReward: 300
-      goldReward: 200
+      expReward: 10000
+      goldReward: 2000
       itemReward: {fileID: 0}
       questItem: {fileID: 0}
       location: {x: 0, y: 0, z: 0}
@@ -903,6 +939,8 @@ MonoBehaviour:
     characterV2: {x: 0, y: 0}
     removeItem: 0
     item: {fileID: 0}
+    addItem: 0
+    giveItem: {fileID: 0}
     dialogue:
     - We don't have time to spare. HQ will only dispatch troops once they are done
       with the other war!
@@ -953,7 +991,102 @@ MonoBehaviour:
     characterV2: {x: 0, y: 0}
     removeItem: 0
     item: {fileID: 0}
+    addItem: 0
+    giveItem: {fileID: 0}
     dialogue:
     - We're counting on you!
     characterDialogue: []
-  sequenceNumber: 0
+  - Items: []
+    Quest:
+      ID: 0
+      npc: {fileID: 11400000, guid: dded4d2a027a93e40b20cdffe5da2185, type: 2}
+      isActive: 1
+      canRepeat: 0
+      status: 2
+      title: Retrieve Artifact
+      description: The artifact seems to have been stolen by the Supreme Leader and
+        Resistance. Who knows where they might hide the Red Artifact? Only one way
+        to find out!
+      questCriteria:
+        criteriaType: 0
+        action: Artifact Retrieved
+        Target: Supreme Leader
+        requiredAmount: 1
+        currentAmount: 0
+      expReward: 300
+      goldReward: 200
+      itemReward: {fileID: 0}
+      questItem: {fileID: 0}
+      location: {x: 0, y: 0, z: 0}
+    hasShop: 0
+    hasQuest: 0
+    isStory: 1
+    isEnd: 0
+    repeatableQuest: 0
+    waitingQuest: 0
+    justDialogue: 0
+    hasHeal: 0
+    backToNormal: 0
+    sequenceNum: 0
+    activatePortal: 0
+    destination: 
+    triggerBoss: 0
+    teleport: 0
+    newBG: 
+    characterV2: {x: 0, y: 0}
+    removeItem: 1
+    item: {fileID: 251665617477875492, guid: 481140615d9a943439e2237487915bb0, type: 3}
+    addItem: 0
+    giveItem: {fileID: 0}
+    dialogue:
+    - Hey,you're back. I would like to thank you on behalf of the people of the Town
+      and Xenonia. You are truly our hero!
+    - I will take the red artifact from you and bring it back to Dr Aaron.
+    characterDialogue: []
+  - Items: []
+    Quest:
+      ID: 0
+      npc: {fileID: 11400000, guid: dded4d2a027a93e40b20cdffe5da2185, type: 2}
+      isActive: 1
+      canRepeat: 0
+      status: 2
+      title: Retrieve Artifact
+      description: The artifact seems to have been stolen by the Supreme Leader and
+        Resistance. Who knows where they might hide the Red Artifact? Only one way
+        to find out!
+      questCriteria:
+        criteriaType: 0
+        action: Artifact Retrieved
+        Target: Supreme Leader
+        requiredAmount: 1
+        currentAmount: 0
+      expReward: 300
+      goldReward: 200
+      itemReward: {fileID: 0}
+      questItem: {fileID: 0}
+      location: {x: 0, y: 0, z: 0}
+    hasShop: 0
+    hasQuest: 0
+    isStory: 0
+    isEnd: 1
+    repeatableQuest: 0
+    waitingQuest: 0
+    justDialogue: 0
+    hasHeal: 0
+    backToNormal: 0
+    sequenceNum: 0
+    activatePortal: 0
+    destination: 
+    triggerBoss: 0
+    teleport: 0
+    newBG: 
+    characterV2: {x: 0, y: 0}
+    removeItem: 0
+    item: {fileID: 0}
+    addItem: 0
+    giveItem: {fileID: 0}
+    dialogue:
+    - Now that the game is really completed, have you found the 2 secret areas? If
+      not, I guess the game isn't really over yet hehehe :)))
+    characterDialogue: []
+  sequenceNumber: 21

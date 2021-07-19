@@ -12,6 +12,6 @@ public class MechaGolemReward : BossReward
         characterLevel.GainExperience(expReward);
         characterWallet.AddGold(goldReward);
         Vector3 v3 = gameObject.transform.position;
-        Instantiate(keyItem, new Vector3(v3.x, v3.y - 1.5f, v3.z), Quaternion.identity);
+        //Instantiate(keyItem, new Vector3(v3.x, v3.y - 1.5f, v3.z), Quaternion.identity);
     }
 }

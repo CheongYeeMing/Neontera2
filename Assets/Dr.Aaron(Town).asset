@@ -53,6 +53,8 @@ MonoBehaviour:
     characterV2: {x: 0, y: 0}
     removeItem: 0
     item: {fileID: 0}
+    addItem: 0
+    giveItem: {fileID: 0}
     dialogue:
     - Oh hello, good to see you! It's rare that we get any visitors up here... as
       you can see it's not very accessible...
@@ -63,7 +65,30 @@ MonoBehaviour:
     - Concocted and fine tuned, these can greatly help you in combat.
     characterDialogue: []
   - Items:
-    - {fileID: 8177623600617057691, guid: f4cd1c3d359f38743ba95f19bc13ac24, type: 3}
+    - {fileID: 8177623600617057691, guid: caa1af639adc5884090fe39b362545ba, type: 3}
+    - {fileID: 8177623600617057691, guid: bf9b617b971305a429f37c2422116c52, type: 3}
+    - {fileID: 8177623600617057691, guid: e356be7dfe53adf40a7c6d13c5bb5287, type: 3}
+    - {fileID: 8177623600617057691, guid: 99b0ed3737792ce43b8963ebed21d1e4, type: 3}
+    - {fileID: 8177623600617057691, guid: 607d66aa068d2644f84d386e2c175465, type: 3}
+    - {fileID: 8177623600617057691, guid: a4e1e4d92ca047a47a2b6bdf306e487f, type: 3}
+    - {fileID: 8177623600617057691, guid: 6f4fa3e3efd57974ea6287e90139fa03, type: 3}
+    - {fileID: 8177623600617057691, guid: a37e126bbee6dfd4389670fe584004f8, type: 3}
+    - {fileID: 8177623600617057691, guid: cf7c4341fdea886408629098cd495dab, type: 3}
+    - {fileID: 5506736617597566838, guid: 98b42e1649de08345828be311335e3d3, type: 3}
+    - {fileID: 5506736617597566838, guid: 76dc18548bf6b50418fe70a0cc0c902e, type: 3}
+    - {fileID: 5506736617597566838, guid: f6be2588902931546beeaf998bddf06b, type: 3}
+    - {fileID: 5506736617597566838, guid: 68505eb0400b1e345a5a16faed96c231, type: 3}
+    - {fileID: 5506736617597566838, guid: 769197b2be67e5744990082057c2bb6d, type: 3}
+    - {fileID: 5506736617597566838, guid: 8fc1d35ddf558334f90783ff6374da23, type: 3}
+    - {fileID: 5506736617597566838, guid: 5150862b19d38ea42b42291b6490c09b, type: 3}
+    - {fileID: 5506736617597566838, guid: eab9f59a3f295b34fbd34be6914ce3bb, type: 3}
+    - {fileID: 5506736617597566838, guid: e27a7232d7b1e5647bf2278deee12924, type: 3}
+    - {fileID: 5506736617597566838, guid: 52792120b58895e4c97340cf902356bd, type: 3}
+    - {fileID: 5506736617597566838, guid: b50c7fc2d907c00468eb22782723f97b, type: 3}
+    - {fileID: 5506736617597566838, guid: d91e683e7a5048b44b9c135bbd1fa6f0, type: 3}
+    - {fileID: 5506736617597566838, guid: e5863ca91217f11449cec794e4da0e62, type: 3}
+    - {fileID: 5506736617597566838, guid: afe36cb203f3e6248a1e92a65ede8768, type: 3}
+    - {fileID: 5506736617597566838, guid: 71ab0fa4cc969a64d8fbdbb6b89bd072, type: 3}
     Quest:
       ID: 0
       npc: {fileID: 0}
@@ -101,6 +126,8 @@ MonoBehaviour:
     characterV2: {x: 0, y: 0}
     removeItem: 0
     item: {fileID: 0}
+    addItem: 0
+    giveItem: {fileID: 0}
     dialogue:
     - Welcome to the Well-Ordered Lab. Are you looking for any consmables or potions?
     - C'mon in, I'll show you my latest concoctions >:)
@@ -148,6 +175,8 @@ MonoBehaviour:
     characterV2: {x: 0, y: 0}
     removeItem: 0
     item: {fileID: 0}
+    addItem: 0
+    giveItem: {fileID: 0}
     dialogue:
     - Hey, you here to look for supplements for your next mission?
     - No? Oh what's that red thing you got there?? Looks like some ancient artifact
@@ -196,6 +225,8 @@ MonoBehaviour:
     characterV2: {x: 0, y: 0}
     removeItem: 1
     item: {fileID: 251665617477875492, guid: 481140615d9a943439e2237487915bb0, type: 3}
+    addItem: 0
+    giveItem: {fileID: 0}
     dialogue:
     - On closer inspection, this seems like an artifact that has the effect to affect
       one's emotions. I think this might have triggered the animals in the forest...
@@ -243,6 +274,8 @@ MonoBehaviour:
     characterV2: {x: 0, y: 0}
     removeItem: 0
     item: {fileID: 0}
+    addItem: 0
+    giveItem: {fileID: 0}
     dialogue:
     - Oh thank god you're here!
     - I lost the Red Artifact... the one where you retrieved from the forest...
@@ -289,6 +322,8 @@ MonoBehaviour:
     characterV2: {x: 0, y: 0}
     removeItem: 0
     item: {fileID: 0}
+    addItem: 0
+    giveItem: {fileID: 0}
     dialogue:
     - 'I had spent some of my extra time investigating the Red Artifact, carrying
       out some simple experiments. '
@@ -339,6 +374,8 @@ MonoBehaviour:
     characterV2: {x: 0, y: 0}
     removeItem: 0
     item: {fileID: 0}
+    addItem: 0
+    giveItem: {fileID: 0}
     dialogue:
     - It seems to me it is currently at the coordinates of a military installation...
     - It cannot be. The fact that it is transmitting means that the tracker is working
@@ -388,6 +425,8 @@ MonoBehaviour:
     characterV2: {x: 0, y: 0}
     removeItem: 0
     item: {fileID: 0}
+    addItem: 0
+    giveItem: {fileID: 0}
     dialogue:
     - I think you got all the information you need already. I will pass you the coordinates.
       Do report back to Johnson for more details.

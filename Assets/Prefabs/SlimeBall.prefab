@@ -118,7 +118,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0bc8edffc062c5c46a577c447653145b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  damage: 5
+  damage: 8
   particle: {fileID: 8238640050655009291, guid: a0af57cd6834b2449987202c1b7a50ed, type: 3}
 --- !u!50 &5890223777650043300
 Rigidbody2D:

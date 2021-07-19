@@ -13,6 +13,9 @@ public class NPCManager : MonoBehaviour
     [SerializeField] NPC LloydForest;
     [SerializeField] NPC TrinaCave;
 
+    [SerializeField] NPC Nicole;
+    [SerializeField] NPC Wilson;
+
     [SerializeField] public NPC QuestList;
     [SerializeField] QuestList questList;
 
@@ -27,13 +30,8 @@ public class NPCManager : MonoBehaviour
         LloydForest.sequenceNumber = Data.LloydForest;
         TrinaCave.sequenceNumber = Data.TrinaCave;
 
-        //foreach (int i in Data.quests)
-        //{
-        //    Quest quest = QuestList.Sequences[i].Quest;
-        //    quest.status = Quest.Status.ONGOING;
-            
-        //    questList.AddQuest(quest);
-        //}
+        Nicole.sequenceNumber = Data.Nicole;
+        Wilson.sequenceNumber = Data.Wilson;
 
         for (int i = 0; i < Data.quests.Count; i++)
         {
@@ -54,5 +52,8 @@ public class NPCManager : MonoBehaviour
         Data.MartinTown = MartinTown.sequenceNumber;
         Data.LloydForest = LloydForest.sequenceNumber;
         Data.TrinaCave = TrinaCave.sequenceNumber;
+
+        Data.Nicole = Nicole.sequenceNumber;
+        Data.Wilson = Wilson.sequenceNumber;
     }
 }

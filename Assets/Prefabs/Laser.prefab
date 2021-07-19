@@ -143,5 +143,5 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f027831437bf50045a7fd6f77f48cf3b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  damage: 5
+  damage: 40
   particle: {fileID: 8369515963355395263, guid: b0112ac3be52847458e79d583b484952, type: 3}

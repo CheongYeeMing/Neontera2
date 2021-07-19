@@ -12,6 +12,9 @@ public class PauseMenu : MonoBehaviour
 
     public GameObject character;
     [SerializeField] NPCManager npcManager;
+    [SerializeField] ItemManager itemManager;
+    [SerializeField] MonologueManager monologueManager;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -75,8 +78,15 @@ public class PauseMenu : MonoBehaviour
             Data.quests.Add(quest.ID);
             Data.questProgress.Add(quest.questCriteria.currentAmount);
         }
+
         // Save NPC Sequence Number
         npcManager.Save();
+
+        // Save Active State of Item GameObjects
+        itemManager.Save();
+
+        // Save Active State of Monologue GameObjects
+        monologueManager.Save();
 
         Data.SaveGame();
     }
@@ -85,7 +95,7 @@ public class PauseMenu : MonoBehaviour
         FindObjectOfType<AudioManager>().StopEffect("Click");
         FindObjectOfType<AudioManager>().PlayEffect("Click");
         Time.timeScale = 1;
-        SceneManager.LoadScene(1); // Return to Start Menu
+        SceneManager.LoadScene(0); // Return to Start Menu
     }
 
     public void Resume()

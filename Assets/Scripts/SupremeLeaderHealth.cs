@@ -7,6 +7,11 @@ using TMPro;
 public class SupremeLeaderHealth : BossHealth
 {
     [SerializeField] Monologue GameCompleteMonologue;
+    [SerializeField] GameObject HighEliteSoldiers;
+    [SerializeField] GameObject HighEliteSoldierDetails;
+    [SerializeField] GameObject EliteSoldiers;
+    [SerializeField] GameObject EliteSoldierDetails;
+
     // Start is called before the first frame update
     public override void Start()
     {
@@ -92,6 +97,10 @@ public class SupremeLeaderHealth : BossHealth
         gameObject.GetComponent<Rigidbody2D>().gravityScale = 0;
         GameCompleteMonologue.gameObject.transform.position = FindObjectOfType<Character>().gameObject.transform.position;
         GameCompleteMonologue.gameObject.SetActive(true);
+        HighEliteSoldiers.SetActive(false);
+        HighEliteSoldierDetails.SetActive(false);
+        EliteSoldiers.SetActive(false);
+        EliteSoldierDetails.SetActive(false);
         foreach (Collider2D collider in GetComponents<Collider2D>())
         {
             collider.enabled = false;

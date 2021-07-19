@@ -50,8 +50,9 @@ public class CharacterHealth : MonoBehaviour, Health
         if (GetComponent<Transform>().position.y < -100)
         {
             health -= maxHealth * 0.2f; // When fall out of map, slow death.
-            if (health <= 0)
+            if (health <= 0 && !isDead)
             {
+                isDead = true;
                 health = 0;
                 Die();
             }

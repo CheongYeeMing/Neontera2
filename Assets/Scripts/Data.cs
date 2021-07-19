@@ -11,16 +11,18 @@ public static class Data
     // Character
     public static int level = 1;
     public static float gold = 10;
-    public static float currentExp;
+    public static float currentExp = 0;
     public static float currentHealth = 0;
-    public static float maxHealth;
-    //public static float Xcoordinate = -10.2f;
-    //public static float Ycoordinate = -1.39f;
-    public static float Xcoordinate = 140.47f;
-    public static float Ycoordinate = -18.02f;
+    public static float maxHealth = 0;
+    public static float Xcoordinate = -10.2f;
+    public static float Ycoordinate = -1.39f;
+    //public static float Xcoordinate = 140.47f;
+    //public static float Ycoordinate = -18.02f;
     //public static float Xcoordinate = 552.08f;
     //public static float Ycoordinate = -20.19f;
-    public static string location = "Town";
+    //public static float Xcoordinate = 965.08f;
+    //public static float Ycoordinate = 10.19f;
+    public static string location = "Intro";
 
     // Character Equipped Items
     public static List<int> equippedItems = new List<int>();
@@ -41,6 +43,15 @@ public static class Data
     public static int MartinTown = 0;
     public static int LloydForest = 0;
     public static int TrinaCave = 0;
+
+    public static int Nicole = 0;
+    public static int Wilson = 0;
+
+    // GameObject Items
+    public static List<int> Item = new List<int>();
+
+    // GameObject Monologues
+    public static List<int> Monologue = new List<int>();
 
     public static void SaveGame()
     {
@@ -69,6 +80,7 @@ public static class Data
         PlayerPrefs.SetInt("questProgress", questProgress.Count);
         for (int i = 0; i < questProgress.Count; i++) PlayerPrefs.SetInt("questProgress" + (i + 1), questProgress[i]);
 
+        // NPC
         PlayerPrefs.SetInt("JohnsonIntro", JohnsonIntro);
         PlayerPrefs.SetInt("DrAaronIntro", DrAaronIntro);
         PlayerPrefs.SetInt("JohnsonTown", JohnsonTown);
@@ -77,6 +89,15 @@ public static class Data
         PlayerPrefs.SetInt("MartinTown", MartinTown);
         PlayerPrefs.SetInt("LloydForest", LloydForest);
         PlayerPrefs.SetInt("TrinaCave", TrinaCave);
+
+        PlayerPrefs.SetInt("Nicole", Nicole);
+        PlayerPrefs.SetInt("Wilson", Wilson);
+
+        PlayerPrefs.SetInt("gameObjectItem", Item.Count);
+        for (int i = 0; i < Item.Count; i++) PlayerPrefs.SetInt("gameObjectItem" + (i + 1), Item[i]);
+
+        PlayerPrefs.SetInt("gameObjectMonologue", Monologue.Count);
+        for (int i = 0; i < Monologue.Count; i++) PlayerPrefs.SetInt("gameObjectMonologue" + (i + 1), Monologue[i]);
 
         PlayerPrefs.Save();
     }
@@ -105,6 +126,7 @@ public static class Data
 
         for (int i = 0; i < PlayerPrefs.GetInt("questProgress"); i++) questProgress.Add(PlayerPrefs.GetInt("questProgress" + (i + 1)));
 
+        //NPC
         JohnsonIntro = PlayerPrefs.GetInt("JohnsonIntro");
         DrAaronIntro = PlayerPrefs.GetInt("DrAaronIntro");
         JohnsonTown = PlayerPrefs.GetInt("JohnsonTown");
@@ -113,10 +135,60 @@ public static class Data
         MartinTown = PlayerPrefs.GetInt("MartinTown");
         LloydForest = PlayerPrefs.GetInt("LloydForest");
         TrinaCave = PlayerPrefs.GetInt("TrinaCave");
+
+        Nicole = PlayerPrefs.GetInt("Nicole");
+        Wilson = PlayerPrefs.GetInt("Wilson");
+
+        for (int i = 0; i < PlayerPrefs.GetInt("gameObjectItem"); i++) Item.Add(PlayerPrefs.GetInt("gameObjectItem" + (i + 1)));
+
+        for (int i = 0; i < PlayerPrefs.GetInt("gameObjectMonologue"); i++) Monologue.Add(PlayerPrefs.GetInt("gameObjectMonologue" + (i + 1)));
     }
 
     public static void NewGame()
     {
         PlayerPrefs.DeleteAll();
+        PlayerPrefs.Save();
+
+        musicVolume = 0.5f;
+        effectsVolume = 0.5f;
+
+        // Character
+        level = 1;
+        gold = 10;
+        currentExp = 0;
+        currentHealth = 0;
+        maxHealth = 0;
+        Xcoordinate = -10.2f;
+        Ycoordinate = -1.39f;
+        location = "Intro";
+
+        // Character Equipped Items
+        equippedItems = new List<int>();
+
+        // Character Inventory
+        items = new List<int>();
+
+        // Character Quests
+        quests = new List<int>();
+        questProgress = new List<int>();
+
+        // NPC Sequence Number
+        JohnsonIntro = 0;
+        DrAaronIntro = 0;
+        JohnsonTown = 0;
+        DrAaronTown = 0;
+        JeanneTown = 0;
+        MartinTown = 0;
+        LloydForest = 0;
+        TrinaCave = 0;
+        
+        Nicole = 0;
+        Wilson = 0;
+
+        // GameObject Items
+        Item = new List<int>();
+
+        // GameObject Monologues
+        Monologue = new List<int>();
     }
 }

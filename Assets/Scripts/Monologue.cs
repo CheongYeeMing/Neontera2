@@ -14,6 +14,7 @@ public class Monologue : MonoBehaviour
     [SerializeField] Text examineText;
     [SerializeField] TextMeshProUGUI enterToContinue;
     [SerializeField] bool isThoughts;
+    [SerializeField] Sprite characterHead;
 
     [SerializeField] List<string> text;
 
@@ -73,10 +74,10 @@ public class Monologue : MonoBehaviour
             }
             else
             {
-                if (currTextNumber < text.Count)
+                if (currTextNumber < text.Count - 1)
                 {
                     StopAllCoroutines();
-                    StartCoroutine(TypeSentence(text[currTextNumber++]));
+                    StartCoroutine(TypeSentence(text[++currTextNumber]));
                 }
                 else
                 {
@@ -116,6 +117,8 @@ public class Monologue : MonoBehaviour
             FindObjectOfType<AudioManager>().PlayEffect("DialogueMonologue");
             if (!isThoughts)
                 examineImage.sprite = npc.icon;
+            else
+                examineImage.sprite = characterHead;
             // Write description text on the right side of image
             StopAllCoroutines();
             StartCoroutine(TypeSentence(text[currTextNumber++]));
