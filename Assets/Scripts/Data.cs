@@ -13,7 +13,7 @@ public static class Data
     public static float gold = 10;
     public static float currentExp = 0;
     public static float currentHealth = 0;
-    public static float maxHealth = 0;
+    public static float baseHealth = 0;
     public static float Xcoordinate = -10.2f;
     public static float Ycoordinate = -1.39f;
     //public static float Xcoordinate = 140.47f;
@@ -62,7 +62,7 @@ public static class Data
         PlayerPrefs.SetFloat("gold", gold);
         PlayerPrefs.SetFloat("currentExp", currentExp);
         PlayerPrefs.SetFloat("currentHealth", currentHealth);
-        PlayerPrefs.SetFloat("maxHealth", maxHealth);
+        PlayerPrefs.SetFloat("baseHealth", baseHealth);
         PlayerPrefs.SetFloat("Xcoordinate", Xcoordinate);
         PlayerPrefs.SetFloat("Ycoordinate", Ycoordinate);
 
@@ -99,7 +99,7 @@ public static class Data
         PlayerPrefs.SetInt("gameObjectMonologue", Monologue.Count);
         for (int i = 0; i < Monologue.Count; i++) PlayerPrefs.SetInt("gameObjectMonologue" + (i + 1), Monologue[i]);
 
-        PlayerPrefs.Save();
+        //PlayerPrefs.Save();
     }
 
     public static void LoadGame()
@@ -111,7 +111,7 @@ public static class Data
         gold = PlayerPrefs.GetFloat("gold");
         currentExp = PlayerPrefs.GetFloat("currentExp");
         currentHealth = PlayerPrefs.GetFloat("currentHealth");
-        maxHealth = PlayerPrefs.GetFloat("maxHealth");
+        baseHealth = PlayerPrefs.GetFloat("baseHealth");
         Xcoordinate = PlayerPrefs.GetFloat("Xcoordinate");
         Ycoordinate = PlayerPrefs.GetFloat("Ycoordinate");
 
@@ -147,7 +147,7 @@ public static class Data
     public static void NewGame()
     {
         PlayerPrefs.DeleteAll();
-        PlayerPrefs.Save();
+        //PlayerPrefs.Save();
 
         musicVolume = 0.5f;
         effectsVolume = 0.5f;
@@ -157,10 +157,14 @@ public static class Data
         gold = 10;
         currentExp = 0;
         currentHealth = 0;
-        maxHealth = 0;
+        baseHealth = 0;
         Xcoordinate = -10.2f;
         Ycoordinate = -1.39f;
         location = "Intro";
+        //Xcoordinate = 140;
+        //Ycoordinate = -18;
+        //location = "Town";
+
 
         // Character Equipped Items
         equippedItems = new List<int>();

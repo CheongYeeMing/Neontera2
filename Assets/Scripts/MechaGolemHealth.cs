@@ -104,12 +104,12 @@ public class MechaGolemHealth : BossHealth
     {
         if(currentHealth < maxHealth)
         {
-            currentHealth += maxHealth / 10;
+            currentHealth += maxHealth / 20;
             if (currentHealth > maxHealth)
             {
                 currentHealth = maxHealth;
             }
-            HealingPopUp.Create(gameObject, maxHealth / 10);
+            HealingPopUp.Create(gameObject, maxHealth / 20);
         }
     }
 }

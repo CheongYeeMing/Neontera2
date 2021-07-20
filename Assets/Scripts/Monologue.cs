@@ -74,10 +74,11 @@ public class Monologue : MonoBehaviour
             }
             else
             {
-                if (currTextNumber < text.Count - 1)
+                if (currTextNumber < text.Count)
                 {
                     StopAllCoroutines();
-                    StartCoroutine(TypeSentence(text[++currTextNumber]));
+                    StartCoroutine(TypeSentence(text[currTextNumber]));
+                    currTextNumber++;
                 }
                 else
                 {
@@ -144,7 +145,7 @@ public class Monologue : MonoBehaviour
         foreach (char letter in sentence.ToCharArray())
         {
             examineText.text += letter;
-            yield return new WaitForSeconds(0.015f);
+            yield return new WaitForSeconds(0.008f);
         }
         enterToContinue.gameObject.SetActive(true);
     }

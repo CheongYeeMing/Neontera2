@@ -30,10 +30,10 @@ public class CharacterHealth : MonoBehaviour, Health
     // Start is called before the first frame update
     void Start()
     {
-        maxHealth = Data.maxHealth;
+        baseMaxHealth = Data.baseHealth;
         if (Data.currentHealth == 0) 
         { 
-            if (Data.maxHealth == 0) maxHealth = baseMaxHealth + GetComponent<Character>().GetHealth().CalculateFinalValue();
+            maxHealth = baseMaxHealth + GetComponent<Character>().GetHealth().CalculateFinalValue();
             health = maxHealth;
             Data.currentHealth = health;
         }
@@ -158,6 +158,7 @@ public class CharacterHealth : MonoBehaviour, Health
     {
         isDead = true;
         gameObject.GetComponent<CharacterAnimation>().ChangeAnimationState(CHARACTER_DIE);
+        FindObjectOfType<AudioManager>().StopEffect("Run");
         FindObjectOfType<AudioManager>().PlayEffect("CharacterDie");
         GetComponent<BoxCollider2D>().enabled = false;
         GetComponent<Rigidbody2D>().velocity = Vector2.zero;
@@ -167,6 +168,7 @@ public class CharacterHealth : MonoBehaviour, Health
 
     public void Revive()
     {
+        Debug.Log("Revived");
         isDead = false;
         health = maxHealth;
         GetComponent<BoxCollider2D>().enabled = true;
@@ -204,8 +206,8 @@ public class CharacterHealth : MonoBehaviour, Health
         return health;
     }
 
-    public float GetMaxHealth()
+    public float GetBaseHealth()
     {
-        return maxHealth;
+        return baseMaxHealth;
     }
 }

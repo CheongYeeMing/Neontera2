@@ -262,7 +262,7 @@ MonoBehaviour:
       npc: {fileID: 11400000}
       isActive: 1
       canRepeat: 0
-      status: 0
+      status: 2
       title: Lloyd's Staff
       description: Lloyd dropped his staff while escaping from hordes of centipede.
         It should be on a high platform towards the east side of the forest.

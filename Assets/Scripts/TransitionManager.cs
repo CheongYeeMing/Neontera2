@@ -15,6 +15,7 @@ public class TransitionManager : MonoBehaviour
 
     void Start()
     {
+        animator = gameObject.GetComponent<Animator>();
         Deactivate();
     }
 

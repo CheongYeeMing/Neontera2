@@ -64,6 +64,7 @@ public class ParallaxBackgroundManager : MonoBehaviour
 
     public void SetBackground(string newBackground)
     {
+        Debug.Log("Setbg");
         FindObjectOfType<AudioManager>().ChangeMusic(currentBackground, newBackground);
         currentBackground = newBackground;
         GetComponent<CharacterMovement>().location = currentBackground;
@@ -108,6 +109,11 @@ public class ParallaxBackgroundManager : MonoBehaviour
             SecretArea2Details.SetActive(true);
         }
         Transition.Deactivate();
+        if (GetComponent<CharacterHealth>().IsDead())
+        {
+            GetComponent<CharacterHealth>().Revive();
+            GetComponent<CharacterWallet>().MinusGold(GetComponent<CharacterWallet>().GetGoldAmount() / 10);
+        }
         isTeleporting = false;
     }
 
@@ -204,11 +210,20 @@ public class ParallaxBackgroundManager : MonoBehaviour
         SetBackground(newBackground);
     }
 
+    public void Respawn(string newBackground, GameObject Character, Vector2 Destination)
+    {
+        StopAllCoroutines();
+        StartCoroutine(Teleport(newBackground,  Character, Destination));
+    }
     public IEnumerator Teleport(string newBackground, GameObject Character, Vector2 Destination)
     {
+        Debug.Log("Transition");
         Transition.Activate();
+        Debug.Log("TransitionActivated");
         yield return new WaitForSeconds(1.3f);
+        Debug.Log("Waited for Seconds");
         Character.transform.position = Destination;
+        Debug.Log("Position Changed");
         if (currentBackground == INTRO)
         {
             Intro.SetActive(false);

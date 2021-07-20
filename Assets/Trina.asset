@@ -125,7 +125,7 @@ MonoBehaviour:
         out. I wonder just how strong these monsters are...
       questCriteria:
         criteriaType: 0
-        action: FIreworm Exterminated
+        action: FIreworms Slain
         Target: Fire Worm
         requiredAmount: 15
         currentAmount: 0

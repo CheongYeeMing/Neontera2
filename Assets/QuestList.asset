@@ -458,7 +458,7 @@ MonoBehaviour:
     addItem: 0
     giveItem: {fileID: 0}
     dialogue:
-    - The portal to the cave is behind the weapons shop. Head towards the north of
+    - The portal to the cave is behind the weapons shop. Head towards the west of
       the town to find the portal leaving to the cave. Are you ready for your next
       mission?
     - 'Very well. '
@@ -480,7 +480,7 @@ MonoBehaviour:
         out. I wonder just how strong these monsters are...
       questCriteria:
         criteriaType: 0
-        action: FIreworm Exterminated
+        action: FIreworms Slain
         Target: Fire Worm
         requiredAmount: 15
         currentAmount: 15

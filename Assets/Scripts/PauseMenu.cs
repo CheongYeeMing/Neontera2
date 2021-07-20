@@ -55,7 +55,7 @@ public class PauseMenu : MonoBehaviour
         Data.gold = character.GetComponent<CharacterWallet>().GetGoldAmount();
         Data.currentExp = character.GetComponent<CharacterLevel>().GetCurrentExp();
         Data.currentHealth = character.GetComponent<CharacterHealth>().GetCurrentHealth();
-        Data.maxHealth = character.GetComponent<CharacterHealth>().GetMaxHealth();
+        Data.baseHealth = character.GetComponent<CharacterHealth>().GetBaseHealth();
 
         // Character Position
         Data.Xcoordinate = character.transform.position.x;

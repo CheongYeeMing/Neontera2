@@ -66,7 +66,7 @@ public class PlayMenu : MonoBehaviour
     {
         StartButton.GetComponent<AudioSource>().Stop();
         StartButton.GetComponent<AudioSource>().Play();
-        if (Data.items.Count == 0)
+        if (!PlayerPrefs.HasKey("level"))
         {
             NoSavedData.SetActive(true);
             return;
@@ -79,7 +79,7 @@ public class PlayMenu : MonoBehaviour
     {
         StartButton.GetComponent<AudioSource>().Stop();
         StartButton.GetComponent<AudioSource>().Play();
-        if (Data.Monologue.Count != 0)
+        if (PlayerPrefs.HasKey("level"))
         {
             OverwriteData.SetActive(true);
             return;
