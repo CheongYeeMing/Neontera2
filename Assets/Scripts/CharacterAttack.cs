@@ -14,6 +14,7 @@ public class CharacterAttack : MonoBehaviour
     public LayerMask mobLayer;
     private CharacterMovement playerMovement;
 
+    public float baseAttack;
     private float attack;
     private float cooldownTimer = Mathf.Infinity;
     private float attackRange = 1.5f;
@@ -33,10 +34,15 @@ public class CharacterAttack : MonoBehaviour
     [SerializeField] GameObject Slash_3;
     public float comboTimer;
 
+    public void Start()
+    {
+        baseAttack = Data.baseAttack;
+        attack = GetComponent<Character>().GetAttack().CalculateFinalValue();
+    }
+
     private void Awake()
     {
         playerMovement = GetComponent<CharacterMovement>();
-        attack = GetComponent<Character>().GetAttack().CalculateFinalValue();
         combo = 1;
     }
 
@@ -165,6 +171,14 @@ public class CharacterAttack : MonoBehaviour
         FindObjectOfType<AudioManager>().StopEffect("CharacterNormalAttack");
     }
 
+    public void IncreaseAttack(int level)
+    {
+        baseAttack += (baseAttack * 0.015f) * ((100 - level) * 0.1f);
+        GetComponent<Character>().Attack.SetBaseValue(baseAttack);
+        attack = GetComponent<Character>().GetAttack().CalculateFinalValue();
+        GetComponent<Character>().statPanel.UpdateStatValues();
+    }
+
     public void OnDrawGizmosSelected()
     {
         if (attackPoint == null) return;
@@ -188,5 +202,10 @@ public class CharacterAttack : MonoBehaviour
     public bool GetIsAttacking()
     {
         return isAttacking;
+    }
+
+    public float GetBaseAttack()
+    {
+        return baseAttack;
     }
 }

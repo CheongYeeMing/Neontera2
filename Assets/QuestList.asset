@@ -632,8 +632,9 @@ MonoBehaviour:
       canRepeat: 0
       status: 2
       title: Get the Details
-      description: Seems like Dr Aaron might have lost something important. Go to
-        the lab to find out more.
+      description: 'The artifact seems to have been stolen by the Supreme Leader
+        and Resistance. I should head to the portal leading to base station (beside
+        Dr Aaron''s lab)... '
       questCriteria:
         criteriaType: 2
         action: Talked to Aaron

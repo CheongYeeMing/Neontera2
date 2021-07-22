@@ -11,9 +11,10 @@ public static class Data
     // Character
     public static int level = 1;
     public static float gold = 10;
+    public static float baseAttack = 10;
     public static float currentExp = 0;
     public static float currentHealth = 0;
-    public static float baseHealth = 0;
+    public static float baseHealth = 100;
     public static float Xcoordinate = -10.2f;
     public static float Ycoordinate = -1.39f;
     //public static float Xcoordinate = 140.47f;
@@ -53,6 +54,9 @@ public static class Data
     // GameObject Monologues
     public static List<int> Monologue = new List<int>();
 
+    // GameObject Portals
+    public static List<int> Portal = new List<int>();
+
     public static void SaveGame()
     {
         PlayerPrefs.SetFloat("musicVolume", musicVolume);
@@ -60,6 +64,7 @@ public static class Data
 
         PlayerPrefs.SetInt("level", level);
         PlayerPrefs.SetFloat("gold", gold);
+        PlayerPrefs.SetFloat("baseAttack", baseAttack);
         PlayerPrefs.SetFloat("currentExp", currentExp);
         PlayerPrefs.SetFloat("currentHealth", currentHealth);
         PlayerPrefs.SetFloat("baseHealth", baseHealth);
@@ -99,6 +104,9 @@ public static class Data
         PlayerPrefs.SetInt("gameObjectMonologue", Monologue.Count);
         for (int i = 0; i < Monologue.Count; i++) PlayerPrefs.SetInt("gameObjectMonologue" + (i + 1), Monologue[i]);
 
+        PlayerPrefs.SetInt("gameObjectPortal", Portal.Count);
+        for (int i = 0; i < Portal.Count; i++) PlayerPrefs.SetInt("gameObjectPortal" + (i + 1), Portal[i]);
+
         //PlayerPrefs.Save();
     }
 
@@ -109,6 +117,7 @@ public static class Data
 
         level = PlayerPrefs.GetInt("level");
         gold = PlayerPrefs.GetFloat("gold");
+        baseAttack = PlayerPrefs.GetFloat("baseAttack");
         currentExp = PlayerPrefs.GetFloat("currentExp");
         currentHealth = PlayerPrefs.GetFloat("currentHealth");
         baseHealth = PlayerPrefs.GetFloat("baseHealth");
@@ -142,6 +151,8 @@ public static class Data
         for (int i = 0; i < PlayerPrefs.GetInt("gameObjectItem"); i++) Item.Add(PlayerPrefs.GetInt("gameObjectItem" + (i + 1)));
 
         for (int i = 0; i < PlayerPrefs.GetInt("gameObjectMonologue"); i++) Monologue.Add(PlayerPrefs.GetInt("gameObjectMonologue" + (i + 1)));
+
+        for (int i = 0; i < PlayerPrefs.GetInt("gameObjectPortal"); i++) Portal.Add(PlayerPrefs.GetInt("gameObjectPortal" + (i + 1)));
     }
 
     public static void NewGame()
@@ -155,9 +166,10 @@ public static class Data
         // Character
         level = 1;
         gold = 10;
+        baseAttack = 10;
         currentExp = 0;
         currentHealth = 0;
-        baseHealth = 0;
+        baseHealth = 100;
         Xcoordinate = -10.2f;
         Ycoordinate = -1.39f;
         location = "Intro";
@@ -194,5 +206,8 @@ public static class Data
 
         // GameObject Monologues
         Monologue = new List<int>();
+
+        // GameObject Portals
+        Portal = new List<int>();
     }
 }

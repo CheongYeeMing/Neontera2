@@ -20,8 +20,8 @@ public class Character : MonoBehaviour
 
     private void Awake()
     {
-        Attack.SetBaseValue(10);
-        Health.SetBaseValue(100);
+        Attack.SetBaseValue(Data.baseAttack);
+        Health.SetBaseValue(Data.baseHealth);
         Speed.SetBaseValue(6);
         statPanel.SetStats(Attack, Health, Speed);
         statPanel.UpdateStatValues();

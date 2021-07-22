@@ -90,6 +90,7 @@ public class CharacterLevel : MonoBehaviour
         backExpBar.fillAmount = 0f;
         currentExp = Mathf.RoundToInt(currentExp - requiredExp);
         GetComponent<CharacterHealth>().IncreaseHealth(level);
+        GetComponent<CharacterAttack>().IncreaseAttack(level);
         requiredExp = CalculateRequiredExp();
         levelText.text = "Level " + level;
         Data.level = level;

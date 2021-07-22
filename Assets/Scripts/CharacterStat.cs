@@ -29,7 +29,7 @@ public class CharacterStat
     public readonly List<StatModifier> statModifiers;
     public readonly ReadOnlyCollection<StatModifier> StatModifiers;
 
-    public void SetBaseValue(int baseValue)
+    public void SetBaseValue(float baseValue)
     {
         BaseValue = baseValue;
     }

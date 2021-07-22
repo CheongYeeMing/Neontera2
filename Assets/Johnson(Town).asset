@@ -907,9 +907,9 @@ MonoBehaviour:
       canRepeat: 0
       status: 2
       title: Retrieve Artifact
-      description: The artifact seems to have been stolen by the Supreme Leader and
-        Resistance. Who knows where they might hide the Red Artifact? Only one way
-        to find out!
+      description: 'The artifact seems to have been stolen by the Supreme Leader
+        and Resistance. I should head to the portal leading to base station (beside
+        Dr Aaron''s lab)... '
       questCriteria:
         criteriaType: 0
         action: Artifact Retrieved
@@ -1089,4 +1089,4 @@ MonoBehaviour:
     - Now that the game is really completed, have you found the 2 secret areas? If
       not, I guess the game isn't really over yet hehehe :)))
     characterDialogue: []
-  sequenceNumber: 21
+  sequenceNumber: 0

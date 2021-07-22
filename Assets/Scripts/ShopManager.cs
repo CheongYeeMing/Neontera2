@@ -25,7 +25,7 @@ public class ShopManager : MonoBehaviour
         }
         if (item.itemType == Item.ItemType.Consumables)
         {
-            shopSelectedItemPanel.ShopSelectedConsumableItem(item);
+            shopSelectedItemPanel.ShopSelectedConsumableItem((ConsumableItem)item);
         }
     }
 }

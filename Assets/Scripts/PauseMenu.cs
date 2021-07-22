@@ -14,6 +14,7 @@ public class PauseMenu : MonoBehaviour
     [SerializeField] NPCManager npcManager;
     [SerializeField] ItemManager itemManager;
     [SerializeField] MonologueManager monologueManager;
+    [SerializeField] PortalManager portalManager;
 
     // Start is called before the first frame update
     void Start()
@@ -53,6 +54,7 @@ public class PauseMenu : MonoBehaviour
         // Character Stats
         Data.level = character.GetComponent<CharacterLevel>().GetLevel();
         Data.gold = character.GetComponent<CharacterWallet>().GetGoldAmount();
+        Data.baseAttack = character.GetComponent<CharacterAttack>().GetBaseAttack();
         Data.currentExp = character.GetComponent<CharacterLevel>().GetCurrentExp();
         Data.currentHealth = character.GetComponent<CharacterHealth>().GetCurrentHealth();
         Data.baseHealth = character.GetComponent<CharacterHealth>().GetBaseHealth();
@@ -87,6 +89,9 @@ public class PauseMenu : MonoBehaviour
 
         // Save Active State of Monologue GameObjects
         monologueManager.Save();
+
+        // Save Active State of Portal GameObjects
+        portalManager.Save();
 
         Data.SaveGame();
     }

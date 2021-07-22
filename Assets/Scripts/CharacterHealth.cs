@@ -33,7 +33,7 @@ public class CharacterHealth : MonoBehaviour, Health
         baseMaxHealth = Data.baseHealth;
         if (Data.currentHealth == 0) 
         { 
-            maxHealth = baseMaxHealth + GetComponent<Character>().GetHealth().CalculateFinalValue();
+            maxHealth = GetComponent<Character>().GetHealth().CalculateFinalValue();
             health = maxHealth;
             Data.currentHealth = health;
         }
@@ -45,7 +45,7 @@ public class CharacterHealth : MonoBehaviour, Health
     // Update is called once per frame
     void Update()
     {
-        maxHealth = baseMaxHealth + GetComponent<Character>().GetHealth().CalculateFinalValue();
+        maxHealth = GetComponent<Character>().GetHealth().CalculateFinalValue();
         health = Mathf.Clamp(health, 0, maxHealth);
         if (GetComponent<Transform>().position.y < -100)
         {
@@ -149,9 +149,11 @@ public class CharacterHealth : MonoBehaviour, Health
 
     public void IncreaseHealth(int level)
     {
-        baseMaxHealth += (health * 0.01f) * ((100 - level) * 0.1f);
-        health += (health * 0.01f) * ((100 - level) * 0.1f);
-        maxHealth += (health * 0.01f) * ((100 - level) * 0.1f);
+        baseMaxHealth += (baseMaxHealth * 0.01f) * ((100 - level) * 0.1f);
+        health += (baseMaxHealth * 0.01f) * ((100 - level) * 0.1f);
+        maxHealth += (baseMaxHealth * 0.01f) * ((100 - level) * 0.1f);
+        GetComponent<Character>().Health.SetBaseValue(baseMaxHealth);
+        GetComponent<Character>().statPanel.UpdateStatValues();
     }
 
     public void Die()
