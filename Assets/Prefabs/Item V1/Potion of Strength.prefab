@@ -136,7 +136,7 @@ MonoBehaviour:
   Icon: {fileID: 21300000, guid: e2f1ddeaeed383f47a4f3604be675063, type: 3}
   descriptionText: This potion is nasty but it gives a boost in your strength, its
     not much but it'll help!
-  cost: 0
+  cost: 5
   healAmount: 0
   AttackPercentBonus: 5
   HealthPercentBonus: 0

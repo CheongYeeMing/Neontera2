@@ -14,10 +14,10 @@ public class CharacterHealth : MonoBehaviour, Health
 
     private GameObject attackedBy;
 
-    private float health;
+    public float health;
     private float lerpTimer;
     private float baseMaxHealth;
-    private float maxHealth;
+    public float maxHealth;
     private float chipSpeed = 2f;
 
     private bool isHurting;
@@ -30,10 +30,11 @@ public class CharacterHealth : MonoBehaviour, Health
     // Start is called before the first frame update
     void Start()
     {
-        baseMaxHealth = Data.maxHealth;
+        baseMaxHealth = Data.baseHealth;
         if (Data.currentHealth == 0) 
         { 
-            health = baseMaxHealth;
+            maxHealth = GetComponent<Character>().GetHealth().CalculateFinalValue();
+            health = maxHealth;
             Data.currentHealth = health;
         }
         else
@@ -44,17 +45,19 @@ public class CharacterHealth : MonoBehaviour, Health
     // Update is called once per frame
     void Update()
     {
-        maxHealth = baseMaxHealth + GetComponent<Character>().GetHealth().CalculateFinalValue();
+        maxHealth = GetComponent<Character>().GetHealth().CalculateFinalValue();
         health = Mathf.Clamp(health, 0, maxHealth);
+        if (GetComponent<Transform>().position.y < -100)
+        {
+            health -= maxHealth * 0.2f; // When fall out of map, slow death.
+            if (health <= 0 && !isDead)
+            {
+                isDead = true;
+                health = 0;
+                Die();
+            }
+        }
         UpdateHealthUI();
-        if (Input.GetKeyDown(KeyCode.D))
-        {
-            TakeDamage(Random.Range(5, 10));
-        }
-        if (Input.GetKeyDown(KeyCode.F))
-        {
-            RestoreHealth(Random.Range(5, 10));
-        }
     }
 
     public void UpdateHealthUI()
@@ -85,8 +88,12 @@ public class CharacterHealth : MonoBehaviour, Health
 
     public void TakeDamage(float damage)
     {
+        if (GetComponent<CharacterAttack>().GetIsAttacking()) return;
+        FindObjectOfType<AudioManager>().StopEffect("CharacterHurt");
+        FindObjectOfType<AudioManager>().PlayEffect("CharacterHurt");
         isHurting = true;
         gameObject.GetComponent<CharacterAnimation>().ChangeAnimationState(CHARACTER_HURT);
+        CinemachineShake.Instance.Hit();
         KnockBack(attackedBy);
         health -= damage;
         lerpTimer = 0f;
@@ -122,7 +129,6 @@ public class CharacterHealth : MonoBehaviour, Health
         BossAttack bossAttack;
         if (mob.TryGetComponent<BossAttack>(out bossAttack))
         {
-            Debug.Log("okay its working");
             if (mob.transform.position.x > gameObject.transform.position.x)
             {
 
@@ -143,25 +149,32 @@ public class CharacterHealth : MonoBehaviour, Health
 
     public void IncreaseHealth(int level)
     {
-        baseMaxHealth += (health * 0.01f) * ((100 - level) * 0.1f);
-        health = baseMaxHealth;
+        baseMaxHealth += (baseMaxHealth * 0.01f) * ((100 - level) * 0.1f);
+        health += (baseMaxHealth * 0.01f) * ((100 - level) * 0.1f);
+        maxHealth += (baseMaxHealth * 0.01f) * ((100 - level) * 0.1f);
+        GetComponent<Character>().Health.SetBaseValue(baseMaxHealth);
+        GetComponent<Character>().statPanel.UpdateStatValues();
     }
 
     public void Die()
     {
         isDead = true;
         gameObject.GetComponent<CharacterAnimation>().ChangeAnimationState(CHARACTER_DIE);
+        FindObjectOfType<AudioManager>().StopEffect("Run");
+        FindObjectOfType<AudioManager>().PlayEffect("CharacterDie");
         GetComponent<BoxCollider2D>().enabled = false;
-        Debug.Log("Character is dead!!!");
-        // Dead Screen, Auto Respawn in Town area???
+        GetComponent<Rigidbody2D>().velocity = Vector2.zero;
+        GetComponent<Rigidbody2D>().gravityScale = 0;
         gameOver.gameObject.SetActive(true);
     }
 
     public void Revive()
     {
+        Debug.Log("Revived");
         isDead = false;
         health = maxHealth;
         GetComponent<BoxCollider2D>().enabled = true;
+        GetComponent<Rigidbody2D>().gravityScale = 1;
     }
 
     public bool IsHurting()
@@ -182,5 +195,21 @@ public class CharacterHealth : MonoBehaviour, Health
     public void SetAttackedBy(GameObject attackedBy)
     {
         this.attackedBy = attackedBy;
+    }
+
+    public void FullRestore()
+    {
+        health = maxHealth;
+        FindObjectOfType<AudioManager>().PlayEffect("CharacterHeal");
+    }
+
+    public float GetCurrentHealth()
+    {
+        return health;
+    }
+
+    public float GetBaseHealth()
+    {
+        return baseMaxHealth;
     }
 }

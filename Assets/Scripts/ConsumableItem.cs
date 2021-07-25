@@ -23,6 +23,7 @@ public class ConsumableItem : Item
 
     public void Consume(Character c)
     {
+        FindObjectOfType<AudioManager>().PlayEffect("ConsumeItem");
         if (consumableType == ConsumableType.Instant)
         {
             Heal(c);
@@ -36,6 +37,7 @@ public class ConsumableItem : Item
 
     public void Heal(Character c)
     {
+        FindObjectOfType<AudioManager>().PlayEffect("CharacterHeal");
         c.gameObject.GetComponent<CharacterHealth>().RestoreHealth(healAmount);
     }
 
@@ -43,15 +45,15 @@ public class ConsumableItem : Item
     {
         if (AttackPercentBonus != 0)
         {
-            c.GetAttack().AddModifier(new StatModifier(AttackPercentBonus, StatModType.PercentMult, this));
+            c.GetAttack().AddModifier(new StatModifier(AttackPercentBonus, StatModType.PercentAdd, this));
         }
         if (HealthPercentBonus != 0)
         {
-            c.GetHealth().AddModifier(new StatModifier(HealthPercentBonus, StatModType.PercentMult, this));
+            c.GetHealth().AddModifier(new StatModifier(HealthPercentBonus, StatModType.PercentAdd, this));
         }
         if (SpeedPercentBonus != 0)
         {
-            c.GetSpeed().AddModifier(new StatModifier(SpeedPercentBonus, StatModType.PercentMult, this));
+            c.GetSpeed().AddModifier(new StatModifier(SpeedPercentBonus, StatModType.PercentAdd, this));
         }
     }
 

@@ -82,6 +82,8 @@ public class SelectedItemPanel : MonoBehaviour
 
     public void Interact()
     {
+        FindObjectOfType<AudioManager>().StopEffect("Click");
+        FindObjectOfType<AudioManager>().PlayEffect("Click");
         if (item is EquipableItem && ((EquipableItem)item).isEquipped)
         {
             FindObjectOfType<Character>().Unequip((EquipableItem)item);
@@ -97,5 +99,14 @@ public class SelectedItemPanel : MonoBehaviour
             FindObjectOfType<Character>().Consume((ConsumableItem)item);
             gameObject.SetActive(false);
         }
+    }
+
+    public void ConfirmDelete()
+    {
+        FindObjectOfType<AudioManager>().StopEffect("Click");
+        FindObjectOfType<AudioManager>().PlayEffect("Click");
+        FindObjectOfType<AudioManager>().StopEffect("Warning");
+        FindObjectOfType<AudioManager>().PlayEffect("Warning");
+        DeleteWindow.gameObject.SetActive(true);
     }
 }

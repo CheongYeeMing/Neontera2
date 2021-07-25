@@ -7,6 +7,7 @@ using TMPro;
 public class SlimeKingHealth : BossHealth
 {
     [SerializeField] public float enrageDelay; // Animation is 1.1s
+    [SerializeField] public Monologue defeatedMonologue;
 
     protected const string BOSS_ENRAGE = "Enrage";
     protected const string BOSS_ENRAGED_IDLE = "EnragedIdle";
@@ -109,6 +110,8 @@ public class SlimeKingHealth : BossHealth
         Debug.Log("Mob is dead!!!");
         gameObject.GetComponent<SlimeKingAnimation>().ChangeAnimationState(GetDieState());
         gameObject.GetComponent<Rigidbody2D>().gravityScale = 0;
+        defeatedMonologue.gameObject.transform.position = FindObjectOfType<Character>().gameObject.transform.position;
+        defeatedMonologue.gameObject.SetActive(true);
         foreach (Collider2D collider in GetComponents<Collider2D>())
         {
             collider.enabled = false;

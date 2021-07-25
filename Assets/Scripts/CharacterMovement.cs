@@ -8,6 +8,8 @@ public class CharacterMovement : MonoBehaviour
     [SerializeField] private LayerMask wallLayer;
     [SerializeField] private float speed;
     [SerializeField] private float jumpPower;
+    [SerializeField] ParticleSystem jumpDust;
+    [SerializeField] ParticleSystem walkDust;
 
     private BoxCollider2D boxCollider;
     private Rigidbody2D body;
@@ -15,11 +17,14 @@ public class CharacterMovement : MonoBehaviour
     private float wallJumpCooldown; // Prevent instant teleportation up wall
     private float horizontalInput;
 
+    // Location
+    public string location;
+
     // Mob Animation States
     private const string CHARACTER_IDLE = "Idle";
     private const string CHARACTER_RUN = "Run";
     private const string CHARACTER_JUMP = "Jump";
-    
+
 
     private void Awake()
     {
@@ -27,9 +32,18 @@ public class CharacterMovement : MonoBehaviour
         boxCollider = GetComponent<BoxCollider2D>();
     }
 
+    public void Start()
+    {
+        location = Data.location;
+        gameObject.transform.position = new Vector2(Data.Xcoordinate,Data.Ycoordinate);
+    }
+
     private void FixedUpdate()
     {
+        if (isGrounded()) walkDust.gameObject.SetActive(true);
+        else walkDust.gameObject.SetActive(false);
         speed = GetComponent<Character>().GetSpeed().CalculateFinalValue();
+        if (GetComponent<CharacterAttack>().GetIsAttacking() && isGrounded()) return;
         if (CanMove() == false)
         {
             GetComponent<CharacterAnimation>().ChangeAnimationState(CHARACTER_IDLE);
@@ -37,6 +51,14 @@ public class CharacterMovement : MonoBehaviour
             return;
         }
         horizontalInput = Input.GetAxis("Horizontal");
+
+        // Audio
+        if (isGrounded() && horizontalInput != 0)
+        {
+            FindObjectOfType<AudioManager>().PlayEffect("Run");
+        }
+        else FindObjectOfType<AudioManager>().StopEffect("Run");
+        if (isGrounded()) FindObjectOfType<AudioManager>().StopEffect("Jump");
 
         // Flip player when moving
         if (horizontalInput > 0.01f)
@@ -89,6 +111,11 @@ public class CharacterMovement : MonoBehaviour
         } 
     }
 
+    public void CreateDust()
+    {
+        jumpDust.Play();
+    }
+
     private void Jump()
     {
         if (isGrounded())
@@ -96,6 +123,8 @@ public class CharacterMovement : MonoBehaviour
             body.velocity = new Vector2(body.velocity.x, jumpPower);
             //animator.SetTrigger("jump");
             gameObject.GetComponent<CharacterAnimation>().ChangeAnimationState(CHARACTER_JUMP);
+            CreateDust();
+            FindObjectOfType<AudioManager>().PlayEffect("Jump");
         }
         else if (onWall() && !isGrounded())
         {
@@ -105,6 +134,8 @@ public class CharacterMovement : MonoBehaviour
             {
                 body.velocity = new Vector2(-Mathf.Sign(transform.localScale.x) * 10, jumpPower);
                 transform.localScale= new Vector3(-Mathf.Sign(transform.localScale.x) * 0.3f, transform.localScale.y, transform.localScale.z);
+                CreateDust();
+                FindObjectOfType<AudioManager>().PlayEffect("Jump");
             }
             else
             {
@@ -114,7 +145,7 @@ public class CharacterMovement : MonoBehaviour
         }
     }
 
-    private bool isGrounded()
+    public bool isGrounded()
     {
         RaycastHit2D raycastHit = Physics2D.BoxCast(boxCollider.bounds.center, boxCollider.bounds.size, 0, Vector2.down, 0.03f, groundLayer);
         return raycastHit.collider != null;
@@ -128,6 +159,24 @@ public class CharacterMovement : MonoBehaviour
 
     public bool canAttack()
     {
+        //bool can = true;
+        //Monologue[] monologues = FindObjectsOfType<Monologue>();
+        //foreach (Monologue mono in monologues)
+        //{
+        //    if (mono.IsExamining())
+        //    {
+        //        can = false;
+        //        break;
+        //    }
+        //}
+        //if (FindObjectOfType<InventorySystem>().isOpen)
+        //{
+        //    can = false;
+        //}
+        //if (gameObject.GetComponent<CharacterHealth>().IsHurting() || gameObject.GetComponent<CharacterHealth>().IsDead())
+        //{
+        //    can = false;
+        //}
         return !onWall() && !GetComponent<CharacterHealth>().IsDead();
     }
 
@@ -151,7 +200,6 @@ public class CharacterMovement : MonoBehaviour
         {
             can = false;
         }
-        
         DialogueManager[] npc = FindObjectsOfType<DialogueManager>();
         for (int i = 0; i < npc.Length; i++)
         {

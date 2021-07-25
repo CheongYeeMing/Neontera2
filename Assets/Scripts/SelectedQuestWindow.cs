@@ -32,8 +32,8 @@ public class SelectedQuestWindow : MonoBehaviour
         questName.text = quest.title;
         questDescription.text = quest.description;
         questCriteria.text = quest.questCriteria.action + ": " + quest.questCriteria.currentAmount + "/" + quest.questCriteria.requiredAmount;
-        questExpReward.text = quest.expReward.ToString();
-        questGoldReward.text = quest.goldReward.ToString();
+        questExpReward.text = "Exp: " + quest.expReward.ToString();
+        questGoldReward.text = "Gold: " +quest.goldReward.ToString();
         if (quest.itemReward != null)
             questItemReward.text = quest.itemReward.name.ToString();
     }
@@ -63,14 +63,18 @@ public class SelectedQuestWindow : MonoBehaviour
             CompleteQuestButton.gameObject.SetActive(true);
             AcceptQuestButton.gameObject.SetActive(false);
             DeclineQuestButton.gameObject.SetActive(false);
+
+            //Auto Complete Quest
+            CompleteQuest();
         }
     }
 
     public void AcceptQuest()
     {
+        FindObjectOfType<AudioManager>().PlayEffect("QuestAccepted");
         dialogueManager.QuestAccepted();
-        questList.AddQuest(quest);
-        quest.status = Quest.Status.ONGOING;
+        questList.AddQuest(quest);           //
+        quest.status = Quest.Status.ONGOING; //
         gameObject.SetActive(false);
         if (quest.questItem != null)
             item = Instantiate(quest.questItem, quest.location, Quaternion.identity);
@@ -99,11 +103,15 @@ public class SelectedQuestWindow : MonoBehaviour
 
     public void ContinueQuest()
     {
+        FindObjectOfType<AudioManager>().StopEffect("Open");
+        FindObjectOfType<AudioManager>().PlayEffect("Open");
         gameObject.SetActive(false);
     }
 
     public void CompleteQuest()
     {
+        FindObjectOfType<AudioManager>().StopEffect("QuestComplete");
+        FindObjectOfType<AudioManager>().PlayEffect("QuestComplete");
         if (quest.questCriteria.criteriaType == CriteriaType.Collect && item != null)
             inventory.RemoveItem(item);
         quest.npc.sequenceNumber++;
@@ -117,7 +125,7 @@ public class SelectedQuestWindow : MonoBehaviour
         // Some Quest to be reset
         if (quest.canRepeat == true)
         {
-            quest.Reset();
+            quest.FinalReset();
         }
         // Some Quest can only be done once then move on to next Quest already
 

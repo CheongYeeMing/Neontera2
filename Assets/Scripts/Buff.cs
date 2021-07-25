@@ -63,6 +63,6 @@ public class Buff : MonoBehaviour
         itemName.enabled = false;
         itemEffect.enabled = false;
         durationLeft.enabled = false;
-        gameObject.GetComponentInParent<Image>().enabled = false;
+        GetComponent<Image>().enabled = false;
     }
 }

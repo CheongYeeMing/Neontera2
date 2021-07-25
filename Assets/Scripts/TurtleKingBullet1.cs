@@ -5,6 +5,7 @@ using UnityEngine;
 public class TurtleKingBullet1 : MonoBehaviour
 {
     [SerializeField] protected float damage;
+    [SerializeField] protected ParticleSystem particle;
 
     protected Rigidbody2D body;
 
@@ -27,6 +28,7 @@ public class TurtleKingBullet1 : MonoBehaviour
     {
         if (collision.gameObject.tag == "Character")
         {
+            Instantiate(particle, collision.gameObject.transform.position, transform.rotation);
             StartCoroutine(CollideCharacter(collision.gameObject));
         }
         else if (collision.gameObject.tag == "Invincible" && collision.gameObject.layer == 8)
@@ -44,7 +46,7 @@ public class TurtleKingBullet1 : MonoBehaviour
         body.velocity = Vector2.zero;
         character.GetComponent<CharacterHealth>().SetAttackedBy(gameObject);
         character.GetComponent<CharacterHealth>().TakeDamage(damage);
-        yield return new WaitForSeconds(0.3f);
+        yield return new WaitForSeconds(0);
         Destroy(gameObject);
     }
 

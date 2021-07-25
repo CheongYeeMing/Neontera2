@@ -5,6 +5,7 @@ using UnityEngine;
 public class SupremeLeaderLaser : MonoBehaviour
 {
     [SerializeField] protected float damage;
+    [SerializeField] protected ParticleSystem particle;
 
     protected Rigidbody2D body;
 
@@ -28,14 +29,18 @@ public class SupremeLeaderLaser : MonoBehaviour
     {
         if (collision.gameObject.tag == "Character")
         {
+            Instantiate(particle, collision.gameObject.transform.position, transform.rotation);
+            StopAllCoroutines();
             StartCoroutine(CollideCharacter(collision.gameObject));
         }
         else if (collision.gameObject.tag == "Invincible" && collision.gameObject.layer == 8)
         {
+            Instantiate(particle, transform.position, transform.rotation);
             CollideGround(collision.gameObject);
         }
         else if (collision.gameObject.tag == "Invincible" && collision.gameObject.layer == 9)
         {
+            Instantiate(particle, transform.position, transform.rotation);
             CollideWall(collision.gameObject);
         }
     }
@@ -45,8 +50,9 @@ public class SupremeLeaderLaser : MonoBehaviour
         body.velocity = Vector2.zero;
         character.GetComponent<CharacterHealth>().SetAttackedBy(gameObject);
         character.GetComponent<CharacterHealth>().TakeDamage(damage);
-        yield return new WaitForSeconds(0.3f);
+        yield return new WaitForSeconds(0);
         Destroy(gameObject);
+
     }
 
     public void CollideGround(GameObject ground)

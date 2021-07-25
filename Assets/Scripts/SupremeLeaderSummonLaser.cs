@@ -29,6 +29,8 @@ public class SupremeLeaderSummonLaser : BossSummoner
             }
             Quaternion angleAxis = Quaternion.AngleAxis(-angle, Vector3.forward);
             gameObject.GetComponent<SupremeLeaderAnimation>().ChangeAnimationState(SUPREME_LEADER_LASER);
+            FindObjectOfType<AudioManager>().StopEffect("Laser");
+            FindObjectOfType<AudioManager>().PlayEffect("Laser");
             Instantiate(prefab, new Vector3((float)(transform.position.x + Mathf.Sign(transform.localScale.x) * 1f), transform.position.y, transform.position.z), angleAxis);
             if (target.position.x < transform.position.x)
             {

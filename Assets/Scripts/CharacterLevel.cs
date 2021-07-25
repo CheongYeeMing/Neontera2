@@ -46,7 +46,7 @@ public class CharacterLevel : MonoBehaviour
         UpdateExpUI();
         if (Input.GetKeyDown(KeyCode.Equals))
         {
-            GainExperience(20);
+            GainExperience(requiredExp);
         }
         if (currentExp > requiredExp)
         {
@@ -84,11 +84,13 @@ public class CharacterLevel : MonoBehaviour
 
     public void LevelUp()
     {
+        FindObjectOfType<AudioManager>().PlayEffect("LevelUp");
         level++;
         frontExpBar.fillAmount = 0f;
         backExpBar.fillAmount = 0f;
         currentExp = Mathf.RoundToInt(currentExp - requiredExp);
         GetComponent<CharacterHealth>().IncreaseHealth(level);
+        GetComponent<CharacterAttack>().IncreaseAttack(level);
         requiredExp = CalculateRequiredExp();
         levelText.text = "Level " + level;
         Data.level = level;

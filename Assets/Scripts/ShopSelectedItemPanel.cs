@@ -36,13 +36,24 @@ public class ShopSelectedItemPanel : MonoBehaviour
         gameObject.SetActive(true);
     }
 
-    public void ShopSelectedConsumableItem(Item item)
+    public void ShopSelectedConsumableItem(ConsumableItem item)
     {
         this.item = item;
         ItemName.text = item.ItemName;
         Icon.sprite = item.Icon;
         DescriptionText.text = item.descriptionText;
         StatsText.text = "";
+        if (item.consumableType == ConsumableType.Instant)
+        {
+            StatsText.text += "Heal Amount: " + item.healAmount.ToString();
+        }
+        if (item.consumableType == ConsumableType.FadeOverTime)
+        {
+            StatsText.text += "AttackPercent: " + item.AttackPercentBonus.ToString() + "\n";
+            StatsText.text += "HealthPercent: " + item.HealthPercentBonus.ToString() + "\n";
+            StatsText.text += "SpeedPercent: " + item.SpeedPercentBonus.ToString() + "\n" + "\n";
+            StatsText.text += "Duration: " + item.duration + " seconds";
+        }
         ItemPrice.text = "Price: " + item.cost + " gold";
         BuyButton.GetComponentInChildren<Text>().text = "Buy";
         gameObject.SetActive(true);
@@ -50,8 +61,12 @@ public class ShopSelectedItemPanel : MonoBehaviour
 
     public void BuyItem()
     {
+        FindObjectOfType<AudioManager>().StopEffect("Click");
+        FindObjectOfType<AudioManager>().PlayEffect("Click");
         if (FindObjectOfType<CharacterWallet>().HasEnoughGold(item.cost) && !inventory.IsFull())
         {
+            FindObjectOfType<AudioManager>().StopEffect("BuyItem");
+            FindObjectOfType<AudioManager>().PlayEffect("BuyItem");
             FindObjectOfType<CharacterWallet>().MinusGold(item.cost);
             if (item is EquipableItem)
             {
@@ -66,7 +81,17 @@ public class ShopSelectedItemPanel : MonoBehaviour
         }
         else
         {
+            FindObjectOfType<AudioManager>().StopEffect("Warning");
+            FindObjectOfType<AudioManager>().PlayEffect("Warning");
             InsufficientGoldWindow.gameObject.SetActive(true);
         }
+    }
+
+    public void CloseInsufficientGoldWindow()
+    {
+        FindObjectOfType<AudioManager>().StopEffect("Warning");
+        FindObjectOfType<AudioManager>().StopEffect("Click");
+        FindObjectOfType<AudioManager>().PlayEffect("Click");
+        InsufficientGoldWindow.gameObject.SetActive(false);
     }
 }

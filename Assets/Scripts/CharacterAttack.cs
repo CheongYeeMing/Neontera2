@@ -14,25 +14,41 @@ public class CharacterAttack : MonoBehaviour
     public LayerMask mobLayer;
     private CharacterMovement playerMovement;
 
+    public float baseAttack;
     private float attack;
     private float cooldownTimer = Mathf.Infinity;
-    private float attackRange = 0.5f;
+    private float attackRange = 1.5f;
 
     private bool isAttacking;
 
     // Character Animation States
     private const string CHARACTER_ATTACK = "Attack";
+    private const string CHARACTER_ATTACK_2 = "Attack2";
+    private const string CHARACTER_ATTACK_3 = "Attack3";
     private const string CHARACTER_SPECIAL_ATTACK = "AttackFireball";
+
+    // Combo
+    public int combo;
+    [SerializeField] GameObject Slash_1;
+    [SerializeField] GameObject Slash_2;
+    [SerializeField] GameObject Slash_3;
+    public float comboTimer;
+
+    public void Start()
+    {
+        baseAttack = Data.baseAttack;
+        attack = GetComponent<Character>().GetAttack().CalculateFinalValue();
+    }
 
     private void Awake()
     {
         playerMovement = GetComponent<CharacterMovement>();
-        attack = GetComponent<Character>().GetAttack().CalculateFinalValue();
-        
+        combo = 1;
     }
 
     private void Update()
     {
+        if (!playerMovement.CanMove()) return;
         if (Input.GetKey(KeyCode.A) && playerMovement.canAttack() && !isAttacking && cooldownTimer > attackDelay)
         {
             Attack();
@@ -41,15 +57,44 @@ public class CharacterAttack : MonoBehaviour
         {
             SpecialAttack();
         }
-
         cooldownTimer += Time.deltaTime;
+        comboTimer += Time.deltaTime;
+        if (comboTimer > 1f) combo = 1;
     }
 
     private void Attack()
     {
         isAttacking = true;
-        gameObject.GetComponent<CharacterAnimation>().ChangeAnimationState(CHARACTER_ATTACK);
+        
+        FindObjectOfType<AudioManager>().PlayEffect("CharacterNormalAttack");
         cooldownTimer = 0;
+        comboTimer = 0;
+        if (combo >= 4) combo = 1;
+        Debug.Log(combo);
+        if (combo == 1)
+        {
+            gameObject.GetComponent<CharacterAnimation>().ChangeAnimationState(CHARACTER_ATTACK);
+            GameObject Slash1 = Instantiate(Slash_1, new Vector2(attackPoint.position.x, attackPoint.position.y), Quaternion.identity) as GameObject;
+            Slash1.GetComponent<Rigidbody2D>().velocity = new Vector2(Mathf.Sign(transform.localScale.x) * 0.5f, -0.5f);
+        }
+        else if (combo == 2)
+        {
+            gameObject.GetComponent<CharacterAnimation>().ChangeAnimationState(CHARACTER_ATTACK_2);
+            GameObject Slash2 = Instantiate(Slash_2, new Vector2(attackPoint.position.x, attackPoint.position.y), Quaternion.identity) as GameObject;
+            Slash2.GetComponent<Rigidbody2D>().velocity = new Vector2(Mathf.Sign(transform.localScale.x) * 0.4f, 0.6f);
+        }
+        else if (combo == 3)
+        {
+            gameObject.GetComponent<CharacterAnimation>().ChangeAnimationState(CHARACTER_ATTACK_3);
+            GameObject Slash3 = Instantiate(Slash_3, attackPoint.position, Quaternion.identity) as GameObject;
+            Slash3.GetComponent<Projectile>().damage = (float)(gameObject.GetComponent<Character>().GetAttack().CalculateFinalValue() * 0.75);
+            Slash3.GetComponent<Rigidbody2D>().velocity = new Vector2(Mathf.Sign(transform.localScale.x) * 3f, 0);
+        }
+        if (combo < 3) GetComponent<Rigidbody2D>().velocity = new Vector2(Mathf.Sign(gameObject.transform.localScale.x) * 1f, 0);
+        else if (combo == 3) GetComponent<Rigidbody2D>().velocity = new Vector2(Mathf.Sign(gameObject.transform.localScale.x) * 3f, 0);
+        //if (combo < 3) GetComponent<Rigidbody2D>().AddForce(new Vector2(Mathf.Sign(gameObject.transform.localScale.x) * 30f, 0));
+        //else if (combo == 3) GetComponent<Rigidbody2D>().AddForce(new Vector2(Mathf.Sign(gameObject.transform.localScale.x) * 145f, 0));
+        combo++;
 
         Collider2D[] hitMobs = Physics2D.OverlapCircleAll(attackPoint.position, attackRange, mobLayer);
         attack = gameObject.GetComponent<Character>().GetAttack().CalculateFinalValue();
@@ -123,6 +168,15 @@ public class CharacterAttack : MonoBehaviour
     public void AttackComplete()
     {
         isAttacking = false;
+        FindObjectOfType<AudioManager>().StopEffect("CharacterNormalAttack");
+    }
+
+    public void IncreaseAttack(int level)
+    {
+        baseAttack += (baseAttack * 0.015f) * ((100 - level) * 0.1f);
+        GetComponent<Character>().Attack.SetBaseValue(baseAttack);
+        attack = GetComponent<Character>().GetAttack().CalculateFinalValue();
+        GetComponent<Character>().statPanel.UpdateStatValues();
     }
 
     public void OnDrawGizmosSelected()
@@ -136,7 +190,8 @@ public class CharacterAttack : MonoBehaviour
     {
         gameObject.GetComponent<CharacterAnimation>().ChangeAnimationState(CHARACTER_SPECIAL_ATTACK);
         cooldownTimer = 0;
-
+        FindObjectOfType<AudioManager>().StopEffect("CharacterLaser");
+        FindObjectOfType<AudioManager>().PlayEffect("CharacterLaser");
         GameObject fireBall = Instantiate(fireball, firePoint.transform.position, Quaternion.identity) as GameObject;
         fireBall.GetComponent<Projectile>().damage = (float)(gameObject.GetComponent<Character>().GetAttack().CalculateFinalValue()*0.75);
         fireBall.GetComponent<Rigidbody2D>().velocity = new Vector2(Mathf.Sign(transform.localScale.x) * 15.0f, 0);
@@ -147,5 +202,10 @@ public class CharacterAttack : MonoBehaviour
     public bool GetIsAttacking()
     {
         return isAttacking;
+    }
+
+    public float GetBaseAttack()
+    {
+        return baseAttack;
     }
 }

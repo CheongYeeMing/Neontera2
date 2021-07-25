@@ -35,8 +35,12 @@ public class QuestSlot : MonoBehaviour, IPointerClickHandler
     {
         if (eventData != null && eventData.button == PointerEventData.InputButton.Left)
         {
+            Debug.Log("Click 2");
+            Debug.Log(Quest);
+            Debug.Log(OnLeftClickEvent);
             if (Quest != null && OnLeftClickEvent != null)
             {
+                Debug.Log("Click 3");
                 OnLeftClickEvent(Quest);
             }
         }

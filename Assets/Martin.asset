@@ -15,12 +15,81 @@ MonoBehaviour:
   npcName: Martin
   icon: {fileID: 21300000, guid: 29149487ef4ec16489b2d80b0d182b9f, type: 3}
   Sequences:
-  - Items:
-    - {fileID: 227948212008674030, guid: 5059df9dbf3a2f742b6a42b7419613de, type: 3}
-    - {fileID: 171027649447050905, guid: 10ea64dda7f88af458f4b14147c6ffb6, type: 3}
-    - {fileID: 1645576359943562433, guid: c3f35dd8affa47e4283d27ae70458bee, type: 3}
-    - {fileID: 4317239124109681369, guid: 9406610717ba9504d975efbc29a00708, type: 3}
+  - Items: []
     Quest:
+      ID: 0
+      npc: {fileID: 0}
+      isActive: 0
+      canRepeat: 0
+      status: 0
+      title: 
+      description: 
+      questCriteria:
+        criteriaType: 0
+        action: 
+        Target: 
+        requiredAmount: 0
+        currentAmount: 0
+      expReward: 0
+      goldReward: 0
+      itemReward: {fileID: 0}
+      questItem: {fileID: 0}
+      location: {x: 0, y: 0, z: 0}
+    hasShop: 0
+    hasQuest: 0
+    isStory: 1
+    isEnd: 0
+    repeatableQuest: 0
+    waitingQuest: 0
+    justDialogue: 0
+    hasHeal: 0
+    backToNormal: 0
+    sequenceNum: 0
+    activatePortal: 0
+    destination: 
+    triggerBoss: 0
+    teleport: 0
+    newBG: 
+    characterV2: {x: 0, y: 0}
+    removeItem: 0
+    item: {fileID: 0}
+    addItem: 0
+    giveItem: {fileID: 0}
+    dialogue:
+    - Hi, you look new. Allow me to introduce myself. My name is Martin, I'm the
+      weaponsmith of this town.
+    - I make equipment of all types, Armour, Helmet, Swords and Boots.
+    - My items are priced reasonably. The price of the item scales with its rarity
+      and calibre.
+    characterDialogue: []
+  - Items:
+    - {fileID: 227948212008674030, guid: d839943cc8efc524e9901df5a765baa5, type: 3}
+    - {fileID: 227948212008674030, guid: fd4d94e669c70a4438b1d6425d7cef25, type: 3}
+    - {fileID: 227948212008674030, guid: aefcaf14852c44840b444c66574a4a4b, type: 3}
+    - {fileID: 227948212008674030, guid: 4063dc41d74d06948b26c677ec525b8e, type: 3}
+    - {fileID: 227948212008674030, guid: 2d96aee1a39d59943a0aa07135a0f797, type: 3}
+    - {fileID: 227948212008674030, guid: cbaf77ea3814fb948b0c4f30412b8be0, type: 3}
+    - {fileID: 227948212008674030, guid: 046460315a0d2284ab9c5ca2b1c13832, type: 3}
+    - {fileID: 1645576359943562433, guid: 79dab519e67821940ba239e7d66191e1, type: 3}
+    - {fileID: 1645576359943562433, guid: e3524674b48810345ae768bbe32c9b24, type: 3}
+    - {fileID: 1645576359943562433, guid: 0768e7dcc8b08154bb279c6d22737f24, type: 3}
+    - {fileID: 1645576359943562433, guid: ea9d6b2ccde08e1498ee662b65b3ca24, type: 3}
+    - {fileID: 1645576359943562433, guid: 562d623958a349b40be04ee14ef7629a, type: 3}
+    - {fileID: 1645576359943562433, guid: a285054d0149a064194847729befd025, type: 3}
+    - {fileID: 4317239124109681369, guid: 9f4ac928f9b3aec45af22bafc98d1768, type: 3}
+    - {fileID: 4317239124109681369, guid: 19d913eb75b1c1148bd6ffa4589625c2, type: 3}
+    - {fileID: 4317239124109681369, guid: 192740c52d8b1bb48bcea52778efd2aa, type: 3}
+    - {fileID: 4317239124109681369, guid: 8eabc81b4b9a05940a544d2aed4efcc5, type: 3}
+    - {fileID: 4317239124109681369, guid: d9e1c05acadf90e4fa448aa3feab204b, type: 3}
+    - {fileID: 4317239124109681369, guid: ea0ceab6886837045ae74c28c5f6bdfd, type: 3}
+    - {fileID: 171027649447050905, guid: 563f86692c897954f826761b8e64b230, type: 3}
+    - {fileID: 171027649447050905, guid: 4ac89876619364347aa29adc2c022932, type: 3}
+    - {fileID: 171027649447050905, guid: 1b0355a80351a8f4298f1aaeba229f1e, type: 3}
+    - {fileID: 171027649447050905, guid: 980aeb064c6dc7d408b73107dca38490, type: 3}
+    - {fileID: 171027649447050905, guid: f927da39aadb4c14dabaf4eb4bdc0e7c, type: 3}
+    - {fileID: 171027649447050905, guid: b2e5b5b4bd5695044bc958ee2f3e52f5, type: 3}
+    Quest:
+      ID: 0
       npc: {fileID: 0}
       isActive: 0
       canRepeat: 0
@@ -41,12 +110,23 @@ MonoBehaviour:
     hasShop: 1
     hasQuest: 0
     isStory: 0
+    isEnd: 0
+    repeatableQuest: 0
     waitingQuest: 0
     justDialogue: 0
-    hasTeleportNPC: 0
-    npcV3: {x: 0, y: 0, z: 0}
-    hasTeleportCharacter: 0
-    characterV3: {x: 0, y: 0, z: 0}
+    hasHeal: 0
+    backToNormal: 0
+    sequenceNum: 0
+    activatePortal: 0
+    destination: 
+    triggerBoss: 0
+    teleport: 0
+    newBG: 
+    characterV2: {x: 0, y: 0}
+    removeItem: 0
+    item: {fileID: 0}
+    addItem: 0
+    giveItem: {fileID: 0}
     dialogue:
     - Greetings Traveller! How can I help you?
     - 'Ofcourse I can! C''mon, let me show you all the equipment I have for sale

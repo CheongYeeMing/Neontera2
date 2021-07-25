@@ -5,10 +5,11 @@ using UnityEngine.SceneManagement;
 
 public class Portal : MonoBehaviour
 {
-    [SerializeField] Portal Destination;
-    [SerializeField] string Location;
+    [SerializeField] public Portal Destination;
+    [SerializeField] public string Location;
 
-    [SerializeField]  bool isActivated;
+    [SerializeField] public bool isActivated;
+    [SerializeField] GameObject PortalNameTag;
 
     Animator animator;
 
@@ -21,6 +22,7 @@ public class Portal : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        PortalNameTag.transform.position = new Vector2(gameObject.transform.position.x, gameObject.transform.position.y - 1.2f);
         if (isActivated)
         {
             animator.SetTrigger("Activate");
@@ -34,8 +36,11 @@ public class Portal : MonoBehaviour
 
     public void Teleport(GameObject Character)
     {
-        if (isActivated)
+        if (isActivated && !Character.GetComponent<ParallaxBackgroundManager>().isTeleporting)
         {
+            Character.GetComponent<ParallaxBackgroundManager>().isTeleporting = true;
+            FindObjectOfType<AudioManager>().StopEffect("Portal");
+            FindObjectOfType<AudioManager>().PlayEffect("Portal");
             StopAllCoroutines();
             StartCoroutine(Character.GetComponent<ParallaxBackgroundManager>().ChangeBackground(Destination.Location, Character, Destination));
         }

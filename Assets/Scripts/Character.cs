@@ -16,27 +16,39 @@ public class Character : MonoBehaviour
     public CharacterStat Health;
     public CharacterStat Speed;
 
+    [SerializeField] ItemList itemList;
+
     private void Awake()
     {
-        Attack.SetBaseValue(100);
+        Attack.SetBaseValue(Data.baseAttack);
+        Health.SetBaseValue(Data.baseHealth);
         Speed.SetBaseValue(6);
         statPanel.SetStats(Attack, Health, Speed);
         statPanel.UpdateStatValues();
         inventory.OnItemRightClickedEvent += EquipFromInventory;
-        equipmentPanel.OnItemRightClickedEvent += UnequipFromEquipPanel;
         inventory.OnItemLeftClickedEvent += ShowInSelectedItemPanel;
+        equipmentPanel.OnItemRightClickedEvent += UnequipFromEquipPanel;
         equipmentPanel.OnItemLeftClickedEvent += ShowInSelectedItemPanel;
         questList.OnItemLeftClickedEvent += ShowInSelectedQuestWindow;
     }
 
+    public void Start()
+    {
+        foreach (int item in Data.equippedItems) LoadEquip((EquipableItem)(itemList.GetItem(item)));
+    }
+
     public void ShowInSelectedQuestWindow(Quest quest)
     {
-        selectedQuestWindow.gameObject.SetActive(true);
+        Debug.Log("Here???");
+        FindObjectOfType<AudioManager>().StopEffect("SelectQuest");
+        FindObjectOfType<AudioManager>().PlayEffect("SelectQuest");
         selectedQuestWindow.QuestSelected(quest);
     }
 
     private void ShowInSelectedItemPanel(Item item)
     {
+        FindObjectOfType<AudioManager>().StopEffect("Click");
+        FindObjectOfType<AudioManager>().PlayEffect("Click");
         selectedItemPanel.item = item;
         if (item.itemType == Item.ItemType.Equipment && item is EquipableItem)
         {
@@ -70,8 +82,25 @@ public class Character : MonoBehaviour
         }
     }
 
+    public void LoadEquip(EquipableItem item)
+    {
+        EquipableItem previousItem;
+        if (equipmentPanel.AddItem(item, out previousItem))
+        {
+            if (previousItem != null)
+            {
+                inventory.AddItem(previousItem);
+                previousItem.Unequip(this);
+                statPanel.UpdateStatValues();
+            }
+            item.Equip(this);
+            statPanel.UpdateStatValues();
+        }
+    }
+
     public void Equip(EquipableItem item)
     {
+        FindObjectOfType<AudioManager>().PlayEffect("EquipItem");
         if (inventory.RemoveItem(item))
         {
             EquipableItem previousItem;

@@ -6,6 +6,8 @@ using UnityEngine.Events;
 [System.Serializable]
 public class Quest
 {
+    public int ID;
+
     public NPC npc;
 
     public bool isActive;
@@ -51,5 +53,12 @@ public class Quest
     {
         status = Status.WAITING;
         questCriteria.currentAmount = 0;
+    }
+
+    public void FinalReset()
+    {
+        status = Status.WAITING;
+        questCriteria.currentAmount = 0;
+        npc.sequenceNumber -= 2;
     }
 }

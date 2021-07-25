@@ -14,6 +14,7 @@ public class Monologue : MonoBehaviour
     [SerializeField] Text examineText;
     [SerializeField] TextMeshProUGUI enterToContinue;
     [SerializeField] bool isThoughts;
+    [SerializeField] Sprite characterHead;
 
     [SerializeField] List<string> text;
 
@@ -24,6 +25,9 @@ public class Monologue : MonoBehaviour
     bool isExamining;
     [SerializeField] bool triggerAgain;
     int currTextNumber;
+
+    [SerializeField] bool activateBoss;
+    [SerializeField] GameObject boss;
 
     // Start is called before the first frame update
     void Start()
@@ -37,6 +41,8 @@ public class Monologue : MonoBehaviour
         if (!IsExamining()) return;
         if (Input.GetKeyDown(KeyCode.Return))
         {
+            FindObjectOfType<AudioManager>().StopEffect("RetroClick");
+            FindObjectOfType<AudioManager>().PlayEffect("RetroClick");
             if (requireKey)
             {
                 if (!HasKey())
@@ -71,7 +77,8 @@ public class Monologue : MonoBehaviour
                 if (currTextNumber < text.Count)
                 {
                     StopAllCoroutines();
-                    StartCoroutine(TypeSentence(text[currTextNumber++]));
+                    StartCoroutine(TypeSentence(text[currTextNumber]));
+                    currTextNumber++;
                 }
                 else
                 {
@@ -95,11 +102,24 @@ public class Monologue : MonoBehaviour
         {
             examineWindow.SetActive(false);
             isExamining = false;
+            if (activateBoss)
+            {
+                boss.GetComponent<BossAttack>().enabled = true;
+                boss.GetComponent<BossHealth>().enabled = true;
+                boss.GetComponent<BossMovement>().enabled = true;
+            }
         }
         else
         {
+            character.GetComponent<CharacterAnimation>().ChangeAnimationState("Idle");
+            character.GetComponent<Rigidbody2D>().velocity = Vector2.zero;
+            FindObjectOfType<AudioManager>().StopEffect("Run");
+            FindObjectOfType<AudioManager>().StopEffect("DialogueMonologue");
+            FindObjectOfType<AudioManager>().PlayEffect("DialogueMonologue");
             if (!isThoughts)
                 examineImage.sprite = npc.icon;
+            else
+                examineImage.sprite = characterHead;
             // Write description text on the right side of image
             StopAllCoroutines();
             StartCoroutine(TypeSentence(text[currTextNumber++]));
@@ -107,8 +127,16 @@ public class Monologue : MonoBehaviour
             examineWindow.SetActive(true);
             // Enable the boolean
             isExamining = true;
+            if (activateBoss)
+            {
+                boss.gameObject.SetActive(true);
+                boss.GetComponent<BossAttack>().enabled = false;
+                boss.GetComponent<BossHealth>().enabled = false;
+                boss.GetComponent<BossMovement>().enabled = false;
+            }
         }
     }
+
 
     public IEnumerator TypeSentence(string sentence)
     {
@@ -117,7 +145,7 @@ public class Monologue : MonoBehaviour
         foreach (char letter in sentence.ToCharArray())
         {
             examineText.text += letter;
-            yield return new WaitForSeconds(0.015f);
+            yield return new WaitForSeconds(0.008f);
         }
         enterToContinue.gameObject.SetActive(true);
     }

@@ -98,7 +98,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ef865fd7bb9d35845b10569a586db2cb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  damage: 20
+  damage: 75
+  particle: {fileID: 7286366338101187087, guid: fcfb89306642af942bbb037f56ee1571, type: 3}
 --- !u!61 &1058296172025874781
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -144,5 +145,5 @@ Rigidbody2D:
   m_Material: {fileID: 0}
   m_Interpolate: 0
   m_SleepingMode: 1
-  m_CollisionDetection: 0
+  m_CollisionDetection: 1
   m_Constraints: 4

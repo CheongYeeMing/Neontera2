@@ -11,7 +11,7 @@ public class Projectile : MonoBehaviour
 
     public float damage;
 
-    public IEnumerator Start()
+    public virtual IEnumerator Start()
     {
         animator = GetComponent<Animator>();
         if (GetComponent<Rigidbody2D>().velocity.x < 0)
@@ -22,7 +22,7 @@ public class Projectile : MonoBehaviour
         Destroy(gameObject);
     }
 
-    private void OnTriggerEnter2D(Collider2D collision)
+    public virtual void OnTriggerEnter2D(Collider2D collision)
     {
         if (collision.gameObject.tag == "Invincible")
         {
@@ -30,7 +30,7 @@ public class Projectile : MonoBehaviour
         }
     }
 
-    public IEnumerator Collide(GameObject collidedObject)
+    public virtual IEnumerator Collide(GameObject collidedObject)
     {
         GetComponent<Rigidbody2D>().velocity = Vector2.zero;
         animator.SetTrigger("explode");

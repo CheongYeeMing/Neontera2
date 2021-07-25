@@ -29,7 +29,7 @@ public class CharacterStat
     public readonly List<StatModifier> statModifiers;
     public readonly ReadOnlyCollection<StatModifier> StatModifiers;
 
-    public void SetBaseValue(int baseValue)
+    public void SetBaseValue(float baseValue)
     {
         BaseValue = baseValue;
     }
@@ -101,7 +101,7 @@ public class CharacterStat
                 sumPercentAdd += mod.Value;
                 if (i + 1 >= statModifiers.Count || statModifiers[i+1].Type != StatModType.PercentAdd)
                 {
-                    finalValue *= 1 + sumPercentAdd;
+                    finalValue *= 1 + sumPercentAdd/100;
                     sumPercentAdd = 0;
                 }
             }

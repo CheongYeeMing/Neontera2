@@ -16,6 +16,8 @@ public class ShopManager : MonoBehaviour
     public void ShowInShopSelectedItem(Item item)
     {
         Debug.Log(item);
+        FindObjectOfType<AudioManager>().StopEffect("Click");
+        FindObjectOfType<AudioManager>().PlayEffect("Click");
         shopSelectedItemPanel.item = item;
         if (item.itemType == Item.ItemType.Equipment && item is EquipableItem)
         {
@@ -23,7 +25,7 @@ public class ShopManager : MonoBehaviour
         }
         if (item.itemType == Item.ItemType.Consumables)
         {
-            shopSelectedItemPanel.ShopSelectedConsumableItem(item);
+            shopSelectedItemPanel.ShopSelectedConsumableItem((ConsumableItem)item);
         }
     }
 }

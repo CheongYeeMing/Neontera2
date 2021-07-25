@@ -12,6 +12,9 @@ public class DeleteWindow : MonoBehaviour
     
     public void Yes()
     {
+        FindObjectOfType<AudioManager>().StopEffect("Click");
+        FindObjectOfType<AudioManager>().PlayEffect("Click");
+        FindObjectOfType<AudioManager>().StopEffect("Warning");
         if (item is EquipableItem && ((EquipableItem)item).isEquipped)
         {
             FindObjectOfType<Character>().Delete((EquipableItem)item);
@@ -27,6 +30,9 @@ public class DeleteWindow : MonoBehaviour
 
     public void No()
     {
+        FindObjectOfType<AudioManager>().StopEffect("Click");
+        FindObjectOfType<AudioManager>().PlayEffect("Click");
+        FindObjectOfType<AudioManager>().StopEffect("Warning");
         this.gameObject.SetActive(false);
     }
 }

@@ -6,8 +6,17 @@ using UnityEngine.UI;
 public class QuestManager : MonoBehaviour
 {
     [SerializeField] public GameObject AcceptedQuestWindow;
+    [SerializeField] public SelectedQuestWindow selectedQuestWindow;
+
+    public Animator animator;
 
     private bool isOpen = false;
+
+    public void Start()
+    {
+        //AcceptedQuestWindow.SetActive(true);
+        animator.SetBool("IsOpen", false);
+    }
 
     private void Update()
     {
@@ -19,9 +28,18 @@ public class QuestManager : MonoBehaviour
 
     public void ToggleQuestList()
     {
+        FindObjectOfType<AudioManager>().StopEffect("Open");
+        FindObjectOfType<AudioManager>().PlayEffect("Open");
         isOpen = !isOpen;
-        if (FindObjectOfType<SelectedQuestWindow>())
-            FindObjectOfType<SelectedQuestWindow>().gameObject.SetActive(false);
-        AcceptedQuestWindow.SetActive(isOpen);
+        //AcceptedQuestWindow.SetActive(isOpen);
+        animator.SetBool("IsOpen", isOpen);
+        selectedQuestWindow.gameObject.SetActive(false);
+        //if (FindObjectOfType<SelectedQuestWindow>())
+        //    FindObjectOfType<SelectedQuestWindow>().gameObject.SetActive(false);
+    }
+
+    public void Close()
+    {
+        ToggleQuestList();
     }
 }

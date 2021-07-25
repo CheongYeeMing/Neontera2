@@ -14,5 +14,680 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   npcName: Trina
   icon: {fileID: 21300000, guid: 962b3c417baeb6d47abdb7b39dd31a0f, type: 3}
-  Sequences: []
+  Sequences:
+  - Items: []
+    Quest:
+      ID: 0
+      npc: {fileID: 0}
+      isActive: 0
+      canRepeat: 0
+      status: 0
+      title: 
+      description: 
+      questCriteria:
+        criteriaType: 0
+        action: 
+        Target: 
+        requiredAmount: 0
+        currentAmount: 0
+      expReward: 0
+      goldReward: 0
+      itemReward: {fileID: 0}
+      questItem: {fileID: 0}
+      location: {x: 0, y: 0, z: 0}
+    hasShop: 0
+    hasQuest: 0
+    isStory: 0
+    isEnd: 0
+    repeatableQuest: 0
+    waitingQuest: 0
+    justDialogue: 1
+    hasHeal: 0
+    backToNormal: 0
+    sequenceNum: 0
+    activatePortal: 0
+    destination: 
+    triggerBoss: 0
+    teleport: 0
+    newBG: 
+    characterV2: {x: 0, y: 0}
+    removeItem: 0
+    item: {fileID: 0}
+    addItem: 0
+    giveItem: {fileID: 0}
+    dialogue:
+    - Hello, I am Sergeant Trina. Which squad are you from and what are you doing
+      here???
+    - We were facing off against fire worms but they overpowered our defenses...
+      my whole squad has already been wiped out!
+    - You are not wrong. There's nothing I can do with my rank now that I'm out here
+      with my whole squad wiped out...
+    characterDialogue:
+    - I don't have a squad. What happened here??
+    - You don't need to know.
+  - Items: []
+    Quest:
+      ID: 0
+      npc: {fileID: 0}
+      isActive: 0
+      canRepeat: 0
+      status: 0
+      title: 
+      description: 
+      questCriteria:
+        criteriaType: 0
+        action: 
+        Target: 
+        requiredAmount: 0
+        currentAmount: 0
+      expReward: 0
+      goldReward: 0
+      itemReward: {fileID: 0}
+      questItem: {fileID: 0}
+      location: {x: 0, y: 0, z: 0}
+    hasShop: 0
+    hasQuest: 0
+    isStory: 1
+    isEnd: 0
+    repeatableQuest: 0
+    waitingQuest: 0
+    justDialogue: 0
+    hasHeal: 0
+    backToNormal: 0
+    sequenceNum: 0
+    activatePortal: 0
+    destination: 
+    triggerBoss: 0
+    teleport: 0
+    newBG: 
+    characterV2: {x: 0, y: 0}
+    removeItem: 0
+    item: {fileID: 0}
+    addItem: 0
+    giveItem: {fileID: 0}
+    dialogue:
+    - 'We thought it would be a simple clearing mission since they did not request
+      for High Elite Soldiers. '
+    - 'However, the monsters were too strong for us to handle. We have failed the
+      mission. '
+    - I'm injured badly and I will not be able to get out of this trench. It's up
+      to you to complete the mission.
+    characterDialogue: []
+  - Items: []
+    Quest:
+      ID: 9
+      npc: {fileID: 11400000}
+      isActive: 1
+      canRepeat: 0
+      status: 1
+      title: Fireworm Killer
+      description: Sergeant Trina's whole squad of training soldiers have been taken
+        out. I wonder just how strong these monsters are...
+      questCriteria:
+        criteriaType: 0
+        action: FIreworms Slain
+        Target: Fire Worm
+        requiredAmount: 15
+        currentAmount: 0
+      expReward: 2000
+      goldReward: 250
+      itemReward: {fileID: 0}
+      questItem: {fileID: 0}
+      location: {x: 0, y: 0, z: 0}
+    hasShop: 0
+    hasQuest: 1
+    isStory: 0
+    isEnd: 0
+    repeatableQuest: 0
+    waitingQuest: 0
+    justDialogue: 0
+    hasHeal: 0
+    backToNormal: 0
+    sequenceNum: 0
+    activatePortal: 0
+    destination: 
+    triggerBoss: 0
+    teleport: 0
+    newBG: 
+    characterV2: {x: 0, y: 0}
+    removeItem: 0
+    item: {fileID: 0}
+    addItem: 0
+    giveItem: {fileID: 0}
+    dialogue:
+    - There are too many fireworms here. We need to take them out fast. Are you ready
+      to carry out the mission?
+    - Solid. I like that confidence! Show me what you got in you!
+    - Why did Johnson send you here...
+    - Oh, by the way this might be your first time fighting a fireworm. It is similar
+      to slimes in terms of movement, however it spits fireballs. Be careful!
+    - Why did Johnson send you here...
+    characterDialogue:
+    - Let's get it!
+    - I want to go back to Town...
+  - Items: []
+    Quest:
+      ID: 0
+      npc: {fileID: 0}
+      isActive: 0
+      canRepeat: 0
+      status: 0
+      title: 
+      description: 
+      questCriteria:
+        criteriaType: 0
+        action: 
+        Target: 
+        requiredAmount: 0
+        currentAmount: 0
+      expReward: 0
+      goldReward: 0
+      itemReward: {fileID: 0}
+      questItem: {fileID: 0}
+      location: {x: 0, y: 0, z: 0}
+    hasShop: 0
+    hasQuest: 0
+    isStory: 0
+    isEnd: 0
+    repeatableQuest: 0
+    waitingQuest: 1
+    justDialogue: 0
+    hasHeal: 0
+    backToNormal: 0
+    sequenceNum: 0
+    activatePortal: 0
+    destination: 
+    triggerBoss: 0
+    teleport: 0
+    newBG: 
+    characterV2: {x: 0, y: 0}
+    removeItem: 0
+    item: {fileID: 0}
+    addItem: 0
+    giveItem: {fileID: 0}
+    dialogue:
+    - If I remember correctly, the fireballs that hit the ground seemed to bounce
+      right back up... weird.
+    characterDialogue: []
+  - Items: []
+    Quest:
+      ID: 0
+      npc: {fileID: 0}
+      isActive: 0
+      canRepeat: 0
+      status: 0
+      title: 
+      description: 
+      questCriteria:
+        criteriaType: 0
+        action: 
+        Target: 
+        requiredAmount: 0
+        currentAmount: 0
+      expReward: 0
+      goldReward: 0
+      itemReward: {fileID: 0}
+      questItem: {fileID: 0}
+      location: {x: 0, y: 0, z: 0}
+    hasShop: 0
+    hasQuest: 0
+    isStory: 1
+    isEnd: 0
+    repeatableQuest: 0
+    waitingQuest: 0
+    justDialogue: 0
+    hasHeal: 0
+    backToNormal: 0
+    sequenceNum: 0
+    activatePortal: 0
+    destination: 
+    triggerBoss: 0
+    teleport: 0
+    newBG: 
+    characterV2: {x: 0, y: 0}
+    removeItem: 0
+    item: {fileID: 0}
+    addItem: 0
+    giveItem: {fileID: 0}
+    dialogue:
+    - Wow that was impressive young one. Some of my training soldiers couldn't even
+      take out a single Fire Worm before going down.
+    - 'But don''t get too ahead of yourself yet. I need you to go deeper this time.
+      All the way to the east side of the cave. '
+    - There is a trench, as deep as the one you're in right now. We were fleeing
+      from that trench when I dropped my communication device.
+    characterDialogue:
+    - 
+  - Items: []
+    Quest:
+      ID: 10
+      npc: {fileID: 11400000}
+      isActive: 0
+      canRepeat: 0
+      status: 1
+      title: Trina's Device
+      description: Trina dropped her communication device at the far end of this
+        cave in a trench. Surely there are going to be a ton of fireworms on the
+        way there... Better be fast!
+      questCriteria:
+        criteriaType: 1
+        action: Device Collected
+        Target: Trina's Device
+        requiredAmount: 1
+        currentAmount: 0
+      expReward: 1500
+      goldReward: 200
+      itemReward: {fileID: 0}
+      questItem: {fileID: 8118475526843008118, guid: bfd188af789a60d4cb41433fe1bd0ddd, type: 3}
+      location: {x: 738.73, y: -5.57, z: 0}
+    hasShop: 0
+    hasQuest: 1
+    isStory: 0
+    isEnd: 0
+    repeatableQuest: 0
+    waitingQuest: 0
+    justDialogue: 0
+    hasHeal: 0
+    backToNormal: 0
+    sequenceNum: 0
+    activatePortal: 0
+    destination: 
+    triggerBoss: 0
+    teleport: 0
+    newBG: 
+    characterV2: {x: 0, y: 0}
+    removeItem: 0
+    item: {fileID: 0}
+    addItem: 0
+    giveItem: {fileID: 0}
+    dialogue:
+    - Head to the east side of this cave and retrieve my communication device. You
+      got the energy to go now?
+    - Superb. You are definitely going to make it through the training phase... if
+      only you were in my squad ..
+    - I guess you should take a rest first then...
+    - Come back once you find the device.
+    - I guess you should take a rest first then...
+    characterDialogue:
+    - Ofcourse, there's no time to rest now!
+    - I'm tired after fighting 15 fireworms...
+  - Items: []
+    Quest:
+      ID: 0
+      npc: {fileID: 0}
+      isActive: 0
+      canRepeat: 0
+      status: 0
+      title: 
+      description: 
+      questCriteria:
+        criteriaType: 0
+        action: 
+        Target: 
+        requiredAmount: 0
+        currentAmount: 0
+      expReward: 0
+      goldReward: 0
+      itemReward: {fileID: 0}
+      questItem: {fileID: 0}
+      location: {x: 0, y: 0, z: 0}
+    hasShop: 0
+    hasQuest: 0
+    isStory: 0
+    isEnd: 0
+    repeatableQuest: 0
+    waitingQuest: 1
+    justDialogue: 0
+    hasHeal: 0
+    backToNormal: 0
+    sequenceNum: 0
+    activatePortal: 0
+    destination: 
+    triggerBoss: 0
+    teleport: 0
+    newBG: 
+    characterV2: {x: 0, y: 0}
+    removeItem: 0
+    item: {fileID: 0}
+    addItem: 0
+    giveItem: {fileID: 0}
+    dialogue:
+    - If only I hadn't dropped my device... I could have called for more backup ...
+    characterDialogue: []
+  - Items: []
+    Quest:
+      ID: 0
+      npc: {fileID: 0}
+      isActive: 0
+      canRepeat: 0
+      status: 0
+      title: 
+      description: 
+      questCriteria:
+        criteriaType: 0
+        action: 
+        Target: 
+        requiredAmount: 0
+        currentAmount: 0
+      expReward: 0
+      goldReward: 0
+      itemReward: {fileID: 0}
+      questItem: {fileID: 0}
+      location: {x: 0, y: 0, z: 0}
+    hasShop: 0
+    hasQuest: 0
+    isStory: 1
+    isEnd: 0
+    repeatableQuest: 0
+    waitingQuest: 0
+    justDialogue: 0
+    hasHeal: 0
+    backToNormal: 0
+    sequenceNum: 0
+    activatePortal: 0
+    destination: 
+    triggerBoss: 1
+    teleport: 0
+    newBG: 
+    characterV2: {x: 0, y: 0}
+    removeItem: 0
+    item: {fileID: 0}
+    addItem: 0
+    giveItem: {fileID: 0}
+    dialogue:
+    - WOW looks like you managed to retrieve it with ease huh... you are definitely
+      one of the most talented trainee soldiers I've ever seen.
+    - With this I can now call the HQ for backup...
+    - I'm truly intrigued by your potential. What if you could take out that beast
+      all by yourself... hmmm
+    characterDialogue: []
+  - Items: []
+    Quest:
+      ID: 11
+      npc: {fileID: 11400000}
+      isActive: 1
+      canRepeat: 0
+      status: 0
+      title: Deep Dweller
+      description: There seems to be some powerful monster beneath the cracks on
+        the east side of this cave. Who knows what it might be able to do?
+      questCriteria:
+        criteriaType: 0
+        action: Mecha Golem Killed
+        Target: Mecha Golem
+        requiredAmount: 1
+        currentAmount: 1
+      expReward: 3000
+      goldReward: 500
+      itemReward: {fileID: 0}
+      questItem: {fileID: 0}
+      location: {x: 0, y: 0, z: 0}
+    hasShop: 0
+    hasQuest: 1
+    isStory: 0
+    isEnd: 0
+    repeatableQuest: 0
+    waitingQuest: 0
+    justDialogue: 0
+    hasHeal: 0
+    backToNormal: 0
+    sequenceNum: 0
+    activatePortal: 0
+    destination: 
+    triggerBoss: 0
+    teleport: 0
+    newBG: 
+    characterV2: {x: 0, y: 0}
+    removeItem: 0
+    item: {fileID: 0}
+    addItem: 0
+    giveItem: {fileID: 0}
+    dialogue:
+    - This is a good chance for you to prove yourself as a soldier. I want you to
+      take out that monster deep in the cave. Are you up for it?
+    - Amazing. I shall await your return while HQ is on their way !
+    - Well, I thought you had more in you...
+    - Do be careful. I have absolutely no intel on what might be below!
+    - Well, I thought you had more in you...
+    characterDialogue:
+    - I'm ready to give it a shot!!!
+    - I think we should wait for backup.
+  - Items: []
+    Quest:
+      ID: 0
+      npc: {fileID: 0}
+      isActive: 0
+      canRepeat: 0
+      status: 0
+      title: 
+      description: 
+      questCriteria:
+        criteriaType: 0
+        action: 
+        Target: 
+        requiredAmount: 0
+        currentAmount: 0
+      expReward: 0
+      goldReward: 0
+      itemReward: {fileID: 0}
+      questItem: {fileID: 0}
+      location: {x: 0, y: 0, z: 0}
+    hasShop: 0
+    hasQuest: 0
+    isStory: 0
+    isEnd: 0
+    repeatableQuest: 0
+    waitingQuest: 1
+    justDialogue: 0
+    hasHeal: 0
+    backToNormal: 0
+    sequenceNum: 0
+    activatePortal: 0
+    destination: 
+    triggerBoss: 0
+    teleport: 0
+    newBG: 
+    characterV2: {x: 0, y: 0}
+    removeItem: 0
+    item: {fileID: 0}
+    addItem: 0
+    giveItem: {fileID: 0}
+    dialogue:
+    - Do prepare well before you go!
+    characterDialogue: []
+  - Items: []
+    Quest:
+      ID: 0
+      npc: {fileID: 0}
+      isActive: 0
+      canRepeat: 0
+      status: 0
+      title: 
+      description: 
+      questCriteria:
+        criteriaType: 0
+        action: 
+        Target: 
+        requiredAmount: 0
+        currentAmount: 0
+      expReward: 0
+      goldReward: 0
+      itemReward: {fileID: 0}
+      questItem: {fileID: 0}
+      location: {x: 0, y: 0, z: 0}
+    hasShop: 0
+    hasQuest: 0
+    isStory: 0
+    isEnd: 0
+    repeatableQuest: 0
+    waitingQuest: 0
+    justDialogue: 1
+    hasHeal: 0
+    backToNormal: 0
+    sequenceNum: 0
+    activatePortal: 0
+    destination: 
+    triggerBoss: 0
+    teleport: 0
+    newBG: 
+    characterV2: {x: 0, y: 0}
+    removeItem: 0
+    item: {fileID: 0}
+    addItem: 0
+    giveItem: {fileID: 0}
+    dialogue:
+    - Excellent! Excellent. I am beyond impressed at what you have accomplished here.
+    - Wow... young talent nowadays is hard to come by. I dare say you have the potential
+      to be one of the greatest soldiers Xenon has ever seen.
+    - But except you didn't. Have more confidence in what you can do!! I dare say
+      you have the potential to be one of the greatest soldiers Xenon has ever seen.
+    characterDialogue:
+    - No sweat, it wasn't that tough anyways.
+    - I could've lost my life...
+  - Items: []
+    Quest:
+      ID: 0
+      npc: {fileID: 0}
+      isActive: 0
+      canRepeat: 0
+      status: 0
+      title: 
+      description: 
+      questCriteria:
+        criteriaType: 0
+        action: 
+        Target: 
+        requiredAmount: 0
+        currentAmount: 0
+      expReward: 0
+      goldReward: 0
+      itemReward: {fileID: 0}
+      questItem: {fileID: 0}
+      location: {x: 0, y: 0, z: 0}
+    hasShop: 0
+    hasQuest: 0
+    isStory: 1
+    isEnd: 0
+    repeatableQuest: 0
+    waitingQuest: 0
+    justDialogue: 0
+    hasHeal: 0
+    backToNormal: 0
+    sequenceNum: 0
+    activatePortal: 0
+    destination: 
+    triggerBoss: 0
+    teleport: 0
+    newBG: 
+    characterV2: {x: 0, y: 0}
+    removeItem: 0
+    item: {fileID: 0}
+    addItem: 0
+    giveItem: {fileID: 0}
+    dialogue:
+    - Your job here is done. I thank you once again, on behalf of HQ for helping
+      me and my squad out. We are indebted to you!
+    - 'Unfortunately, HQ has decided to post me here permanently to take out the
+      never ending horde of fireworms. Guess I''ll be here for awhile haha. '
+    - Hope you can drop by to help me out some time!! You'll be rewarded accordingly
+      !!
+    - Anyways, you should probably head back and report to Johnson. Do send my regards!
+    characterDialogue: []
+  - Items: []
+    Quest:
+      ID: 9
+      npc: {fileID: 11400000}
+      isActive: 0
+      canRepeat: 1
+      status: 2
+      title: Fireworm Killer
+      description: Sergeant Trina's whole squad of training soldiers have been taken
+        out. I wonder just how strong these monsters are...
+      questCriteria:
+        criteriaType: 0
+        action: FIreworm Exterminated
+        Target: Fire Worm
+        requiredAmount: 15
+        currentAmount: 0
+      expReward: 2000
+      goldReward: 250
+      itemReward: {fileID: 0}
+      questItem: {fileID: 0}
+      location: {x: 0, y: 0, z: 0}
+    hasShop: 0
+    hasQuest: 0
+    isStory: 0
+    isEnd: 1
+    repeatableQuest: 1
+    waitingQuest: 0
+    justDialogue: 0
+    hasHeal: 0
+    backToNormal: 0
+    sequenceNum: 0
+    activatePortal: 0
+    destination: 
+    triggerBoss: 0
+    teleport: 0
+    newBG: 
+    characterV2: {x: 0, y: 0}
+    removeItem: 0
+    item: {fileID: 0}
+    addItem: 0
+    giveItem: {fileID: 0}
+    dialogue:
+    - Looks like you're back to take out more fireworms for me huh ;)  Are you ready
+      to carry out the mission?
+    - Finally someone to help me with the Fire Worms!!!
+    - Oh haha, it's nice to see you here! But there's really nothing much here in
+      this cave now that the golem is gone ~
+    - You already know what Fire Worms can do. But do be careful, I do not wish to
+      see casualties today!
+    - Oh haha, its nice to see you here! But there's really nothing much here in
+      this cave now that the golem is gone ~
+    characterDialogue:
+    - Let's get it!
+    - I just wanted to say hi !!
+  - Items: []
+    Quest:
+      ID: 0
+      npc: {fileID: 0}
+      isActive: 0
+      canRepeat: 0
+      status: 0
+      title: 
+      description: 
+      questCriteria:
+        criteriaType: 0
+        action: 
+        Target: 
+        requiredAmount: 0
+        currentAmount: 0
+      expReward: 0
+      goldReward: 0
+      itemReward: {fileID: 0}
+      questItem: {fileID: 0}
+      location: {x: 0, y: 0, z: 0}
+    hasShop: 0
+    hasQuest: 0
+    isStory: 0
+    isEnd: 0
+    repeatableQuest: 0
+    waitingQuest: 1
+    justDialogue: 0
+    hasHeal: 0
+    backToNormal: 0
+    sequenceNum: 0
+    activatePortal: 0
+    destination: 
+    triggerBoss: 0
+    teleport: 0
+    newBG: 
+    characterV2: {x: 0, y: 0}
+    removeItem: 0
+    item: {fileID: 0}
+    addItem: 0
+    giveItem: {fileID: 0}
+    dialogue:
+    - These fireworms are so annoying... why did HQ post me here... *cries*
+    characterDialogue: []
   sequenceNumber: 0

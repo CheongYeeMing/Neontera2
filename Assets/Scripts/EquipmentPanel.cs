@@ -6,6 +6,7 @@ public class EquipmentPanel : MonoBehaviour
 {
     [SerializeField] Transform equipmentSlotsParent;
     [SerializeField] EquipmentSlot[] equipmentSlots;
+    [SerializeField] List<EquipableItem> equippedItems;
 
     public event Action<Item> OnItemRightClickedEvent;
     public event Action<Item> OnItemLeftClickedEvent;
@@ -22,9 +23,37 @@ public class EquipmentPanel : MonoBehaviour
 
     private void OnValidate()
     {
-        equipmentSlots = equipmentSlotsParent.GetComponentsInChildren<EquipmentSlot>();
-        Data.equipmentSlots = equipmentSlots;
+        //equipmentSlots = Data.equipmentSlots;
+        //equippedItems = Data.equippedItems;
+        //Debug.Log(Data.equippedItems.Count);
+        if (equipmentSlotsParent != null)
+        {
+            equipmentSlots = equipmentSlotsParent.GetComponentsInChildren<EquipmentSlot>();
+        }
+        //RefreshUI();
     }
+
+    //public void RefreshUI()
+    //{
+    //    foreach (EquipableItem item in equippedItems)
+    //    {
+    //        Debug.Log(item);
+    //        for (int i = 0; i < equipmentSlots.Length; i++)
+    //        {
+    //            if (equipmentSlots[i].EquipmentType == item.EquipmentType)
+    //            {
+    //                Debug.Log("Added");
+    //                equipmentSlots[i].Item = item;
+    //            }
+    //            else
+    //            {
+    //                Debug.Log("nothing");
+    //                equipmentSlots[i].Item = null;
+    //            }
+    //        }
+    //    }
+    //}
+
 
     public bool AddItem(EquipableItem item, out EquipableItem previousItem)
     {
@@ -32,7 +61,9 @@ public class EquipmentPanel : MonoBehaviour
         {
             if (equipmentSlots[i].EquipmentType == item.EquipmentType)
             {
+                equippedItems.Add(item);
                 previousItem = (EquipableItem)equipmentSlots[i].Item;
+                if (previousItem != null) equippedItems.Remove(previousItem);
                 equipmentSlots[i].Item = item;
                 return true;
             }
@@ -47,10 +78,21 @@ public class EquipmentPanel : MonoBehaviour
         {
             if (equipmentSlots[i].Item == item)
             {
+                equippedItems.Remove(item);
                 equipmentSlots[i].Item = null;
                 return true;
             }
         }
         return false;
+    }
+
+    public EquipmentSlot[] GetEquipmentSlots()
+    {
+        return equipmentSlots;
+    }
+
+    public List<EquipableItem> GetEquippedItems()
+    {
+        return equippedItems;
     }
 }

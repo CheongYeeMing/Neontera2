@@ -19,13 +19,30 @@ public class NPC : ScriptableObject
         public bool hasShop;
         public bool hasQuest;
         public bool isStory;
+        public bool isEnd;
+        public bool repeatableQuest;
         public bool waitingQuest;
         public bool justDialogue;
-        public bool hasTeleportNPC;
-        public Vector3 npcV3;
-        public bool hasTeleportCharacter;
-        public Vector3 characterV3;
-        
+        public bool hasHeal;
+
+        public bool backToNormal;
+        public int sequenceNum;
+
+        public bool activatePortal;
+        public string destination;
+
+        public bool triggerBoss;
+
+        public bool teleport;
+        public string newBG;
+        public Vector2 characterV2;
+
+        public bool removeItem;
+        public Item item;
+
+        public bool addItem;
+        public Item giveItem;
+
         [TextArea(3, 15)]
         public string[] dialogue;
         [TextArea(3, 15)]
