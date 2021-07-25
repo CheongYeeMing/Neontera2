@@ -150,7 +150,7 @@ MonoBehaviour:
     giveItem: {fileID: 0}
     dialogue:
     - Would you mind helping me to retrieve back that artifact? If I remember correctly,
-      it was a red slime that stole by bag...
+      it was a red slime that had stolen my bag...
     - 'Really?? Thank you so much! '
     - 'What am I going to do ... '
     - Do let me know when you find it... I will be waiting for your return!

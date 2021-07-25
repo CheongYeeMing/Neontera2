@@ -116,7 +116,7 @@ MonoBehaviour:
     addItem: 0
     giveItem: {fileID: 0}
     dialogue:
-    - Alright. Now back to business, you ready for the next mission?
+    - Alright. Now back to business, are you ready for the next mission?
     - That's what I'd like to hear!
     - Time waits for no one! We have to proceed anyways...
     characterDialogue:
@@ -552,7 +552,7 @@ MonoBehaviour:
     giveItem: {fileID: 0}
     dialogue:
     - The portal to the cave is behind the weapons shop. Head towards the west of
-      the town to find the portal leaving to the cave. Are you ready for your next
+      the town to find the portal leading to the cave. Are you ready for your next
       mission?
     - 'Very well. '
     - Hurry up then, we don't have time to spare.
@@ -650,7 +650,7 @@ MonoBehaviour:
     - 'Good to see you back in one piece. I''ve heard nothing but praises from Sergeant
       Trina...  didn''t expect you to already be able to handle monsters of that
       calibre. '
-    - Anyways, have you met up with Dr Aaron? He filled a report for a missing item.
+    - Anyways, have you met up with Dr Aaron? He filed a report for a missing item.
       I was thinking of assigning this task to you.
     characterDialogue: []
   - Items: []
@@ -695,7 +695,7 @@ MonoBehaviour:
     addItem: 0
     giveItem: {fileID: 0}
     dialogue:
-    - Go up to the lab and find Dr Aaron. You ready?
+    - Go up to the lab and find Dr Aaron. Are you ready?
     - 'Good to hear! '
     - I guess Dr Aaron would have to wait then...
     - I expect you to return soon.
@@ -792,12 +792,12 @@ MonoBehaviour:
     - Ah, so you know the details already. Seems like the military has stolen the
       artifact. From the coordinates given by Dr Aaron, its a base station headed
       by Supreme Leader
-    - HQ just informed me that he has gone rogue and joined with the Resistance.
-      It seems like you would have to enter the base and fight fellow Xenonians.
+    - HQ just informed me that he has gone rogue and joined the Resistance. It seems
+      like you would have to enter the base and fight fellow Xenonians.
     - 'What is Resistance? They are a group of Xenonians that think they are better
       than the government. '
-    - They have carried out multiple attacks on Xenonians and are looking to takeover
-      the government, ruling under their own ideology.
+    - They have carried out multiple attacks on Xenonians and are looking to take
+      over the government, ruling under their own ideology.
     - Recently, an attack was launched against us in sector CS2103. I did not expect
       the Supreme Leader to also be a part of them.
     characterDialogue: []
@@ -1040,7 +1040,7 @@ MonoBehaviour:
     giveItem: {fileID: 0}
     dialogue:
     - Hey,you're back. I would like to thank you on behalf of the people of the Town
-      and Xenonia. You are truly our hero!
+      and Xenon. You are truly our hero!
     - I will take the red artifact from you and bring it back to Dr Aaron.
     characterDialogue: []
   - Items: []

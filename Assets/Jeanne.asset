@@ -17,6 +17,7 @@ MonoBehaviour:
   Sequences:
   - Items: []
     Quest:
+      ID: 0
       npc: {fileID: 0}
       isActive: 0
       canRepeat: 0
@@ -37,16 +38,26 @@ MonoBehaviour:
     hasShop: 0
     hasQuest: 0
     isStory: 0
+    isEnd: 0
+    repeatableQuest: 0
     waitingQuest: 0
     justDialogue: 0
-    hasTeleportNPC: 0
-    npcV3: {x: 0, y: 0, z: 0}
-    hasTeleportCharacter: 0
-    characterV3: {x: 0, y: 0, z: 0}
     hasHeal: 1
+    backToNormal: 0
+    sequenceNum: 0
+    activatePortal: 0
+    destination: 
+    triggerBoss: 0
+    teleport: 0
+    newBG: 
+    characterV2: {x: 0, y: 0}
+    removeItem: 0
+    item: {fileID: 0}
+    addItem: 0
+    giveItem: {fileID: 0}
     dialogue:
     - Hello, welcome to the Inn. How may I help you? Need a room for 1 night?
-    - Dont worry, I will make sure you get back to full health in no time!
+    - Don't worry, I will make sure you get back to full health in no time!
     - Well then, have a nice day :)
     characterDialogue:
     - Yes, I need to rest!

@@ -56,7 +56,7 @@ MonoBehaviour:
     addItem: 0
     giveItem: {fileID: 0}
     dialogue:
-    - Hello, I am Seargeant Trina. Which squad are you from and what are you doing
+    - Hello, I am Sergeant Trina. Which squad are you from and what are you doing
       here???
     - We were facing off against fire worms but they overpowered our defenses...
       my whole squad has already been wiped out!
@@ -106,7 +106,7 @@ MonoBehaviour:
     addItem: 0
     giveItem: {fileID: 0}
     dialogue:
-    - 'We thought it will be a simple clearing mission since they did not request
+    - 'We thought it would be a simple clearing mission since they did not request
       for High Elite Soldiers. '
     - 'However, the monsters were too strong for us to handle. We have failed the
       mission. '
@@ -396,7 +396,7 @@ MonoBehaviour:
     giveItem: {fileID: 0}
     dialogue:
     - WOW looks like you managed to retrieve it with ease huh... you are definitely
-      one of the most talented trainee soldier I've ever seen.
+      one of the most talented trainee soldiers I've ever seen.
     - With this I can now call the HQ for backup...
     - I'm truly intrigued by your potential. What if you could take out that beast
       all by yourself... hmmm
@@ -444,7 +444,7 @@ MonoBehaviour:
     giveItem: {fileID: 0}
     dialogue:
     - This is a good chance for you to prove yourself as a soldier. I want you to
-      take out that monster deep in the cave. You up for it?
+      take out that monster deep in the cave. Are you up for it?
     - Amazing. I shall await your return while HQ is on their way !
     - Well, I thought you had more in you...
     - Do be careful. I have absolutely no intel on what might be below!
@@ -537,7 +537,7 @@ MonoBehaviour:
     giveItem: {fileID: 0}
     dialogue:
     - Excellent! Excellent. I am beyond impressed at what you have accomplished here.
-    - Wow... young talent nowadays are hard to come by. I dare say you have the potential
+    - Wow... young talent nowadays is hard to come by. I dare say you have the potential
       to be one of the greatest soldiers Xenon has ever seen.
     - But except you didn't. Have more confidence in what you can do!! I dare say
       you have the potential to be one of the greatest soldiers Xenon has ever seen.
@@ -587,7 +587,7 @@ MonoBehaviour:
     dialogue:
     - Your job here is done. I thank you once again, on behalf of HQ for helping
       me and my squad out. We are indebted to you!
-    - 'Unfortunately, HQ has decided to post me here permanently to take our the
+    - 'Unfortunately, HQ has decided to post me here permanently to take out the
       never ending horde of fireworms. Guess I''ll be here for awhile haha. '
     - Hope you can drop by to help me out some time!! You'll be rewarded accordingly
       !!
@@ -638,7 +638,7 @@ MonoBehaviour:
     - Looks like you're back to take out more fireworms for me huh ;)  Are you ready
       to carry out the mission?
     - Finally someone to help me with the Fire Worms!!!
-    - Oh haha, its nice to see you here! But there's really nothing much here in
+    - Oh haha, it's nice to see you here! But there's really nothing much here in
       this cave now that the golem is gone ~
     - You already know what Fire Worms can do. But do be careful, I do not wish to
       see casualties today!
@@ -646,7 +646,7 @@ MonoBehaviour:
       this cave now that the golem is gone ~
     characterDialogue:
     - Let's get it!
-    - I just wanted to come say hi !!
+    - I just wanted to say hi !!
   - Items: []
     Quest:
       ID: 0

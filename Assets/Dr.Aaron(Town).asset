@@ -129,9 +129,9 @@ MonoBehaviour:
     addItem: 0
     giveItem: {fileID: 0}
     dialogue:
-    - Welcome to the Well-Ordered Lab. Are you looking for any consmables or potions?
+    - Welcome to the Well-Ordered Lab. Are you looking for any consumables or potions?
     - C'mon in, I'll show you my latest concoctions >:)
-    - Alrighty, let me know if you need anytning~
+    - Alrighty, let me know if you need anything~
     - Have a nice day !!
     characterDialogue:
     - Yes, please show me your creation!
@@ -178,7 +178,7 @@ MonoBehaviour:
     addItem: 0
     giveItem: {fileID: 0}
     dialogue:
-    - Hey, you here to look for supplements for your next mission?
+    - Hey, are you here to look for supplements for your next mission?
     - No? Oh what's that red thing you got there?? Looks like some ancient artifact
       I've yet to encounter in my years of study!!
     - No? Oh what's that red thing you got there?? Looks like some ancient artifact
@@ -228,7 +228,7 @@ MonoBehaviour:
     addItem: 0
     giveItem: {fileID: 0}
     dialogue:
-    - On closer inspection, this seems like an artifact that has the effect to affect
+    - On closer inspection, this seems like an artifact that has the effect of affecting
       one's emotions. I think this might have triggered the animals in the forest...
       which resulted in increased aggression.
     - I'd very much like to do more research on that artifact... but the army is
@@ -278,7 +278,7 @@ MonoBehaviour:
     giveItem: {fileID: 0}
     dialogue:
     - Oh thank god you're here!
-    - I lost the Red Artifact... the one where you retrieved from the forest...
+    - I lost the Red Artifact... the one you retrieved from the forest...
     - 'Thank you for coming up here! The artifact has been stolen by someone... '
     characterDialogue:
     - What happened?? I heard you lost something...

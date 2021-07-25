@@ -108,8 +108,8 @@ MonoBehaviour:
       ago or so. Things were as per normal at first.
     - But I was suddenly attacked by a group of slimes and one of them managed to
       steal my bag which contained an important artifact...
-    - The artifact is crucial for advancements of portal system. Without the artifact,
-      I will not be able to complete the task set by the army.
+    - The artifact is crucial for advancements of the portal system. Without the
+      artifact, I will not be able to complete the task set by the army.
     characterDialogue: []
   - Items: []
     Quest:
@@ -154,7 +154,7 @@ MonoBehaviour:
     giveItem: {fileID: 0}
     dialogue:
     - Would you mind helping me to retrieve back that artifact? If I remember correctly,
-      it was a red slime that stole by bag...
+      it was a red slime that had stolen my bag...
     - 'Really?? Thank you so much! '
     - 'What am I going to do ... '
     - Do let me know when you find it... I will be waiting for your return!
