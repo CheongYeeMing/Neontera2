@@ -26,8 +26,8 @@ public class Character : MonoBehaviour
         statPanel.SetStats(Attack, Health, Speed);
         statPanel.UpdateStatValues();
         inventory.OnItemRightClickedEvent += EquipFromInventory;
-        equipmentPanel.OnItemRightClickedEvent += UnequipFromEquipPanel;
         inventory.OnItemLeftClickedEvent += ShowInSelectedItemPanel;
+        equipmentPanel.OnItemRightClickedEvent += UnequipFromEquipPanel;
         equipmentPanel.OnItemLeftClickedEvent += ShowInSelectedItemPanel;
         questList.OnItemLeftClickedEvent += ShowInSelectedQuestWindow;
     }
