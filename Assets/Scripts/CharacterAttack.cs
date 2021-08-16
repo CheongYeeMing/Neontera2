@@ -174,7 +174,7 @@ public class CharacterAttack : MonoBehaviour
     public void IncreaseAttack(int level)
     {
         baseAttack += (baseAttack * 0.015f) * ((100 - level) * 0.1f);
-        GetComponent<Character>().Attack.SetBaseValue(baseAttack);
+        GetComponent<Character>().Attack.SetBaseValue((int)baseAttack);
         attack = GetComponent<Character>().GetAttack().CalculateFinalValue();
         GetComponent<Character>().statPanel.UpdateStatValues();
     }
