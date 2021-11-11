@@ -1,4 +1,3 @@
-using UnityEngine.Audio;
 using System.Collections;
 using UnityEngine;
 using UnityEngine.UI;
@@ -41,11 +40,6 @@ public class AudioManager : MonoBehaviour
 
             s.source.volume = slider.value;
         }
-    }
-
-    private void Start()
-    {
-        
     }
 
     // Update is called once per frame
