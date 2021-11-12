@@ -6,6 +6,14 @@
 Assets/AssetStoreTools*
 *.log
 *.exe0.log
+*.exe1.log
+*.exe2.log
+*.exe3.log
+*.exe4.log
+*.exe5.log
+*.exe6.log
+*.exe7.log
+
 # Visual Studio cache directory
 .vs/
 
