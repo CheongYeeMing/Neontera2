@@ -20,13 +20,13 @@ public class AudioManager : MonoBehaviour
     // Start is called before the first frame update
     void Awake()
     {
-        RetrieveSavedVolumeData();
+        GetSavedVolumeData();
         SetSavedVolumeData();
         Initialise(MusicVolumeSlider, musicList);
         Initialise(EffectsVolumeSlider, effectsList);
     }
 
-    private void RetrieveSavedVolumeData()
+    private void GetSavedVolumeData()
     {
         MusicVolumeSlider.value = Data.musicVolume;
         EffectsVolumeSlider.value = Data.effectsVolume;
