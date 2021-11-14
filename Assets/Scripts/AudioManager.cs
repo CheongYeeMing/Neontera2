@@ -102,19 +102,23 @@ public class AudioManager : MonoBehaviour
 
     public IEnumerator UpdateBGMPortal(string prevBG, string currBG)
     {
+        // Searching for previous and current Music
         Sound prev = Array.Find(musicList, sound => sound.name == prevBG);
         Sound curr = Array.Find(musicList, sound => sound.name == currBG);
 
+        // Gradually reduce volume of previous Music
         for (int i = (int)(prev.source.volume * 100); i > 0; i--)
         {
             prev.source.volume -= 0.01f;
             yield return null;
         }
 
+        // Swapping music
         prev.source.Stop();
         curr.source.volume = 0;
         curr.source.Play();
 
+        // Gradually increase volume of current Music
         for (int i = 0; i < MusicVolumeSlider.value; i++)
         {
             curr.source.volume += 0.01f;
