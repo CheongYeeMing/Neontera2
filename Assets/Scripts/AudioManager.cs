@@ -5,6 +5,8 @@ using System;
 
 public class AudioManager : MonoBehaviour
 {
+    private const float SOUND_PITCH = 1;
+
     [SerializeField] Slider MusicVolumeSlider;
     [SerializeField] Slider EffectsVolumeSlider;
 
@@ -18,14 +20,22 @@ public class AudioManager : MonoBehaviour
     // Start is called before the first frame update
     void Awake()
     {
-        MusicVolumeSlider.value = Data.musicVolume;
-        EffectsVolumeSlider.value = Data.effectsVolume;
-
-        previousMusicVolume = MusicVolumeSlider.value;
-        previousEffectsVolume = EffectsVolumeSlider.value;
-
+        GetSavedVolumeData();
+        SetSavedVolumeData();
         Initialise(MusicVolumeSlider, musicList);
         Initialise(EffectsVolumeSlider, effectsList);
+    }
+
+    private void GetSavedVolumeData()
+    {
+        MusicVolumeSlider.value = Data.musicVolume;
+        EffectsVolumeSlider.value = Data.effectsVolume;
+    }
+
+    private void SetSavedVolumeData()
+    {
+        previousMusicVolume = MusicVolumeSlider.value;
+        previousEffectsVolume = EffectsVolumeSlider.value;
     }
 
     private void Initialise(Slider slider, Sound[] sounds)
@@ -35,7 +45,7 @@ public class AudioManager : MonoBehaviour
             s.source = gameObject.AddComponent<AudioSource>();
             s.source.clip = s.clip;
 
-            s.source.pitch = 1;
+            s.source.pitch = SOUND_PITCH;
             s.source.loop = s.loop;
 
             s.source.volume = slider.value;
@@ -45,14 +55,24 @@ public class AudioManager : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (MusicVolumeSlider.value != previousMusicVolume)
+        if (MusicVolumeChanged())
         {
             UpdateMusicVolume();
         }
-        if (EffectsVolumeSlider.value != previousEffectsVolume)
+        if (EffectsVolumeChanged())
         {
             UpdateEffectsVolume();
         }
+    }
+
+    private bool MusicVolumeChanged()
+    {
+        return MusicVolumeSlider.value != previousMusicVolume;
+    }
+
+    private bool EffectsVolumeChanged()
+    {
+        return EffectsVolumeSlider.value != previousEffectsVolume;
     }
 
     private void UpdateMusicVolume()
@@ -82,19 +102,23 @@ public class AudioManager : MonoBehaviour
 
     public IEnumerator UpdateBGMPortal(string prevBG, string currBG)
     {
+        // Searching for previous and current Music
         Sound prev = Array.Find(musicList, sound => sound.name == prevBG);
         Sound curr = Array.Find(musicList, sound => sound.name == currBG);
 
+        // Gradually reduce volume of previous Music
         for (int i = (int)(prev.source.volume * 100); i > 0; i--)
         {
             prev.source.volume -= 0.01f;
             yield return null;
         }
 
+        // Swapping music
         prev.source.Stop();
         curr.source.volume = 0;
         curr.source.Play();
 
+        // Gradually increase volume of current Music
         for (int i = 0; i < MusicVolumeSlider.value; i++)
         {
             curr.source.volume += 0.01f;
