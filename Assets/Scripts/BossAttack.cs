@@ -4,6 +4,9 @@ using UnityEngine;
 
 public class BossAttack : MonoBehaviour
 {
+    // Boss Animation States
+    protected const string BOSS_ATTACK = "Attack";
+
     [SerializeField] public float attackDelay;
     [SerializeField] public float KnockbackX;
     [SerializeField] public float KnockbackY;
@@ -13,29 +16,36 @@ public class BossAttack : MonoBehaviour
 
     protected bool isAttacking;
 
-    // Boss Animation States
-    protected const string BOSS_ATTACK = "Attack";
-
     // Boss Auto Attack
     public virtual void OnCollisionEnter2D(Collision2D collision)
     {
         if (collision.gameObject.CompareTag("Character"))
         {
-            if (isAttacking == false)
+            if (!IsAttacking())
             {
-                Debug.Log("attack animation called");
-                isAttacking = true;
-                gameObject.GetComponent<BossAnimation>().ChangeAnimationState(BOSS_ATTACK);
+                Attack();
             }
-            collision.gameObject.GetComponent<CharacterHealth>().SetAttackedBy(gameObject);
-            collision.gameObject.GetComponent<CharacterHealth>().TakeDamage(attack);
-            Invoke("AttackComplete", attackDelay);
+            DealDamage(collision);
         }
     }
 
     public virtual void AttackComplete()
     {
         isAttacking = false;
+    }
+
+    private void Attack()
+    {
+        Debug.Log("attack animation called");
+        isAttacking = true;
+        gameObject.GetComponent<BossAnimation>().ChangeAnimationState(BOSS_ATTACK);
+    }
+
+    private void DealDamage(Collision2D character)
+    {
+        character.gameObject.GetComponent<CharacterHealth>().SetAttackedBy(gameObject);
+        character.gameObject.GetComponent<CharacterHealth>().TakeDamage(attack);
+        Invoke("AttackComplete", attackDelay);
     }
 
     public bool IsAttacking()
