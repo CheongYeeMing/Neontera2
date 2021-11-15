@@ -6,6 +6,10 @@ using TMPro;
 
 public class BossHealth : MonoBehaviour, Health
 {
+    // Mob Animation States
+    protected const string BOSS_HURT = "Hurt";
+    protected const string BOSS_DIE = "Die";
+
     [SerializeField] public string mobName;
     [SerializeField] public float hurtDelay;
     [SerializeField] public float dieDelay;
@@ -39,10 +43,6 @@ public class BossHealth : MonoBehaviour, Health
     protected bool isInvulnerable;
 
     protected GameObject attackedBy;
-
-    // Mob Animation States
-    protected const string BOSS_HURT = "Hurt";
-    protected const string BOSS_DIE = "Die";
 
     // Start is called before the first frame update
     public virtual void Start()
