@@ -96,7 +96,10 @@ public class CharacterMovement : MonoBehaviour
             FindObjectOfType<AudioManager>().PlayEffect("Run");
         }
         else FindObjectOfType<AudioManager>().StopEffect("Run");
-        if (IsGrounded()) FindObjectOfType<AudioManager>().StopEffect("Jump");
+        if (IsGrounded())
+        {
+            FindObjectOfType<AudioManager>().StopEffect("Jump");
+        }
     }
 
     private void UpdateSpeed()
