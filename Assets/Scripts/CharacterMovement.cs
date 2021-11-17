@@ -31,7 +31,7 @@ public class CharacterMovement : MonoBehaviour
         boxCollider = GetComponent<BoxCollider2D>();
     }
 
-    public void Start()
+    private void Start()
     {
         location = Data.location;
         gameObject.transform.position = new Vector2(Data.Xcoordinate,Data.Ycoordinate);
@@ -89,7 +89,7 @@ public class CharacterMovement : MonoBehaviour
         }
     }
 
-    public void UpdateAudio()
+    private void UpdateAudio()
     {
         if (IsGrounded() && IsMoving())
         {
@@ -99,12 +99,12 @@ public class CharacterMovement : MonoBehaviour
         if (IsGrounded()) FindObjectOfType<AudioManager>().StopEffect("Jump");
     }
 
-    public void UpdateSpeed()
+    private void UpdateSpeed()
     {
         speed = GetComponent<Character>().GetSpeed().CalculateFinalValue();
     }
 
-    public void UpdateFacingDirection()
+    private void UpdateFacingDirection()
     {
         // Flip player to match facing direction when moving
         if (horizontalInput > 0.01f) // Character facing right
@@ -117,17 +117,17 @@ public class CharacterMovement : MonoBehaviour
         }
     }
 
-    public void UpdateHorizontalInput()
+    private void UpdateHorizontalInput()
     {
         horizontalInput = Input.GetAxis("Horizontal");
     }
 
-    public bool IsMoving()
+    private bool IsMoving()
     {
         return horizontalInput != 0;
     }
 
-    public bool IsAbleToWallJump()
+    private bool IsAbleToWallJump()
     {
         if (wallJumpCooldown > 0.2f)
         {
@@ -169,7 +169,7 @@ public class CharacterMovement : MonoBehaviour
         }
     }
 
-    public bool IsGrounded()
+    private bool IsGrounded()
     {
         RaycastHit2D raycastHit = Physics2D.BoxCast(boxCollider.bounds.center, boxCollider.bounds.size, 0, Vector2.down, 0.03f, groundLayer);
         return raycastHit.collider != null;
@@ -226,7 +226,7 @@ public class CharacterMovement : MonoBehaviour
         return can;
     }
 
-    public bool IsInMonologue()
+    private bool IsInMonologue()
     {
         bool inMonologue = false;
         Monologue[] monologues = FindObjectsOfType<Monologue>();
@@ -241,7 +241,7 @@ public class CharacterMovement : MonoBehaviour
         return inMonologue;
     }
 
-    public bool IsInDialogue()
+    private bool IsInDialogue()
     {
         bool inDialogue = false;
         DialogueManager[] npc = FindObjectsOfType<DialogueManager>();
@@ -262,12 +262,12 @@ public class CharacterMovement : MonoBehaviour
     }
 
     // Methods for Particle System
-    public void CreateDust()
+    private void CreateDust()
     {
         jumpDust.Play();
     }
 
-    public void UpdateWalkDustParticle()
+    private void UpdateWalkDustParticle()
     {
         if (IsGrounded())
         {
