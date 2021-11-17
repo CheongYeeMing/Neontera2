@@ -39,8 +39,8 @@ public class CharacterMovement : MonoBehaviour
 
     private void FixedUpdate()
     {
-        UpdateWalkDustParticle()
-        speed = GetComponent<Character>().GetSpeed().CalculateFinalValue();
+        UpdateWalkDustParticle();
+        UpdateSpeed();
         if (GetComponent<CharacterAttack>().GetIsAttacking() && IsGrounded()) return;
         if (IsAbleToMove() == false)
         {
@@ -95,6 +95,11 @@ public class CharacterMovement : MonoBehaviour
                 Jump();
             }
         }
+    }
+
+    public void UpdateSpeed()
+    {
+        speed = GetComponent<Character>().GetSpeed().CalculateFinalValue();
     }
 
     public void UpdateFacingDirection()
