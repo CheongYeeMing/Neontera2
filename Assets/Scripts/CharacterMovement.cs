@@ -145,7 +145,6 @@ public class CharacterMovement : MonoBehaviour
         if (IsGrounded())
         {
             body.velocity = new Vector2(body.velocity.x, jumpPower);
-            //animator.SetTrigger("jump");
             gameObject.GetComponent<CharacterAnimation>().ChangeAnimationState(CHARACTER_JUMP);
             CreateDust();
             FindObjectOfType<AudioManager>().PlayEffect("Jump");
