@@ -39,10 +39,10 @@ public class CharacterMovement : MonoBehaviour
 
     private void FixedUpdate()
     {
-        if (isGrounded()) walkDust.gameObject.SetActive(true);
+        if (IsGrounded()) walkDust.gameObject.SetActive(true);
         else walkDust.gameObject.SetActive(false);
         speed = GetComponent<Character>().GetSpeed().CalculateFinalValue();
-        if (GetComponent<CharacterAttack>().GetIsAttacking() && isGrounded()) return;
+        if (GetComponent<CharacterAttack>().GetIsAttacking() && IsGrounded()) return;
         if (CanMove() == false)
         {
             GetComponent<CharacterAnimation>().ChangeAnimationState(CHARACTER_IDLE);
@@ -52,12 +52,12 @@ public class CharacterMovement : MonoBehaviour
         horizontalInput = Input.GetAxis("Horizontal");
 
         // Audio
-        if (isGrounded() && horizontalInput != 0)
+        if (IsGrounded() && horizontalInput != 0)
         {
             FindObjectOfType<AudioManager>().PlayEffect("Run");
         }
         else FindObjectOfType<AudioManager>().StopEffect("Run");
-        if (isGrounded()) FindObjectOfType<AudioManager>().StopEffect("Jump");
+        if (IsGrounded()) FindObjectOfType<AudioManager>().StopEffect("Jump");
 
         // Flip player when moving
         if (horizontalInput > 0.01f)
@@ -72,7 +72,7 @@ public class CharacterMovement : MonoBehaviour
         // Set animator parameters
         //animator.SetBool("run", horizontalInput != 0);
         //animator.SetBool("grounded", isGrounded());
-        if (isGrounded() && !GetComponent<CharacterAttack>().GetIsAttacking())
+        if (IsGrounded() && !GetComponent<CharacterAttack>().GetIsAttacking())
         {
             if (horizontalInput != 0)
             {
@@ -90,7 +90,7 @@ public class CharacterMovement : MonoBehaviour
             // Player movement
             body.velocity = new Vector2(horizontalInput * speed, body.velocity.y);
 
-            if (onWall() && !isGrounded())
+            if (IsOnWall() && !IsGrounded())
             {
                 body.gravityScale = 0;
                 body.velocity = new Vector2(transform.localScale.x, 0.3f);
@@ -117,7 +117,7 @@ public class CharacterMovement : MonoBehaviour
 
     private void Jump()
     {
-        if (isGrounded())
+        if (IsGrounded())
         {
             body.velocity = new Vector2(body.velocity.x, jumpPower);
             //animator.SetTrigger("jump");
@@ -125,7 +125,7 @@ public class CharacterMovement : MonoBehaviour
             CreateDust();
             FindObjectOfType<AudioManager>().PlayEffect("Jump");
         }
-        else if (onWall() && !isGrounded())
+        else if (IsOnWall() && !IsGrounded())
         {
             gameObject.GetComponent<CharacterAnimation>().ChangeAnimationState(CHARACTER_JUMP);
             // Wall grab animation !!
@@ -144,13 +144,13 @@ public class CharacterMovement : MonoBehaviour
         }
     }
 
-    public bool isGrounded()
+    public bool IsGrounded()
     {
         RaycastHit2D raycastHit = Physics2D.BoxCast(boxCollider.bounds.center, boxCollider.bounds.size, 0, Vector2.down, 0.03f, groundLayer);
         return raycastHit.collider != null;
     }
 
-    private bool onWall()
+    private bool IsOnWall()
     {
         RaycastHit2D raycastHit = Physics2D.BoxCast(boxCollider.bounds.center, boxCollider.bounds.size, 0, new Vector2(transform.localScale.x, 0), 0.03f, wallLayer);
         return raycastHit.collider != null;
@@ -176,7 +176,7 @@ public class CharacterMovement : MonoBehaviour
         //{
         //    can = false;
         //}
-        return !onWall() && !GetComponent<CharacterHealth>().IsDead();
+        return !IsOnWall() && !GetComponent<CharacterHealth>().IsDead();
     }
 
     public bool CanMove()
