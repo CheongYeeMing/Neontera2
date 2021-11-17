@@ -59,15 +59,7 @@ public class CharacterMovement : MonoBehaviour
         else FindObjectOfType<AudioManager>().StopEffect("Run");
         if (IsGrounded()) FindObjectOfType<AudioManager>().StopEffect("Jump");
 
-        // Flip player when moving
-        if (horizontalInput > 0.01f)
-        {
-            transform.localScale = new Vector3(0.3f, 0.3f, 1);
-        }
-        else if (horizontalInput < -0.01f)
-        {
-            transform.localScale = new Vector3(-0.3f, 0.3f, 1);
-        }
+        UpdateFacingDirection();
 
         // Set animator parameters
         //animator.SetBool("run", horizontalInput != 0);
@@ -103,6 +95,19 @@ public class CharacterMovement : MonoBehaviour
             {
                 Jump();
             }
+        }
+    }
+
+    public void UpdateFacingDirection()
+    {
+        // Flip player to match facing direction when moving
+        if (horizontalInput > 0.01f) // Character facing right
+        {
+            transform.localScale = new Vector3(0.3f, 0.3f, 1);
+        }
+        else if (horizontalInput < -0.01f) // Character facing left
+        {
+            transform.localScale = new Vector3(-0.3f, 0.3f, 1); // Flip the x scale
         }
     }
 
