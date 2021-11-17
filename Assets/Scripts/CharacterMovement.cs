@@ -85,7 +85,7 @@ public class CharacterMovement : MonoBehaviour
         }
 
         // Wall Jump
-        if (wallJumpCooldown > 0.2f)
+        if (IsAbleToWallJump())
         {
             // Player movement
             body.velocity = new Vector2(horizontalInput * speed, body.velocity.y);
@@ -104,10 +104,19 @@ public class CharacterMovement : MonoBehaviour
                 Jump();
             }
         }
+    }
+
+    public bool IsAbleToWallJump()
+    {
+        if (wallJumpCooldown > 0.2f)
+        {
+            return true;
+        }
         else
         {
             wallJumpCooldown += Time.deltaTime;
-        } 
+            return false;
+        }
     }
 
     public void CreateDust()
@@ -182,14 +191,9 @@ public class CharacterMovement : MonoBehaviour
     public bool IsAbleToMove()
     {
         bool can = true;
-        Monologue[] monologues = FindObjectsOfType<Monologue>();
-        foreach(Monologue mono in monologues)
+        if (IsInMonologue())
         {
-            if (mono.IsExamining())
-            {
-                can = false;
-                break;
-            }
+            can = false;
         }
         if (FindObjectOfType<InventorySystem>().isOpen)
         {
@@ -199,16 +203,41 @@ public class CharacterMovement : MonoBehaviour
         {
             can = false;
         }
+        if (IsInDialogue())
+        {
+            can = false;
+        }
+        return can;
+    }
+
+    public bool IsInMonologue()
+    {
+        bool inMonologue = false;
+        Monologue[] monologues = FindObjectsOfType<Monologue>();
+        foreach (Monologue mono in monologues)
+        {
+            if (mono.IsExamining())
+            {
+                inMonologue = true;
+                break;
+            }
+        }
+        return inMonologue;
+    }
+
+    public bool IsInDialogue()
+    {
+        bool inDialogue = false;
         DialogueManager[] npc = FindObjectsOfType<DialogueManager>();
         for (int i = 0; i < npc.Length; i++)
         {
             if (npc[i].isTalking)
             {
-                can = false;
+                inDialogue = true;
                 break;
             }
         }
-        return can;
+        return inDialogue;
     }
 
     public Rigidbody2D GetRigidBody()
