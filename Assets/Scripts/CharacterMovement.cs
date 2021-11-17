@@ -49,15 +49,7 @@ public class CharacterMovement : MonoBehaviour
             return;
         }
         UpdateHorizontalInput();
-
-        // Audio
-        if (IsGrounded() && IsMoving())
-        {
-            FindObjectOfType<AudioManager>().PlayEffect("Run");
-        }
-        else FindObjectOfType<AudioManager>().StopEffect("Run");
-        if (IsGrounded()) FindObjectOfType<AudioManager>().StopEffect("Jump");
-
+        UpdateAudio();
         UpdateFacingDirection();
 
         // Set animator parameters
@@ -95,6 +87,16 @@ public class CharacterMovement : MonoBehaviour
                 Jump();
             }
         }
+    }
+
+    public void UpdateAudio()
+    {
+        if (IsGrounded() && IsMoving())
+        {
+            FindObjectOfType<AudioManager>().PlayEffect("Run");
+        }
+        else FindObjectOfType<AudioManager>().StopEffect("Run");
+        if (IsGrounded()) FindObjectOfType<AudioManager>().StopEffect("Jump");
     }
 
     public void UpdateSpeed()
