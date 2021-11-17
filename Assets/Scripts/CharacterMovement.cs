@@ -134,11 +134,6 @@ public class CharacterMovement : MonoBehaviour
         }
     }
 
-    public void CreateDust()
-    {
-        jumpDust.Play();
-    }
-
     private void Jump()
     {
         if (IsGrounded())
@@ -258,5 +253,11 @@ public class CharacterMovement : MonoBehaviour
     public Rigidbody2D GetRigidBody()
     {
         return body;
+    }
+
+    // Methods for Particle System
+    public void CreateDust()
+    {
+        jumpDust.Play();
     }
 }
