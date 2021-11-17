@@ -48,12 +48,12 @@ public class CharacterAttack : MonoBehaviour
 
     private void Update()
     {
-        if (!playerMovement.CanMove()) return;
-        if (Input.GetKey(KeyCode.A) && playerMovement.canAttack() && !isAttacking && cooldownTimer > attackDelay)
+        if (!playerMovement.IsAbleToMove()) return;
+        if (Input.GetKey(KeyCode.A) && playerMovement.IsAbleToAttack() && !isAttacking && cooldownTimer > attackDelay)
         {
             Attack();
         }
-        else if (Input.GetKeyDown(KeyCode.S) && playerMovement.canAttack() && cooldownTimer > attackDelay)
+        else if (Input.GetKeyDown(KeyCode.S) && playerMovement.IsAbleToAttack() && cooldownTimer > attackDelay)
         {
             SpecialAttack();
         }

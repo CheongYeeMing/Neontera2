@@ -4,6 +4,11 @@ using UnityEngine;
 
 public class CharacterMovement : MonoBehaviour
 {
+    // Mob Animation States
+    private const string CHARACTER_IDLE = "Idle";
+    private const string CHARACTER_RUN = "Run";
+    private const string CHARACTER_JUMP = "Jump";
+
     [SerializeField] private LayerMask groundLayer;
     [SerializeField] private LayerMask wallLayer;
     [SerializeField] private float speed;
@@ -20,19 +25,13 @@ public class CharacterMovement : MonoBehaviour
     // Location
     public string location;
 
-    // Mob Animation States
-    private const string CHARACTER_IDLE = "Idle";
-    private const string CHARACTER_RUN = "Run";
-    private const string CHARACTER_JUMP = "Jump";
-
-
     private void Awake()
     {
         body = GetComponent<Rigidbody2D>();
         boxCollider = GetComponent<BoxCollider2D>();
     }
 
-    public void Start()
+    private void Start()
     {
         location = Data.location;
         gameObject.transform.position = new Vector2(Data.Xcoordinate,Data.Ycoordinate);
@@ -40,42 +39,25 @@ public class CharacterMovement : MonoBehaviour
 
     private void FixedUpdate()
     {
-        if (isGrounded()) walkDust.gameObject.SetActive(true);
-        else walkDust.gameObject.SetActive(false);
-        speed = GetComponent<Character>().GetSpeed().CalculateFinalValue();
-        if (GetComponent<CharacterAttack>().GetIsAttacking() && isGrounded()) return;
-        if (CanMove() == false)
+        UpdateWalkDustParticle();
+        UpdateSpeed();
+        if (GetComponent<CharacterAttack>().GetIsAttacking() && IsGrounded()) return;
+        if (IsAbleToMove() == false)
         {
             GetComponent<CharacterAnimation>().ChangeAnimationState(CHARACTER_IDLE);
             //body.velocity = Vector2.zero;
             return;
         }
-        horizontalInput = Input.GetAxis("Horizontal");
-
-        // Audio
-        if (isGrounded() && horizontalInput != 0)
-        {
-            FindObjectOfType<AudioManager>().PlayEffect("Run");
-        }
-        else FindObjectOfType<AudioManager>().StopEffect("Run");
-        if (isGrounded()) FindObjectOfType<AudioManager>().StopEffect("Jump");
-
-        // Flip player when moving
-        if (horizontalInput > 0.01f)
-        {
-            transform.localScale = new Vector3(0.3f, 0.3f, 1);
-        }
-        else if (horizontalInput < -0.01f)
-        {
-            transform.localScale = new Vector3(-0.3f, 0.3f, 1);
-        }
+        UpdateHorizontalInput();
+        UpdateAudio();
+        UpdateFacingDirection();
 
         // Set animator parameters
         //animator.SetBool("run", horizontalInput != 0);
         //animator.SetBool("grounded", isGrounded());
-        if (isGrounded() && !GetComponent<CharacterAttack>().GetIsAttacking())
+        if (IsGrounded() && !GetComponent<CharacterAttack>().GetIsAttacking())
         {
-            if (horizontalInput != 0)
+            if (IsMoving())
             {
                 gameObject.GetComponent<CharacterAnimation>().ChangeAnimationState(CHARACTER_RUN);
             }
@@ -86,12 +68,12 @@ public class CharacterMovement : MonoBehaviour
         }
 
         // Wall Jump
-        if (wallJumpCooldown > 0.2f)
+        if (IsAbleToWallJump())
         {
             // Player movement
             body.velocity = new Vector2(horizontalInput * speed, body.velocity.y);
 
-            if (onWall() && !isGrounded())
+            if (IsOnWall() && !IsGrounded())
             {
                 body.gravityScale = 0;
                 body.velocity = new Vector2(transform.localScale.x, 0.3f);
@@ -105,20 +87,62 @@ public class CharacterMovement : MonoBehaviour
                 Jump();
             }
         }
+    }
+
+    private void UpdateAudio()
+    {
+        if (IsGrounded() && IsMoving())
+        {
+            FindObjectOfType<AudioManager>().PlayEffect("Run");
+        }
+        else FindObjectOfType<AudioManager>().StopEffect("Run");
+        if (IsGrounded()) FindObjectOfType<AudioManager>().StopEffect("Jump");
+    }
+
+    private void UpdateSpeed()
+    {
+        speed = GetComponent<Character>().GetSpeed().CalculateFinalValue();
+    }
+
+    private void UpdateFacingDirection()
+    {
+        // Flip player to match facing direction when moving
+        if (horizontalInput > 0.01f) // Character facing right
+        {
+            transform.localScale = new Vector3(0.3f, 0.3f, 1);
+        }
+        else if (horizontalInput < -0.01f) // Character facing left
+        {
+            transform.localScale = new Vector3(-0.3f, 0.3f, 1); // Flip the x scale
+        }
+    }
+
+    private void UpdateHorizontalInput()
+    {
+        horizontalInput = Input.GetAxis("Horizontal");
+    }
+
+    private bool IsMoving()
+    {
+        return horizontalInput != 0;
+    }
+
+    private bool IsAbleToWallJump()
+    {
+        if (wallJumpCooldown > 0.2f)
+        {
+            return true;
+        }
         else
         {
             wallJumpCooldown += Time.deltaTime;
-        } 
-    }
-
-    public void CreateDust()
-    {
-        jumpDust.Play();
+            return false;
+        }
     }
 
     private void Jump()
     {
-        if (isGrounded())
+        if (IsGrounded())
         {
             body.velocity = new Vector2(body.velocity.x, jumpPower);
             //animator.SetTrigger("jump");
@@ -126,7 +150,7 @@ public class CharacterMovement : MonoBehaviour
             CreateDust();
             FindObjectOfType<AudioManager>().PlayEffect("Jump");
         }
-        else if (onWall() && !isGrounded())
+        else if (IsOnWall() && !IsGrounded())
         {
             gameObject.GetComponent<CharacterAnimation>().ChangeAnimationState(CHARACTER_JUMP);
             // Wall grab animation !!
@@ -145,19 +169,19 @@ public class CharacterMovement : MonoBehaviour
         }
     }
 
-    public bool isGrounded()
+    private bool IsGrounded()
     {
         RaycastHit2D raycastHit = Physics2D.BoxCast(boxCollider.bounds.center, boxCollider.bounds.size, 0, Vector2.down, 0.03f, groundLayer);
         return raycastHit.collider != null;
     }
 
-    private bool onWall()
+    private bool IsOnWall()
     {
         RaycastHit2D raycastHit = Physics2D.BoxCast(boxCollider.bounds.center, boxCollider.bounds.size, 0, new Vector2(transform.localScale.x, 0), 0.03f, wallLayer);
         return raycastHit.collider != null;
     }
 
-    public bool canAttack()
+    public bool IsAbleToAttack()
     {
         //bool can = true;
         //Monologue[] monologues = FindObjectsOfType<Monologue>();
@@ -177,20 +201,15 @@ public class CharacterMovement : MonoBehaviour
         //{
         //    can = false;
         //}
-        return !onWall() && !GetComponent<CharacterHealth>().IsDead();
+        return !IsOnWall() && !GetComponent<CharacterHealth>().IsDead();
     }
 
-    public bool CanMove()
+    public bool IsAbleToMove()
     {
         bool can = true;
-        Monologue[] monologues = FindObjectsOfType<Monologue>();
-        foreach(Monologue mono in monologues)
+        if (IsInMonologue())
         {
-            if (mono.IsExamining())
-            {
-                can = false;
-                break;
-            }
+            can = false;
         }
         if (FindObjectOfType<InventorySystem>().isOpen)
         {
@@ -200,20 +219,63 @@ public class CharacterMovement : MonoBehaviour
         {
             can = false;
         }
+        if (IsInDialogue())
+        {
+            can = false;
+        }
+        return can;
+    }
+
+    private bool IsInMonologue()
+    {
+        bool inMonologue = false;
+        Monologue[] monologues = FindObjectsOfType<Monologue>();
+        foreach (Monologue mono in monologues)
+        {
+            if (mono.IsExamining())
+            {
+                inMonologue = true;
+                break;
+            }
+        }
+        return inMonologue;
+    }
+
+    private bool IsInDialogue()
+    {
+        bool inDialogue = false;
         DialogueManager[] npc = FindObjectsOfType<DialogueManager>();
         for (int i = 0; i < npc.Length; i++)
         {
             if (npc[i].isTalking)
             {
-                can = false;
+                inDialogue = true;
                 break;
             }
         }
-        return can;
+        return inDialogue;
     }
 
     public Rigidbody2D GetRigidBody()
     {
         return body;
+    }
+
+    // Methods for Particle System
+    private void CreateDust()
+    {
+        jumpDust.Play();
+    }
+
+    private void UpdateWalkDustParticle()
+    {
+        if (IsGrounded())
+        {
+            walkDust.gameObject.SetActive(true);
+        }
+        else
+        {
+            walkDust.gameObject.SetActive(false);
+        }
     }
 }
