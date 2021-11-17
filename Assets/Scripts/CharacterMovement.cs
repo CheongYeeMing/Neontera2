@@ -43,7 +43,7 @@ public class CharacterMovement : MonoBehaviour
         else walkDust.gameObject.SetActive(false);
         speed = GetComponent<Character>().GetSpeed().CalculateFinalValue();
         if (GetComponent<CharacterAttack>().GetIsAttacking() && IsGrounded()) return;
-        if (CanMove() == false)
+        if (IsAbleToMove() == false)
         {
             GetComponent<CharacterAnimation>().ChangeAnimationState(CHARACTER_IDLE);
             //body.velocity = Vector2.zero;
@@ -156,7 +156,7 @@ public class CharacterMovement : MonoBehaviour
         return raycastHit.collider != null;
     }
 
-    public bool canAttack()
+    public bool IsAbleToAttack()
     {
         //bool can = true;
         //Monologue[] monologues = FindObjectsOfType<Monologue>();
@@ -179,7 +179,7 @@ public class CharacterMovement : MonoBehaviour
         return !IsOnWall() && !GetComponent<CharacterHealth>().IsDead();
     }
 
-    public bool CanMove()
+    public bool IsAbleToMove()
     {
         bool can = true;
         Monologue[] monologues = FindObjectsOfType<Monologue>();

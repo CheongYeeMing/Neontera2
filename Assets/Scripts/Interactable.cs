@@ -32,7 +32,7 @@ public class Interactable : MonoBehaviour
             {
                 detectedObject.GetComponent<Monologue>().ToggleMonologue();
             }
-            if (GetComponent<CharacterMovement>().CanMove()) DetectedHint.gameObject.SetActive(true);
+            if (GetComponent<CharacterMovement>().IsAbleToMove()) DetectedHint.gameObject.SetActive(true);
             if (InteractInput())
             {
                 DetectedHint.gameObject.SetActive(false);
