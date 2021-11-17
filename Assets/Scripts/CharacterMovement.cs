@@ -39,8 +39,7 @@ public class CharacterMovement : MonoBehaviour
 
     private void FixedUpdate()
     {
-        if (IsGrounded()) walkDust.gameObject.SetActive(true);
-        else walkDust.gameObject.SetActive(false);
+        UpdateWalkDustParticle()
         speed = GetComponent<Character>().GetSpeed().CalculateFinalValue();
         if (GetComponent<CharacterAttack>().GetIsAttacking() && IsGrounded()) return;
         if (IsAbleToMove() == false)
@@ -259,5 +258,17 @@ public class CharacterMovement : MonoBehaviour
     public void CreateDust()
     {
         jumpDust.Play();
+    }
+
+    public void UpdateWalkDustParticle()
+    {
+        if (IsGrounded())
+        {
+            walkDust.gameObject.SetActive(true);
+        }
+        else
+        {
+            walkDust.gameObject.SetActive(false);
+        }
     }
 }
