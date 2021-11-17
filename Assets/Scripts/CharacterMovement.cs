@@ -49,10 +49,10 @@ public class CharacterMovement : MonoBehaviour
             //body.velocity = Vector2.zero;
             return;
         }
-        horizontalInput = Input.GetAxis("Horizontal");
+        UpdateHorizontalInput();
 
         // Audio
-        if (IsGrounded() && horizontalInput != 0)
+        if (IsGrounded() && IsMoving())
         {
             FindObjectOfType<AudioManager>().PlayEffect("Run");
         }
@@ -74,7 +74,7 @@ public class CharacterMovement : MonoBehaviour
         //animator.SetBool("grounded", isGrounded());
         if (IsGrounded() && !GetComponent<CharacterAttack>().GetIsAttacking())
         {
-            if (horizontalInput != 0)
+            if (IsMoving())
             {
                 gameObject.GetComponent<CharacterAnimation>().ChangeAnimationState(CHARACTER_RUN);
             }
@@ -104,6 +104,16 @@ public class CharacterMovement : MonoBehaviour
                 Jump();
             }
         }
+    }
+
+    public void UpdateHorizontalInput()
+    {
+        horizontalInput = Input.GetAxis("Horizontal");
+    }
+
+    public bool IsMoving()
+    {
+        return horizontalInput != 0;
     }
 
     public bool IsAbleToWallJump()
