@@ -4,6 +4,11 @@ using UnityEngine;
 
 public class CharacterMovement : MonoBehaviour
 {
+    // Mob Animation States
+    private const string CHARACTER_IDLE = "Idle";
+    private const string CHARACTER_RUN = "Run";
+    private const string CHARACTER_JUMP = "Jump";
+
     [SerializeField] private LayerMask groundLayer;
     [SerializeField] private LayerMask wallLayer;
     [SerializeField] private float speed;
@@ -19,12 +24,6 @@ public class CharacterMovement : MonoBehaviour
 
     // Location
     public string location;
-
-    // Mob Animation States
-    private const string CHARACTER_IDLE = "Idle";
-    private const string CHARACTER_RUN = "Run";
-    private const string CHARACTER_JUMP = "Jump";
-
 
     private void Awake()
     {
