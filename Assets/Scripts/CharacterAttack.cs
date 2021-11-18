@@ -68,7 +68,7 @@ public class CharacterAttack : MonoBehaviour
         
         FindObjectOfType<AudioManager>().PlayEffect("CharacterNormalAttack");
         ResetCooldownTimer();
-        comboTimer = 0;
+        ResetComboTimer();
         if (combo >= 4) ResetCombo();
         if (combo == 1)
         {
@@ -215,5 +215,10 @@ public class CharacterAttack : MonoBehaviour
     private void ResetCooldownTimer()
     {
         cooldownTimer = 0;
+    }
+
+    private void ResetComboTimer()
+    {
+        comboTimer = 0;
     }
 }
