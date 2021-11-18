@@ -43,7 +43,7 @@ public class CharacterAttack : MonoBehaviour
     private void Awake()
     {
         characterMovement = GetComponent<CharacterMovement>();
-        combo = 1;
+        ResetCombo();
     }
 
     private void Update()
@@ -59,7 +59,7 @@ public class CharacterAttack : MonoBehaviour
         }
         cooldownTimer += Time.deltaTime;
         comboTimer += Time.deltaTime;
-        if (comboTimer > 1f) combo = 1;
+        if (comboTimer > 1f) ResetCombo();
     }
 
     private void Attack()
@@ -69,7 +69,7 @@ public class CharacterAttack : MonoBehaviour
         FindObjectOfType<AudioManager>().PlayEffect("CharacterNormalAttack");
         cooldownTimer = 0;
         comboTimer = 0;
-        if (combo >= 4) combo = 1;
+        if (combo >= 4) ResetCombo();
         if (combo == 1)
         {
             gameObject.GetComponent<CharacterAnimation>().ChangeAnimationState(CHARACTER_ATTACK);
@@ -205,5 +205,10 @@ public class CharacterAttack : MonoBehaviour
     public float GetBaseAttack()
     {
         return baseAttack;
+    }
+
+    private void ResetCombo()
+    {
+        combo = 1;
     }
 }
