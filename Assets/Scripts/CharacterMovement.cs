@@ -45,7 +45,6 @@ public class CharacterMovement : MonoBehaviour
         if (IsAbleToMove() == false)
         {
             GetComponent<CharacterAnimation>().ChangeAnimationState(CHARACTER_IDLE);
-            //body.velocity = Vector2.zero;
             return;
         }
         UpdateHorizontalInput();
