@@ -12,8 +12,8 @@ public class CharacterAttack : MonoBehaviour
 
     [SerializeField] private Transform firePoint;
     [SerializeField] public Transform attackPoint;
-    [SerializeField] public float attackDelay;
     [SerializeField] private GameObject fireball;
+    [SerializeField] public float attackDelay;
     [SerializeField] public float KnockbackX;
     [SerializeField] public float KnockbackY;
     
@@ -70,7 +70,6 @@ public class CharacterAttack : MonoBehaviour
         cooldownTimer = 0;
         comboTimer = 0;
         if (combo >= 4) combo = 1;
-        Debug.Log(combo);
         if (combo == 1)
         {
             gameObject.GetComponent<CharacterAnimation>().ChangeAnimationState(CHARACTER_ATTACK);
