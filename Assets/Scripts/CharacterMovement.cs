@@ -19,6 +19,8 @@ public class CharacterMovement : MonoBehaviour
     private BoxCollider2D boxCollider;
     private Rigidbody2D body;
 
+    private CharacterHealth characterHealth;
+
     private float wallJumpTimer; // Prevent instant teleportation up wall
     private float horizontalInput;
 
@@ -29,6 +31,7 @@ public class CharacterMovement : MonoBehaviour
     {
         body = GetComponent<Rigidbody2D>();
         boxCollider = GetComponent<BoxCollider2D>();
+        characterHealth = GetComponent<CharacterHealth>();
     }
 
     private void Start()
@@ -202,7 +205,7 @@ public class CharacterMovement : MonoBehaviour
         //{
         //    can = false;
         //}
-        return !IsOnWall() && !GetComponent<CharacterHealth>().IsDead();
+        return !IsOnWall() && !characterHealth.IsDead();
     }
 
     public bool IsAbleToMove()
@@ -216,7 +219,7 @@ public class CharacterMovement : MonoBehaviour
         {
             can = false;
         }
-        if (gameObject.GetComponent<CharacterHealth>().IsHurting() || gameObject.GetComponent<CharacterHealth>().IsDead())
+        if (characterHealth.IsHurting() || characterHealth.IsDead())
         {
             can = false;
         }
