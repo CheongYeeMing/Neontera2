@@ -4,6 +4,12 @@ using UnityEngine;
 
 public class CharacterAttack : MonoBehaviour
 {
+    // Character Animation States
+    private const string CHARACTER_ATTACK = "Attack";
+    private const string CHARACTER_ATTACK_2 = "Attack2";
+    private const string CHARACTER_ATTACK_3 = "Attack3";
+    private const string CHARACTER_SPECIAL_ATTACK = "AttackFireball";
+
     [SerializeField] private Transform firePoint;
     [SerializeField] public Transform attackPoint;
     [SerializeField] public float attackDelay;
@@ -20,12 +26,6 @@ public class CharacterAttack : MonoBehaviour
     private float attackRange = 1.5f;
 
     private bool isAttacking;
-
-    // Character Animation States
-    private const string CHARACTER_ATTACK = "Attack";
-    private const string CHARACTER_ATTACK_2 = "Attack2";
-    private const string CHARACTER_ATTACK_3 = "Attack3";
-    private const string CHARACTER_SPECIAL_ATTACK = "AttackFireball";
 
     // Combo
     public int combo;
