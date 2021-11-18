@@ -48,7 +48,7 @@ public class CharacterMovement : MonoBehaviour
             return;
         }
         UpdateHorizontalInput();
-        UpdateAudio();
+        UpdateMovementAudio();
         UpdateFacingDirection();
 
         // Set animator parameters
@@ -88,7 +88,7 @@ public class CharacterMovement : MonoBehaviour
         }
     }
 
-    private void UpdateAudio()
+    private void UpdateMovementAudio()
     {
         if (IsGrounded() && IsMoving())
         {
