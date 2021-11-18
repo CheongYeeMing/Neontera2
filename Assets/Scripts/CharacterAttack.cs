@@ -91,8 +91,6 @@ public class CharacterAttack : MonoBehaviour
         }
         if (combo < 3) GetComponent<Rigidbody2D>().velocity = new Vector2(Mathf.Sign(gameObject.transform.localScale.x) * 1f, 0);
         else if (combo == 3) GetComponent<Rigidbody2D>().velocity = new Vector2(Mathf.Sign(gameObject.transform.localScale.x) * 3f, 0);
-        //if (combo < 3) GetComponent<Rigidbody2D>().AddForce(new Vector2(Mathf.Sign(gameObject.transform.localScale.x) * 30f, 0));
-        //else if (combo == 3) GetComponent<Rigidbody2D>().AddForce(new Vector2(Mathf.Sign(gameObject.transform.localScale.x) * 145f, 0));
         combo++;
 
         Collider2D[] hitMobs = Physics2D.OverlapCircleAll(attackPoint.position, attackRange, mobLayer);
