@@ -18,7 +18,7 @@ public class CharacterAttack : MonoBehaviour
     [SerializeField] public float KnockbackY;
     
     public LayerMask mobLayer;
-    private CharacterMovement playerMovement;
+    private CharacterMovement characterMovement;
 
     public float baseAttack;
     private float attack;
@@ -42,18 +42,18 @@ public class CharacterAttack : MonoBehaviour
 
     private void Awake()
     {
-        playerMovement = GetComponent<CharacterMovement>();
+        characterMovement = GetComponent<CharacterMovement>();
         combo = 1;
     }
 
     private void Update()
     {
-        if (!playerMovement.IsAbleToMove()) return;
-        if (Input.GetKey(KeyCode.A) && playerMovement.IsAbleToAttack() && !isAttacking && cooldownTimer > attackDelay)
+        if (!characterMovement.IsAbleToMove()) return;
+        if (Input.GetKey(KeyCode.A) && characterMovement.IsAbleToAttack() && !isAttacking && cooldownTimer > attackDelay)
         {
             Attack();
         }
-        else if (Input.GetKeyDown(KeyCode.S) && playerMovement.IsAbleToAttack() && cooldownTimer > attackDelay)
+        else if (Input.GetKeyDown(KeyCode.S) && characterMovement.IsAbleToAttack() && cooldownTimer > attackDelay)
         {
             SpecialAttack();
         }
@@ -194,7 +194,6 @@ public class CharacterAttack : MonoBehaviour
         GameObject fireBall = Instantiate(fireball, firePoint.transform.position, Quaternion.identity) as GameObject;
         fireBall.GetComponent<Projectile>().damage = (float)(gameObject.GetComponent<Character>().GetAttack().CalculateFinalValue()*0.75);
         fireBall.GetComponent<Rigidbody2D>().velocity = new Vector2(Mathf.Sign(transform.localScale.x) * 15.0f, 0);
-
         Invoke("AttackComplete", attackDelay);
     }
 
