@@ -97,6 +97,52 @@ public class CharacterAttack : MonoBehaviour
                 }
             }
         }
+        UpdateQuests(hitMobs);
+        Invoke("AttackComplete", attackDelay);
+    }
+    public void AttackComplete()
+    {
+        isAttacking = false;
+        FindObjectOfType<AudioManager>().StopEffect("CharacterNormalAttack");
+    }
+
+    public void IncreaseAttack(int level)
+    {
+        baseAttack += (baseAttack * 0.015f) * ((100 - level) * 0.1f);
+        GetComponent<Character>().Attack.SetBaseValue((int)baseAttack);
+        attack = GetComponent<Character>().GetAttack().CalculateFinalValue();
+        GetComponent<Character>().statPanel.UpdateStatValues();
+    }
+
+    private void ComboAttack()
+    {
+        if (combo >= 4) ResetCombo();
+        if (combo == 1)
+        {
+            characterAnimation.ChangeAnimationState(CHARACTER_ATTACK);
+            GameObject Slash1 = Instantiate(Slash_1, new Vector2(attackPoint.position.x, attackPoint.position.y), Quaternion.identity) as GameObject;
+            Slash1.GetComponent<Rigidbody2D>().velocity = new Vector2(Mathf.Sign(transform.localScale.x) * 0.5f, -0.5f);
+        }
+        else if (combo == 2)
+        {
+            characterAnimation.ChangeAnimationState(CHARACTER_ATTACK_2);
+            GameObject Slash2 = Instantiate(Slash_2, new Vector2(attackPoint.position.x, attackPoint.position.y), Quaternion.identity) as GameObject;
+            Slash2.GetComponent<Rigidbody2D>().velocity = new Vector2(Mathf.Sign(transform.localScale.x) * 0.4f, 0.6f);
+        }
+        else if (combo == 3)
+        {
+            characterAnimation.ChangeAnimationState(CHARACTER_ATTACK_3);
+            GameObject Slash3 = Instantiate(Slash_3, attackPoint.position, Quaternion.identity) as GameObject;
+            Slash3.GetComponent<Projectile>().damage = (float)(gameObject.GetComponent<Character>().GetAttack().CalculateFinalValue() * 0.75);
+            Slash3.GetComponent<Rigidbody2D>().velocity = new Vector2(Mathf.Sign(transform.localScale.x) * 3f, 0);
+        }
+        if (combo < 3) GetComponent<Rigidbody2D>().velocity = new Vector2(Mathf.Sign(gameObject.transform.localScale.x) * 1f, 0);
+        else if (combo == 3) GetComponent<Rigidbody2D>().velocity = new Vector2(Mathf.Sign(gameObject.transform.localScale.x) * 3f, 0);
+        combo++;
+    }
+
+    public void UpdateQuests(Collider2D[] hitMobs)
+    {
         foreach (Collider2D mob in hitMobs)
         {
             MobHealth mobHealth;
@@ -140,47 +186,6 @@ public class CharacterAttack : MonoBehaviour
                 }
             }
         }
-        Invoke("AttackComplete", attackDelay);
-    }
-    public void AttackComplete()
-    {
-        isAttacking = false;
-        FindObjectOfType<AudioManager>().StopEffect("CharacterNormalAttack");
-    }
-
-    public void IncreaseAttack(int level)
-    {
-        baseAttack += (baseAttack * 0.015f) * ((100 - level) * 0.1f);
-        GetComponent<Character>().Attack.SetBaseValue((int)baseAttack);
-        attack = GetComponent<Character>().GetAttack().CalculateFinalValue();
-        GetComponent<Character>().statPanel.UpdateStatValues();
-    }
-
-    private void ComboAttack()
-    {
-        if (combo >= 4) ResetCombo();
-        if (combo == 1)
-        {
-            characterAnimation.ChangeAnimationState(CHARACTER_ATTACK);
-            GameObject Slash1 = Instantiate(Slash_1, new Vector2(attackPoint.position.x, attackPoint.position.y), Quaternion.identity) as GameObject;
-            Slash1.GetComponent<Rigidbody2D>().velocity = new Vector2(Mathf.Sign(transform.localScale.x) * 0.5f, -0.5f);
-        }
-        else if (combo == 2)
-        {
-            characterAnimation.ChangeAnimationState(CHARACTER_ATTACK_2);
-            GameObject Slash2 = Instantiate(Slash_2, new Vector2(attackPoint.position.x, attackPoint.position.y), Quaternion.identity) as GameObject;
-            Slash2.GetComponent<Rigidbody2D>().velocity = new Vector2(Mathf.Sign(transform.localScale.x) * 0.4f, 0.6f);
-        }
-        else if (combo == 3)
-        {
-            characterAnimation.ChangeAnimationState(CHARACTER_ATTACK_3);
-            GameObject Slash3 = Instantiate(Slash_3, attackPoint.position, Quaternion.identity) as GameObject;
-            Slash3.GetComponent<Projectile>().damage = (float)(gameObject.GetComponent<Character>().GetAttack().CalculateFinalValue() * 0.75);
-            Slash3.GetComponent<Rigidbody2D>().velocity = new Vector2(Mathf.Sign(transform.localScale.x) * 3f, 0);
-        }
-        if (combo < 3) GetComponent<Rigidbody2D>().velocity = new Vector2(Mathf.Sign(gameObject.transform.localScale.x) * 1f, 0);
-        else if (combo == 3) GetComponent<Rigidbody2D>().velocity = new Vector2(Mathf.Sign(gameObject.transform.localScale.x) * 3f, 0);
-        combo++;
     }
 
     public void OnDrawGizmosSelected()
