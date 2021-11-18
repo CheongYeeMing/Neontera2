@@ -19,7 +19,7 @@ public class CharacterMovement : MonoBehaviour
     private BoxCollider2D boxCollider;
     private Rigidbody2D body;
 
-    private float wallJumpCooldown; // Prevent instant teleportation up wall
+    private float wallJumpTimer; // Prevent instant teleportation up wall
     private float horizontalInput;
 
     // Location
@@ -131,13 +131,13 @@ public class CharacterMovement : MonoBehaviour
 
     private bool IsAbleToWallJump()
     {
-        if (wallJumpCooldown > 0.2f)
+        if (wallJumpTimer > 0.2f)
         {
             return true;
         }
         else
         {
-            wallJumpCooldown += Time.deltaTime;
+            wallJumpTimer += Time.deltaTime;
             return false;
         }
     }
@@ -166,7 +166,7 @@ public class CharacterMovement : MonoBehaviour
             {
                 body.velocity = new Vector2(-Mathf.Sign(transform.localScale.x) * 3, 6);
             }
-            wallJumpCooldown = 0;
+            wallJumpTimer = 0;
         }
     }
 
