@@ -41,7 +41,7 @@ public class CharacterMovement : MonoBehaviour
     {
         UpdateWalkDustParticle();
         UpdateSpeed();
-        if (GetComponent<CharacterAttack>().GetIsAttacking() && IsGrounded()) return;
+        if (GetComponent<CharacterAttack>().IsAttacking() && IsGrounded()) return;
         if (IsAbleToMove() == false)
         {
             GetComponent<CharacterAnimation>().ChangeAnimationState(CHARACTER_IDLE);
@@ -54,7 +54,7 @@ public class CharacterMovement : MonoBehaviour
         // Set animator parameters
         //animator.SetBool("run", horizontalInput != 0);
         //animator.SetBool("grounded", isGrounded());
-        if (IsGrounded() && !GetComponent<CharacterAttack>().GetIsAttacking())
+        if (IsGrounded() && !GetComponent<CharacterAttack>().IsAttacking())
         {
             if (IsMoving())
             {
