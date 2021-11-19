@@ -128,7 +128,7 @@ public class CharacterAttack : MonoBehaviour
         foreach (Collider2D mob in hitMobs)
         {
             MobHealth mobHealth;
-            if (mob.TryGetComponent<MobHealth>(out mobHealth))
+            if (mob.TryGetComponent(out mobHealth))
             {
                 if (mobHealth.IsDead() && mob.GetComponent<MobReward>().GetIsRewardGiven() == false)
                 {
@@ -148,7 +148,7 @@ public class CharacterAttack : MonoBehaviour
                 }
             }
             BossHealth bossHealth;
-            if (mob.TryGetComponent<BossHealth>(out bossHealth))
+            if (mob.TryGetComponent(out bossHealth))
             {
                 if (bossHealth.IsDead() && mob.GetComponent<BossReward>().GetIsRewardGiven() == false)
                 {
@@ -175,7 +175,7 @@ public class CharacterAttack : MonoBehaviour
         foreach (Collider2D mob in hitMobs)
         {
             MobHealth mobHealth;
-            if (mob.TryGetComponent<MobHealth>(out mobHealth))
+            if (mob.TryGetComponent(out mobHealth))
             {
                 if (!mob.GetComponent<MobHealth>().IsHurting())
                 {
@@ -184,7 +184,7 @@ public class CharacterAttack : MonoBehaviour
                 }
             }
             BossHealth bossHealth;
-            if (mob.TryGetComponent<BossHealth>(out bossHealth))
+            if (mob.TryGetComponent(out bossHealth))
             {
                 if (!mob.GetComponent<BossHealth>().IsHurting())
                 {
