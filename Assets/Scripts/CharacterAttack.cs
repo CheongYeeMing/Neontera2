@@ -102,19 +102,19 @@ public class CharacterAttack : MonoBehaviour
         if (combo == 1)
         {
             characterAnimation.ChangeAnimationState(CHARACTER_ATTACK);
-            GameObject Slash1 = Instantiate(Slash_1, new Vector2(attackPoint.position.x, attackPoint.position.y), Quaternion.identity) as GameObject;
+            GameObject Slash1 = Instantiate(Slash_1, new Vector2(attackPoint.position.x, attackPoint.position.y), Quaternion.identity);
             Slash1.GetComponent<Rigidbody2D>().velocity = new Vector2(Mathf.Sign(transform.localScale.x) * 0.5f, -0.5f);
         }
         else if (combo == 2)
         {
             characterAnimation.ChangeAnimationState(CHARACTER_ATTACK_2);
-            GameObject Slash2 = Instantiate(Slash_2, new Vector2(attackPoint.position.x, attackPoint.position.y), Quaternion.identity) as GameObject;
+            GameObject Slash2 = Instantiate(Slash_2, new Vector2(attackPoint.position.x, attackPoint.position.y), Quaternion.identity);
             Slash2.GetComponent<Rigidbody2D>().velocity = new Vector2(Mathf.Sign(transform.localScale.x) * 0.4f, 0.6f);
         }
         else if (combo == 3)
         {
             characterAnimation.ChangeAnimationState(CHARACTER_ATTACK_3);
-            GameObject Slash3 = Instantiate(Slash_3, attackPoint.position, Quaternion.identity) as GameObject;
+            GameObject Slash3 = Instantiate(Slash_3, attackPoint.position, Quaternion.identity);
             Slash3.GetComponent<Projectile>().damage = (float)(character.GetAttack().CalculateFinalValue() * 0.75);
             Slash3.GetComponent<Rigidbody2D>().velocity = new Vector2(Mathf.Sign(transform.localScale.x) * 3f, 0);
         }
