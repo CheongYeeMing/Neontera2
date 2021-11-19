@@ -39,7 +39,7 @@ public class CharacterAttack : MonoBehaviour
     public void Start()
     {
         baseAttack = Data.baseAttack;
-        attack = GetComponent<Character>().GetAttack().CalculateFinalValue();
+        UpdateAttackValue();
     }
 
     private void Awake()
@@ -76,8 +76,7 @@ public class CharacterAttack : MonoBehaviour
         ComboAttack();
 
         Collider2D[] hitMobs = Physics2D.OverlapCircleAll(attackPoint.position, attackRange, mobLayer);
-        attack = character.GetAttack().CalculateFinalValue();
-
+        UpdateAttackValue();
         DealDamageToMobs(hitMobs);
         UpdateQuests(hitMobs);
         Invoke("AttackComplete", attackDelay);
@@ -92,8 +91,13 @@ public class CharacterAttack : MonoBehaviour
     {
         baseAttack += (baseAttack * 0.015f) * ((100 - level) * 0.1f);
         character.Attack.SetBaseValue((int)baseAttack);
-        attack = character.GetAttack().CalculateFinalValue();
+        UpdateAttackValue();
         character.statPanel.UpdateStatValues();
+    }
+
+    private void UpdateAttackValue()
+    {
+        attack = character.GetAttack().CalculateFinalValue();
     }
 
     private void ComboAttack()
@@ -195,7 +199,7 @@ public class CharacterAttack : MonoBehaviour
         }
     }
 
-    public void OnDrawGizmosSelected()
+    private void OnDrawGizmosSelected()
     {
         if (attackPoint == null) return;
         Gizmos.DrawWireSphere(attackPoint.position, attackRange);
