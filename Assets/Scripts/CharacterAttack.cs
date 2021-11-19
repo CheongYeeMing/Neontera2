@@ -17,11 +17,13 @@ public class CharacterAttack : MonoBehaviour
     [SerializeField] public float KnockbackX;
     [SerializeField] public float KnockbackY;
     
-    public LayerMask mobLayer;
+    private LayerMask mobLayer;
+
+    private Character character;
     private CharacterAnimation characterAnimation;
     private CharacterMovement characterMovement;
 
-    public float baseAttack;
+    private float baseAttack;
     private float attack;
     private float cooldownTimer = Mathf.Infinity;
     private float attackRange = 1.5f;
@@ -29,20 +31,22 @@ public class CharacterAttack : MonoBehaviour
     private bool isAttacking;
 
     // Combo
-    public int combo;
     [SerializeField] GameObject Slash_1;
     [SerializeField] GameObject Slash_2;
     [SerializeField] GameObject Slash_3;
-    public float comboTimer;
+
+    private int combo;
+    private float comboTimer;
 
     public void Start()
     {
         baseAttack = Data.baseAttack;
-        attack = GetComponent<Character>().GetAttack().CalculateFinalValue();
+        UpdateAttackValue();
     }
 
     private void Awake()
     {
+        character = GetComponent<Character>();
         characterAnimation = GetComponent<CharacterAnimation>();
         characterMovement = GetComponent<CharacterMovement>();
         ResetCombo();
@@ -50,7 +54,10 @@ public class CharacterAttack : MonoBehaviour
 
     private void Update()
     {
-        if (!characterMovement.IsAbleToMove()) return;
+        if (!characterMovement.IsAbleToMove())
+        {
+            return;
+        }
         if (Input.GetKey(KeyCode.A) && characterMovement.IsAbleToAttack() && !isAttacking && cooldownTimer > attackDelay)
         {
             Attack();
@@ -61,85 +68,23 @@ public class CharacterAttack : MonoBehaviour
         }
         cooldownTimer += Time.deltaTime;
         comboTimer += Time.deltaTime;
-        if (comboTimer > 1f) ResetCombo();
+        if (comboTimer > 1f)
+        {
+            ResetCombo();
+        }
     }
 
     private void Attack()
     {
         isAttacking = true;
-        
         FindObjectOfType<AudioManager>().PlayEffect("CharacterNormalAttack");
         ResetCooldownTimer();
         ResetComboTimer();
         ComboAttack();
-
         Collider2D[] hitMobs = Physics2D.OverlapCircleAll(attackPoint.position, attackRange, mobLayer);
-        attack = gameObject.GetComponent<Character>().GetAttack().CalculateFinalValue();
-
-        foreach (Collider2D mob in hitMobs)
-        {
-            MobHealth mobHealth;
-            if (mob.TryGetComponent<MobHealth>(out mobHealth))
-            {
-                if (!mob.GetComponent<MobHealth>().IsHurting())
-                {
-                    mob.GetComponent<MobHealth>().SetAttackedBy(gameObject);
-                    mob.GetComponent<MobHealth>().TakeDamage(attack);
-                }
-            }
-            BossHealth bossHealth;
-            if (mob.TryGetComponent<BossHealth>(out bossHealth))
-            {
-                if (!mob.GetComponent<BossHealth>().IsHurting())
-                {
-                    mob.GetComponent<BossHealth>().SetAttackedBy(gameObject);
-                    mob.GetComponent<BossHealth>().TakeDamage(attack);
-                }
-            }
-        }
-        foreach (Collider2D mob in hitMobs)
-        {
-            MobHealth mobHealth;
-            if (mob.TryGetComponent<MobHealth>(out mobHealth))
-            {
-                if (mobHealth.IsDead() && mob.GetComponent<MobReward>().GetIsRewardGiven() == false)
-                {
-                    foreach (Quest quest in gameObject.GetComponent<Character>().questList.quests)
-                    {
-                        if (quest.questCriteria.criteriaType == CriteriaType.Kill)
-                        {
-                            if (quest.questCriteria.Target == mobHealth.mobName)
-                            {
-                                quest.questCriteria.Execute();
-                                quest.Update();
-                            }
-                        }
-                    }
-                    // Rewards for Mob kill
-                    mob.GetComponent<MobReward>().GetReward(gameObject.GetComponent<CharacterLevel>(), gameObject.GetComponent<CharacterWallet>());
-                }
-            }
-            BossHealth bossHealth;
-            if (mob.TryGetComponent<BossHealth>(out bossHealth))
-            {
-                if (bossHealth.IsDead() && mob.GetComponent<BossReward>().GetIsRewardGiven() == false)
-                {
-                    foreach (Quest quest in gameObject.GetComponent<Character>().questList.quests)
-                    {
-                        if (quest.questCriteria.criteriaType == CriteriaType.Kill)
-                        {
-                            if (quest.questCriteria.Target == bossHealth.mobName)
-                            {
-                                quest.questCriteria.Execute();
-                                quest.Update();
-                            }
-                        }
-                    }
-                    // Rewards for Mob kill
-                    mob.GetComponent<BossReward>().GetReward(gameObject.GetComponent<CharacterLevel>(), gameObject.GetComponent<CharacterWallet>());
-                }
-            }
-        }
+        UpdateAttackValue();
+        DealDamageToMobs(hitMobs);
+        UpdateQuestsAndRewards(hitMobs);
         Invoke("AttackComplete", attackDelay);
     }
     public void AttackComplete()
@@ -151,41 +96,140 @@ public class CharacterAttack : MonoBehaviour
     public void IncreaseAttack(int level)
     {
         baseAttack += (baseAttack * 0.015f) * ((100 - level) * 0.1f);
-        GetComponent<Character>().Attack.SetBaseValue((int)baseAttack);
-        attack = GetComponent<Character>().GetAttack().CalculateFinalValue();
-        GetComponent<Character>().statPanel.UpdateStatValues();
+        character.Attack.SetBaseValue((int)baseAttack);
+        UpdateAttackValue();
+        character.statPanel.UpdateStatValues();
+    }
+
+    private void UpdateAttackValue()
+    {
+        attack = character.GetAttack().CalculateFinalValue();
     }
 
     private void ComboAttack()
     {
-        if (combo >= 4) ResetCombo();
+        if (combo >= 4)
+        {
+            ResetCombo();
+        }
         if (combo == 1)
         {
             characterAnimation.ChangeAnimationState(CHARACTER_ATTACK);
-            GameObject Slash1 = Instantiate(Slash_1, new Vector2(attackPoint.position.x, attackPoint.position.y), Quaternion.identity) as GameObject;
+            GameObject Slash1 = Instantiate(Slash_1, new Vector2(attackPoint.position.x, attackPoint.position.y), Quaternion.identity);
             Slash1.GetComponent<Rigidbody2D>().velocity = new Vector2(Mathf.Sign(transform.localScale.x) * 0.5f, -0.5f);
         }
         else if (combo == 2)
         {
             characterAnimation.ChangeAnimationState(CHARACTER_ATTACK_2);
-            GameObject Slash2 = Instantiate(Slash_2, new Vector2(attackPoint.position.x, attackPoint.position.y), Quaternion.identity) as GameObject;
+            GameObject Slash2 = Instantiate(Slash_2, new Vector2(attackPoint.position.x, attackPoint.position.y), Quaternion.identity);
             Slash2.GetComponent<Rigidbody2D>().velocity = new Vector2(Mathf.Sign(transform.localScale.x) * 0.4f, 0.6f);
         }
         else if (combo == 3)
         {
             characterAnimation.ChangeAnimationState(CHARACTER_ATTACK_3);
-            GameObject Slash3 = Instantiate(Slash_3, attackPoint.position, Quaternion.identity) as GameObject;
-            Slash3.GetComponent<Projectile>().damage = (float)(gameObject.GetComponent<Character>().GetAttack().CalculateFinalValue() * 0.75);
+            GameObject Slash3 = Instantiate(Slash_3, attackPoint.position, Quaternion.identity);
+            Slash3.GetComponent<Projectile>().damage = (float)(character.GetAttack().CalculateFinalValue() * 0.75);
             Slash3.GetComponent<Rigidbody2D>().velocity = new Vector2(Mathf.Sign(transform.localScale.x) * 3f, 0);
         }
-        if (combo < 3) GetComponent<Rigidbody2D>().velocity = new Vector2(Mathf.Sign(gameObject.transform.localScale.x) * 1f, 0);
-        else if (combo == 3) GetComponent<Rigidbody2D>().velocity = new Vector2(Mathf.Sign(gameObject.transform.localScale.x) * 3f, 0);
+        if (combo < 3)
+        {
+            GetComponent<Rigidbody2D>().velocity = new Vector2(Mathf.Sign(transform.localScale.x) * 1f, 0);
+        }
+        else if (combo == 3)
+        {
+            GetComponent<Rigidbody2D>().velocity = new Vector2(Mathf.Sign(transform.localScale.x) * 3f, 0);
+        }
         combo++;
     }
 
-    public void OnDrawGizmosSelected()
+    private void UpdateQuestsAndRewards(Collider2D[] hitMobs)
     {
-        if (attackPoint == null) return;
+        foreach (Collider2D mob in hitMobs)
+        {
+            MobHealth mobHealth;
+            if (mob.TryGetComponent(out mobHealth))
+            {
+                if (mobHealth.IsDead() && !mob.GetComponent<MobReward>().GetIsRewardGiven())
+                {
+                    UpdateQuestsMob(mobHealth);
+                    // Rewards for Mob kill
+                    mob.GetComponent<MobReward>().GetReward(GetComponent<CharacterLevel>(), GetComponent<CharacterWallet>());
+                }
+            }
+            BossHealth bossHealth;
+            if (mob.TryGetComponent(out bossHealth))
+            {
+                if (bossHealth.IsDead() && !mob.GetComponent<BossReward>().GetIsRewardGiven())
+                {
+                    UpdateQuestsBoss(bossHealth);
+                    // Rewards for Mob kill
+                    mob.GetComponent<BossReward>().GetReward(GetComponent<CharacterLevel>(), GetComponent<CharacterWallet>());
+                }
+            }
+        }
+    }
+
+    private void UpdateQuestsMob(MobHealth mobHealth) 
+    {
+        foreach (Quest quest in character.questList.quests)
+        {
+            if (quest.questCriteria.criteriaType == CriteriaType.Kill)
+            {
+                if (quest.questCriteria.Target == mobHealth.mobName)
+                {
+                    quest.questCriteria.Execute();
+                    quest.Update();
+                }
+            }
+        }
+    }
+
+    private void UpdateQuestsBoss(BossHealth bossHealth)
+    {
+        foreach (Quest quest in character.questList.quests)
+        {
+            if (quest.questCriteria.criteriaType == CriteriaType.Kill)
+            {
+                if (quest.questCriteria.Target == bossHealth.mobName)
+                {
+                    quest.questCriteria.Execute();
+                    quest.Update();
+                }
+            }
+        }
+    }
+
+    private void DealDamageToMobs(Collider2D[] hitMobs)
+    {
+        foreach (Collider2D mob in hitMobs)
+        {
+            MobHealth mobHealth;
+            if (mob.TryGetComponent(out mobHealth))
+            {
+                if (!mob.GetComponent<MobHealth>().IsHurting())
+                {
+                    mob.GetComponent<MobHealth>().SetAttackedBy(gameObject);
+                    mob.GetComponent<MobHealth>().TakeDamage(attack);
+                }
+            }
+            BossHealth bossHealth;
+            if (mob.TryGetComponent(out bossHealth))
+            {
+                if (!mob.GetComponent<BossHealth>().IsHurting())
+                {
+                    mob.GetComponent<BossHealth>().SetAttackedBy(gameObject);
+                    mob.GetComponent<BossHealth>().TakeDamage(attack);
+                }
+            }
+        }
+    }
+
+    private void OnDrawGizmosSelected()
+    {
+        if (attackPoint == null)
+        {
+            return;
+        }
         Gizmos.DrawWireSphere(attackPoint.position, attackRange);
         Gizmos.DrawWireSphere(firePoint.position, attackRange);
     }
@@ -196,8 +240,8 @@ public class CharacterAttack : MonoBehaviour
         ResetCooldownTimer();
         FindObjectOfType<AudioManager>().StopEffect("CharacterLaser");
         FindObjectOfType<AudioManager>().PlayEffect("CharacterLaser");
-        GameObject fireBall = Instantiate(fireball, firePoint.transform.position, Quaternion.identity) as GameObject;
-        fireBall.GetComponent<Projectile>().damage = (float)(gameObject.GetComponent<Character>().GetAttack().CalculateFinalValue()*0.75);
+        GameObject fireBall = Instantiate(fireball, firePoint.transform.position, Quaternion.identity);
+        fireBall.GetComponent<Projectile>().damage = (float)(character.GetAttack().CalculateFinalValue()*0.75);
         fireBall.GetComponent<Rigidbody2D>().velocity = new Vector2(Mathf.Sign(transform.localScale.x) * 15.0f, 0);
         Invoke("AttackComplete", attackDelay);
     }
