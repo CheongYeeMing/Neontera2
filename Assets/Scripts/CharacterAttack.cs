@@ -132,11 +132,11 @@ public class CharacterAttack : MonoBehaviour
         }
         if (combo < 3)
         {
-            GetComponent<Rigidbody2D>().velocity = new Vector2(Mathf.Sign(gameObject.transform.localScale.x) * 1f, 0);
+            GetComponent<Rigidbody2D>().velocity = new Vector2(Mathf.Sign(transform.localScale.x) * 1f, 0);
         }
         else if (combo == 3)
         {
-            GetComponent<Rigidbody2D>().velocity = new Vector2(Mathf.Sign(gameObject.transform.localScale.x) * 3f, 0);
+            GetComponent<Rigidbody2D>().velocity = new Vector2(Mathf.Sign(transform.localScale.x) * 3f, 0);
         }
         combo++;
     }
@@ -162,7 +162,7 @@ public class CharacterAttack : MonoBehaviour
                         }
                     }
                     // Rewards for Mob kill
-                    mob.GetComponent<MobReward>().GetReward(gameObject.GetComponent<CharacterLevel>(), gameObject.GetComponent<CharacterWallet>());
+                    mob.GetComponent<MobReward>().GetReward(GetComponent<CharacterLevel>(), GetComponent<CharacterWallet>());
                 }
             }
             BossHealth bossHealth;
@@ -182,7 +182,7 @@ public class CharacterAttack : MonoBehaviour
                         }
                     }
                     // Rewards for Mob kill
-                    mob.GetComponent<BossReward>().GetReward(gameObject.GetComponent<CharacterLevel>(), gameObject.GetComponent<CharacterWallet>());
+                    mob.GetComponent<BossReward>().GetReward(GetComponent<CharacterLevel>(), GetComponent<CharacterWallet>());
                 }
             }
         }
