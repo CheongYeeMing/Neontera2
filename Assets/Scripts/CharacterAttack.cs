@@ -76,27 +76,7 @@ public class CharacterAttack : MonoBehaviour
         Collider2D[] hitMobs = Physics2D.OverlapCircleAll(attackPoint.position, attackRange, mobLayer);
         attack = gameObject.GetComponent<Character>().GetAttack().CalculateFinalValue();
 
-        foreach (Collider2D mob in hitMobs)
-        {
-            MobHealth mobHealth;
-            if (mob.TryGetComponent<MobHealth>(out mobHealth))
-            {
-                if (!mob.GetComponent<MobHealth>().IsHurting())
-                {
-                    mob.GetComponent<MobHealth>().SetAttackedBy(gameObject);
-                    mob.GetComponent<MobHealth>().TakeDamage(attack);
-                }
-            }
-            BossHealth bossHealth;
-            if (mob.TryGetComponent<BossHealth>(out bossHealth))
-            {
-                if (!mob.GetComponent<BossHealth>().IsHurting())
-                {
-                    mob.GetComponent<BossHealth>().SetAttackedBy(gameObject);
-                    mob.GetComponent<BossHealth>().TakeDamage(attack);
-                }
-            }
-        }
+        DealDamageToMobs(hitMobs);
         UpdateQuests(hitMobs);
         Invoke("AttackComplete", attackDelay);
     }
@@ -183,6 +163,31 @@ public class CharacterAttack : MonoBehaviour
                     }
                     // Rewards for Mob kill
                     mob.GetComponent<BossReward>().GetReward(gameObject.GetComponent<CharacterLevel>(), gameObject.GetComponent<CharacterWallet>());
+                }
+            }
+        }
+    }
+
+    public void DealDamageToMobs(Collider2D[] hitMobs)
+    {
+        foreach (Collider2D mob in hitMobs)
+        {
+            MobHealth mobHealth;
+            if (mob.TryGetComponent<MobHealth>(out mobHealth))
+            {
+                if (!mob.GetComponent<MobHealth>().IsHurting())
+                {
+                    mob.GetComponent<MobHealth>().SetAttackedBy(gameObject);
+                    mob.GetComponent<MobHealth>().TakeDamage(attack);
+                }
+            }
+            BossHealth bossHealth;
+            if (mob.TryGetComponent<BossHealth>(out bossHealth))
+            {
+                if (!mob.GetComponent<BossHealth>().IsHurting())
+                {
+                    mob.GetComponent<BossHealth>().SetAttackedBy(gameObject);
+                    mob.GetComponent<BossHealth>().TakeDamage(attack);
                 }
             }
         }
