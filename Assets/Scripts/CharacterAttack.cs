@@ -17,13 +17,13 @@ public class CharacterAttack : MonoBehaviour
     [SerializeField] public float KnockbackX;
     [SerializeField] public float KnockbackY;
     
-    public LayerMask mobLayer;
+    private LayerMask mobLayer;
 
     private Character character;
     private CharacterAnimation characterAnimation;
     private CharacterMovement characterMovement;
 
-    public float baseAttack;
+    private float baseAttack;
     private float attack;
     private float cooldownTimer = Mathf.Infinity;
     private float attackRange = 1.5f;
@@ -31,11 +31,12 @@ public class CharacterAttack : MonoBehaviour
     private bool isAttacking;
 
     // Combo
-    public int combo;
     [SerializeField] GameObject Slash_1;
     [SerializeField] GameObject Slash_2;
     [SerializeField] GameObject Slash_3;
-    public float comboTimer;
+
+    private int combo;
+    private float comboTimer;
 
     public void Start()
     {
