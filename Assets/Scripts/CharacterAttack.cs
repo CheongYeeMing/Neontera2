@@ -151,17 +151,7 @@ public class CharacterAttack : MonoBehaviour
             {
                 if (mobHealth.IsDead() && !mob.GetComponent<MobReward>().GetIsRewardGiven())
                 {
-                    foreach (Quest quest in character.questList.quests)
-                    {
-                        if (quest.questCriteria.criteriaType == CriteriaType.Kill)
-                        {
-                            if (quest.questCriteria.Target == mobHealth.mobName)
-                            {
-                                quest.questCriteria.Execute();
-                                quest.Update();
-                            }
-                        }
-                    }
+                    UpdateQuestsMob(mobHealth);
                     // Rewards for Mob kill
                     mob.GetComponent<MobReward>().GetReward(GetComponent<CharacterLevel>(), GetComponent<CharacterWallet>());
                 }
@@ -171,19 +161,39 @@ public class CharacterAttack : MonoBehaviour
             {
                 if (bossHealth.IsDead() && !mob.GetComponent<BossReward>().GetIsRewardGiven())
                 {
-                    foreach (Quest quest in character.questList.quests)
-                    {
-                        if (quest.questCriteria.criteriaType == CriteriaType.Kill)
-                        {
-                            if (quest.questCriteria.Target == bossHealth.mobName)
-                            {
-                                quest.questCriteria.Execute();
-                                quest.Update();
-                            }
-                        }
-                    }
+                    UpdateQuestsBoss(bossHealth);
                     // Rewards for Mob kill
                     mob.GetComponent<BossReward>().GetReward(GetComponent<CharacterLevel>(), GetComponent<CharacterWallet>());
+                }
+            }
+        }
+    }
+
+    private void UpdateQuestsMob(MobHealth mobHealth) 
+    {
+        foreach (Quest quest in character.questList.quests)
+        {
+            if (quest.questCriteria.criteriaType == CriteriaType.Kill)
+            {
+                if (quest.questCriteria.Target == mobHealth.mobName)
+                {
+                    quest.questCriteria.Execute();
+                    quest.Update();
+                }
+            }
+        }
+    }
+
+    private void UpdateQuestsBoss(BossHealth bossHealth)
+    {
+        foreach (Quest quest in character.questList.quests)
+        {
+            if (quest.questCriteria.criteriaType == CriteriaType.Kill)
+            {
+                if (quest.questCriteria.Target == bossHealth.mobName)
+                {
+                    quest.questCriteria.Execute();
+                    quest.Update();
                 }
             }
         }
