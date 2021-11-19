@@ -18,6 +18,7 @@ public class CharacterAttack : MonoBehaviour
     [SerializeField] public float KnockbackY;
     
     public LayerMask mobLayer;
+    private Character character;
     private CharacterAnimation characterAnimation;
     private CharacterMovement characterMovement;
 
@@ -43,6 +44,7 @@ public class CharacterAttack : MonoBehaviour
 
     private void Awake()
     {
+        character = GetComponent<Character>();
         characterAnimation = GetComponent<CharacterAnimation>();
         characterMovement = GetComponent<CharacterMovement>();
         ResetCombo();
@@ -74,7 +76,7 @@ public class CharacterAttack : MonoBehaviour
         ComboAttack();
 
         Collider2D[] hitMobs = Physics2D.OverlapCircleAll(attackPoint.position, attackRange, mobLayer);
-        attack = gameObject.GetComponent<Character>().GetAttack().CalculateFinalValue();
+        attack = character.GetAttack().CalculateFinalValue();
 
         DealDamageToMobs(hitMobs);
         UpdateQuests(hitMobs);
@@ -89,9 +91,9 @@ public class CharacterAttack : MonoBehaviour
     public void IncreaseAttack(int level)
     {
         baseAttack += (baseAttack * 0.015f) * ((100 - level) * 0.1f);
-        GetComponent<Character>().Attack.SetBaseValue((int)baseAttack);
-        attack = GetComponent<Character>().GetAttack().CalculateFinalValue();
-        GetComponent<Character>().statPanel.UpdateStatValues();
+        character.Attack.SetBaseValue((int)baseAttack);
+        attack = character.GetAttack().CalculateFinalValue();
+        character.statPanel.UpdateStatValues();
     }
 
     private void ComboAttack()
@@ -113,7 +115,7 @@ public class CharacterAttack : MonoBehaviour
         {
             characterAnimation.ChangeAnimationState(CHARACTER_ATTACK_3);
             GameObject Slash3 = Instantiate(Slash_3, attackPoint.position, Quaternion.identity) as GameObject;
-            Slash3.GetComponent<Projectile>().damage = (float)(gameObject.GetComponent<Character>().GetAttack().CalculateFinalValue() * 0.75);
+            Slash3.GetComponent<Projectile>().damage = (float)(character.GetAttack().CalculateFinalValue() * 0.75);
             Slash3.GetComponent<Rigidbody2D>().velocity = new Vector2(Mathf.Sign(transform.localScale.x) * 3f, 0);
         }
         if (combo < 3) GetComponent<Rigidbody2D>().velocity = new Vector2(Mathf.Sign(gameObject.transform.localScale.x) * 1f, 0);
@@ -130,7 +132,7 @@ public class CharacterAttack : MonoBehaviour
             {
                 if (mobHealth.IsDead() && mob.GetComponent<MobReward>().GetIsRewardGiven() == false)
                 {
-                    foreach (Quest quest in gameObject.GetComponent<Character>().questList.quests)
+                    foreach (Quest quest in character.questList.quests)
                     {
                         if (quest.questCriteria.criteriaType == CriteriaType.Kill)
                         {
@@ -150,7 +152,7 @@ public class CharacterAttack : MonoBehaviour
             {
                 if (bossHealth.IsDead() && mob.GetComponent<BossReward>().GetIsRewardGiven() == false)
                 {
-                    foreach (Quest quest in gameObject.GetComponent<Character>().questList.quests)
+                    foreach (Quest quest in character.questList.quests)
                     {
                         if (quest.questCriteria.criteriaType == CriteriaType.Kill)
                         {
@@ -207,7 +209,7 @@ public class CharacterAttack : MonoBehaviour
         FindObjectOfType<AudioManager>().StopEffect("CharacterLaser");
         FindObjectOfType<AudioManager>().PlayEffect("CharacterLaser");
         GameObject fireBall = Instantiate(fireball, firePoint.transform.position, Quaternion.identity) as GameObject;
-        fireBall.GetComponent<Projectile>().damage = (float)(gameObject.GetComponent<Character>().GetAttack().CalculateFinalValue()*0.75);
+        fireBall.GetComponent<Projectile>().damage = (float)(character.GetAttack().CalculateFinalValue()*0.75);
         fireBall.GetComponent<Rigidbody2D>().velocity = new Vector2(Mathf.Sign(transform.localScale.x) * 15.0f, 0);
         Invoke("AttackComplete", attackDelay);
     }
