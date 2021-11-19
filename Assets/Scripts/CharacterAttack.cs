@@ -142,7 +142,7 @@ public class CharacterAttack : MonoBehaviour
         combo++;
     }
 
-    public void UpdateQuestsAndRewards(Collider2D[] hitMobs)
+    private void UpdateQuestsAndRewards(Collider2D[] hitMobs)
     {
         foreach (Collider2D mob in hitMobs)
         {
@@ -189,7 +189,7 @@ public class CharacterAttack : MonoBehaviour
         }
     }
 
-    public void DealDamageToMobs(Collider2D[] hitMobs)
+    private void DealDamageToMobs(Collider2D[] hitMobs)
     {
         foreach (Collider2D mob in hitMobs)
         {
