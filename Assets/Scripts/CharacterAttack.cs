@@ -84,7 +84,7 @@ public class CharacterAttack : MonoBehaviour
         Collider2D[] hitMobs = Physics2D.OverlapCircleAll(attackPoint.position, attackRange, mobLayer);
         UpdateAttackValue();
         DealDamageToMobs(hitMobs);
-        UpdateQuests(hitMobs);
+        UpdateQuestsAndRewards(hitMobs);
         Invoke("AttackComplete", attackDelay);
     }
     public void AttackComplete()
@@ -142,7 +142,7 @@ public class CharacterAttack : MonoBehaviour
         combo++;
     }
 
-    public void UpdateQuests(Collider2D[] hitMobs)
+    public void UpdateQuestsAndRewards(Collider2D[] hitMobs)
     {
         foreach (Collider2D mob in hitMobs)
         {
