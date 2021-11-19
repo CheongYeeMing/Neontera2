@@ -18,6 +18,7 @@ public class CharacterAttack : MonoBehaviour
     [SerializeField] public float KnockbackY;
     
     public LayerMask mobLayer;
+
     private Character character;
     private CharacterAnimation characterAnimation;
     private CharacterMovement characterMovement;
@@ -52,7 +53,10 @@ public class CharacterAttack : MonoBehaviour
 
     private void Update()
     {
-        if (!characterMovement.IsAbleToMove()) return;
+        if (!characterMovement.IsAbleToMove())
+        {
+            return;
+        }
         if (Input.GetKey(KeyCode.A) && characterMovement.IsAbleToAttack() && !isAttacking && cooldownTimer > attackDelay)
         {
             Attack();
@@ -63,18 +67,19 @@ public class CharacterAttack : MonoBehaviour
         }
         cooldownTimer += Time.deltaTime;
         comboTimer += Time.deltaTime;
-        if (comboTimer > 1f) ResetCombo();
+        if (comboTimer > 1f)
+        {
+            ResetCombo();
+        }
     }
 
     private void Attack()
     {
         isAttacking = true;
-        
         FindObjectOfType<AudioManager>().PlayEffect("CharacterNormalAttack");
         ResetCooldownTimer();
         ResetComboTimer();
         ComboAttack();
-
         Collider2D[] hitMobs = Physics2D.OverlapCircleAll(attackPoint.position, attackRange, mobLayer);
         UpdateAttackValue();
         DealDamageToMobs(hitMobs);
@@ -102,7 +107,10 @@ public class CharacterAttack : MonoBehaviour
 
     private void ComboAttack()
     {
-        if (combo >= 4) ResetCombo();
+        if (combo >= 4)
+        {
+            ResetCombo();
+        }
         if (combo == 1)
         {
             characterAnimation.ChangeAnimationState(CHARACTER_ATTACK);
@@ -122,8 +130,14 @@ public class CharacterAttack : MonoBehaviour
             Slash3.GetComponent<Projectile>().damage = (float)(character.GetAttack().CalculateFinalValue() * 0.75);
             Slash3.GetComponent<Rigidbody2D>().velocity = new Vector2(Mathf.Sign(transform.localScale.x) * 3f, 0);
         }
-        if (combo < 3) GetComponent<Rigidbody2D>().velocity = new Vector2(Mathf.Sign(gameObject.transform.localScale.x) * 1f, 0);
-        else if (combo == 3) GetComponent<Rigidbody2D>().velocity = new Vector2(Mathf.Sign(gameObject.transform.localScale.x) * 3f, 0);
+        if (combo < 3)
+        {
+            GetComponent<Rigidbody2D>().velocity = new Vector2(Mathf.Sign(gameObject.transform.localScale.x) * 1f, 0);
+        }
+        else if (combo == 3)
+        {
+            GetComponent<Rigidbody2D>().velocity = new Vector2(Mathf.Sign(gameObject.transform.localScale.x) * 3f, 0);
+        }
         combo++;
     }
 
@@ -201,7 +215,10 @@ public class CharacterAttack : MonoBehaviour
 
     private void OnDrawGizmosSelected()
     {
-        if (attackPoint == null) return;
+        if (attackPoint == null)
+        {
+            return;
+        }
         Gizmos.DrawWireSphere(attackPoint.position, attackRange);
         Gizmos.DrawWireSphere(firePoint.position, attackRange);
     }
