@@ -1,5 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class CharacterAttack : MonoBehaviour
@@ -21,16 +19,20 @@ public class CharacterAttack : MonoBehaviour
 
     private Character character;
     private CharacterAnimation characterAnimation;
+    private CharacterLevel characterLevel;
     private CharacterMovement characterMovement;
+    private CharacterWallet characterWallet;
 
+    // Normal Attack 
     private float baseAttack;
     private float attack;
     private float cooldownTimer = Mathf.Infinity;
     private float attackRange = 1.5f;
 
+    // Attack status
     private bool isAttacking;
 
-    // Combo
+    // Combo Variables
     [SerializeField] GameObject Slash_1;
     [SerializeField] GameObject Slash_2;
     [SerializeField] GameObject Slash_3;
@@ -46,9 +48,7 @@ public class CharacterAttack : MonoBehaviour
 
     private void Awake()
     {
-        character = GetComponent<Character>();
-        characterAnimation = GetComponent<CharacterAnimation>();
-        characterMovement = GetComponent<CharacterMovement>();
+        GetCharacterComponents();
         ResetCombo();
     }
 
@@ -72,6 +72,15 @@ public class CharacterAttack : MonoBehaviour
         {
             ResetCombo();
         }
+    }
+
+    private void GetCharacterComponents()
+    {
+        character = GetComponent<Character>();
+        characterAnimation = GetComponent<CharacterAnimation>();
+        characterLevel = GetComponent<CharacterLevel>();
+        characterMovement = GetComponent<CharacterMovement>();
+        characterWallet = GetComponent<CharacterWallet>();
     }
 
     private void Attack()
@@ -153,7 +162,7 @@ public class CharacterAttack : MonoBehaviour
                 {
                     UpdateQuestsMob(mobHealth);
                     // Rewards for Mob kill
-                    mob.GetComponent<MobReward>().GetReward(GetComponent<CharacterLevel>(), GetComponent<CharacterWallet>());
+                    mob.GetComponent<MobReward>().GetReward(characterLevel, characterWallet);
                 }
             }
             BossHealth bossHealth;
@@ -163,7 +172,7 @@ public class CharacterAttack : MonoBehaviour
                 {
                     UpdateQuestsBoss(bossHealth);
                     // Rewards for Mob kill
-                    mob.GetComponent<BossReward>().GetReward(GetComponent<CharacterLevel>(), GetComponent<CharacterWallet>());
+                    mob.GetComponent<BossReward>().GetReward(characterLevel, characterWallet);
                 }
             }
         }
