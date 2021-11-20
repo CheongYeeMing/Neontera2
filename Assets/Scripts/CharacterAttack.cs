@@ -19,6 +19,7 @@ public class CharacterAttack : MonoBehaviour
 
     private Character character;
     private CharacterAnimation characterAnimation;
+    private CharacterLevel characterLevel;
     private CharacterMovement characterMovement;
 
     // Normal Attack 
@@ -76,6 +77,7 @@ public class CharacterAttack : MonoBehaviour
     {
         character = GetComponent<Character>();
         characterAnimation = GetComponent<CharacterAnimation>();
+        characterLevel = GetComponent<CharacterLevel>();
         characterMovement = GetComponent<CharacterMovement>();
     }
 
@@ -158,7 +160,7 @@ public class CharacterAttack : MonoBehaviour
                 {
                     UpdateQuestsMob(mobHealth);
                     // Rewards for Mob kill
-                    mob.GetComponent<MobReward>().GetReward(GetComponent<CharacterLevel>(), GetComponent<CharacterWallet>());
+                    mob.GetComponent<MobReward>().GetReward(characterLevel, GetComponent<CharacterWallet>());
                 }
             }
             BossHealth bossHealth;
@@ -168,7 +170,7 @@ public class CharacterAttack : MonoBehaviour
                 {
                     UpdateQuestsBoss(bossHealth);
                     // Rewards for Mob kill
-                    mob.GetComponent<BossReward>().GetReward(GetComponent<CharacterLevel>(), GetComponent<CharacterWallet>());
+                    mob.GetComponent<BossReward>().GetReward(characterLevel, GetComponent<CharacterWallet>());
                 }
             }
         }
