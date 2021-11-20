@@ -21,14 +21,16 @@ public class CharacterAttack : MonoBehaviour
     private CharacterAnimation characterAnimation;
     private CharacterMovement characterMovement;
 
+    // Normal Attack 
     private float baseAttack;
     private float attack;
     private float cooldownTimer = Mathf.Infinity;
     private float attackRange = 1.5f;
 
+    // Attack status
     private bool isAttacking;
 
-    // Combo
+    // Combo Variables
     [SerializeField] GameObject Slash_1;
     [SerializeField] GameObject Slash_2;
     [SerializeField] GameObject Slash_3;
@@ -44,9 +46,7 @@ public class CharacterAttack : MonoBehaviour
 
     private void Awake()
     {
-        character = GetComponent<Character>();
-        characterAnimation = GetComponent<CharacterAnimation>();
-        characterMovement = GetComponent<CharacterMovement>();
+        GetCharacterComponents();
         ResetCombo();
     }
 
@@ -70,6 +70,13 @@ public class CharacterAttack : MonoBehaviour
         {
             ResetCombo();
         }
+    }
+
+    private void GetCharacterComponents()
+    {
+        character = GetComponent<Character>();
+        characterAnimation = GetComponent<CharacterAnimation>();
+        characterMovement = GetComponent<CharacterMovement>();
     }
 
     private void Attack()
