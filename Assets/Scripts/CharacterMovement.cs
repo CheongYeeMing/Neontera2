@@ -32,6 +32,7 @@ public class CharacterMovement : MonoBehaviour
     {
         body = GetComponent<Rigidbody2D>();
         boxCollider = GetComponent<BoxCollider2D>();
+        characterAttack = GetComponent<CharacterAttack>();
         characterHealth = GetComponent<CharacterHealth>();
     }
 
