@@ -185,13 +185,23 @@ public class CharacterMovement : MonoBehaviour
 
     private bool IsGrounded()
     {
-        RaycastHit2D raycastHit = Physics2D.BoxCast(boxCollider.bounds.center, boxCollider.bounds.size, BOXCAST_ANGLE, Vector2.down, BOXCAST_DISTANCE, groundLayer);
+        RaycastHit2D raycastHit = Physics2D.BoxCast(boxCollider.bounds.center,
+            boxCollider.bounds.size,
+            BOXCAST_ANGLE,
+            Vector2.down,
+            BOXCAST_DISTANCE,
+            groundLayer);
         return raycastHit.collider != null;
     }
 
     private bool IsOnWall()
     {
-        RaycastHit2D raycastHit = Physics2D.BoxCast(boxCollider.bounds.center, boxCollider.bounds.size, BOXCAST_ANGLE, new Vector2(transform.localScale.x, 0), BOXCAST_DISTANCE, wallLayer);
+        RaycastHit2D raycastHit = Physics2D.BoxCast(boxCollider.bounds.center,
+            boxCollider.bounds.size,
+            BOXCAST_ANGLE,
+            new Vector2(transform.localScale.x, 0),
+            BOXCAST_DISTANCE,
+            wallLayer);
         return raycastHit.collider != null;
     }
 
