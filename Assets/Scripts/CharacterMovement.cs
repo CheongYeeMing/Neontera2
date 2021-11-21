@@ -72,8 +72,6 @@ public class CharacterMovement : MonoBehaviour
         UpdateFacingDirection();
 
         // Set animator parameters
-        //animator.SetBool("run", horizontalInput != 0);
-        //animator.SetBool("grounded", isGrounded());
         if (IsGrounded() && !characterAttack.IsAttacking())
         {
             if (IsMoving())
