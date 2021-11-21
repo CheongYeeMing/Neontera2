@@ -62,7 +62,7 @@ public class CharacterMovement : MonoBehaviour
         UpdateWalkDustParticle();
         UpdateSpeed();
         if (characterAttack.IsAttacking() && IsGrounded()) return;
-        if (IsAbleToMove() == false)
+        if (!IsAbleToMove())
         {
             characterAnimation.ChangeAnimationState(CHARACTER_IDLE);
             return;
