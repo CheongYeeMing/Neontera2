@@ -54,7 +54,7 @@ public class CharacterMovement : MonoBehaviour
     private void Start()
     {
         location = Data.location;
-        gameObject.transform.position = new Vector2(Data.Xcoordinate,Data.Ycoordinate);
+        transform.position = new Vector2(Data.Xcoordinate,Data.Ycoordinate);
     }
 
     private void FixedUpdate()
