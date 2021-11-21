@@ -4,13 +4,13 @@ using UnityEngine;
 
 public class CharacterMovement : MonoBehaviour
 {
-    // Mob Animation States
+    private const string AUDIO_JUMP = "Jump";
+    private const string AUDIO_RUN = "Run";
+    private const float BOXCAST_ANGLE = 0;
+    private const float BOXCAST_DISTANCE = 0.03f;
     private const string CHARACTER_IDLE = "Idle";
     private const string CHARACTER_RUN = "Run";
     private const string CHARACTER_JUMP = "Jump";
-
-    private const float BOXCAST_ANGLE = 0;
-    private const float BOXCAST_DISTANCE = 0.03f;
     private const float CHARACTER_X = 0.3f;
     private const float CHARACTER_Y = 0.3f;
     private const float CHARACTER_Z = 1;
@@ -112,12 +112,12 @@ public class CharacterMovement : MonoBehaviour
     {
         if (IsGrounded() && IsMoving())
         {
-            FindObjectOfType<AudioManager>().PlayEffect("Run");
+            FindObjectOfType<AudioManager>().PlayEffect(AUDIO_RUN);
         }
-        else FindObjectOfType<AudioManager>().StopEffect("Run");
+        else FindObjectOfType<AudioManager>().StopEffect(AUDIO_RUN);
         if (IsGrounded())
         {
-            FindObjectOfType<AudioManager>().StopEffect("Jump");
+            FindObjectOfType<AudioManager>().StopEffect(AUDIO_JUMP);
         }
     }
 
@@ -169,7 +169,7 @@ public class CharacterMovement : MonoBehaviour
             body.velocity = new Vector2(body.velocity.x, jumpPower);
             characterAnimation.ChangeAnimationState(CHARACTER_JUMP);
             CreateDust();
-            FindObjectOfType<AudioManager>().PlayEffect("Jump");
+            FindObjectOfType<AudioManager>().PlayEffect(AUDIO_JUMP);
         }
         else if (IsOnWall() && !IsGrounded())
         {
@@ -180,7 +180,7 @@ public class CharacterMovement : MonoBehaviour
                 body.velocity = new Vector2(-Mathf.Sign(transform.localScale.x) * 10, jumpPower);
                 transform.localScale= new Vector3(-Mathf.Sign(transform.localScale.x) * 0.3f, transform.localScale.y, transform.localScale.z);
                 CreateDust();
-                FindObjectOfType<AudioManager>().PlayEffect("Jump");
+                FindObjectOfType<AudioManager>().PlayEffect(AUDIO_JUMP);
             }
             else
             {
