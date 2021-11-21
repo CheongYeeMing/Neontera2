@@ -9,6 +9,7 @@ public class CharacterMovement : MonoBehaviour
     private const string CHARACTER_RUN = "Run";
     private const string CHARACTER_JUMP = "Jump";
 
+    private const float BOXCAST_ANGLE = 0;
     private const float BOXCAST_DISTANCE = 0.03f;
     private const float WALL_JUMP_COOLDOWN = 0.2f;
 
@@ -184,13 +185,13 @@ public class CharacterMovement : MonoBehaviour
 
     private bool IsGrounded()
     {
-        RaycastHit2D raycastHit = Physics2D.BoxCast(boxCollider.bounds.center, boxCollider.bounds.size, 0, Vector2.down, BOXCAST_DISTANCE, groundLayer);
+        RaycastHit2D raycastHit = Physics2D.BoxCast(boxCollider.bounds.center, boxCollider.bounds.size, BOXCAST_ANGLE, Vector2.down, BOXCAST_DISTANCE, groundLayer);
         return raycastHit.collider != null;
     }
 
     private bool IsOnWall()
     {
-        RaycastHit2D raycastHit = Physics2D.BoxCast(boxCollider.bounds.center, boxCollider.bounds.size, 0, new Vector2(transform.localScale.x, 0), BOXCAST_DISTANCE, wallLayer);
+        RaycastHit2D raycastHit = Physics2D.BoxCast(boxCollider.bounds.center, boxCollider.bounds.size, BOXCAST_ANGLE, new Vector2(transform.localScale.x, 0), BOXCAST_DISTANCE, wallLayer);
         return raycastHit.collider != null;
     }
 
