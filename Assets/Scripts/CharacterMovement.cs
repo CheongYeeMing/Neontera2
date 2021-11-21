@@ -11,6 +11,8 @@ public class CharacterMovement : MonoBehaviour
 
     private const float BOXCAST_ANGLE = 0;
     private const float BOXCAST_DISTANCE = 0.03f;
+    private const float GRAVITY_SCALE_ZERO = 0;
+    private const float GRAVITY_SCALE_NORMAL = 3;
     private const float WALL_JUMP_COOLDOWN = 0.2f;
 
     [SerializeField] private LayerMask groundLayer;
@@ -87,11 +89,11 @@ public class CharacterMovement : MonoBehaviour
 
             if (IsOnWall() && !IsGrounded())
             {
-                body.gravityScale = 0;
+                body.gravityScale = GRAVITY_SCALE_ZERO;
                 body.velocity = new Vector2(transform.localScale.x, 0.3f);
             } else
             {
-                body.gravityScale = 3;
+                body.gravityScale = GRAVITY_SCALE_NORMAL;
             }
             // Player jump key
             if (Input.GetKey(KeyCode.UpArrow) || Input.GetKey(KeyCode.Space))
