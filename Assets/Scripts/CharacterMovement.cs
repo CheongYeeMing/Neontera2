@@ -16,6 +16,7 @@ public class CharacterMovement : MonoBehaviour
     private const float CHARACTER_Z = 1;
     private const float GRAVITY_SCALE_ZERO = 0;
     private const float GRAVITY_SCALE_NORMAL = 3;
+    private const string HORIZONTAL_AXIS = "Horizontal";
     private const float MINIMUM_HORIZONTAL_LEFT_INPUT = -0.01f;
     private const float MINIMUM_HORIZONTAL_RIGHT_INPUT = 0.01f;
     private const float WALL_JUMP_COOLDOWN = 0.2f;
@@ -139,7 +140,7 @@ public class CharacterMovement : MonoBehaviour
 
     private void UpdateHorizontalInput()
     {
-        horizontalInput = Input.GetAxis("Horizontal");
+        horizontalInput = Input.GetAxis(HORIZONTAL_AXIS);
     }
 
     private bool IsMoving()
