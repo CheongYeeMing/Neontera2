@@ -29,12 +29,11 @@ public class CharacterMovement : MonoBehaviour
     [SerializeField] ParticleSystem walkDust;
 
     private BoxCollider2D boxCollider;
-    private Rigidbody2D body;
-
     private Character character;
     private CharacterAnimation characterAnimation;
     private CharacterAttack characterAttack;
     private CharacterHealth characterHealth;
+    private Rigidbody2D body;
 
     private float wallJumpTimer; // Prevent instant teleportation up wall
     private float horizontalInput;
