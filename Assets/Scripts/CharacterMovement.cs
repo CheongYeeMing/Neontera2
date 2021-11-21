@@ -11,8 +11,13 @@ public class CharacterMovement : MonoBehaviour
 
     private const float BOXCAST_ANGLE = 0;
     private const float BOXCAST_DISTANCE = 0.03f;
+    private const float CHARACTER_X = 0.3f;
+    private const float CHARACTER_Y = 0.3f;
+    private const float CHARACTER_Z = 1;
     private const float GRAVITY_SCALE_ZERO = 0;
     private const float GRAVITY_SCALE_NORMAL = 3;
+    private const float MINIMUM_HORIZONTAL_LEFT_INPUT = -0.01f;
+    private const float MINIMUM_HORIZONTAL_RIGHT_INPUT = 0.01f;
     private const float WALL_JUMP_COOLDOWN = 0.2f;
 
     [SerializeField] private LayerMask groundLayer;
@@ -90,7 +95,7 @@ public class CharacterMovement : MonoBehaviour
             if (IsOnWall() && !IsGrounded())
             {
                 body.gravityScale = GRAVITY_SCALE_ZERO;
-                body.velocity = new Vector2(transform.localScale.x, 0.3f);
+                body.velocity = new Vector2(transform.localScale.x, CHARACTER_Y);
             } else
             {
                 body.gravityScale = GRAVITY_SCALE_NORMAL;
@@ -124,13 +129,13 @@ public class CharacterMovement : MonoBehaviour
     private void UpdateFacingDirection()
     {
         // Flip player to match facing direction when moving
-        if (horizontalInput > 0.01f) // Character facing right
+        if (horizontalInput > MINIMUM_HORIZONTAL_RIGHT_INPUT) // Character facing right
         {
-            transform.localScale = new Vector3(0.3f, 0.3f, 1);
+            transform.localScale = new Vector3(CHARACTER_X, CHARACTER_Y, CHARACTER_Z);
         }
-        else if (horizontalInput < -0.01f) // Character facing left
+        else if (horizontalInput < MINIMUM_HORIZONTAL_LEFT_INPUT) // Character facing left
         {
-            transform.localScale = new Vector3(-0.3f, 0.3f, 1); // Flip the x scale
+            transform.localScale = new Vector3(-CHARACTER_X, CHARACTER_Y, CHARACTER_Z); // Flip the x scale
         }
     }
 
