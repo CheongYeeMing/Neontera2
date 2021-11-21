@@ -19,6 +19,7 @@ public class CharacterMovement : MonoBehaviour
     private BoxCollider2D boxCollider;
     private Rigidbody2D body;
 
+    private CharacterAnimation characterAnimation;
     private CharacterAttack characterAttack;
     private CharacterHealth characterHealth;
 
@@ -32,6 +33,7 @@ public class CharacterMovement : MonoBehaviour
     {
         body = GetComponent<Rigidbody2D>();
         boxCollider = GetComponent<BoxCollider2D>();
+        characterAnimation = GetComponent<CharacterAnimation>();
         characterAttack = GetComponent<CharacterAttack>();
         characterHealth = GetComponent<CharacterHealth>();
     }
@@ -49,7 +51,7 @@ public class CharacterMovement : MonoBehaviour
         if (characterAttack.IsAttacking() && IsGrounded()) return;
         if (IsAbleToMove() == false)
         {
-            GetComponent<CharacterAnimation>().ChangeAnimationState(CHARACTER_IDLE);
+            characterAnimation.ChangeAnimationState(CHARACTER_IDLE);
             return;
         }
         UpdateHorizontalInput();
@@ -63,11 +65,11 @@ public class CharacterMovement : MonoBehaviour
         {
             if (IsMoving())
             {
-                gameObject.GetComponent<CharacterAnimation>().ChangeAnimationState(CHARACTER_RUN);
+                characterAnimation.ChangeAnimationState(CHARACTER_RUN);
             }
             else
             {
-                gameObject.GetComponent<CharacterAnimation>().ChangeAnimationState(CHARACTER_IDLE);
+                characterAnimation.ChangeAnimationState(CHARACTER_IDLE);
             }
         }
 
@@ -152,13 +154,13 @@ public class CharacterMovement : MonoBehaviour
         if (IsGrounded())
         {
             body.velocity = new Vector2(body.velocity.x, jumpPower);
-            gameObject.GetComponent<CharacterAnimation>().ChangeAnimationState(CHARACTER_JUMP);
+            characterAnimation.ChangeAnimationState(CHARACTER_JUMP);
             CreateDust();
             FindObjectOfType<AudioManager>().PlayEffect("Jump");
         }
         else if (IsOnWall() && !IsGrounded())
         {
-            gameObject.GetComponent<CharacterAnimation>().ChangeAnimationState(CHARACTER_JUMP);
+            characterAnimation.ChangeAnimationState(CHARACTER_JUMP);
             // Wall grab animation !!
             if (horizontalInput == 0)
             {
