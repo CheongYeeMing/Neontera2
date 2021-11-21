@@ -19,6 +19,7 @@ public class CharacterMovement : MonoBehaviour
     private BoxCollider2D boxCollider;
     private Rigidbody2D body;
 
+    private Character character;
     private CharacterAnimation characterAnimation;
     private CharacterAttack characterAttack;
     private CharacterHealth characterHealth;
@@ -33,6 +34,7 @@ public class CharacterMovement : MonoBehaviour
     {
         body = GetComponent<Rigidbody2D>();
         boxCollider = GetComponent<BoxCollider2D>();
+        character = GetComponent<Character>();
         characterAnimation = GetComponent<CharacterAnimation>();
         characterAttack = GetComponent<CharacterAttack>();
         characterHealth = GetComponent<CharacterHealth>();
@@ -110,7 +112,7 @@ public class CharacterMovement : MonoBehaviour
 
     private void UpdateSpeed()
     {
-        speed = GetComponent<Character>().GetSpeed().CalculateFinalValue();
+        speed = character.GetSpeed().CalculateFinalValue();
     }
 
     private void UpdateFacingDirection()
