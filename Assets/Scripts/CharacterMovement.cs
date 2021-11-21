@@ -19,6 +19,7 @@ public class CharacterMovement : MonoBehaviour
     private BoxCollider2D boxCollider;
     private Rigidbody2D body;
 
+    private CharacterAttack characterAttack;
     private CharacterHealth characterHealth;
 
     private float wallJumpTimer; // Prevent instant teleportation up wall
@@ -44,7 +45,7 @@ public class CharacterMovement : MonoBehaviour
     {
         UpdateWalkDustParticle();
         UpdateSpeed();
-        if (GetComponent<CharacterAttack>().IsAttacking() && IsGrounded()) return;
+        if (characterAttack.IsAttacking() && IsGrounded()) return;
         if (IsAbleToMove() == false)
         {
             GetComponent<CharacterAnimation>().ChangeAnimationState(CHARACTER_IDLE);
@@ -57,7 +58,7 @@ public class CharacterMovement : MonoBehaviour
         // Set animator parameters
         //animator.SetBool("run", horizontalInput != 0);
         //animator.SetBool("grounded", isGrounded());
-        if (IsGrounded() && !GetComponent<CharacterAttack>().IsAttacking())
+        if (IsGrounded() && !characterAttack.IsAttacking())
         {
             if (IsMoving())
             {
