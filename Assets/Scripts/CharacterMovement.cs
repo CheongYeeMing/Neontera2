@@ -191,7 +191,8 @@ public class CharacterMovement : MonoBehaviour
             Vector2.down,
             BOXCAST_DISTANCE,
             groundLayer);
-        return raycastHit.collider != null;
+        bool isOnGround = raycastHit.collider != null;
+        return isOnGround;
     }
 
     private bool IsOnWall()
@@ -202,7 +203,8 @@ public class CharacterMovement : MonoBehaviour
             new Vector2(transform.localScale.x, 0),
             BOXCAST_DISTANCE,
             wallLayer);
-        return raycastHit.collider != null;
+        bool isOnWall = raycastHit.collider != null;
+        return isOnWall;
     }
 
     public bool IsAbleToAttack()
