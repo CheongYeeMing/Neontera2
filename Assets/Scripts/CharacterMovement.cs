@@ -9,6 +9,8 @@ public class CharacterMovement : MonoBehaviour
     private const string CHARACTER_RUN = "Run";
     private const string CHARACTER_JUMP = "Jump";
 
+    private const float WALL_JUMP_COOLDOWN = 0.2f;
+
     [SerializeField] private LayerMask groundLayer;
     [SerializeField] private LayerMask wallLayer;
     [SerializeField] private float speed;
@@ -140,7 +142,7 @@ public class CharacterMovement : MonoBehaviour
 
     private bool IsAbleToWallJump()
     {
-        if (wallJumpTimer > 0.2f)
+        if (wallJumpTimer > WALL_JUMP_COOLDOWN)
         {
             return true;
         }
