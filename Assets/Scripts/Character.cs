@@ -7,7 +7,7 @@ public class Character : MonoBehaviour
     [SerializeField] public Inventory inventory;
     [SerializeField] public QuestList questList;
     [SerializeField] public StatPanel statPanel;
-    [SerializeField] public SelectedItemPanel selectedItemPanel;
+    [SerializeField] private SelectedItemPanel selectedItemPanel;
     [SerializeField] public SelectedQuestWindow selectedQuestWindow;
 
     public CharacterStat Attack;
