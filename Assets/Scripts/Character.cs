@@ -32,7 +32,10 @@ public class Character : MonoBehaviour
 
     public void Start()
     {
-        foreach (int item in Data.equippedItems) LoadEquip((EquipableItem)(itemList.GetItem(item)));
+        foreach (int item in Data.equippedItems)
+        {
+            LoadEquip((EquipableItem)(itemList.GetItem(item)));
+        }
     }
 
     public void ShowInSelectedQuestWindow(Quest quest)
