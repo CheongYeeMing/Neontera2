@@ -2,7 +2,7 @@ using UnityEngine;
 
 public class Character : MonoBehaviour
 {
-    [SerializeField] BuffWindow buffWindow;
+    [SerializeField] private BuffWindow buffWindow;
     [SerializeField] public EquipmentPanel equipmentPanel;
     [SerializeField] public Inventory inventory;
     [SerializeField] public QuestList questList;
