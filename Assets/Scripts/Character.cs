@@ -2,13 +2,13 @@ using UnityEngine;
 
 public class Character : MonoBehaviour
 {
-    [SerializeField] public Inventory inventory;
+    [SerializeField] public BuffWindow buffWindow;
     [SerializeField] public EquipmentPanel equipmentPanel;
+    [SerializeField] public Inventory inventory;
+    [SerializeField] public QuestList questList;
     [SerializeField] public StatPanel statPanel;
     [SerializeField] public SelectedItemPanel selectedItemPanel;
-    [SerializeField] public QuestList questList;
     [SerializeField] public SelectedQuestWindow selectedQuestWindow;
-    [SerializeField] public BuffWindow buffWindow;
 
     public CharacterStat Attack;
     public CharacterStat Health;
