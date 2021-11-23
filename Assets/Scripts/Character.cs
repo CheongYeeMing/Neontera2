@@ -8,7 +8,7 @@ public class Character : MonoBehaviour
     [SerializeField] public QuestList questList;
     [SerializeField] public StatPanel statPanel;
     [SerializeField] private SelectedItemPanel selectedItemPanel;
-    [SerializeField] public SelectedQuestWindow selectedQuestWindow;
+    [SerializeField] private SelectedQuestWindow selectedQuestWindow;
 
     public CharacterStat Attack;
     public CharacterStat Health;
