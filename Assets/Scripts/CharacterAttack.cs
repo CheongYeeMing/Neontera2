@@ -10,7 +10,7 @@ public class CharacterAttack : MonoBehaviour
     [SerializeField] private GameObject fireball;
     [SerializeField] public float KnockbackX;
     [SerializeField] public float KnockbackY;
-    
+
     public LayerMask mobLayer;
     private CharacterMovement playerMovement;
 
@@ -65,7 +65,7 @@ public class CharacterAttack : MonoBehaviour
     private void Attack()
     {
         isAttacking = true;
-        
+
         FindObjectOfType<AudioManager>().PlayEffect("CharacterNormalAttack");
         cooldownTimer = 0;
         comboTimer = 0;
@@ -176,7 +176,7 @@ public class CharacterAttack : MonoBehaviour
         baseAttack += (baseAttack * 0.015f) * ((100 - level) * 0.1f);
         GetComponent<Character>().Attack.SetBaseValue((int)baseAttack);
         attack = GetComponent<Character>().GetAttack().CalculateFinalValue();
-        GetComponent<Character>().statPanel.UpdateStatValues();
+        GetComponent<Character>().UpdateCharacterStats();
     }
 
     public void OnDrawGizmosSelected()
@@ -193,7 +193,7 @@ public class CharacterAttack : MonoBehaviour
         FindObjectOfType<AudioManager>().StopEffect("CharacterLaser");
         FindObjectOfType<AudioManager>().PlayEffect("CharacterLaser");
         GameObject fireBall = Instantiate(fireball, firePoint.transform.position, Quaternion.identity) as GameObject;
-        fireBall.GetComponent<Projectile>().damage = (float)(gameObject.GetComponent<Character>().GetAttack().CalculateFinalValue()*0.75);
+        fireBall.GetComponent<Projectile>().damage = (float)(gameObject.GetComponent<Character>().GetAttack().CalculateFinalValue() * 0.75);
         fireBall.GetComponent<Rigidbody2D>().velocity = new Vector2(Mathf.Sign(transform.localScale.x) * 15.0f, 0);
 
         Invoke("AttackComplete", attackDelay);

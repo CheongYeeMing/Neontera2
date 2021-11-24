@@ -4,10 +4,22 @@ using UnityEngine;
 
 public class CharacterMovement : MonoBehaviour
 {
-    // Mob Animation States
+    private const string AUDIO_JUMP = "Jump";
+    private const string AUDIO_RUN = "Run";
+    private const float BOXCAST_ANGLE = 0;
+    private const float BOXCAST_DISTANCE = 0.03f;
     private const string CHARACTER_IDLE = "Idle";
     private const string CHARACTER_RUN = "Run";
     private const string CHARACTER_JUMP = "Jump";
+    private const float CHARACTER_X = 0.3f;
+    private const float CHARACTER_Y = 0.3f;
+    private const float CHARACTER_Z = 1;
+    private const float GRAVITY_SCALE_ZERO = 0;
+    private const float GRAVITY_SCALE_NORMAL = 3;
+    private const string HORIZONTAL_AXIS = "Horizontal";
+    private const float MINIMUM_HORIZONTAL_LEFT_INPUT = -0.01f;
+    private const float MINIMUM_HORIZONTAL_RIGHT_INPUT = 0.01f;
+    private const float WALL_JUMP_COOLDOWN = 0.2f;
 
     [SerializeField] private LayerMask groundLayer;
     [SerializeField] private LayerMask wallLayer;
@@ -17,9 +29,13 @@ public class CharacterMovement : MonoBehaviour
     [SerializeField] ParticleSystem walkDust;
 
     private BoxCollider2D boxCollider;
+    private Character character;
+    private CharacterAnimation characterAnimation;
+    private CharacterAttack characterAttack;
+    private CharacterHealth characterHealth;
     private Rigidbody2D body;
 
-    private float wallJumpCooldown; // Prevent instant teleportation up wall
+    private float wallJumpTimer; // Prevent instant teleportation up wall
     private float horizontalInput;
 
     // Location
@@ -29,41 +45,42 @@ public class CharacterMovement : MonoBehaviour
     {
         body = GetComponent<Rigidbody2D>();
         boxCollider = GetComponent<BoxCollider2D>();
+        character = GetComponent<Character>();
+        characterAnimation = GetComponent<CharacterAnimation>();
+        characterAttack = GetComponent<CharacterAttack>();
+        characterHealth = GetComponent<CharacterHealth>();
     }
 
     private void Start()
     {
         location = Data.location;
-        gameObject.transform.position = new Vector2(Data.Xcoordinate,Data.Ycoordinate);
+        transform.position = new Vector2(Data.Xcoordinate,Data.Ycoordinate);
     }
 
     private void FixedUpdate()
     {
         UpdateWalkDustParticle();
         UpdateSpeed();
-        if (GetComponent<CharacterAttack>().GetIsAttacking() && IsGrounded()) return;
-        if (IsAbleToMove() == false)
+        if (characterAttack.GetIsAttacking() && IsGrounded()) return;
+        if (!IsAbleToMove())
         {
-            GetComponent<CharacterAnimation>().ChangeAnimationState(CHARACTER_IDLE);
-            //body.velocity = Vector2.zero;
+            characterAnimation.ChangeAnimationState(CHARACTER_IDLE);
             return;
         }
         UpdateHorizontalInput();
-        UpdateAudio();
+        UpdateMovementAudio();
         UpdateFacingDirection();
 
         // Set animator parameters
-        //animator.SetBool("run", horizontalInput != 0);
-        //animator.SetBool("grounded", isGrounded());
-        if (IsGrounded() && !GetComponent<CharacterAttack>().GetIsAttacking())
+        if (IsGrounded() && !characterAttack.GetIsAttacking())
         {
             if (IsMoving())
             {
-                gameObject.GetComponent<CharacterAnimation>().ChangeAnimationState(CHARACTER_RUN);
+                characterAnimation.ChangeAnimationState(CHARACTER_RUN);
             }
             else
             {
-                gameObject.GetComponent<CharacterAnimation>().ChangeAnimationState(CHARACTER_IDLE);
+                characterAnimation.ChangeAnimationState(CHARACTER_IDLE);
             }
         }
 
@@ -75,11 +92,11 @@ public class CharacterMovement : MonoBehaviour
 
             if (IsOnWall() && !IsGrounded())
             {
-                body.gravityScale = 0;
-                body.velocity = new Vector2(transform.localScale.x, 0.3f);
+                body.gravityScale = GRAVITY_SCALE_ZERO;
+                body.velocity = new Vector2(transform.localScale.x, CHARACTER_Y);
             } else
             {
-                body.gravityScale = 3;
+                body.gravityScale = GRAVITY_SCALE_NORMAL;
             }
             // Player jump key
             if (Input.GetKey(KeyCode.UpArrow) || Input.GetKey(KeyCode.Space))
@@ -89,37 +106,40 @@ public class CharacterMovement : MonoBehaviour
         }
     }
 
-    private void UpdateAudio()
+    private void UpdateMovementAudio()
     {
         if (IsGrounded() && IsMoving())
         {
-            FindObjectOfType<AudioManager>().PlayEffect("Run");
+            FindObjectOfType<AudioManager>().PlayEffect(AUDIO_RUN);
         }
-        else FindObjectOfType<AudioManager>().StopEffect("Run");
-        if (IsGrounded()) FindObjectOfType<AudioManager>().StopEffect("Jump");
+        else FindObjectOfType<AudioManager>().StopEffect(AUDIO_RUN);
+        if (IsGrounded())
+        {
+            FindObjectOfType<AudioManager>().StopEffect(AUDIO_JUMP);
+        }
     }
 
     private void UpdateSpeed()
     {
-        speed = GetComponent<Character>().GetSpeed().CalculateFinalValue();
+        speed = character.GetSpeed().CalculateFinalValue();
     }
 
     private void UpdateFacingDirection()
     {
         // Flip player to match facing direction when moving
-        if (horizontalInput > 0.01f) // Character facing right
+        if (horizontalInput > MINIMUM_HORIZONTAL_RIGHT_INPUT) // Character facing right
         {
-            transform.localScale = new Vector3(0.3f, 0.3f, 1);
+            transform.localScale = new Vector3(CHARACTER_X, CHARACTER_Y, CHARACTER_Z);
         }
-        else if (horizontalInput < -0.01f) // Character facing left
+        else if (horizontalInput < MINIMUM_HORIZONTAL_LEFT_INPUT) // Character facing left
         {
-            transform.localScale = new Vector3(-0.3f, 0.3f, 1); // Flip the x scale
+            transform.localScale = new Vector3(-CHARACTER_X, CHARACTER_Y, CHARACTER_Z); // Flip the x scale
         }
     }
 
     private void UpdateHorizontalInput()
     {
-        horizontalInput = Input.GetAxis("Horizontal");
+        horizontalInput = Input.GetAxis(HORIZONTAL_AXIS);
     }
 
     private bool IsMoving()
@@ -129,13 +149,13 @@ public class CharacterMovement : MonoBehaviour
 
     private bool IsAbleToWallJump()
     {
-        if (wallJumpCooldown > 0.2f)
+        if (wallJumpTimer > WALL_JUMP_COOLDOWN)
         {
             return true;
         }
         else
         {
-            wallJumpCooldown += Time.deltaTime;
+            wallJumpTimer += Time.deltaTime;
             return false;
         }
     }
@@ -145,40 +165,51 @@ public class CharacterMovement : MonoBehaviour
         if (IsGrounded())
         {
             body.velocity = new Vector2(body.velocity.x, jumpPower);
-            //animator.SetTrigger("jump");
-            gameObject.GetComponent<CharacterAnimation>().ChangeAnimationState(CHARACTER_JUMP);
+            characterAnimation.ChangeAnimationState(CHARACTER_JUMP);
             CreateDust();
-            FindObjectOfType<AudioManager>().PlayEffect("Jump");
+            FindObjectOfType<AudioManager>().PlayEffect(AUDIO_JUMP);
         }
         else if (IsOnWall() && !IsGrounded())
         {
-            gameObject.GetComponent<CharacterAnimation>().ChangeAnimationState(CHARACTER_JUMP);
+            characterAnimation.ChangeAnimationState(CHARACTER_JUMP);
             // Wall grab animation !!
             if (horizontalInput == 0)
             {
                 body.velocity = new Vector2(-Mathf.Sign(transform.localScale.x) * 10, jumpPower);
                 transform.localScale= new Vector3(-Mathf.Sign(transform.localScale.x) * 0.3f, transform.localScale.y, transform.localScale.z);
                 CreateDust();
-                FindObjectOfType<AudioManager>().PlayEffect("Jump");
+                FindObjectOfType<AudioManager>().PlayEffect(AUDIO_JUMP);
             }
             else
             {
                 body.velocity = new Vector2(-Mathf.Sign(transform.localScale.x) * 3, 6);
             }
-            wallJumpCooldown = 0;
+            wallJumpTimer = 0;
         }
     }
 
     private bool IsGrounded()
     {
-        RaycastHit2D raycastHit = Physics2D.BoxCast(boxCollider.bounds.center, boxCollider.bounds.size, 0, Vector2.down, 0.03f, groundLayer);
-        return raycastHit.collider != null;
+        RaycastHit2D raycastHit = Physics2D.BoxCast(boxCollider.bounds.center,
+            boxCollider.bounds.size,
+            BOXCAST_ANGLE,
+            Vector2.down,
+            BOXCAST_DISTANCE,
+            groundLayer);
+        bool isOnGround = raycastHit.collider != null;
+        return isOnGround;
     }
 
     private bool IsOnWall()
     {
-        RaycastHit2D raycastHit = Physics2D.BoxCast(boxCollider.bounds.center, boxCollider.bounds.size, 0, new Vector2(transform.localScale.x, 0), 0.03f, wallLayer);
-        return raycastHit.collider != null;
+        RaycastHit2D raycastHit = Physics2D.BoxCast(boxCollider.bounds.center,
+            boxCollider.bounds.size,
+            BOXCAST_ANGLE,
+            new Vector2(transform.localScale.x, 0),
+            BOXCAST_DISTANCE,
+            wallLayer);
+        bool isOnWall = raycastHit.collider != null;
+        return isOnWall;
     }
 
     public bool IsAbleToAttack()
@@ -201,7 +232,7 @@ public class CharacterMovement : MonoBehaviour
         //{
         //    can = false;
         //}
-        return !IsOnWall() && !GetComponent<CharacterHealth>().IsDead();
+        return !IsOnWall() && !characterHealth.IsDead();
     }
 
     public bool IsAbleToMove()
@@ -215,7 +246,7 @@ public class CharacterMovement : MonoBehaviour
         {
             can = false;
         }
-        if (gameObject.GetComponent<CharacterHealth>().IsHurting() || gameObject.GetComponent<CharacterHealth>().IsDead())
+        if (characterHealth.IsHurting() || characterHealth.IsDead())
         {
             can = false;
         }

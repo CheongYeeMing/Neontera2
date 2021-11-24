@@ -1,16 +1,19 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class Character : MonoBehaviour
 {
-    [SerializeField] public Inventory inventory;
+    private const string AUDIO_CLICK = "Click";
+    private const string AUDIO_EQUIP_ITEM = "EquipItem";
+    private const string AUDIO_SELECT_QUEST = "SelectQuest";
+    private const float BASE_SPEED = 6;
+
+    [SerializeField] private BuffWindow buffWindow;
     [SerializeField] public EquipmentPanel equipmentPanel;
-    [SerializeField] public StatPanel statPanel;
-    [SerializeField] public SelectedItemPanel selectedItemPanel;
+    [SerializeField] public Inventory inventory;
     [SerializeField] public QuestList questList;
-    [SerializeField] public SelectedQuestWindow selectedQuestWindow;
-    [SerializeField] public BuffWindow buffWindow;
+    [SerializeField] private StatPanel statPanel;
+    [SerializeField] private SelectedItemPanel selectedItemPanel;
+    [SerializeField] private SelectedQuestWindow selectedQuestWindow;
 
     public CharacterStat Attack;
     public CharacterStat Health;
@@ -22,9 +25,9 @@ public class Character : MonoBehaviour
     {
         Attack.SetBaseValue(Data.baseAttack);
         Health.SetBaseValue(Data.baseHealth);
-        Speed.SetBaseValue(6);
+        Speed.SetBaseValue(BASE_SPEED);
         statPanel.SetStats(Attack, Health, Speed);
-        statPanel.UpdateStatValues();
+        UpdateCharacterStats();
         inventory.OnItemRightClickedEvent += EquipFromInventory;
         inventory.OnItemLeftClickedEvent += ShowInSelectedItemPanel;
         equipmentPanel.OnItemRightClickedEvent += UnequipFromEquipPanel;
@@ -34,21 +37,23 @@ public class Character : MonoBehaviour
 
     public void Start()
     {
-        foreach (int item in Data.equippedItems) LoadEquip((EquipableItem)(itemList.GetItem(item)));
+        foreach (int item in Data.equippedItems)
+        {
+            LoadEquip((EquipableItem)(itemList.GetItem(item)));
+        }
     }
 
     public void ShowInSelectedQuestWindow(Quest quest)
     {
-        Debug.Log("Here???");
-        FindObjectOfType<AudioManager>().StopEffect("SelectQuest");
-        FindObjectOfType<AudioManager>().PlayEffect("SelectQuest");
+        FindObjectOfType<AudioManager>().StopEffect(AUDIO_SELECT_QUEST);
+        FindObjectOfType<AudioManager>().PlayEffect(AUDIO_SELECT_QUEST);
         selectedQuestWindow.QuestSelected(quest);
     }
 
     private void ShowInSelectedItemPanel(Item item)
     {
-        FindObjectOfType<AudioManager>().StopEffect("Click");
-        FindObjectOfType<AudioManager>().PlayEffect("Click");
+        FindObjectOfType<AudioManager>().StopEffect(AUDIO_CLICK);
+        FindObjectOfType<AudioManager>().PlayEffect(AUDIO_CLICK);
         selectedItemPanel.item = item;
         if (item.itemType == Item.ItemType.Equipment && item is EquipableItem)
         {
@@ -91,16 +96,16 @@ public class Character : MonoBehaviour
             {
                 inventory.AddItem(previousItem);
                 previousItem.Unequip(this);
-                statPanel.UpdateStatValues();
+                UpdateCharacterStats();
             }
             item.Equip(this);
-            statPanel.UpdateStatValues();
+            UpdateCharacterStats();
         }
     }
 
     public void Equip(EquipableItem item)
     {
-        FindObjectOfType<AudioManager>().PlayEffect("EquipItem");
+        FindObjectOfType<AudioManager>().PlayEffect(AUDIO_EQUIP_ITEM);
         if (inventory.RemoveItem(item))
         {
             EquipableItem previousItem;
@@ -110,10 +115,10 @@ public class Character : MonoBehaviour
                 {
                     inventory.AddItem(previousItem);
                     previousItem.Unequip(this);
-                    statPanel.UpdateStatValues();
+                    UpdateCharacterStats();
                 }
                 item.Equip(this);
-                statPanel.UpdateStatValues();
+                UpdateCharacterStats();
             }
             else
             {
@@ -126,7 +131,7 @@ public class Character : MonoBehaviour
     {
         if (!inventory.IsFull() && equipmentPanel.RemoveItem(item)){
             item.Unequip(this);
-            statPanel.UpdateStatValues();
+            UpdateCharacterStats();
             inventory.AddItem(item);
         }
     }
@@ -135,7 +140,7 @@ public class Character : MonoBehaviour
     {
         equipmentPanel.RemoveItem(item);
         item.Unequip(this);
-        statPanel.UpdateStatValues();
+        UpdateCharacterStats();
     }
 
     public void Consume(ConsumableItem item)
@@ -148,7 +153,7 @@ public class Character : MonoBehaviour
             {
                 buffWindow.AddItem(item);
             }
-            statPanel.UpdateStatValues();
+            UpdateCharacterStats();
         }
     }
 
@@ -172,5 +177,10 @@ public class Character : MonoBehaviour
     public CharacterStat GetSpeed()
     {
         return Speed;
+    }
+
+    public void UpdateCharacterStats()
+    {
+        statPanel.UpdateStatValues();
     }
 }
