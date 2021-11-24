@@ -11,7 +11,7 @@ public class Character : MonoBehaviour
     [SerializeField] public EquipmentPanel equipmentPanel;
     [SerializeField] public Inventory inventory;
     [SerializeField] public QuestList questList;
-    [SerializeField] public StatPanel statPanel;
+    [SerializeField] private StatPanel statPanel;
     [SerializeField] private SelectedItemPanel selectedItemPanel;
     [SerializeField] private SelectedQuestWindow selectedQuestWindow;
 
@@ -27,7 +27,7 @@ public class Character : MonoBehaviour
         Health.SetBaseValue(Data.baseHealth);
         Speed.SetBaseValue(BASE_SPEED);
         statPanel.SetStats(Attack, Health, Speed);
-        statPanel.UpdateStatValues();
+        UpdateCharacterStats();
         inventory.OnItemRightClickedEvent += EquipFromInventory;
         inventory.OnItemLeftClickedEvent += ShowInSelectedItemPanel;
         equipmentPanel.OnItemRightClickedEvent += UnequipFromEquipPanel;
@@ -96,10 +96,10 @@ public class Character : MonoBehaviour
             {
                 inventory.AddItem(previousItem);
                 previousItem.Unequip(this);
-                statPanel.UpdateStatValues();
+                UpdateCharacterStats();
             }
             item.Equip(this);
-            statPanel.UpdateStatValues();
+            UpdateCharacterStats();
         }
     }
 
@@ -115,10 +115,10 @@ public class Character : MonoBehaviour
                 {
                     inventory.AddItem(previousItem);
                     previousItem.Unequip(this);
-                    statPanel.UpdateStatValues();
+                    UpdateCharacterStats();
                 }
                 item.Equip(this);
-                statPanel.UpdateStatValues();
+                UpdateCharacterStats();
             }
             else
             {
@@ -131,7 +131,7 @@ public class Character : MonoBehaviour
     {
         if (!inventory.IsFull() && equipmentPanel.RemoveItem(item)){
             item.Unequip(this);
-            statPanel.UpdateStatValues();
+            UpdateCharacterStats();
             inventory.AddItem(item);
         }
     }
@@ -140,7 +140,7 @@ public class Character : MonoBehaviour
     {
         equipmentPanel.RemoveItem(item);
         item.Unequip(this);
-        statPanel.UpdateStatValues();
+        UpdateCharacterStats();
     }
 
     public void Consume(ConsumableItem item)
@@ -153,7 +153,7 @@ public class Character : MonoBehaviour
             {
                 buffWindow.AddItem(item);
             }
-            statPanel.UpdateStatValues();
+            UpdateCharacterStats();
         }
     }
 
@@ -177,5 +177,10 @@ public class Character : MonoBehaviour
     public CharacterStat GetSpeed()
     {
         return Speed;
+    }
+
+    public void UpdateCharacterStats()
+    {
+        statPanel.UpdateStatValues();
     }
 }
