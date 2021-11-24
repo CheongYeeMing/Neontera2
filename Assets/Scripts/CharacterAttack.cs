@@ -199,7 +199,7 @@ public class CharacterAttack : MonoBehaviour
         Invoke("AttackComplete", attackDelay);
     }
 
-    public bool GetIsAttacking()
+    public bool IsAttacking()
     {
         return isAttacking;
     }
