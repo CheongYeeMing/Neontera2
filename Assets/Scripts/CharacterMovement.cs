@@ -61,7 +61,7 @@ public class CharacterMovement : MonoBehaviour
     {
         UpdateWalkDustParticle();
         UpdateSpeed();
-        if (characterAttack.IsAttacking() && IsGrounded()) return;
+        if (characterAttack.GetIsAttacking() && IsGrounded()) return;
         if (!IsAbleToMove())
         {
             characterAnimation.ChangeAnimationState(CHARACTER_IDLE);
@@ -72,7 +72,7 @@ public class CharacterMovement : MonoBehaviour
         UpdateFacingDirection();
 
         // Set animator parameters
-        if (IsGrounded() && !characterAttack.IsAttacking())
+        if (IsGrounded() && !characterAttack.GetIsAttacking())
         {
             if (IsMoving())
             {
