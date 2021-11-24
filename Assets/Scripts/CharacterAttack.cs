@@ -70,7 +70,6 @@ public class CharacterAttack : MonoBehaviour
         cooldownTimer = 0;
         comboTimer = 0;
         if (combo >= 4) combo = 1;
-        Debug.Log(combo);
         if (combo == 1)
         {
             gameObject.GetComponent<CharacterAnimation>().ChangeAnimationState(CHARACTER_ATTACK);
