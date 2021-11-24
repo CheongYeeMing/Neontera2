@@ -91,6 +91,7 @@ public class CharacterAttack : MonoBehaviour
         ResetComboTimer();
         ComboAttack();
         Collider2D[] hitMobs = Physics2D.OverlapCircleAll(attackPoint.position, attackRange, mobLayer);
+        Debug.Log(hitMobs.Length);
         UpdateAttackValue();
         DealDamageToMobs(hitMobs);
         UpdateQuestsAndRewards(hitMobs);
@@ -107,7 +108,7 @@ public class CharacterAttack : MonoBehaviour
         baseAttack += (baseAttack * 0.015f) * ((100 - level) * 0.1f);
         character.Attack.SetBaseValue((int)baseAttack);
         UpdateAttackValue();
-        character.statPanel.UpdateStatValues();
+        character.UpdateCharacterStats();
     }
 
     private void UpdateAttackValue()
@@ -210,6 +211,7 @@ public class CharacterAttack : MonoBehaviour
 
     private void DealDamageToMobs(Collider2D[] hitMobs)
     {
+        Debug.Log(hitMobs.Length);
         foreach (Collider2D mob in hitMobs)
         {
             MobHealth mobHealth;

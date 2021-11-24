@@ -153,7 +153,7 @@ public class CharacterHealth : MonoBehaviour, Health
         health += (baseMaxHealth * 0.01f) * ((100 - level) * 0.1f);
         maxHealth += (baseMaxHealth * 0.01f) * ((100 - level) * 0.1f);
         GetComponent<Character>().Health.SetBaseValue((int)baseMaxHealth);
-        GetComponent<Character>().statPanel.UpdateStatValues();
+        GetComponent<Character>().UpdateCharacterStats();
     }
 
     public void Die()
