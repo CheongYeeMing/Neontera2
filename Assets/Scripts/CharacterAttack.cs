@@ -108,7 +108,7 @@ public class CharacterAttack : MonoBehaviour
         foreach (Collider2D mob in hitMobs)
         {
             MobHealth mobHealth;
-            if (mob.TryGetComponent<MobHealth>(out mobHealth))
+            if (mob.TryGetComponent(out mobHealth))
             {
                 if (!mobHealth.IsHurting())
                 {
@@ -117,7 +117,7 @@ public class CharacterAttack : MonoBehaviour
                 }
             }
             BossHealth bossHealth;
-            if (mob.TryGetComponent<BossHealth>(out bossHealth))
+            if (mob.TryGetComponent(out bossHealth))
             {
                 if (!bossHealth.IsHurting())
                 {
