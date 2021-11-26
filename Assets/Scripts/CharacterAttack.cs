@@ -20,6 +20,7 @@ public class CharacterAttack : MonoBehaviour
 
     public LayerMask mobLayer;
     private Character character;
+    private CharacterAnimation characterAnimation;
     private CharacterMovement characterMovement;
 
     public float baseAttack;
@@ -45,6 +46,7 @@ public class CharacterAttack : MonoBehaviour
     private void Awake()
     {
         character = GetComponent<Character>();
+        characterAnimation = GetComponent<CharacterAnimation>();
         characterMovement = GetComponent<CharacterMovement>();
         combo = COMBO_SLASH_1;
     }
@@ -75,19 +77,19 @@ public class CharacterAttack : MonoBehaviour
         if (combo > COMBO_SLASH_3) combo = COMBO_SLASH_1;
         if (combo == COMBO_SLASH_1)
         {
-            gameObject.GetComponent<CharacterAnimation>().ChangeAnimationState(CHARACTER_ATTACK);
+            characterAnimation.ChangeAnimationState(CHARACTER_ATTACK);
             GameObject Slash1 = Instantiate(Slash_1, new Vector2(attackPoint.position.x, attackPoint.position.y), Quaternion.identity);
             Slash1.GetComponent<Rigidbody2D>().velocity = new Vector2(Mathf.Sign(transform.localScale.x) * 0.5f, -0.5f);
         }
         else if (combo == COMBO_SLASH_2)
         {
-            gameObject.GetComponent<CharacterAnimation>().ChangeAnimationState(CHARACTER_ATTACK_2);
+            characterAnimation.ChangeAnimationState(CHARACTER_ATTACK_2);
             GameObject Slash2 = Instantiate(Slash_2, new Vector2(attackPoint.position.x, attackPoint.position.y), Quaternion.identity);
             Slash2.GetComponent<Rigidbody2D>().velocity = new Vector2(Mathf.Sign(transform.localScale.x) * 0.4f, 0.6f);
         }
         else if (combo == COMBO_SLASH_3)
         {
-            gameObject.GetComponent<CharacterAnimation>().ChangeAnimationState(CHARACTER_ATTACK_3);
+            characterAnimation.ChangeAnimationState(CHARACTER_ATTACK_3);
             GameObject Slash3 = Instantiate(Slash_3, attackPoint.position, Quaternion.identity) as GameObject;
             Slash3.GetComponent<Projectile>().damage = (float)(character.GetAttack().CalculateFinalValue() * 0.75);
             Slash3.GetComponent<Rigidbody2D>().velocity = new Vector2(Mathf.Sign(transform.localScale.x) * 3f, 0);
@@ -188,7 +190,7 @@ public class CharacterAttack : MonoBehaviour
 
     private void SpecialAttack()
     {
-        gameObject.GetComponent<CharacterAnimation>().ChangeAnimationState(CHARACTER_SPECIAL_ATTACK);
+        characterAnimation.ChangeAnimationState(CHARACTER_SPECIAL_ATTACK);
         cooldownTimer = 0;
         FindObjectOfType<AudioManager>().StopEffect("CharacterLaser");
         FindObjectOfType<AudioManager>().PlayEffect("CharacterLaser");
