@@ -21,6 +21,7 @@ public class CharacterAttack : MonoBehaviour
     public LayerMask mobLayer;
     private Character character;
     private CharacterAnimation characterAnimation;
+    private CharacterLevel characterLevel;
     private CharacterMovement characterMovement;
     private CharacterWallet characterWallet;
 
@@ -48,6 +49,7 @@ public class CharacterAttack : MonoBehaviour
     {
         character = GetComponent<Character>();
         characterAnimation = GetComponent<CharacterAnimation>();
+        characterLevel = GetComponent<CharacterLevel>();
         characterMovement = GetComponent<CharacterMovement>();
         characterWallet = GetComponent<CharacterWallet>();
         combo = COMBO_SLASH_1;
@@ -143,7 +145,7 @@ public class CharacterAttack : MonoBehaviour
                         }
                     }
                     // Rewards for Mob kill
-                    mob.GetComponent<MobReward>().GetReward(gameObject.GetComponent<CharacterLevel>(), characterWallet);
+                    mob.GetComponent<MobReward>().GetReward(characterLevel, characterWallet);
                 }
             }
             BossHealth bossHealth;
@@ -163,7 +165,7 @@ public class CharacterAttack : MonoBehaviour
                         }
                     }
                     // Rewards for Mob kill
-                    mob.GetComponent<BossReward>().GetReward(gameObject.GetComponent<CharacterLevel>(), characterWallet);
+                    mob.GetComponent<BossReward>().GetReward(characterLevel, characterWallet);
                 }
             }
         }
