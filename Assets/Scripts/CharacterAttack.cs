@@ -44,7 +44,7 @@ public class CharacterAttack : MonoBehaviour
     public void Start()
     {
         baseAttack = Data.baseAttack;
-        attack = character.GetAttack().CalculateFinalValue();
+        UpdateAttackPower();
     }
 
     private void Awake()
@@ -112,54 +112,10 @@ public class CharacterAttack : MonoBehaviour
         combo++;
 
         Collider2D[] hitMobs = Physics2D.OverlapCircleAll(attackPoint.position, attackRange, mobLayer);
-        attack = character.GetAttack().CalculateFinalValue();
+        UpdateAttackPower();
 
         DealDamageToMobs(hitMobs);
-        foreach (Collider2D mob in hitMobs)
-        {
-            MobHealth mobHealth;
-            if (mob.TryGetComponent(out mobHealth))
-            {
-                MobReward mobReward = mob.GetComponent<MobReward>();
-                if (mobHealth.IsDead() && mobReward.GetIsRewardGiven() == false)
-                {
-                    foreach (Quest quest in character.questList.quests)
-                    {
-                        if (quest.questCriteria.criteriaType == CriteriaType.Kill)
-                        {
-                            if (quest.questCriteria.Target == mobHealth.mobName)
-                            {
-                                quest.questCriteria.Execute();
-                                quest.Update();
-                            }
-                        }
-                    }
-                    // Rewards for Mob kill
-                    mobReward.GetReward(characterLevel, characterWallet);
-                }
-            }
-            BossHealth bossHealth;
-            if (mob.TryGetComponent(out bossHealth))
-            {
-                BossReward bossReward = mob.GetComponent<BossReward>();
-                if (bossHealth.IsDead() && bossReward.GetIsRewardGiven() == false)
-                {
-                    foreach (Quest quest in character.questList.quests)
-                    {
-                        if (quest.questCriteria.criteriaType == CriteriaType.Kill)
-                        {
-                            if (quest.questCriteria.Target == bossHealth.mobName)
-                            {
-                                quest.questCriteria.Execute();
-                                quest.Update();
-                            }
-                        }
-                    }
-                    // Rewards for Mob kill
-                    bossReward.GetReward(characterLevel, characterWallet);
-                }
-            }
-        }
+        UpdateQuestAndReward(hitMobs);
         Invoke("AttackComplete", attackDelay);
     }
 
@@ -188,6 +144,60 @@ public class CharacterAttack : MonoBehaviour
         }
     }
 
+    private void UpdateQuestAndReward(Collider2D[] hitMobs)
+    {
+        foreach (Collider2D mob in hitMobs)
+        {
+            MobHealth mobHealth;
+            if (mob.TryGetComponent(out mobHealth))
+            {
+                MobReward mobReward = mob.GetComponent<MobReward>();
+                if (mobHealth.IsDead() && !mobReward.GetIsRewardGiven())
+                {
+                    foreach (Quest quest in character.questList.quests)
+                    {
+                        if (quest.questCriteria.criteriaType == CriteriaType.Kill)
+                        {
+                            if (quest.questCriteria.Target == mobHealth.mobName)
+                            {
+                                quest.questCriteria.Execute();
+                                quest.Update();
+                            }
+                        }
+                    }
+                    // Rewards for Mob kill
+                    mobReward.GetReward(characterLevel, characterWallet);
+                }
+            }
+            BossHealth bossHealth;
+            if (mob.TryGetComponent(out bossHealth))
+            {
+                BossReward bossReward = mob.GetComponent<BossReward>();
+                if (bossHealth.IsDead() && !bossReward.GetIsRewardGiven())
+                {
+                    foreach (Quest quest in character.questList.quests)
+                    {
+                        if (quest.questCriteria.criteriaType == CriteriaType.Kill)
+                        {
+                            if (quest.questCriteria.Target == bossHealth.mobName)
+                            {
+                                quest.questCriteria.Execute();
+                                quest.Update();
+                            }
+                        }
+                    }
+                    // Rewards for Mob kill
+                    bossReward.GetReward(characterLevel, characterWallet);
+                }
+            }
+        }
+    }
+
+    private void UpdateAttackPower()
+    {
+        attack = character.GetAttack().CalculateFinalValue();
+    }
+
     public void AttackComplete()
     {
         isAttacking = false;
@@ -198,7 +208,7 @@ public class CharacterAttack : MonoBehaviour
     {
         baseAttack += (baseAttack * 0.015f) * ((100 - level) * 0.1f);
         character.Attack.SetBaseValue((int)baseAttack);
-        attack = character.GetAttack().CalculateFinalValue();
+        UpdateAttackPower();
         character.UpdateCharacterStats();
     }
 
