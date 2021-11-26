@@ -19,11 +19,13 @@ public class CharacterAttack : MonoBehaviour
     [SerializeField] public float KnockbackY;
 
     public LayerMask mobLayer;
+
     private Character character;
     private CharacterAnimation characterAnimation;
     private CharacterLevel characterLevel;
     private CharacterMovement characterMovement;
     private CharacterWallet characterWallet;
+    private Rigidbody2D rigidBody;
 
     public float baseAttack;
     private float attack;
@@ -52,6 +54,7 @@ public class CharacterAttack : MonoBehaviour
         characterLevel = GetComponent<CharacterLevel>();
         characterMovement = GetComponent<CharacterMovement>();
         characterWallet = GetComponent<CharacterWallet>();
+        rigidBody = GetComponent<Rigidbody2D>();
         combo = COMBO_SLASH_1;
     }
 
@@ -101,8 +104,8 @@ public class CharacterAttack : MonoBehaviour
             Slash3.GetComponent<Projectile>().damage = (float)(character.GetAttack().CalculateFinalValue() * 0.75);
             Slash3.GetComponent<Rigidbody2D>().velocity = new Vector2(Mathf.Sign(transform.localScale.x) * 3f, 0);
         }
-        if (combo < COMBO_SLASH_3) GetComponent<Rigidbody2D>().velocity = new Vector2(Mathf.Sign(gameObject.transform.localScale.x) * 1f, 0);
-        else if (combo == COMBO_SLASH_3) GetComponent<Rigidbody2D>().velocity = new Vector2(Mathf.Sign(gameObject.transform.localScale.x) * 3f, 0);
+        if (combo < COMBO_SLASH_3) rigidBody.velocity = new Vector2(Mathf.Sign(gameObject.transform.localScale.x) * 1f, 0);
+        else if (combo == COMBO_SLASH_3) rigidBody.velocity = new Vector2(Mathf.Sign(gameObject.transform.localScale.x) * 3f, 0);
         combo++;
 
         Collider2D[] hitMobs = Physics2D.OverlapCircleAll(attackPoint.position, attackRange, mobLayer);
