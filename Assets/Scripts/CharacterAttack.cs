@@ -57,7 +57,10 @@ public class CharacterAttack : MonoBehaviour
 
     private void Update()
     {
-        if (!characterMovement.IsAbleToMove()) return;
+        if (!characterMovement.IsAbleToMove())
+        {
+            return;
+        }
         if (Input.GetKey(KeyCode.A) && characterMovement.IsAbleToAttack() && !isAttacking && cooldownTimer > attackDelay)
         {
             Attack();
