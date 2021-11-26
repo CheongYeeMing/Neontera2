@@ -110,10 +110,10 @@ public class CharacterAttack : MonoBehaviour
             MobHealth mobHealth;
             if (mob.TryGetComponent<MobHealth>(out mobHealth))
             {
-                if (!mob.GetComponent<MobHealth>().IsHurting())
+                if (!mobHealth.IsHurting())
                 {
-                    mob.GetComponent<MobHealth>().SetAttackedBy(gameObject);
-                    mob.GetComponent<MobHealth>().TakeDamage(attack);
+                    mobHealth.SetAttackedBy(gameObject);
+                    mobHealth.TakeDamage(attack);
                 }
             }
             BossHealth bossHealth;
