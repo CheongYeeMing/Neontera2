@@ -152,7 +152,8 @@ public class CharacterAttack : MonoBehaviour
             BossHealth bossHealth;
             if (mob.TryGetComponent<BossHealth>(out bossHealth))
             {
-                if (bossHealth.IsDead() && mob.GetComponent<BossReward>().GetIsRewardGiven() == false)
+                BossReward bossReward = mob.GetComponent<BossReward>();
+                if (bossHealth.IsDead() && bossReward.GetIsRewardGiven() == false)
                 {
                     foreach (Quest quest in character.questList.quests)
                     {
@@ -166,7 +167,7 @@ public class CharacterAttack : MonoBehaviour
                         }
                     }
                     // Rewards for Mob kill
-                    mob.GetComponent<BossReward>().GetReward(characterLevel, characterWallet);
+                    bossReward.GetReward(characterLevel, characterWallet);
                 }
             }
         }
