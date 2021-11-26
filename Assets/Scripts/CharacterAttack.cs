@@ -74,7 +74,10 @@ public class CharacterAttack : MonoBehaviour
         }
         cooldownTimer += Time.deltaTime;
         comboTimer += Time.deltaTime;
-        if (comboTimer > 1f) combo = COMBO_SLASH_1;
+        if (comboTimer > 1f)
+        {
+            combo = COMBO_SLASH_1;
+        }
     }
 
     private void Attack()
