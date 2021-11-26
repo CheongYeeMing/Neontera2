@@ -114,27 +114,7 @@ public class CharacterAttack : MonoBehaviour
         Collider2D[] hitMobs = Physics2D.OverlapCircleAll(attackPoint.position, attackRange, mobLayer);
         attack = character.GetAttack().CalculateFinalValue();
 
-        foreach (Collider2D mob in hitMobs)
-        {
-            MobHealth mobHealth;
-            if (mob.TryGetComponent(out mobHealth))
-            {
-                if (!mobHealth.IsHurting())
-                {
-                    mobHealth.SetAttackedBy(gameObject);
-                    mobHealth.TakeDamage(attack);
-                }
-            }
-            BossHealth bossHealth;
-            if (mob.TryGetComponent(out bossHealth))
-            {
-                if (!bossHealth.IsHurting())
-                {
-                    bossHealth.SetAttackedBy(gameObject);
-                    bossHealth.TakeDamage(attack);
-                }
-            }
-        }
+        DealDamageToMobs(hitMobs);
         foreach (Collider2D mob in hitMobs)
         {
             MobHealth mobHealth;
@@ -182,6 +162,32 @@ public class CharacterAttack : MonoBehaviour
         }
         Invoke("AttackComplete", attackDelay);
     }
+
+    private void DealDamageToMobs(Collider2D[] hitMobs)
+    {
+        foreach (Collider2D mob in hitMobs)
+        {
+            MobHealth mobHealth;
+            if (mob.TryGetComponent(out mobHealth))
+            {
+                if (!mobHealth.IsHurting())
+                {
+                    mobHealth.SetAttackedBy(gameObject);
+                    mobHealth.TakeDamage(attack);
+                }
+            }
+            BossHealth bossHealth;
+            if (mob.TryGetComponent(out bossHealth))
+            {
+                if (!bossHealth.IsHurting())
+                {
+                    bossHealth.SetAttackedBy(gameObject);
+                    bossHealth.TakeDamage(attack);
+                }
+            }
+        }
+    }
+
     public void AttackComplete()
     {
         isAttacking = false;
