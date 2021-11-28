@@ -85,7 +85,7 @@ public class CharacterAttack : MonoBehaviour
         isAttacking = true;
 
         FindObjectOfType<AudioManager>().PlayEffect("CharacterNormalAttack");
-        attackCooldownTimer = 0;
+        ResetAttackCooldown();
         comboTimer = 0;
         if (combo > COMBO_SLASH_3) combo = COMBO_SLASH_1;
         if (combo == COMBO_SLASH_1)
@@ -228,7 +228,7 @@ public class CharacterAttack : MonoBehaviour
     private void SpecialAttack()
     {
         characterAnimation.ChangeAnimationState(CHARACTER_SPECIAL_ATTACK);
-        attackCooldownTimer = 0;
+        ResetAttackCooldown();
         FindObjectOfType<AudioManager>().StopEffect("CharacterLaser");
         FindObjectOfType<AudioManager>().PlayEffect("CharacterLaser");
         GameObject fireBall = Instantiate(fireball, firePoint.transform.position, Quaternion.identity);
@@ -246,5 +246,10 @@ public class CharacterAttack : MonoBehaviour
     public float GetBaseAttack()
     {
         return baseAttack;
+    }
+
+    private void ResetAttackCooldown()
+    {
+        attackCooldownTimer = 0;
     }
 }
