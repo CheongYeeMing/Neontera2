@@ -237,7 +237,10 @@ public class CharacterAttack : MonoBehaviour
 
     public void OnDrawGizmosSelected()
     {
-        if (attackPoint == null) return;
+        if (attackPoint == null)
+        {
+            return;
+        }
         Gizmos.DrawWireSphere(attackPoint.position, attackRange);
         Gizmos.DrawWireSphere(firePoint.position, attackRange);
     }
