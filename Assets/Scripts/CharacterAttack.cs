@@ -107,8 +107,14 @@ public class CharacterAttack : MonoBehaviour
             Slash3.GetComponent<Projectile>().damage = (float)(character.GetAttack().CalculateFinalValue() * 0.75);
             Slash3.GetComponent<Rigidbody2D>().velocity = new Vector2(Mathf.Sign(transform.localScale.x) * 3f, 0);
         }
-        if (combo < COMBO_SLASH_3) rigidBody.velocity = new Vector2(Mathf.Sign(gameObject.transform.localScale.x) * 1f, 0);
-        else if (combo == COMBO_SLASH_3) rigidBody.velocity = new Vector2(Mathf.Sign(gameObject.transform.localScale.x) * 3f, 0);
+        if (combo < COMBO_SLASH_3)
+        {
+            rigidBody.velocity = new Vector2(Mathf.Sign(gameObject.transform.localScale.x) * 1f, 0);
+        }
+        else if (combo == COMBO_SLASH_3)
+        {
+            rigidBody.velocity = new Vector2(Mathf.Sign(gameObject.transform.localScale.x) * 3f, 0);
+        }
         combo++;
 
         Collider2D[] hitMobs = Physics2D.OverlapCircleAll(attackPoint.position, attackRange, mobLayer);
