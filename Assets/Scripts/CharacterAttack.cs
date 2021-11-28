@@ -2,7 +2,6 @@ using UnityEngine;
 
 public class CharacterAttack : MonoBehaviour
 {
-    // Character Animation States
     private const string CHARACTER_ATTACK = "Attack";
     private const string CHARACTER_ATTACK_2 = "Attack2";
     private const string CHARACTER_ATTACK_3 = "Attack3";
