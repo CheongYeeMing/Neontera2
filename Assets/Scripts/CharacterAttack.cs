@@ -29,7 +29,7 @@ public class CharacterAttack : MonoBehaviour
 
     public float baseAttack;
     private float attack;
-    private float cooldownTimer = Mathf.Infinity;
+    private float attackCooldownTimer = Mathf.Infinity;
     private float attackRange = 1.5f;
 
     private bool isAttacking;
@@ -64,15 +64,15 @@ public class CharacterAttack : MonoBehaviour
         {
             return;
         }
-        if (Input.GetKey(KeyCode.A) && characterMovement.IsAbleToAttack() && !isAttacking && cooldownTimer > attackDelay)
+        if (Input.GetKey(KeyCode.A) && characterMovement.IsAbleToAttack() && !isAttacking && attackCooldownTimer > attackDelay)
         {
             Attack();
         }
-        else if (Input.GetKeyDown(KeyCode.S) && characterMovement.IsAbleToAttack() && cooldownTimer > attackDelay)
+        else if (Input.GetKeyDown(KeyCode.S) && characterMovement.IsAbleToAttack() && attackCooldownTimer > attackDelay)
         {
             SpecialAttack();
         }
-        cooldownTimer += Time.deltaTime;
+        attackCooldownTimer += Time.deltaTime;
         comboTimer += Time.deltaTime;
         if (comboTimer > 1f)
         {
@@ -85,7 +85,7 @@ public class CharacterAttack : MonoBehaviour
         isAttacking = true;
 
         FindObjectOfType<AudioManager>().PlayEffect("CharacterNormalAttack");
-        cooldownTimer = 0;
+        attackCooldownTimer = 0;
         comboTimer = 0;
         if (combo > COMBO_SLASH_3) combo = COMBO_SLASH_1;
         if (combo == COMBO_SLASH_1)
@@ -228,7 +228,7 @@ public class CharacterAttack : MonoBehaviour
     private void SpecialAttack()
     {
         characterAnimation.ChangeAnimationState(CHARACTER_SPECIAL_ATTACK);
-        cooldownTimer = 0;
+        attackCooldownTimer = 0;
         FindObjectOfType<AudioManager>().StopEffect("CharacterLaser");
         FindObjectOfType<AudioManager>().PlayEffect("CharacterLaser");
         GameObject fireBall = Instantiate(fireball, firePoint.transform.position, Quaternion.identity);
