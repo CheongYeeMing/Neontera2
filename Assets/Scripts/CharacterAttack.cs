@@ -2,7 +2,6 @@ using UnityEngine;
 
 public class CharacterAttack : MonoBehaviour
 {
-    // Character Animation States
     private const string CHARACTER_ATTACK = "Attack";
     private const string CHARACTER_ATTACK_2 = "Attack2";
     private const string CHARACTER_ATTACK_3 = "Attack3";
@@ -29,17 +28,17 @@ public class CharacterAttack : MonoBehaviour
 
     public float baseAttack;
     private float attack;
-    private float cooldownTimer = Mathf.Infinity;
+    private float attackCooldownTimer = Mathf.Infinity;
     private float attackRange = 1.5f;
 
     private bool isAttacking;
 
     // Combo
-    public int combo;
+    public int attackCombo;
     [SerializeField] GameObject Slash_1;
     [SerializeField] GameObject Slash_2;
     [SerializeField] GameObject Slash_3;
-    public float comboTimer;
+    public float attackComboTimer;
 
     public void Start()
     {
@@ -55,7 +54,7 @@ public class CharacterAttack : MonoBehaviour
         characterMovement = GetComponent<CharacterMovement>();
         characterWallet = GetComponent<CharacterWallet>();
         rigidBody = GetComponent<Rigidbody2D>();
-        combo = COMBO_SLASH_1;
+        ResetAttackCombo();
     }
 
     private void Update()
@@ -64,19 +63,19 @@ public class CharacterAttack : MonoBehaviour
         {
             return;
         }
-        if (Input.GetKey(KeyCode.A) && characterMovement.IsAbleToAttack() && !isAttacking && cooldownTimer > attackDelay)
+        if (Input.GetKey(KeyCode.A) && characterMovement.IsAbleToAttack() && !isAttacking && attackCooldownTimer > attackDelay)
         {
             Attack();
         }
-        else if (Input.GetKeyDown(KeyCode.S) && characterMovement.IsAbleToAttack() && cooldownTimer > attackDelay)
+        else if (Input.GetKeyDown(KeyCode.S) && characterMovement.IsAbleToAttack() && attackCooldownTimer > attackDelay)
         {
             SpecialAttack();
         }
-        cooldownTimer += Time.deltaTime;
-        comboTimer += Time.deltaTime;
-        if (comboTimer > 1f)
+        attackCooldownTimer += Time.deltaTime;
+        attackComboTimer += Time.deltaTime;
+        if (attackComboTimer > 1f)
         {
-            combo = COMBO_SLASH_1;
+            ResetAttackCombo();
         }
     }
 
@@ -85,31 +84,8 @@ public class CharacterAttack : MonoBehaviour
         isAttacking = true;
 
         FindObjectOfType<AudioManager>().PlayEffect("CharacterNormalAttack");
-        cooldownTimer = 0;
-        comboTimer = 0;
-        if (combo > COMBO_SLASH_3) combo = COMBO_SLASH_1;
-        if (combo == COMBO_SLASH_1)
-        {
-            characterAnimation.ChangeAnimationState(CHARACTER_ATTACK);
-            GameObject Slash1 = Instantiate(Slash_1, new Vector2(attackPoint.position.x, attackPoint.position.y), Quaternion.identity);
-            Slash1.GetComponent<Rigidbody2D>().velocity = new Vector2(Mathf.Sign(transform.localScale.x) * 0.5f, -0.5f);
-        }
-        else if (combo == COMBO_SLASH_2)
-        {
-            characterAnimation.ChangeAnimationState(CHARACTER_ATTACK_2);
-            GameObject Slash2 = Instantiate(Slash_2, new Vector2(attackPoint.position.x, attackPoint.position.y), Quaternion.identity);
-            Slash2.GetComponent<Rigidbody2D>().velocity = new Vector2(Mathf.Sign(transform.localScale.x) * 0.4f, 0.6f);
-        }
-        else if (combo == COMBO_SLASH_3)
-        {
-            characterAnimation.ChangeAnimationState(CHARACTER_ATTACK_3);
-            GameObject Slash3 = Instantiate(Slash_3, attackPoint.position, Quaternion.identity) as GameObject;
-            Slash3.GetComponent<Projectile>().damage = (float)(character.GetAttack().CalculateFinalValue() * 0.75);
-            Slash3.GetComponent<Rigidbody2D>().velocity = new Vector2(Mathf.Sign(transform.localScale.x) * 3f, 0);
-        }
-        if (combo < COMBO_SLASH_3) rigidBody.velocity = new Vector2(Mathf.Sign(gameObject.transform.localScale.x) * 1f, 0);
-        else if (combo == COMBO_SLASH_3) rigidBody.velocity = new Vector2(Mathf.Sign(gameObject.transform.localScale.x) * 3f, 0);
-        combo++;
+        ResetAttackCooldown();
+        AttackCombo();
 
         Collider2D[] hitMobs = Physics2D.OverlapCircleAll(attackPoint.position, attackRange, mobLayer);
         UpdateAttackPower();
@@ -117,6 +93,53 @@ public class CharacterAttack : MonoBehaviour
         DealDamageToMobs(hitMobs);
         UpdateQuestAndReward(hitMobs);
         Invoke("AttackComplete", attackDelay);
+    }
+
+    private void AttackCombo()
+    {
+        ResetAttackComboTimer();
+
+        bool attackComboCompleted = attackCombo > COMBO_SLASH_3;
+        if (attackComboCompleted)
+        {
+            ResetAttackCombo();
+        }
+
+        bool attackComboSlash1 = attackCombo == COMBO_SLASH_1;
+        bool attackComboSlash2 = attackCombo == COMBO_SLASH_2;
+        bool attackComboSlash3 = attackCombo == COMBO_SLASH_3;
+        if (attackComboSlash1)
+        {
+            characterAnimation.ChangeAnimationState(CHARACTER_ATTACK);
+            GameObject Slash1 = Instantiate(Slash_1, new Vector2(attackPoint.position.x, attackPoint.position.y), Quaternion.identity);
+            Slash1.GetComponent<Rigidbody2D>().velocity = new Vector2(Mathf.Sign(transform.localScale.x) * 0.5f, -0.5f);
+        }
+        else if (attackComboSlash2)
+        {
+            characterAnimation.ChangeAnimationState(CHARACTER_ATTACK_2);
+            GameObject Slash2 = Instantiate(Slash_2, new Vector2(attackPoint.position.x, attackPoint.position.y), Quaternion.identity);
+            Slash2.GetComponent<Rigidbody2D>().velocity = new Vector2(Mathf.Sign(transform.localScale.x) * 0.4f, 0.6f);
+        }
+        else if (attackComboSlash3)
+        {
+            characterAnimation.ChangeAnimationState(CHARACTER_ATTACK_3);
+            GameObject Slash3 = Instantiate(Slash_3, attackPoint.position, Quaternion.identity);
+            Slash3.GetComponent<Projectile>().damage = (float)(character.GetAttack().CalculateFinalValue() * 0.75);
+            Slash3.GetComponent<Rigidbody2D>().velocity = new Vector2(Mathf.Sign(transform.localScale.x) * 3f, 0);
+        }
+
+        bool attackComboOngoing = attackCombo < COMBO_SLASH_3;
+        bool attackComboFinalSlash = attackCombo == COMBO_SLASH_3;
+        if (attackComboOngoing)
+        {
+            rigidBody.velocity = new Vector2(Mathf.Sign(gameObject.transform.localScale.x) * 1f, 0);
+        }
+        else if (attackComboFinalSlash)
+        {
+            rigidBody.velocity = new Vector2(Mathf.Sign(gameObject.transform.localScale.x) * 3f, 0);
+        }
+
+        attackCombo++;
     }
 
     private void DealDamageToMobs(Collider2D[] hitMobs)
@@ -198,7 +221,7 @@ public class CharacterAttack : MonoBehaviour
         attack = character.GetAttack().CalculateFinalValue();
     }
 
-    public void AttackComplete()
+    private void AttackComplete()
     {
         isAttacking = false;
         FindObjectOfType<AudioManager>().StopEffect("CharacterNormalAttack");
@@ -214,7 +237,10 @@ public class CharacterAttack : MonoBehaviour
 
     public void OnDrawGizmosSelected()
     {
-        if (attackPoint == null) return;
+        if (attackPoint == null)
+        {
+            return;
+        }
         Gizmos.DrawWireSphere(attackPoint.position, attackRange);
         Gizmos.DrawWireSphere(firePoint.position, attackRange);
     }
@@ -222,7 +248,7 @@ public class CharacterAttack : MonoBehaviour
     private void SpecialAttack()
     {
         characterAnimation.ChangeAnimationState(CHARACTER_SPECIAL_ATTACK);
-        cooldownTimer = 0;
+        ResetAttackCooldown();
         FindObjectOfType<AudioManager>().StopEffect("CharacterLaser");
         FindObjectOfType<AudioManager>().PlayEffect("CharacterLaser");
         GameObject fireBall = Instantiate(fireball, firePoint.transform.position, Quaternion.identity);
@@ -240,5 +266,20 @@ public class CharacterAttack : MonoBehaviour
     public float GetBaseAttack()
     {
         return baseAttack;
+    }
+
+    private void ResetAttackCooldown()
+    {
+        attackCooldownTimer = 0;
+    }
+
+    private void ResetAttackCombo()
+    {
+        attackCombo = COMBO_SLASH_1;
+    }
+
+    private void ResetAttackComboTimer()
+    {
+        attackComboTimer = 0;
     }
 }
