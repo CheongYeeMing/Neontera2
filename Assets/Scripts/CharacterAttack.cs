@@ -105,33 +105,40 @@ public class CharacterAttack : MonoBehaviour
             ResetAttackCombo();
         }
 
-        if (attackCombo == COMBO_SLASH_1)
+        bool attackComboSlash1 = attackCombo == COMBO_SLASH_1;
+        bool attackComboSlash2 = attackCombo == COMBO_SLASH_2;
+        bool attackComboSlash3 = attackCombo == COMBO_SLASH_3;
+        if (attackComboSlash1)
         {
             characterAnimation.ChangeAnimationState(CHARACTER_ATTACK);
             GameObject Slash1 = Instantiate(Slash_1, new Vector2(attackPoint.position.x, attackPoint.position.y), Quaternion.identity);
             Slash1.GetComponent<Rigidbody2D>().velocity = new Vector2(Mathf.Sign(transform.localScale.x) * 0.5f, -0.5f);
         }
-        else if (attackCombo == COMBO_SLASH_2)
+        else if (attackComboSlash2)
         {
             characterAnimation.ChangeAnimationState(CHARACTER_ATTACK_2);
             GameObject Slash2 = Instantiate(Slash_2, new Vector2(attackPoint.position.x, attackPoint.position.y), Quaternion.identity);
             Slash2.GetComponent<Rigidbody2D>().velocity = new Vector2(Mathf.Sign(transform.localScale.x) * 0.4f, 0.6f);
         }
-        else if (attackCombo == COMBO_SLASH_3)
+        else if (attackComboSlash3)
         {
             characterAnimation.ChangeAnimationState(CHARACTER_ATTACK_3);
             GameObject Slash3 = Instantiate(Slash_3, attackPoint.position, Quaternion.identity);
             Slash3.GetComponent<Projectile>().damage = (float)(character.GetAttack().CalculateFinalValue() * 0.75);
             Slash3.GetComponent<Rigidbody2D>().velocity = new Vector2(Mathf.Sign(transform.localScale.x) * 3f, 0);
         }
-        if (attackCombo < COMBO_SLASH_3)
+
+        bool attackComboOngoing = attackCombo < COMBO_SLASH_3;
+        bool attackComboFinalSlash = attackCombo == COMBO_SLASH_3;
+        if (attackComboOngoing)
         {
             rigidBody.velocity = new Vector2(Mathf.Sign(gameObject.transform.localScale.x) * 1f, 0);
         }
-        else if (attackCombo == COMBO_SLASH_3)
+        else if (attackComboFinalSlash)
         {
             rigidBody.velocity = new Vector2(Mathf.Sign(gameObject.transform.localScale.x) * 3f, 0);
         }
+
         attackCombo++;
     }
 
