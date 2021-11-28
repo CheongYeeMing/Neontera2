@@ -86,7 +86,7 @@ public class CharacterAttack : MonoBehaviour
 
         FindObjectOfType<AudioManager>().PlayEffect("CharacterNormalAttack");
         ResetAttackCooldown();
-        attackComboTimer = 0;
+        ResetAttackComboTimer();
         if (attackCombo > COMBO_SLASH_3)
         {
             ResetAttackCombo();
@@ -259,5 +259,10 @@ public class CharacterAttack : MonoBehaviour
     private void ResetAttackCombo()
     {
         attackCombo = COMBO_SLASH_1;
+    }
+
+    private void ResetAttackComboTimer()
+    {
+        attackComboTimer = 0;
     }
 }
