@@ -76,7 +76,7 @@ public class CharacterAttack : MonoBehaviour
         comboTimer += Time.deltaTime;
         if (comboTimer > 1f)
         {
-            attackCombo = COMBO_SLASH_1;
+            ResetAttackCombo();
         }
     }
 
@@ -89,7 +89,7 @@ public class CharacterAttack : MonoBehaviour
         comboTimer = 0;
         if (attackCombo > COMBO_SLASH_3)
         {
-            attackCombo = COMBO_SLASH_1;
+            ResetAttackCombo();
         }
         if (attackCombo == COMBO_SLASH_1)
         {
@@ -254,5 +254,10 @@ public class CharacterAttack : MonoBehaviour
     private void ResetAttackCooldown()
     {
         attackCooldownTimer = 0;
+    }
+
+    private void ResetAttackCombo()
+    {
+        attackCombo = COMBO_SLASH_1;
     }
 }
