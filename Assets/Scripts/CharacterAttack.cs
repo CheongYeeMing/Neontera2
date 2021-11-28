@@ -207,7 +207,7 @@ public class CharacterAttack : MonoBehaviour
         attack = character.GetAttack().CalculateFinalValue();
     }
 
-    public void AttackComplete()
+    private void AttackComplete()
     {
         isAttacking = false;
         FindObjectOfType<AudioManager>().StopEffect("CharacterNormalAttack");
