@@ -39,7 +39,7 @@ public class CharacterAttack : MonoBehaviour
     [SerializeField] GameObject Slash_1;
     [SerializeField] GameObject Slash_2;
     [SerializeField] GameObject Slash_3;
-    public float comboTimer;
+    public float attackComboTimer;
 
     public void Start()
     {
@@ -73,8 +73,8 @@ public class CharacterAttack : MonoBehaviour
             SpecialAttack();
         }
         attackCooldownTimer += Time.deltaTime;
-        comboTimer += Time.deltaTime;
-        if (comboTimer > 1f)
+        attackComboTimer += Time.deltaTime;
+        if (attackComboTimer > 1f)
         {
             ResetAttackCombo();
         }
@@ -86,7 +86,7 @@ public class CharacterAttack : MonoBehaviour
 
         FindObjectOfType<AudioManager>().PlayEffect("CharacterNormalAttack");
         ResetAttackCooldown();
-        comboTimer = 0;
+        attackComboTimer = 0;
         if (attackCombo > COMBO_SLASH_3)
         {
             ResetAttackCombo();
