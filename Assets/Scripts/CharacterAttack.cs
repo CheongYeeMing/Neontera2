@@ -86,6 +86,18 @@ public class CharacterAttack : MonoBehaviour
 
         FindObjectOfType<AudioManager>().PlayEffect("CharacterNormalAttack");
         ResetAttackCooldown();
+        AttackCombo();
+
+        Collider2D[] hitMobs = Physics2D.OverlapCircleAll(attackPoint.position, attackRange, mobLayer);
+        UpdateAttackPower();
+
+        DealDamageToMobs(hitMobs);
+        UpdateQuestAndReward(hitMobs);
+        Invoke("AttackComplete", attackDelay);
+    }
+
+    private void AttackCombo()
+    {
         ResetAttackComboTimer();
         if (attackCombo > COMBO_SLASH_3)
         {
@@ -119,13 +131,6 @@ public class CharacterAttack : MonoBehaviour
             rigidBody.velocity = new Vector2(Mathf.Sign(gameObject.transform.localScale.x) * 3f, 0);
         }
         attackCombo++;
-
-        Collider2D[] hitMobs = Physics2D.OverlapCircleAll(attackPoint.position, attackRange, mobLayer);
-        UpdateAttackPower();
-
-        DealDamageToMobs(hitMobs);
-        UpdateQuestAndReward(hitMobs);
-        Invoke("AttackComplete", attackDelay);
     }
 
     private void DealDamageToMobs(Collider2D[] hitMobs)
