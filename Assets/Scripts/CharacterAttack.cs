@@ -98,10 +98,13 @@ public class CharacterAttack : MonoBehaviour
     private void AttackCombo()
     {
         ResetAttackComboTimer();
-        if (attackCombo > COMBO_SLASH_3)
+
+        bool attackComboCompleted = attackCombo > COMBO_SLASH_3;
+        if (attackComboCompleted)
         {
             ResetAttackCombo();
         }
+
         if (attackCombo == COMBO_SLASH_1)
         {
             characterAnimation.ChangeAnimationState(CHARACTER_ATTACK);
