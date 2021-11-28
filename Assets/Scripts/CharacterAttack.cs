@@ -118,7 +118,7 @@ public class CharacterAttack : MonoBehaviour
         else if (attackCombo == COMBO_SLASH_3)
         {
             characterAnimation.ChangeAnimationState(CHARACTER_ATTACK_3);
-            GameObject Slash3 = Instantiate(Slash_3, attackPoint.position, Quaternion.identity) as GameObject;
+            GameObject Slash3 = Instantiate(Slash_3, attackPoint.position, Quaternion.identity);
             Slash3.GetComponent<Projectile>().damage = (float)(character.GetAttack().CalculateFinalValue() * 0.75);
             Slash3.GetComponent<Rigidbody2D>().velocity = new Vector2(Mathf.Sign(transform.localScale.x) * 3f, 0);
         }
