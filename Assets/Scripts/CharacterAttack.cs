@@ -55,7 +55,7 @@ public class CharacterAttack : MonoBehaviour
         characterMovement = GetComponent<CharacterMovement>();
         characterWallet = GetComponent<CharacterWallet>();
         rigidBody = GetComponent<Rigidbody2D>();
-        attackCombo = COMBO_SLASH_1;
+        ResetAttackCombo();
     }
 
     private void Update()
