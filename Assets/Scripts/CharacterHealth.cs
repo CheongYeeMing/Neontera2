@@ -46,6 +46,7 @@ public class CharacterHealth : MonoBehaviour, Health
 
     private void Awake()
     {
+        body = GetComponent<Rigidbody2D>();
         character = GetComponent<Character>();
         characterAnimation = GetComponent<CharacterAnimation>();
         characterAttack = GetComponent<CharacterAttack>();
