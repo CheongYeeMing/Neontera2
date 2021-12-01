@@ -126,7 +126,7 @@ public class CharacterHealth : MonoBehaviour, Health
     public void KnockBack(GameObject mob)
     {
         MobAttack mobAttack;
-        if (mob.TryGetComponent<MobAttack>(out mobAttack))
+        if (mob.TryGetComponent(out mobAttack))
         {
             if (mob.transform.position.x > gameObject.transform.position.x)
             {
@@ -139,7 +139,7 @@ public class CharacterHealth : MonoBehaviour, Health
             }
         }
         BossAttack bossAttack;
-        if (mob.TryGetComponent<BossAttack>(out bossAttack))
+        if (mob.TryGetComponent(out bossAttack))
         {
             if (mob.transform.position.x > gameObject.transform.position.x)
             {
