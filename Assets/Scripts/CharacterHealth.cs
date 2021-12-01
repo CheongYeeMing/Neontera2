@@ -10,6 +10,8 @@ public class CharacterHealth : MonoBehaviour, Health
     [SerializeField] public Image backHealthBar;
     [SerializeField] public float hurtDelay;
 
+    private CharacterAttack characterAttack;
+
     private GameObject attackedBy;
 
     public float health;
@@ -40,6 +42,12 @@ public class CharacterHealth : MonoBehaviour, Health
             health = Data.currentHealth;
         }
     }
+
+    private void Awake()
+    {
+        characterAttack = GetComponent<CharacterAttack>();
+    }
+
     // Update is called once per frame
     void Update()
     {
@@ -86,7 +94,7 @@ public class CharacterHealth : MonoBehaviour, Health
 
     public void TakeDamage(float damage)
     {
-        if (GetComponent<CharacterAttack>().IsAttacking())
+        if (characterAttack.IsAttacking())
         {
             return;
         }
