@@ -131,11 +131,11 @@ public class CharacterHealth : MonoBehaviour, Health
             if (mob.transform.position.x > gameObject.transform.position.x)
             {
 
-                body.velocity = new Vector2(body.velocity.x - mob.GetComponent<MobAttack>().KnockbackX, body.velocity.y + mob.GetComponent<MobAttack>().KnockbackY);
+                body.velocity = new Vector2(body.velocity.x - mobAttack.KnockbackX, body.velocity.y + mobAttack.KnockbackY);
             }
             else
             {
-                body.velocity = new Vector2(body.velocity.x + mob.GetComponent<MobAttack>().KnockbackX, body.velocity.y + mob.GetComponent<MobAttack>().KnockbackY);
+                body.velocity = new Vector2(body.velocity.x + mobAttack.KnockbackX, body.velocity.y + mobAttack.KnockbackY);
             }
         }
         BossAttack bossAttack;
