@@ -10,6 +10,7 @@ public class CharacterHealth : MonoBehaviour, Health
     private const float HEALTH_BAR_CHIP_SPEED = 2f;
     private const string CHARACTER_HURT = "Hurt";
     private const string CHARACTER_DIE = "Die";
+    private const string HEALTH_TEXT_SEPARATOR = "/";
 
     [SerializeField] private GameOver gameOver;
     [SerializeField] private TextMeshProUGUI healthText;
@@ -95,7 +96,7 @@ public class CharacterHealth : MonoBehaviour, Health
             percentComplete = percentComplete * percentComplete;
             frontHealthBar.fillAmount = Mathf.Lerp(fillFront, backHealthBar.fillAmount, percentComplete);
         }
-        healthText.text = Mathf.Round(health) + "/" + Mathf.Round(maxHealth); 
+        healthText.text = Mathf.Round(health) + HEALTH_TEXT_SEPARATOR + Mathf.Round(maxHealth); 
     }
 
     public void TakeDamage(float damage)
