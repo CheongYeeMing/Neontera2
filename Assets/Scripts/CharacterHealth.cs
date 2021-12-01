@@ -11,6 +11,7 @@ public class CharacterHealth : MonoBehaviour, Health
     [SerializeField] public float hurtDelay;
 
     private Character character;
+    private CharacterAnimation characterAnimation;
     private CharacterAttack characterAttack;
 
     private GameObject attackedBy;
@@ -47,13 +48,14 @@ public class CharacterHealth : MonoBehaviour, Health
     private void Awake()
     {
         character = GetComponent<Character>();
+        characterAnimation = GetComponent<CharacterAnimation>();
         characterAttack = GetComponent<CharacterAttack>();
     }
 
     // Update is called once per frame
     void Update()
     {
-        maxHealth = GetComponent<Character>().GetHealth().CalculateFinalValue();
+        maxHealth = character.GetHealth().CalculateFinalValue();
         health = Mathf.Clamp(health, 0, maxHealth);
         if (GetComponent<Transform>().position.y < -100)
         {
@@ -103,7 +105,7 @@ public class CharacterHealth : MonoBehaviour, Health
         FindObjectOfType<AudioManager>().StopEffect("CharacterHurt");
         FindObjectOfType<AudioManager>().PlayEffect("CharacterHurt");
         isHurting = true;
-        gameObject.GetComponent<CharacterAnimation>().ChangeAnimationState(CHARACTER_HURT);
+        characterAnimation.ChangeAnimationState(CHARACTER_HURT);
         CinemachineShake.Instance.Hit();
         KnockBack(attackedBy);
         health -= damage;
@@ -170,7 +172,7 @@ public class CharacterHealth : MonoBehaviour, Health
     public void Die()
     {
         isDead = true;
-        gameObject.GetComponent<CharacterAnimation>().ChangeAnimationState(CHARACTER_DIE);
+        characterAnimation.ChangeAnimationState(CHARACTER_DIE);
         FindObjectOfType<AudioManager>().StopEffect("Run");
         FindObjectOfType<AudioManager>().PlayEffect("CharacterDie");
         GetComponent<BoxCollider2D>().enabled = false;
