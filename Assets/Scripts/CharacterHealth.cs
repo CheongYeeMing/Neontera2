@@ -5,6 +5,8 @@ using TMPro;
 public class CharacterHealth : MonoBehaviour, Health
 {
     // Character Animation States
+    private const float GRAVITY_SCALE_ZERO = 0;
+    private const float GRAVITY_SCALE_NORMAL = 3;
     private const float HEALTH_BAR_CHIP_SPEED = 2f;
     private const string CHARACTER_HURT = "Hurt";
     private const string CHARACTER_DIE = "Die";
@@ -176,7 +178,7 @@ public class CharacterHealth : MonoBehaviour, Health
         FindObjectOfType<AudioManager>().PlayEffect("CharacterDie");
         GetComponent<BoxCollider2D>().enabled = false;
         body.velocity = Vector2.zero;
-        body.gravityScale = 0;
+        body.gravityScale = GRAVITY_SCALE_ZERO;
         gameOver.gameObject.SetActive(true);
     }
 
