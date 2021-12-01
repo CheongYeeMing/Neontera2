@@ -88,7 +88,10 @@ public class CharacterHealth : MonoBehaviour, Health
 
     public void TakeDamage(float damage)
     {
-        if (GetComponent<CharacterAttack>().IsAttacking()) return;
+        if (GetComponent<CharacterAttack>().IsAttacking())
+        {
+            return;
+        }
         FindObjectOfType<AudioManager>().StopEffect("CharacterHurt");
         FindObjectOfType<AudioManager>().PlayEffect("CharacterHurt");
         isHurting = true;
