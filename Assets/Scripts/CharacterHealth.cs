@@ -171,7 +171,6 @@ public class CharacterHealth : MonoBehaviour, Health
 
     public void Revive()
     {
-        Debug.Log("Revived");
         isDead = false;
         health = maxHealth;
         GetComponent<BoxCollider2D>().enabled = true;
