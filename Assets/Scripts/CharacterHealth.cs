@@ -13,6 +13,7 @@ public class CharacterHealth : MonoBehaviour, Health
     private Character character;
     private CharacterAnimation characterAnimation;
     private CharacterAttack characterAttack;
+    private Rigidbody2D body;
 
     private GameObject attackedBy;
 
@@ -125,7 +126,6 @@ public class CharacterHealth : MonoBehaviour, Health
 
     public void KnockBack(GameObject mob)
     {
-        Rigidbody2D body = gameObject.GetComponent<CharacterMovement>().GetRigidBody();
         MobAttack mobAttack;
         if (mob.TryGetComponent<MobAttack>(out mobAttack))
         {
@@ -176,8 +176,8 @@ public class CharacterHealth : MonoBehaviour, Health
         FindObjectOfType<AudioManager>().StopEffect("Run");
         FindObjectOfType<AudioManager>().PlayEffect("CharacterDie");
         GetComponent<BoxCollider2D>().enabled = false;
-        GetComponent<Rigidbody2D>().velocity = Vector2.zero;
-        GetComponent<Rigidbody2D>().gravityScale = 0;
+        body.velocity = Vector2.zero;
+        body.gravityScale = 0;
         gameOver.gameObject.SetActive(true);
     }
 
@@ -186,7 +186,7 @@ public class CharacterHealth : MonoBehaviour, Health
         isDead = false;
         health = maxHealth;
         GetComponent<BoxCollider2D>().enabled = true;
-        GetComponent<Rigidbody2D>().gravityScale = 1;
+        body.gravityScale = 1;
     }
 
     public bool IsHurting()
