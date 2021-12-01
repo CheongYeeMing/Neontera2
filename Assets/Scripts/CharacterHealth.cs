@@ -4,31 +4,29 @@ using TMPro;
 
 public class CharacterHealth : MonoBehaviour, Health
 {
-    [SerializeField] public GameOver gameOver;
-    [SerializeField] public TextMeshProUGUI healthText;
-    [SerializeField] public Image frontHealthBar;
-    [SerializeField] public Image backHealthBar;
-    [SerializeField] public float hurtDelay;
+    // Character Animation States
+    private const float HEALTH_BAR_CHIP_SPEED = 2f;
+    private const string CHARACTER_HURT = "Hurt";
+    private const string CHARACTER_DIE = "Die";
+
+    [SerializeField] private GameOver gameOver;
+    [SerializeField] private TextMeshProUGUI healthText;
+    [SerializeField] private Image frontHealthBar;
+    [SerializeField] private Image backHealthBar;
+    [SerializeField] private float hurtDelay;
 
     private Character character;
     private CharacterAnimation characterAnimation;
     private CharacterAttack characterAttack;
+    private GameObject attackedBy;
     private Rigidbody2D body;
 
-    private GameObject attackedBy;
-
+    private bool isHurting;
+    private bool isDead;
     public float health;
     private float lerpTimer;
     private float baseMaxHealth;
     public float maxHealth;
-    private float chipSpeed = 2f;
-
-    private bool isHurting;
-    private bool isDead;
-
-    // Character Animation States
-    private const string CHARACTER_HURT = "Hurt";
-    private const string CHARACTER_DIE = "Die";
 
     // Start is called before the first frame update
     void Start()
@@ -81,7 +79,7 @@ public class CharacterHealth : MonoBehaviour, Health
             frontHealthBar.fillAmount = healthFraction;
             backHealthBar.color = Color.red;
             lerpTimer += Time.deltaTime;
-            float percentComplete = lerpTimer / chipSpeed;
+            float percentComplete = lerpTimer / HEALTH_BAR_CHIP_SPEED;
             percentComplete = percentComplete * percentComplete;
             backHealthBar.fillAmount = Mathf.Lerp(fillBack, healthFraction, percentComplete);
         }
@@ -90,7 +88,7 @@ public class CharacterHealth : MonoBehaviour, Health
             backHealthBar.color = Color.green;
             backHealthBar.fillAmount = healthFraction;
             lerpTimer += Time.deltaTime;
-            float percentComplete = lerpTimer / chipSpeed;
+            float percentComplete = lerpTimer / HEALTH_BAR_CHIP_SPEED;
             percentComplete = percentComplete * percentComplete;
             frontHealthBar.fillAmount = Mathf.Lerp(fillFront, backHealthBar.fillAmount, percentComplete);
         }
