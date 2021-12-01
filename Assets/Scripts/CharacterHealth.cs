@@ -10,6 +10,7 @@ public class CharacterHealth : MonoBehaviour, Health
     [SerializeField] public Image backHealthBar;
     [SerializeField] public float hurtDelay;
 
+    private Character character;
     private CharacterAttack characterAttack;
 
     private GameObject attackedBy;
@@ -33,7 +34,7 @@ public class CharacterHealth : MonoBehaviour, Health
         baseMaxHealth = Data.baseHealth;
         if (Data.currentHealth == 0) 
         { 
-            maxHealth = GetComponent<Character>().GetHealth().CalculateFinalValue();
+            maxHealth = character.GetHealth().CalculateFinalValue();
             health = maxHealth;
             Data.currentHealth = health;
         }
@@ -45,6 +46,7 @@ public class CharacterHealth : MonoBehaviour, Health
 
     private void Awake()
     {
+        character = GetComponent<Character>();
         characterAttack = GetComponent<CharacterAttack>();
     }
 
@@ -161,8 +163,8 @@ public class CharacterHealth : MonoBehaviour, Health
         baseMaxHealth += (baseMaxHealth * 0.01f) * ((100 - level) * 0.1f);
         health += (baseMaxHealth * 0.01f) * ((100 - level) * 0.1f);
         maxHealth += (baseMaxHealth * 0.01f) * ((100 - level) * 0.1f);
-        GetComponent<Character>().Health.SetBaseValue((int)baseMaxHealth);
-        GetComponent<Character>().UpdateCharacterStats();
+        character.Health.SetBaseValue((int)baseMaxHealth);
+        character.UpdateCharacterStats();
     }
 
     public void Die()
