@@ -59,6 +59,14 @@ public class CharacterHealth : MonoBehaviour, Health
     // Update is called once per frame
     void Update()
     {
+        if (Input.GetKeyDown(KeyCode.D))
+        {
+            health -= 20;
+        }
+        if (Input.GetKeyDown(KeyCode.F))
+        {
+            RestoreHealth(20);
+        }
         maxHealth = character.GetHealth().CalculateFinalValue();
         health = Mathf.Clamp(health, 0, maxHealth);
         if (transform.position.y < -100)
@@ -79,19 +87,21 @@ public class CharacterHealth : MonoBehaviour, Health
         float fillFront = frontHealthBar.fillAmount;
         float fillBack = backHealthBar.fillAmount;
         float healthFraction = health / maxHealth;
-        frontHealthBar.fillAmount = healthFraction;
         float percentComplete = lerpTimer / HEALTH_BAR_CHIP_SPEED;
-        percentComplete = percentComplete * percentComplete;
-        backHealthBar.fillAmount = Mathf.Lerp(fillBack, healthFraction, percentComplete);
+        float percentCompleteSquared = percentComplete * percentComplete;
         if (fillBack > healthFraction)
         {
             lerpTimer += Time.deltaTime;
             backHealthBar.color = Color.red;
+            frontHealthBar.fillAmount = healthFraction;
+            backHealthBar.fillAmount = Mathf.Lerp(fillBack, healthFraction, percentCompleteSquared);
         }
         else if (fillFront < healthFraction)
         {
             lerpTimer += Time.deltaTime;
             backHealthBar.color = Color.green;
+            backHealthBar.fillAmount = healthFraction;
+            frontHealthBar.fillAmount = Mathf.Lerp(fillFront, healthFraction, percentCompleteSquared);
         }
         healthText.text = Mathf.Round(health) + HEALTH_TEXT_SEPARATOR + Mathf.Round(maxHealth); 
     }
