@@ -128,7 +128,7 @@ public class CharacterHealth : MonoBehaviour, Health
         MobAttack mobAttack;
         if (mob.TryGetComponent(out mobAttack))
         {
-            if (mob.transform.position.x > gameObject.transform.position.x)
+            if (mob.transform.position.x > transform.position.x)
             {
 
                 body.velocity = new Vector2(body.velocity.x - mobAttack.KnockbackX, body.velocity.y + mobAttack.KnockbackY);
@@ -141,7 +141,7 @@ public class CharacterHealth : MonoBehaviour, Health
         BossAttack bossAttack;
         if (mob.TryGetComponent(out bossAttack))
         {
-            if (mob.transform.position.x > gameObject.transform.position.x)
+            if (mob.transform.position.x > transform.position.x)
             {
 
                 body.velocity = new Vector2(body.velocity.x - bossAttack.KnockbackX, body.velocity.y + bossAttack.KnockbackY);
