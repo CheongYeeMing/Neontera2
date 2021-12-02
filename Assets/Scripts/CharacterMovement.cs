@@ -4,29 +4,31 @@ using UnityEngine;
 
 public class CharacterMovement : MonoBehaviour
 {
-    private const string AUDIO_JUMP = "Jump";
-    private const string AUDIO_RUN = "Run";
     private const float BOXCAST_ANGLE = 0;
     private const float BOXCAST_DISTANCE = 0.03f;
-    private const string CHARACTER_IDLE = "Idle";
-    private const string CHARACTER_RUN = "Run";
-    private const string CHARACTER_JUMP = "Jump";
     private const float CHARACTER_X = 0.3f;
     private const float CHARACTER_Y = 0.3f;
     private const float CHARACTER_Z = 1;
     private const float GRAVITY_SCALE_ZERO = 0;
     private const float GRAVITY_SCALE_NORMAL = 3;
-    private const string HORIZONTAL_AXIS = "Horizontal";
     private const float MINIMUM_HORIZONTAL_LEFT_INPUT = -0.01f;
     private const float MINIMUM_HORIZONTAL_RIGHT_INPUT = 0.01f;
     private const float WALL_JUMP_COOLDOWN = 0.2f;
+    private const string AUDIO_JUMP = "Jump";
+    private const string AUDIO_RUN = "Run";
+    private const string CHARACTER_IDLE = "Idle";
+    private const string CHARACTER_RUN = "Run";
+    private const string CHARACTER_JUMP = "Jump";
+    private const string HORIZONTAL_AXIS = "Horizontal";
+
 
     [SerializeField] private LayerMask groundLayer;
     [SerializeField] private LayerMask wallLayer;
+    [SerializeField] private ParticleSystem jumpDust;
+    [SerializeField] private ParticleSystem walkDust;
     [SerializeField] private float speed;
     [SerializeField] private float jumpPower;
-    [SerializeField] ParticleSystem jumpDust;
-    [SerializeField] ParticleSystem walkDust;
+    
 
     private BoxCollider2D boxCollider;
     private Character character;

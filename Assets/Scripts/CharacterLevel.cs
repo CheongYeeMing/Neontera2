@@ -6,27 +6,30 @@ using TMPro;
 
 public class CharacterLevel : MonoBehaviour
 {
+    private const float EXP_LERP_DELAY = 2f;
+    private const string LEVEL_TEXT = "Level ";
+    private const string SEPARATOR = "/";
     [Header("UI")]
-    [SerializeField] public Image frontExpBar;
-    [SerializeField] public Image backExpBar;
-    [SerializeField] public TextMeshProUGUI levelText;
-    [SerializeField] public TextMeshProUGUI expText;
+    [SerializeField] private Image frontExpBar;
+    [SerializeField] private Image backExpBar;
+    [SerializeField] private TextMeshProUGUI levelText;
+    [SerializeField] private TextMeshProUGUI expText;
 
     [Header("Multipliers")]
     [Range(1f, 300f)]
-    [SerializeField] public float additionMultiplier = 300;
+    [SerializeField] private float additionMultiplier = 300;
     [Range(2f, 4f)]
-    [SerializeField] public float powerMultiplier = 2;
+    [SerializeField] private float powerMultiplier = 2;
     [Range(7f, 14f)]
-    [SerializeField] public float divisionMultiplier = 7;
+    [SerializeField] private float divisionMultiplier = 7;
 
-    [SerializeField] public CharacterInfoWindow charInfoWindow;
+    [SerializeField] private CharacterInfoWindow charInfoWindow;
 
-    private int level;
     private float currentExp;
     private float requiredExp;
     private float lerpTimer;
     private float delayTimer;
+    private int level;
 
     // Start is called before the first frame update
     void Start()
@@ -36,7 +39,7 @@ public class CharacterLevel : MonoBehaviour
         requiredExp = CalculateRequiredExp();
         frontExpBar.fillAmount = currentExp / requiredExp;    
         backExpBar.fillAmount = currentExp / requiredExp;
-        levelText.text = "Level " + level;
+        levelText.text = LEVEL_TEXT + level;
         charInfoWindow.UpdateCharInfoWindow(this);
     }
 
@@ -63,7 +66,7 @@ public class CharacterLevel : MonoBehaviour
         {
             delayTimer += Time.deltaTime;
             backExpBar.fillAmount = expFraction;
-            if (delayTimer > 3)
+            if (delayTimer > EXP_LERP_DELAY)
             {
                 lerpTimer += Time.deltaTime;
                 float percentComplete = lerpTimer / 2;
@@ -71,7 +74,7 @@ public class CharacterLevel : MonoBehaviour
                 frontExpBar.fillAmount = Mathf.Lerp(fillExp, backExpBar.fillAmount, percentComplete);
             }
         }
-        expText.text = currentExp + "/" + requiredExp;
+        expText.text = currentExp + SEPARATOR + requiredExp;
     }
 
     public void GainExperience(float expGained)
@@ -92,19 +95,19 @@ public class CharacterLevel : MonoBehaviour
         GetComponent<CharacterHealth>().IncreaseHealth(level);
         GetComponent<CharacterAttack>().IncreaseAttack(level);
         requiredExp = CalculateRequiredExp();
-        levelText.text = "Level " + level;
+        levelText.text = LEVEL_TEXT + level;
         Data.level = level;
         Data.currentExp = currentExp;
     }
 
     public int CalculateRequiredExp()
     {
-        int solveForRequiredExp = 0;
+        int requiredExp = 0;
         for (int levelCycle = 1; levelCycle <= level; levelCycle++)
         {
-            solveForRequiredExp += (int)Mathf.Floor(levelCycle + additionMultiplier * Mathf.Pow(powerMultiplier, levelCycle / divisionMultiplier));
+            requiredExp += (int)Mathf.Floor(levelCycle + additionMultiplier * Mathf.Pow(powerMultiplier, levelCycle / divisionMultiplier));
         }
-        return solveForRequiredExp / 4;
+        return requiredExp / 4;
     }
 
     public int GetLevel()

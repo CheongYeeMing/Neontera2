@@ -8,11 +8,13 @@ using System;
 
 public class QuestList : MonoBehaviour
 {
-    [SerializeField] public List<Quest> quests;
     [SerializeField] Transform questsParent;
     [SerializeField] QuestSlot[] questSlots;
     [SerializeField] SelectedQuestWindow selectedQuestWindow;
     [SerializeField] GameObject acceptedQuestWindow;
+
+
+    [SerializeField] public List<Quest> questList;
 
     public event Action<Quest> OnItemLeftClickedEvent;
 
@@ -26,20 +28,13 @@ public class QuestList : MonoBehaviour
 
     private void Update()
     {
-        foreach(Quest quest in quests)
+        foreach(Quest quest in questList)
         {
             if (quest.status == Quest.Status.COMPLETED)
             {
                 selectedQuestWindow.QuestSelected(quest);
             }
         }
-    }
-    private void Awake()
-    {
-        //for (int i = 0; i < questSlots.Length; i++)
-        //{
-        //    questSlots[i].OnLeftClickEvent += OnItemLeftClickedEvent;
-        //}
     }
 
     private void OnValidate()
@@ -54,9 +49,9 @@ public class QuestList : MonoBehaviour
     private void RefreshUI()
     {
         int i = 0;
-        for (; i < quests.Count && i < questSlots.Length; i++)
+        for (; i < questList.Count && i < questSlots.Length; i++)
         {
-            questSlots[i].Quest = quests[i];
+            questSlots[i].Quest = questList[i];
         }
 
         for (; i < questSlots.Length; i++)
@@ -75,14 +70,14 @@ public class QuestList : MonoBehaviour
         {
             return false;
         }
-        quests.Add(quest);
+        questList.Add(quest);
         RefreshUI();
         return true;
     }
 
     public bool RemoveQuest(Quest quest)
     {
-        if (quests.Remove(quest))
+        if (questList.Remove(quest))
         {
             RefreshUI();
             return true;
@@ -92,8 +87,7 @@ public class QuestList : MonoBehaviour
 
     public bool IsFull()
     {
-        return quests.Count >= questSlots.Length;
+        bool questSlotsFull = questList.Count >= questSlots.Length;
+        return questSlotsFull;
     }
-
-    
 }

@@ -5,7 +5,6 @@ using System;
 
 public class CharacterHealth : MonoBehaviour, Health
 {
-    // Character Animation States
     private const float GRAVITY_SCALE_ZERO = 0;
     private const float GRAVITY_SCALE_NORMAL = 3;
     private const float HEALTH_BAR_CHIP_SPEED = 2f;
@@ -27,10 +26,10 @@ public class CharacterHealth : MonoBehaviour, Health
 
     private bool isHurting;
     private bool isDead;
-    public float health;
+    private float health;
     private float lerpTimer;
     private float baseMaxHealth;
-    public float maxHealth;
+    private float maxHealth;
 
     // Start is called before the first frame update
     void Start()
