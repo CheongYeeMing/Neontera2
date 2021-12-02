@@ -195,7 +195,7 @@ public class CharacterHealth : MonoBehaviour, Health
         isDead = false;
         health = maxHealth;
         GetComponent<BoxCollider2D>().enabled = true;
-        body.gravityScale = 1;
+        body.gravityScale = 3;
     }
 
     public bool IsHurting()
