@@ -1,6 +1,7 @@
 using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
+using System;
 
 public class CharacterHealth : MonoBehaviour, Health
 {
@@ -14,8 +15,8 @@ public class CharacterHealth : MonoBehaviour, Health
 
     [SerializeField] private GameOver gameOver;
     [SerializeField] private TextMeshProUGUI healthText;
-    [SerializeField] private Image frontHealthBar;
     [SerializeField] private Image backHealthBar;
+    [SerializeField] private Image frontHealthBar;
     [SerializeField] private float hurtDelay;
 
     private Character character;
@@ -78,23 +79,19 @@ public class CharacterHealth : MonoBehaviour, Health
         float fillFront = frontHealthBar.fillAmount;
         float fillBack = backHealthBar.fillAmount;
         float healthFraction = health / maxHealth;
+        frontHealthBar.fillAmount = healthFraction;
+        float percentComplete = lerpTimer / HEALTH_BAR_CHIP_SPEED;
+        percentComplete = percentComplete * percentComplete;
+        backHealthBar.fillAmount = Mathf.Lerp(fillBack, healthFraction, percentComplete);
         if (fillBack > healthFraction)
         {
-            frontHealthBar.fillAmount = healthFraction;
+            lerpTimer += Time.deltaTime;
             backHealthBar.color = Color.red;
-            lerpTimer += Time.deltaTime;
-            float percentComplete = lerpTimer / HEALTH_BAR_CHIP_SPEED;
-            percentComplete = percentComplete * percentComplete;
-            backHealthBar.fillAmount = Mathf.Lerp(fillBack, healthFraction, percentComplete);
         }
-        if (fillFront < healthFraction)
+        else if (fillFront < healthFraction)
         {
-            backHealthBar.color = Color.green;
-            backHealthBar.fillAmount = healthFraction;
             lerpTimer += Time.deltaTime;
-            float percentComplete = lerpTimer / HEALTH_BAR_CHIP_SPEED;
-            percentComplete = percentComplete * percentComplete;
-            frontHealthBar.fillAmount = Mathf.Lerp(fillFront, backHealthBar.fillAmount, percentComplete);
+            backHealthBar.color = Color.green;
         }
         healthText.text = Mathf.Round(health) + HEALTH_TEXT_SEPARATOR + Mathf.Round(maxHealth); 
     }
