@@ -1,6 +1,7 @@
 using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
+using System;
 
 public class CharacterHealth : MonoBehaviour, Health
 {
@@ -14,8 +15,8 @@ public class CharacterHealth : MonoBehaviour, Health
 
     [SerializeField] private GameOver gameOver;
     [SerializeField] private TextMeshProUGUI healthText;
-    [SerializeField] private Image frontHealthBar;
     [SerializeField] private Image backHealthBar;
+    [SerializeField] private Image frontHealthBar;
     [SerializeField] private float hurtDelay;
 
     private Character character;
@@ -58,9 +59,17 @@ public class CharacterHealth : MonoBehaviour, Health
     // Update is called once per frame
     void Update()
     {
+        if (Input.GetKeyDown(KeyCode.D))
+        {
+            health -= 20;
+        }
+        if (Input.GetKeyDown(KeyCode.F))
+        {
+            RestoreHealth(20);
+        }
         maxHealth = character.GetHealth().CalculateFinalValue();
         health = Mathf.Clamp(health, 0, maxHealth);
-        if (GetComponent<Transform>().position.y < -100)
+        if (transform.position.y < -100)
         {
             health -= maxHealth * 0.2f; // When fall out of map, slow death.
             if (health <= 0 && !isDead)
@@ -78,23 +87,21 @@ public class CharacterHealth : MonoBehaviour, Health
         float fillFront = frontHealthBar.fillAmount;
         float fillBack = backHealthBar.fillAmount;
         float healthFraction = health / maxHealth;
+        float percentComplete = lerpTimer / HEALTH_BAR_CHIP_SPEED;
+        float percentCompleteSquared = percentComplete * percentComplete;
         if (fillBack > healthFraction)
         {
-            frontHealthBar.fillAmount = healthFraction;
-            backHealthBar.color = Color.red;
             lerpTimer += Time.deltaTime;
-            float percentComplete = lerpTimer / HEALTH_BAR_CHIP_SPEED;
-            percentComplete = percentComplete * percentComplete;
-            backHealthBar.fillAmount = Mathf.Lerp(fillBack, healthFraction, percentComplete);
+            backHealthBar.color = Color.red;
+            frontHealthBar.fillAmount = healthFraction;
+            backHealthBar.fillAmount = Mathf.Lerp(fillBack, healthFraction, percentCompleteSquared);
         }
-        if (fillFront < healthFraction)
+        else if (fillFront < healthFraction)
         {
+            lerpTimer += Time.deltaTime;
             backHealthBar.color = Color.green;
             backHealthBar.fillAmount = healthFraction;
-            lerpTimer += Time.deltaTime;
-            float percentComplete = lerpTimer / HEALTH_BAR_CHIP_SPEED;
-            percentComplete = percentComplete * percentComplete;
-            frontHealthBar.fillAmount = Mathf.Lerp(fillFront, backHealthBar.fillAmount, percentComplete);
+            frontHealthBar.fillAmount = Mathf.Lerp(fillFront, healthFraction, percentCompleteSquared);
         }
         healthText.text = Mathf.Round(health) + HEALTH_TEXT_SEPARATOR + Mathf.Round(maxHealth); 
     }
@@ -131,7 +138,7 @@ public class CharacterHealth : MonoBehaviour, Health
         MobAttack mobAttack;
         if (mob.TryGetComponent(out mobAttack))
         {
-            if (mob.transform.position.x > gameObject.transform.position.x)
+            if (mob.transform.position.x > transform.position.x)
             {
 
                 body.velocity = new Vector2(body.velocity.x - mobAttack.KnockbackX, body.velocity.y + mobAttack.KnockbackY);
@@ -144,7 +151,7 @@ public class CharacterHealth : MonoBehaviour, Health
         BossAttack bossAttack;
         if (mob.TryGetComponent(out bossAttack))
         {
-            if (mob.transform.position.x > gameObject.transform.position.x)
+            if (mob.transform.position.x > transform.position.x)
             {
 
                 body.velocity = new Vector2(body.velocity.x - bossAttack.KnockbackX, body.velocity.y + bossAttack.KnockbackY);
