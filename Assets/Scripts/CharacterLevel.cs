@@ -7,6 +7,7 @@ using TMPro;
 public class CharacterLevel : MonoBehaviour
 {
     private const float EXP_LERP_DELAY = 2f;
+    private const float EXP_BAR_CHIP_SPEED = 2f;
     private const string LEVEL_TEXT = "Level ";
     private const string SEPARATOR = "/";
     [Header("UI")]
@@ -32,7 +33,7 @@ public class CharacterLevel : MonoBehaviour
     private int level;
 
     // Start is called before the first frame update
-    void Start()
+    private void Start()
     {
         level = Data.level;
         currentExp = Data.currentExp;
@@ -44,7 +45,7 @@ public class CharacterLevel : MonoBehaviour
     }
 
     // Update is called once per frame
-    void Update()
+    private void Update()
     {
         UpdateExpUI();
         if (Input.GetKeyDown(KeyCode.Equals))
@@ -60,8 +61,8 @@ public class CharacterLevel : MonoBehaviour
 
     public void UpdateExpUI()
     {
-        float expFraction = currentExp / requiredExp;
         float fillExp = frontExpBar.fillAmount;
+        float expFraction = currentExp / requiredExp;
         if (fillExp < expFraction)
         {
             delayTimer += Time.deltaTime;
@@ -69,7 +70,7 @@ public class CharacterLevel : MonoBehaviour
             if (delayTimer > EXP_LERP_DELAY)
             {
                 lerpTimer += Time.deltaTime;
-                float percentComplete = lerpTimer / 2;
+                float percentComplete = lerpTimer / EXP_BAR_CHIP_SPEED;
                 percentComplete = percentComplete * percentComplete;
                 frontExpBar.fillAmount = Mathf.Lerp(fillExp, backExpBar.fillAmount, percentComplete);
             }
@@ -85,7 +86,7 @@ public class CharacterLevel : MonoBehaviour
         Data.currentExp = currentExp;
     }
 
-    public void LevelUp()
+    private void LevelUp()
     {
         FindObjectOfType<AudioManager>().PlayEffect("LevelUp");
         level++;
@@ -100,7 +101,7 @@ public class CharacterLevel : MonoBehaviour
         Data.currentExp = currentExp;
     }
 
-    public int CalculateRequiredExp()
+    private int CalculateRequiredExp()
     {
         int requiredExp = 0;
         for (int levelCycle = 1; levelCycle <= level; levelCycle++)
