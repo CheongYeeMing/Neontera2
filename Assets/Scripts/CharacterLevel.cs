@@ -26,6 +26,8 @@ public class CharacterLevel : MonoBehaviour
 
     [SerializeField] private CharacterInfoWindow charInfoWindow;
 
+    private CharacterAttack characterAttack;
+
     private float currentExp;
     private float requiredExp;
     private float lerpTimer;
@@ -41,6 +43,16 @@ public class CharacterLevel : MonoBehaviour
         backExpBar.fillAmount = currentExp / requiredExp;
         levelText.text = LEVEL_TEXT + level;
         charInfoWindow.UpdateCharInfoWindow(this);
+    }
+
+    private void Awake()
+    {
+        GetCharacterLevelComponents();
+    }
+
+    private void GetCharacterLevelComponents()
+    {
+        characterAttack = GetComponent<CharacterAttack>();
     }
 
     // Retrieves saved data, if any
@@ -100,7 +112,7 @@ public class CharacterLevel : MonoBehaviour
         backExpBar.fillAmount = 0f;
         currentExp = Mathf.RoundToInt(currentExp - requiredExp);
         GetComponent<CharacterHealth>().IncreaseHealth(level);
-        GetComponent<CharacterAttack>().IncreaseAttack(level);
+        characterAttack.IncreaseAttack(level);
         requiredExp = CalculateRequiredExp();
         levelText.text = LEVEL_TEXT + level;
         Data.level = level;
