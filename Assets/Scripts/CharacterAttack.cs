@@ -54,13 +54,18 @@ public class CharacterAttack : MonoBehaviour
 
     private void Awake()
     {
+        GetCharacterAttackComponents();
+        ResetAttackCombo();
+    }
+
+    private void GetCharacterAttackComponents()
+    {
         character = GetComponent<Character>();
         characterAnimation = GetComponent<CharacterAnimation>();
         characterLevel = GetComponent<CharacterLevel>();
         characterMovement = GetComponent<CharacterMovement>();
         characterWallet = GetComponent<CharacterWallet>();
         rigidBody = GetComponent<Rigidbody2D>();
-        ResetAttackCombo();
     }
 
     private void Update()
