@@ -33,24 +33,9 @@ public class CharacterAttack : MonoBehaviour
     private float attack;
     private float attackCooldownTimer = Mathf.Infinity;
     private float attackRange = 1.5f;
-
     private bool isAttacking;
-
-    // Combo
     public int attackCombo;
-    
     public float attackComboTimer;
-
-    public void Start()
-    {
-        LoadCharacterAttackData();
-        UpdateAttackPower();
-    }
-
-    private void LoadCharacterAttackData()
-    {
-        baseAttack = Data.baseAttack;
-    }
 
     private void Awake()
     {
@@ -58,14 +43,10 @@ public class CharacterAttack : MonoBehaviour
         ResetAttackCombo();
     }
 
-    private void GetCharacterAttackComponents()
+    private void Start()
     {
-        character = GetComponent<Character>();
-        characterAnimation = GetComponent<CharacterAnimation>();
-        characterLevel = GetComponent<CharacterLevel>();
-        characterMovement = GetComponent<CharacterMovement>();
-        characterWallet = GetComponent<CharacterWallet>();
-        rigidBody = GetComponent<Rigidbody2D>();
+        LoadCharacterAttackData();
+        UpdateAttackPower();
     }
 
     private void Update()
@@ -88,6 +69,21 @@ public class CharacterAttack : MonoBehaviour
         {
             ResetAttackCombo();
         }
+    }
+
+    private void LoadCharacterAttackData()
+    {
+        baseAttack = Data.baseAttack;
+    }
+
+    private void GetCharacterAttackComponents()
+    {
+        character = GetComponent<Character>();
+        characterAnimation = GetComponent<CharacterAnimation>();
+        characterLevel = GetComponent<CharacterLevel>();
+        characterMovement = GetComponent<CharacterMovement>();
+        characterWallet = GetComponent<CharacterWallet>();
+        rigidBody = GetComponent<Rigidbody2D>();
     }
 
     private void Attack()
