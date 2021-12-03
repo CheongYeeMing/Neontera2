@@ -55,14 +55,6 @@ public class CharacterHealth : MonoBehaviour, Health
     // Update is called once per frame
     void Update()
     {
-        if (Input.GetKeyDown(KeyCode.D))
-        {
-            health -= 20;
-        }
-        if (Input.GetKeyDown(KeyCode.F))
-        {
-            RestoreHealth(20);
-        }
         maxHealth = character.GetHealth().CalculateFinalValue();
         health = Mathf.Clamp(health, 0, maxHealth);
         if (transform.position.y < -100)
