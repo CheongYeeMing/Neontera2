@@ -35,6 +35,11 @@ public class CharacterLevel : MonoBehaviour
     private float delayTimer;
     private int level;
 
+    private void Awake()
+    {
+        GetCharacterLevelComponents();
+    }
+
     // Start is called before the first frame update
     private void Start()
     {
@@ -44,11 +49,6 @@ public class CharacterLevel : MonoBehaviour
         backExpBar.fillAmount = currentExp / requiredExp;
         levelText.text = LEVEL_TEXT + level;
         charInfoWindow.UpdateCharInfoWindow(this);
-    }
-
-    private void Awake()
-    {
-        GetCharacterLevelComponents();
     }
 
     private void GetCharacterLevelComponents()

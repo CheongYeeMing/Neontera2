@@ -31,6 +31,11 @@ public class CharacterHealth : MonoBehaviour, Health
     private float baseMaxHealth;
     private float maxHealth;
 
+    private void Awake()
+    {
+        GetCharacterHealthComponents();
+    }
+
     // Start is called before the first frame update
     void Start()
     {
@@ -46,11 +51,7 @@ public class CharacterHealth : MonoBehaviour, Health
             health = Data.currentHealth;
         }
     }
-
-    private void Awake()
-    {
-        GetCharacterHealthComponents();
-    }
+    
 
     // Update is called once per frame
     void Update()
