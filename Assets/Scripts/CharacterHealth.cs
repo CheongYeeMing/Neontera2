@@ -49,10 +49,7 @@ public class CharacterHealth : MonoBehaviour, Health
 
     private void Awake()
     {
-        body = GetComponent<Rigidbody2D>();
-        character = GetComponent<Character>();
-        characterAnimation = GetComponent<CharacterAnimation>();
-        characterAttack = GetComponent<CharacterAttack>();
+        GetCharacterHealthComponents();
     }
 
     // Update is called once per frame
@@ -79,6 +76,14 @@ public class CharacterHealth : MonoBehaviour, Health
             }
         }
         UpdateHealthUI();
+    }
+
+    private void GetCharacterHealthComponents()
+    {
+        body = GetComponent<Rigidbody2D>();
+        character = GetComponent<Character>();
+        characterAnimation = GetComponent<CharacterAnimation>();
+        characterAttack = GetComponent<CharacterAttack>();
     }
 
     public void UpdateHealthUI()
