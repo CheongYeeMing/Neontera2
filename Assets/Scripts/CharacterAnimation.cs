@@ -1,13 +1,7 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class CharacterAnimation : MonoBehaviour, Animation
 {
-    public Animator animator;
-    
-    private string currentState;
-
     // Charater Animation States
     private const string CHARACTER_IDLE = "Idle";
     private const string CHARACTER_RUN = "Run";
@@ -18,6 +12,10 @@ public class CharacterAnimation : MonoBehaviour, Animation
     private const string CHARACTER_SPECIAL_ATTACK = "AttackFireball";
     private const string CHARACTER_HURT = "Hurt";
     private const string CHARACTER_DIE = "Die";
+
+    public Animator animator;
+    private string currentState;
+
 
     public void Start()
     {

@@ -257,7 +257,7 @@ public class DialogueManager : MonoBehaviour
         // Set new selected object
         EventSystem.current.SetSelectedGameObject(characterResponses[0].gameObject);
 
-        foreach (Quest quest in questList.quests)
+        foreach (Quest quest in questList.questList)
         {
             if (quest.questCriteria.criteriaType == CriteriaType.Talk)
             {

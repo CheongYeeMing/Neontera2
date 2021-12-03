@@ -5,7 +5,6 @@ using System;
 
 public class CharacterHealth : MonoBehaviour, Health
 {
-    // Character Animation States
     private const float GRAVITY_SCALE_ZERO = 0;
     private const float GRAVITY_SCALE_NORMAL = 3;
     private const float HEALTH_BAR_CHIP_SPEED = 2f;
@@ -27,10 +26,15 @@ public class CharacterHealth : MonoBehaviour, Health
 
     private bool isHurting;
     private bool isDead;
-    public float health;
+    private float health;
     private float lerpTimer;
     private float baseMaxHealth;
-    public float maxHealth;
+    private float maxHealth;
+
+    private void Awake()
+    {
+        GetCharacterHealthComponents();
+    }
 
     // Start is called before the first frame update
     void Start()
@@ -47,26 +51,11 @@ public class CharacterHealth : MonoBehaviour, Health
             health = Data.currentHealth;
         }
     }
-
-    private void Awake()
-    {
-        body = GetComponent<Rigidbody2D>();
-        character = GetComponent<Character>();
-        characterAnimation = GetComponent<CharacterAnimation>();
-        characterAttack = GetComponent<CharacterAttack>();
-    }
+    
 
     // Update is called once per frame
     void Update()
     {
-        if (Input.GetKeyDown(KeyCode.D))
-        {
-            health -= 20;
-        }
-        if (Input.GetKeyDown(KeyCode.F))
-        {
-            RestoreHealth(20);
-        }
         maxHealth = character.GetHealth().CalculateFinalValue();
         health = Mathf.Clamp(health, 0, maxHealth);
         if (transform.position.y < -100)
@@ -80,6 +69,14 @@ public class CharacterHealth : MonoBehaviour, Health
             }
         }
         UpdateHealthUI();
+    }
+
+    private void GetCharacterHealthComponents()
+    {
+        body = GetComponent<Rigidbody2D>();
+        character = GetComponent<Character>();
+        characterAnimation = GetComponent<CharacterAnimation>();
+        characterAttack = GetComponent<CharacterAttack>();
     }
 
     public void UpdateHealthUI()
@@ -195,7 +192,7 @@ public class CharacterHealth : MonoBehaviour, Health
         isDead = false;
         health = maxHealth;
         GetComponent<BoxCollider2D>().enabled = true;
-        body.gravityScale = 1;
+        body.gravityScale = 3;
     }
 
     public bool IsHurting()

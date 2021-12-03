@@ -10,10 +10,13 @@ public class CharacterAttack : MonoBehaviour
     private const int COMBO_SLASH_2 = 2;
     private const int COMBO_SLASH_3 = 3;
 
-    [SerializeField] private Transform firePoint;
-    [SerializeField] public Transform attackPoint;
-    [SerializeField] public float attackDelay;
     [SerializeField] private GameObject fireball;
+    [SerializeField] private GameObject Slash_1;
+    [SerializeField] private GameObject Slash_2;
+    [SerializeField] private GameObject Slash_3;
+    [SerializeField] private Transform attackPoint;
+    [SerializeField] private Transform firePoint;
+    [SerializeField] private float attackDelay;
     [SerializeField] public float KnockbackX;
     [SerializeField] public float KnockbackY;
 
@@ -30,31 +33,20 @@ public class CharacterAttack : MonoBehaviour
     private float attack;
     private float attackCooldownTimer = Mathf.Infinity;
     private float attackRange = 1.5f;
-
     private bool isAttacking;
-
-    // Combo
     public int attackCombo;
-    [SerializeField] GameObject Slash_1;
-    [SerializeField] GameObject Slash_2;
-    [SerializeField] GameObject Slash_3;
     public float attackComboTimer;
-
-    public void Start()
-    {
-        baseAttack = Data.baseAttack;
-        UpdateAttackPower();
-    }
 
     private void Awake()
     {
-        character = GetComponent<Character>();
-        characterAnimation = GetComponent<CharacterAnimation>();
-        characterLevel = GetComponent<CharacterLevel>();
-        characterMovement = GetComponent<CharacterMovement>();
-        characterWallet = GetComponent<CharacterWallet>();
-        rigidBody = GetComponent<Rigidbody2D>();
+        GetCharacterAttackComponents();
         ResetAttackCombo();
+    }
+
+    private void Start()
+    {
+        LoadCharacterAttackData();
+        UpdateAttackPower();
     }
 
     private void Update()
@@ -77,6 +69,21 @@ public class CharacterAttack : MonoBehaviour
         {
             ResetAttackCombo();
         }
+    }
+
+    private void LoadCharacterAttackData()
+    {
+        baseAttack = Data.baseAttack;
+    }
+
+    private void GetCharacterAttackComponents()
+    {
+        character = GetComponent<Character>();
+        characterAnimation = GetComponent<CharacterAnimation>();
+        characterLevel = GetComponent<CharacterLevel>();
+        characterMovement = GetComponent<CharacterMovement>();
+        characterWallet = GetComponent<CharacterWallet>();
+        rigidBody = GetComponent<Rigidbody2D>();
     }
 
     private void Attack()
@@ -177,7 +184,7 @@ public class CharacterAttack : MonoBehaviour
                 MobReward mobReward = mob.GetComponent<MobReward>();
                 if (mobHealth.IsDead() && !mobReward.GetIsRewardGiven())
                 {
-                    foreach (Quest quest in character.questList.quests)
+                    foreach (Quest quest in character.questList.questList)
                     {
                         if (quest.questCriteria.criteriaType == CriteriaType.Kill)
                         {
@@ -198,7 +205,7 @@ public class CharacterAttack : MonoBehaviour
                 BossReward bossReward = mob.GetComponent<BossReward>();
                 if (bossHealth.IsDead() && !bossReward.GetIsRewardGiven())
                 {
-                    foreach (Quest quest in character.questList.quests)
+                    foreach (Quest quest in character.questList.questList)
                     {
                         if (quest.questCriteria.criteriaType == CriteriaType.Kill)
                         {
