@@ -10,8 +10,13 @@ public class CharacterWallet : MonoBehaviour
 
     public void Awake()
     {
-        GoldAmount = Data.gold;
+        LoadCharacterWalletData();
         UpdateWallet();
+    }
+
+    private void LoadCharacterWalletData()
+    {
+        GoldAmount = Data.gold;
     }
     
     public void UpdateWallet()
