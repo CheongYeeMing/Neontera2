@@ -45,12 +45,7 @@ public class CharacterMovement : MonoBehaviour
 
     private void Awake()
     {
-        body = GetComponent<Rigidbody2D>();
-        boxCollider = GetComponent<BoxCollider2D>();
-        character = GetComponent<Character>();
-        characterAnimation = GetComponent<CharacterAnimation>();
-        characterAttack = GetComponent<CharacterAttack>();
-        characterHealth = GetComponent<CharacterHealth>();
+        GetCharacterMovementComponents();
     }
 
     private void Start()
@@ -106,6 +101,16 @@ public class CharacterMovement : MonoBehaviour
                 Jump();
             }
         }
+    }
+
+    private void GetCharacterMovementComponents()
+    {
+        body = GetComponent<Rigidbody2D>();
+        boxCollider = GetComponent<BoxCollider2D>();
+        character = GetComponent<Character>();
+        characterAnimation = GetComponent<CharacterAnimation>();
+        characterAttack = GetComponent<CharacterAttack>();
+        characterHealth = GetComponent<CharacterHealth>();
     }
 
     private void UpdateMovementAudio()
