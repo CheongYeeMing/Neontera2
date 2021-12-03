@@ -35,13 +35,19 @@ public class CharacterLevel : MonoBehaviour
     // Start is called before the first frame update
     private void Start()
     {
-        level = Data.level;
-        currentExp = Data.currentExp;
+        LoadCharacterLevelData();
         requiredExp = CalculateRequiredExp();
         frontExpBar.fillAmount = currentExp / requiredExp;    
         backExpBar.fillAmount = currentExp / requiredExp;
         levelText.text = LEVEL_TEXT + level;
         charInfoWindow.UpdateCharInfoWindow(this);
+    }
+
+    // Retrieves saved data, if any
+    private void LoadCharacterLevelData()
+    {
+        level = Data.level;
+        currentExp = Data.currentExp;
     }
 
     // Update is called once per frame
