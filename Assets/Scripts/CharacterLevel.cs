@@ -27,6 +27,7 @@ public class CharacterLevel : MonoBehaviour
     [SerializeField] private CharacterInfoWindow charInfoWindow;
 
     private CharacterAttack characterAttack;
+    private CharacterHealth characterHealth;
 
     private float currentExp;
     private float requiredExp;
@@ -53,6 +54,7 @@ public class CharacterLevel : MonoBehaviour
     private void GetCharacterLevelComponents()
     {
         characterAttack = GetComponent<CharacterAttack>();
+        characterHealth = GetComponent<CharacterHealth>();
     }
 
     // Retrieves saved data, if any
@@ -111,7 +113,7 @@ public class CharacterLevel : MonoBehaviour
         frontExpBar.fillAmount = 0f;
         backExpBar.fillAmount = 0f;
         currentExp = Mathf.RoundToInt(currentExp - requiredExp);
-        GetComponent<CharacterHealth>().IncreaseHealth(level);
+        characterHealth.IncreaseHealth(level);
         characterAttack.IncreaseAttack(level);
         requiredExp = CalculateRequiredExp();
         levelText.text = LEVEL_TEXT + level;
