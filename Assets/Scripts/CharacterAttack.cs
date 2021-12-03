@@ -43,8 +43,13 @@ public class CharacterAttack : MonoBehaviour
 
     public void Start()
     {
-        baseAttack = Data.baseAttack;
+        LoadCharacterAttackData();
         UpdateAttackPower();
+    }
+
+    private void LoadCharacterAttackData()
+    {
+        baseAttack = Data.baseAttack;
     }
 
     private void Awake()
