@@ -2,6 +2,7 @@ using UnityEngine;
 
 public class CharacterAttack : MonoBehaviour
 {
+    private const float attackRange = 1.5f;
     private const string CHARACTER_ATTACK = "Attack";
     private const string CHARACTER_ATTACK_2 = "Attack2";
     private const string CHARACTER_ATTACK_3 = "Attack3";
@@ -32,7 +33,6 @@ public class CharacterAttack : MonoBehaviour
     public float baseAttack;
     private float attack;
     private float attackCooldownTimer = Mathf.Infinity;
-    private float attackRange = 1.5f;
     private bool isAttacking;
     public int attackCombo;
     public float attackComboTimer;
