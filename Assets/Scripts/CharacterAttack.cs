@@ -2,13 +2,14 @@ using UnityEngine;
 
 public class CharacterAttack : MonoBehaviour
 {
+    private const float attackRange = 1.5f;
+    private const int COMBO_SLASH_1 = 1;
+    private const int COMBO_SLASH_2 = 2;
+    private const int COMBO_SLASH_3 = 3;
     private const string CHARACTER_ATTACK = "Attack";
     private const string CHARACTER_ATTACK_2 = "Attack2";
     private const string CHARACTER_ATTACK_3 = "Attack3";
     private const string CHARACTER_SPECIAL_ATTACK = "AttackFireball";
-    private const int COMBO_SLASH_1 = 1;
-    private const int COMBO_SLASH_2 = 2;
-    private const int COMBO_SLASH_3 = 3;
 
     [SerializeField] private GameObject fireball;
     [SerializeField] private GameObject Slash_1;
@@ -32,7 +33,6 @@ public class CharacterAttack : MonoBehaviour
     public float baseAttack;
     private float attack;
     private float attackCooldownTimer = Mathf.Infinity;
-    private float attackRange = 1.5f;
     private bool isAttacking;
     public int attackCombo;
     public float attackComboTimer;

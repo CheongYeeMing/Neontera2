@@ -45,8 +45,9 @@ public class CharacterLevel : MonoBehaviour
     {
         LoadCharacterLevelData();
         requiredExp = CalculateRequiredExp();
-        frontExpBar.fillAmount = currentExp / requiredExp;    
-        backExpBar.fillAmount = currentExp / requiredExp;
+        float currentExpPercentage = currentExp / requiredExp;
+        frontExpBar.fillAmount = currentExpPercentage;    
+        backExpBar.fillAmount = currentExpPercentage;
         levelText.text = LEVEL_TEXT + level;
         charInfoWindow.UpdateCharInfoWindow(this);
     }
