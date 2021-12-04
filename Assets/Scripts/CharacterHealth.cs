@@ -68,7 +68,7 @@ public class CharacterHealth : MonoBehaviour, Health
                 Die();
             }
         }
-        UpdateHealthUI();
+        UpdateHealthBarUI();
     }
 
     private void GetCharacterHealthComponents()
@@ -79,7 +79,7 @@ public class CharacterHealth : MonoBehaviour, Health
         characterAttack = GetComponent<CharacterAttack>();
     }
 
-    public void UpdateHealthUI()
+    public void UpdateHealthBarUI()
     {
         float fillFront = frontHealthBar.fillAmount;
         float fillBack = backHealthBar.fillAmount;
@@ -192,7 +192,7 @@ public class CharacterHealth : MonoBehaviour, Health
         isDead = false;
         health = maxHealth;
         GetComponent<BoxCollider2D>().enabled = true;
-        body.gravityScale = 3;
+        body.gravityScale = GRAVITY_SCALE_NORMAL;
     }
 
     public bool IsHurting()
