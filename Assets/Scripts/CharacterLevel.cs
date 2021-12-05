@@ -80,7 +80,7 @@ public class CharacterLevel : MonoBehaviour
         charInfoWindow.UpdateCharInfoWindow(this);
     }
 
-    public void UpdateExpUI()
+    private void UpdateExpUI()
     {
         float fillExp = frontExpBar.fillAmount;
         float expFraction = currentExp / requiredExp;
@@ -98,14 +98,7 @@ public class CharacterLevel : MonoBehaviour
         }
         expText.text = currentExp + SEPARATOR + requiredExp;
     }
-
-    public void GainExperience(float expGained)
-    {
-        currentExp += expGained;
-        lerpTimer = 0f;
-        delayTimer = 0f;
-        Data.currentExp = currentExp;
-    }
+    
 
     private void LevelUp()
     {
@@ -145,5 +138,13 @@ public class CharacterLevel : MonoBehaviour
     public float GetRequiredExp()
     {
         return requiredExp;
+    }
+
+    public void GainExperience(float expGained)
+    {
+        currentExp += expGained;
+        lerpTimer = 0f;
+        delayTimer = 0f;
+        Data.currentExp = currentExp;
     }
 }
