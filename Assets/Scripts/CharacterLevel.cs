@@ -80,7 +80,7 @@ public class CharacterLevel : MonoBehaviour
         charInfoWindow.UpdateCharInfoWindow(this);
     }
 
-    public void UpdateExpUI()
+    private void UpdateExpUI()
     {
         float fillExp = frontExpBar.fillAmount;
         float expFraction = currentExp / requiredExp;
