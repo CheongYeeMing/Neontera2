@@ -222,6 +222,54 @@ public class CharacterMovement : MonoBehaviour
         return isOnWall;
     }
 
+    private bool IsInMonologue()
+    {
+        bool inMonologue = false;
+        Monologue[] monologues = FindObjectsOfType<Monologue>();
+        foreach (Monologue mono in monologues)
+        {
+            if (mono.IsExamining())
+            {
+                inMonologue = true;
+                break;
+            }
+        }
+        return inMonologue;
+    }
+
+    private bool IsInDialogue()
+    {
+        bool inDialogue = false;
+        DialogueManager[] npc = FindObjectsOfType<DialogueManager>();
+        for (int i = 0; i < npc.Length; i++)
+        {
+            if (npc[i].isTalking)
+            {
+                inDialogue = true;
+                break;
+            }
+        }
+        return inDialogue;
+    }
+
+    // Methods for Particle System
+    private void CreateDust()
+    {
+        jumpDust.Play();
+    }
+
+    private void UpdateWalkDustParticle()
+    {
+        if (IsGrounded())
+        {
+            walkDust.gameObject.SetActive(true);
+        }
+        else
+        {
+            walkDust.gameObject.SetActive(false);
+        }
+    }
+
     public bool IsAbleToAttack()
     {
         //bool can = true;
@@ -267,56 +315,8 @@ public class CharacterMovement : MonoBehaviour
         return can;
     }
 
-    private bool IsInMonologue()
-    {
-        bool inMonologue = false;
-        Monologue[] monologues = FindObjectsOfType<Monologue>();
-        foreach (Monologue mono in monologues)
-        {
-            if (mono.IsExamining())
-            {
-                inMonologue = true;
-                break;
-            }
-        }
-        return inMonologue;
-    }
-
-    private bool IsInDialogue()
-    {
-        bool inDialogue = false;
-        DialogueManager[] npc = FindObjectsOfType<DialogueManager>();
-        for (int i = 0; i < npc.Length; i++)
-        {
-            if (npc[i].isTalking)
-            {
-                inDialogue = true;
-                break;
-            }
-        }
-        return inDialogue;
-    }
-
     public Rigidbody2D GetRigidBody()
     {
         return body;
-    }
-
-    // Methods for Particle System
-    private void CreateDust()
-    {
-        jumpDust.Play();
-    }
-
-    private void UpdateWalkDustParticle()
-    {
-        if (IsGrounded())
-        {
-            walkDust.gameObject.SetActive(true);
-        }
-        else
-        {
-            walkDust.gameObject.SetActive(false);
-        }
     }
 }
