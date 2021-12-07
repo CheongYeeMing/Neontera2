@@ -7,6 +7,7 @@ public class CharacterHealth : MonoBehaviour, Health
     private const float GRAVITY_SCALE_ZERO = 0;
     private const float GRAVITY_SCALE_NORMAL = 3;
     private const float HEALTH_BAR_CHIP_SPEED = 2f;
+    private const float HEALTH_ZERO = 0;
     private const float MAXIMUM_LEVEL = 100;
     private const string AUDIO_CHARACTER_HEAL = "CharacterHeal";
     private const string AUDIO_CHARACTER_HURT = "CharacterHurt";
@@ -44,7 +45,7 @@ public class CharacterHealth : MonoBehaviour, Health
     private void Start()
     {
         baseMaxHealth = Data.baseHealth;
-        if (Data.currentHealth == 0) 
+        if (Data.currentHealth == HEALTH_ZERO) 
         { 
             maxHealth = character.GetHealth().CalculateFinalValue();
             health = maxHealth;
@@ -61,14 +62,14 @@ public class CharacterHealth : MonoBehaviour, Health
     private void Update()
     {
         maxHealth = character.GetHealth().CalculateFinalValue();
-        health = Mathf.Clamp(health, 0, maxHealth);
+        health = Mathf.Clamp(health, HEALTH_ZERO, maxHealth);
         if (transform.position.y < -100)
         {
             health -= maxHealth * 0.2f; // When fall out of map, slow death.
-            if (health <= 0 && !isDead)
+            if (health <= HEALTH_ZERO && !isDead)
             {
                 isDead = true;
-                health = 0;
+                health = HEALTH_ZERO;
                 Die();
             }
         }
@@ -121,9 +122,9 @@ public class CharacterHealth : MonoBehaviour, Health
         KnockBack(attackedBy);
         health -= damage;
         lerpTimer = 0f;
-        if (health <= 0)
+        if (health <= HEALTH_ZERO)
         {
-            health = 0;
+            health = HEALTH_ZERO;
             Die();
         }
         Invoke("HurtComplete", hurtDelay);
