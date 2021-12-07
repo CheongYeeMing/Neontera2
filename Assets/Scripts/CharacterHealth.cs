@@ -7,6 +7,10 @@ public class CharacterHealth : MonoBehaviour, Health
     private const float GRAVITY_SCALE_ZERO = 0;
     private const float GRAVITY_SCALE_NORMAL = 3;
     private const float HEALTH_BAR_CHIP_SPEED = 2f;
+    private const string AUDIO_CHARACTER_HEAL = "CharacterHeal";
+    private const string AUDIO_CHARACTER_HURT = "CharacterHurt";
+    private const string AUDIO_CHARACTER_DIE = "CharacterDie";
+    private const string AUDIO_RUN = "Run";
     private const string CHARACTER_HURT = "Hurt";
     private const string CHARACTER_DIE = "Die";
     private const string HEALTH_TEXT_SEPARATOR = "/";
@@ -108,8 +112,8 @@ public class CharacterHealth : MonoBehaviour, Health
         {
             return;
         }
-        FindObjectOfType<AudioManager>().StopEffect("CharacterHurt");
-        FindObjectOfType<AudioManager>().PlayEffect("CharacterHurt");
+        FindObjectOfType<AudioManager>().StopEffect(AUDIO_CHARACTER_HURT);
+        FindObjectOfType<AudioManager>().PlayEffect(AUDIO_CHARACTER_HURT);
         isHurting = true;
         characterAnimation.ChangeAnimationState(CHARACTER_HURT);
         CinemachineShake.Instance.Hit();
@@ -178,8 +182,8 @@ public class CharacterHealth : MonoBehaviour, Health
     {
         isDead = true;
         characterAnimation.ChangeAnimationState(CHARACTER_DIE);
-        FindObjectOfType<AudioManager>().StopEffect("Run");
-        FindObjectOfType<AudioManager>().PlayEffect("CharacterDie");
+        FindObjectOfType<AudioManager>().StopEffect(AUDIO_RUN);
+        FindObjectOfType<AudioManager>().PlayEffect(AUDIO_CHARACTER_DIE);
         GetComponent<BoxCollider2D>().enabled = false;
         body.velocity = Vector2.zero;
         body.gravityScale = GRAVITY_SCALE_ZERO;
@@ -217,7 +221,7 @@ public class CharacterHealth : MonoBehaviour, Health
     public void FullRestore()
     {
         health = maxHealth;
-        FindObjectOfType<AudioManager>().PlayEffect("CharacterHeal");
+        FindObjectOfType<AudioManager>().PlayEffect(AUDIO_CHARACTER_HEAL);
     }
 
     public float GetCurrentHealth()
