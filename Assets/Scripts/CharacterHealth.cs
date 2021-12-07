@@ -57,7 +57,7 @@ public class CharacterHealth : MonoBehaviour, Health
     
 
     // Update is called once per frame
-    void Update()
+    private void Update()
     {
         maxHealth = character.GetHealth().CalculateFinalValue();
         health = Mathf.Clamp(health, 0, maxHealth);
