@@ -40,7 +40,7 @@ public class CharacterHealth : MonoBehaviour, Health
     }
 
     // Start is called before the first frame update
-    void Start()
+    private void Start()
     {
         baseMaxHealth = Data.baseHealth;
         if (Data.currentHealth == 0) 
