@@ -7,6 +7,7 @@ public class CharacterHealth : MonoBehaviour, Health
     private const float GRAVITY_SCALE_ZERO = 0;
     private const float GRAVITY_SCALE_NORMAL = 3;
     private const float HEALTH_BAR_CHIP_SPEED = 2f;
+    private const float MAXIMUM_LEVEL = 100;
     private const string AUDIO_CHARACTER_HEAL = "CharacterHeal";
     private const string AUDIO_CHARACTER_HURT = "CharacterHurt";
     private const string AUDIO_CHARACTER_DIE = "CharacterDie";
@@ -171,9 +172,9 @@ public class CharacterHealth : MonoBehaviour, Health
 
     public void IncreaseHealth(int level)
     {
-        baseMaxHealth += (baseMaxHealth * 0.01f) * ((100 - level) * 0.1f);
-        health += (baseMaxHealth * 0.01f) * ((100 - level) * 0.1f);
-        maxHealth += (baseMaxHealth * 0.01f) * ((100 - level) * 0.1f);
+        baseMaxHealth += (baseMaxHealth * 0.01f) * ((MAXIMUM_LEVEL - level) * 0.1f);
+        health += (baseMaxHealth * 0.01f) * ((MAXIMUM_LEVEL - level) * 0.1f);
+        maxHealth += (baseMaxHealth * 0.01f) * ((MAXIMUM_LEVEL - level) * 0.1f);
         character.Health.SetBaseValue((int)baseMaxHealth);
         character.UpdateCharacterStats();
     }
