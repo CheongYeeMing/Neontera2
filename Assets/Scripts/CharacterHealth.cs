@@ -16,9 +16,9 @@ public class CharacterHealth : MonoBehaviour, Health
     private const string HEALTH_TEXT_SEPARATOR = "/";
 
     [SerializeField] private GameOver gameOver;
-    [SerializeField] private TextMeshProUGUI healthText;
     [SerializeField] private Image backHealthBar;
     [SerializeField] private Image frontHealthBar;
+    [SerializeField] private TextMeshProUGUI healthText;
     [SerializeField] private float hurtDelay;
 
     private Character character;
