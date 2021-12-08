@@ -24,6 +24,7 @@ public class CharacterHealth : MonoBehaviour, Health
     [SerializeField] private TextMeshProUGUI healthText;
     [SerializeField] private float hurtDelay;
 
+    private BoxCollider2D boxCollider;
     private Character character;
     private CharacterAnimation characterAnimation;
     private CharacterAttack characterAttack;
@@ -95,7 +96,7 @@ public class CharacterHealth : MonoBehaviour, Health
 
     private void GetCharacterHealthComponents()
     {
-        body = GetComponent<Rigidbody2D>();
+        boxCollider = GetComponent<BoxCollider2D>();
         character = GetComponent<Character>();
         characterAnimation = GetComponent<CharacterAnimation>();
         characterAttack = GetComponent<CharacterAttack>();
@@ -204,7 +205,7 @@ public class CharacterHealth : MonoBehaviour, Health
         characterAnimation.ChangeAnimationState(CHARACTER_DIE);
         FindObjectOfType<AudioManager>().StopEffect(AUDIO_RUN);
         FindObjectOfType<AudioManager>().PlayEffect(AUDIO_CHARACTER_DIE);
-        GetComponent<BoxCollider2D>().enabled = false;
+        boxCollider.enabled = false;
         rigidBody.velocity = Vector2.zero;
         rigidBody.gravityScale = GRAVITY_SCALE_ZERO;
         gameOver.gameObject.SetActive(true);
@@ -214,8 +215,8 @@ public class CharacterHealth : MonoBehaviour, Health
     {
         isDead = false;
         health = maxHealth;
-        GetComponent<BoxCollider2D>().enabled = true;
-        body.gravityScale = GRAVITY_SCALE_NORMAL;
+        boxCollider.enabled = true;
+        rigidBody.gravityScale = GRAVITY_SCALE_NORMAL;
     }
 
     public bool IsHurting()
