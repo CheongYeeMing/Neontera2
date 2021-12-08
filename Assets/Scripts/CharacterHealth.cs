@@ -80,11 +80,8 @@ public class CharacterHealth : MonoBehaviour, Health
     private void SlowlyKillCharacter()
     {
         health -= maxHealth * 0.2f; // When fall out of map, slow death.
-        bool characterIsDead = health <= HEALTH_ZERO && !isDead;
-        if (characterIsDead)
+        if (HealthBelowZeroAndAlive())
         {
-            isDead = true;
-            health = HEALTH_ZERO; // Prevent negative health
             Die(); // Kill Character
         }
     }
@@ -101,6 +98,12 @@ public class CharacterHealth : MonoBehaviour, Health
         characterAnimation = GetComponent<CharacterAnimation>();
         characterAttack = GetComponent<CharacterAttack>();
         rigidBody = GetComponent<Rigidbody2D>();
+    }
+
+    private bool HealthBelowZeroAndAlive()
+    {
+        bool characterIsDead = health <= HEALTH_ZERO && !isDead;
+        return characterIsDead;
     }
 
     public void UpdateHealthBarUI()
@@ -141,9 +144,8 @@ public class CharacterHealth : MonoBehaviour, Health
         KnockBack(attackedBy);
         health -= damage;
         lerpTimer = 0f;
-        if (health <= HEALTH_ZERO)
+        if (HealthBelowZeroAndAlive())
         {
-            health = HEALTH_ZERO;
             Die();
         }
         Invoke("HurtComplete", hurtDelay);
@@ -202,6 +204,7 @@ public class CharacterHealth : MonoBehaviour, Health
     public void Die()
     {
         isDead = true;
+        health = HEALTH_ZERO;
         characterAnimation.ChangeAnimationState(CHARACTER_DIE);
         FindObjectOfType<AudioManager>().StopEffect(AUDIO_RUN);
         FindObjectOfType<AudioManager>().PlayEffect(AUDIO_CHARACTER_DIE);
