@@ -28,7 +28,7 @@ public class CharacterHealth : MonoBehaviour, Health
     private CharacterAnimation characterAnimation;
     private CharacterAttack characterAttack;
     private GameObject attackedBy;
-    private Rigidbody2D body;
+    private Rigidbody2D rigidBody;
 
     private bool isHurting;
     private bool isDead;
@@ -99,6 +99,7 @@ public class CharacterHealth : MonoBehaviour, Health
         character = GetComponent<Character>();
         characterAnimation = GetComponent<CharacterAnimation>();
         characterAttack = GetComponent<CharacterAttack>();
+        rigidBody = GetComponent<Rigidbody2D>();
     }
 
     public void UpdateHealthBarUI()
@@ -160,11 +161,11 @@ public class CharacterHealth : MonoBehaviour, Health
             if (mob.transform.position.x > transform.position.x)
             {
 
-                body.velocity = new Vector2(body.velocity.x - mobAttack.KnockbackX, body.velocity.y + mobAttack.KnockbackY);
+                rigidBody.velocity = new Vector2(rigidBody.velocity.x - mobAttack.KnockbackX, rigidBody.velocity.y + mobAttack.KnockbackY);
             }
             else
             {
-                body.velocity = new Vector2(body.velocity.x + mobAttack.KnockbackX, body.velocity.y + mobAttack.KnockbackY);
+                rigidBody.velocity = new Vector2(rigidBody.velocity.x + mobAttack.KnockbackX, rigidBody.velocity.y + mobAttack.KnockbackY);
             }
         }
         BossAttack bossAttack;
@@ -173,11 +174,11 @@ public class CharacterHealth : MonoBehaviour, Health
             if (mob.transform.position.x > transform.position.x)
             {
 
-                body.velocity = new Vector2(body.velocity.x - bossAttack.KnockbackX, body.velocity.y + bossAttack.KnockbackY);
+                rigidBody.velocity = new Vector2(rigidBody.velocity.x - bossAttack.KnockbackX, rigidBody.velocity.y + bossAttack.KnockbackY);
             }
             else
             {
-                body.velocity = new Vector2(body.velocity.x + bossAttack.KnockbackX, body.velocity.y + bossAttack.KnockbackY);
+                rigidBody.velocity = new Vector2(rigidBody.velocity.x + bossAttack.KnockbackX, rigidBody.velocity.y + bossAttack.KnockbackY);
             }
         }
     }
@@ -204,8 +205,8 @@ public class CharacterHealth : MonoBehaviour, Health
         FindObjectOfType<AudioManager>().StopEffect(AUDIO_RUN);
         FindObjectOfType<AudioManager>().PlayEffect(AUDIO_CHARACTER_DIE);
         GetComponent<BoxCollider2D>().enabled = false;
-        body.velocity = Vector2.zero;
-        body.gravityScale = GRAVITY_SCALE_ZERO;
+        rigidBody.velocity = Vector2.zero;
+        rigidBody.gravityScale = GRAVITY_SCALE_ZERO;
         gameOver.gameObject.SetActive(true);
     }
 
