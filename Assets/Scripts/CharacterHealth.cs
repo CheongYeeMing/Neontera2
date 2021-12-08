@@ -241,7 +241,8 @@ public class CharacterHealth : MonoBehaviour, Health
 
     public void FullRestore()
     {
-        health = maxHealth;
+        float missingHealth = maxHealth - health;
+        RestoreHealth(missingHealth);
         FindObjectOfType<AudioManager>().PlayEffect(AUDIO_CHARACTER_HEAL);
     }
 
