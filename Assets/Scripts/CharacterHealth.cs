@@ -1,28 +1,35 @@
 using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
-using System;
 
 public class CharacterHealth : MonoBehaviour, Health
 {
     private const float GRAVITY_SCALE_ZERO = 0;
     private const float GRAVITY_SCALE_NORMAL = 3;
     private const float HEALTH_BAR_CHIP_SPEED = 2f;
+    private const float HEALTH_ZERO = 0;
+    private const float MAXIMUM_LEVEL = 100;
+    private const float TRANSFORM_NEGATIVE_LIMIT = -100;
+    private const string AUDIO_CHARACTER_HEAL = "CharacterHeal";
+    private const string AUDIO_CHARACTER_HURT = "CharacterHurt";
+    private const string AUDIO_CHARACTER_DIE = "CharacterDie";
+    private const string AUDIO_RUN = "Run";
     private const string CHARACTER_HURT = "Hurt";
     private const string CHARACTER_DIE = "Die";
     private const string HEALTH_TEXT_SEPARATOR = "/";
 
     [SerializeField] private GameOver gameOver;
-    [SerializeField] private TextMeshProUGUI healthText;
     [SerializeField] private Image backHealthBar;
     [SerializeField] private Image frontHealthBar;
+    [SerializeField] private TextMeshProUGUI healthText;
     [SerializeField] private float hurtDelay;
 
+    private BoxCollider2D boxCollider;
     private Character character;
     private CharacterAnimation characterAnimation;
     private CharacterAttack characterAttack;
     private GameObject attackedBy;
-    private Rigidbody2D body;
+    private Rigidbody2D rigidBody;
 
     private bool isHurting;
     private bool isDead;
@@ -37,10 +44,10 @@ public class CharacterHealth : MonoBehaviour, Health
     }
 
     // Start is called before the first frame update
-    void Start()
+    private void Start()
     {
         baseMaxHealth = Data.baseHealth;
-        if (Data.currentHealth == 0) 
+        if (Data.currentHealth == HEALTH_ZERO) 
         { 
             maxHealth = character.GetHealth().CalculateFinalValue();
             health = maxHealth;
@@ -54,29 +61,46 @@ public class CharacterHealth : MonoBehaviour, Health
     
 
     // Update is called once per frame
-    void Update()
+    private void Update()
     {
-        maxHealth = character.GetHealth().CalculateFinalValue();
-        health = Mathf.Clamp(health, 0, maxHealth);
-        if (transform.position.y < -100)
+        UpdateHealthValue();
+        if (CharacterOutOfBounds())
         {
-            health -= maxHealth * 0.2f; // When fall out of map, slow death.
-            if (health <= 0 && !isDead)
-            {
-                isDead = true;
-                health = 0;
-                Die();
-            }
+            SlowlyKillCharacter();
         }
         UpdateHealthBarUI();
     }
 
+    private void UpdateHealthValue()
+    {
+        maxHealth = character.GetHealth().CalculateFinalValue();
+        health = Mathf.Clamp(health, HEALTH_ZERO, maxHealth);
+    }
+
+    private void SlowlyKillCharacter()
+    {
+        health -= maxHealth * 0.2f; // When fall out of map, slow death.
+        bool characterIsDead = health <= HEALTH_ZERO && !isDead;
+        if (characterIsDead)
+        {
+            isDead = true;
+            health = HEALTH_ZERO; // Prevent negative health
+            Die(); // Kill Character
+        }
+    }
+
+    private bool CharacterOutOfBounds()
+    {
+        return transform.position.y < TRANSFORM_NEGATIVE_LIMIT;
+    }
+
     private void GetCharacterHealthComponents()
     {
-        body = GetComponent<Rigidbody2D>();
+        boxCollider = GetComponent<BoxCollider2D>();
         character = GetComponent<Character>();
         characterAnimation = GetComponent<CharacterAnimation>();
         characterAttack = GetComponent<CharacterAttack>();
+        rigidBody = GetComponent<Rigidbody2D>();
     }
 
     public void UpdateHealthBarUI()
@@ -109,17 +133,17 @@ public class CharacterHealth : MonoBehaviour, Health
         {
             return;
         }
-        FindObjectOfType<AudioManager>().StopEffect("CharacterHurt");
-        FindObjectOfType<AudioManager>().PlayEffect("CharacterHurt");
+        FindObjectOfType<AudioManager>().StopEffect(AUDIO_CHARACTER_HURT);
+        FindObjectOfType<AudioManager>().PlayEffect(AUDIO_CHARACTER_HURT);
         isHurting = true;
         characterAnimation.ChangeAnimationState(CHARACTER_HURT);
         CinemachineShake.Instance.Hit();
         KnockBack(attackedBy);
         health -= damage;
         lerpTimer = 0f;
-        if (health <= 0)
+        if (health <= HEALTH_ZERO)
         {
-            health = 0;
+            health = HEALTH_ZERO;
             Die();
         }
         Invoke("HurtComplete", hurtDelay);
@@ -138,11 +162,11 @@ public class CharacterHealth : MonoBehaviour, Health
             if (mob.transform.position.x > transform.position.x)
             {
 
-                body.velocity = new Vector2(body.velocity.x - mobAttack.KnockbackX, body.velocity.y + mobAttack.KnockbackY);
+                rigidBody.velocity = new Vector2(rigidBody.velocity.x - mobAttack.KnockbackX, rigidBody.velocity.y + mobAttack.KnockbackY);
             }
             else
             {
-                body.velocity = new Vector2(body.velocity.x + mobAttack.KnockbackX, body.velocity.y + mobAttack.KnockbackY);
+                rigidBody.velocity = new Vector2(rigidBody.velocity.x + mobAttack.KnockbackX, rigidBody.velocity.y + mobAttack.KnockbackY);
             }
         }
         BossAttack bossAttack;
@@ -151,11 +175,11 @@ public class CharacterHealth : MonoBehaviour, Health
             if (mob.transform.position.x > transform.position.x)
             {
 
-                body.velocity = new Vector2(body.velocity.x - bossAttack.KnockbackX, body.velocity.y + bossAttack.KnockbackY);
+                rigidBody.velocity = new Vector2(rigidBody.velocity.x - bossAttack.KnockbackX, rigidBody.velocity.y + bossAttack.KnockbackY);
             }
             else
             {
-                body.velocity = new Vector2(body.velocity.x + bossAttack.KnockbackX, body.velocity.y + bossAttack.KnockbackY);
+                rigidBody.velocity = new Vector2(rigidBody.velocity.x + bossAttack.KnockbackX, rigidBody.velocity.y + bossAttack.KnockbackY);
             }
         }
     }
@@ -168,9 +192,9 @@ public class CharacterHealth : MonoBehaviour, Health
 
     public void IncreaseHealth(int level)
     {
-        baseMaxHealth += (baseMaxHealth * 0.01f) * ((100 - level) * 0.1f);
-        health += (baseMaxHealth * 0.01f) * ((100 - level) * 0.1f);
-        maxHealth += (baseMaxHealth * 0.01f) * ((100 - level) * 0.1f);
+        baseMaxHealth += (baseMaxHealth * 0.01f) * ((MAXIMUM_LEVEL - level) * 0.1f);
+        health += (baseMaxHealth * 0.01f) * ((MAXIMUM_LEVEL - level) * 0.1f);
+        maxHealth += (baseMaxHealth * 0.01f) * ((MAXIMUM_LEVEL - level) * 0.1f);
         character.Health.SetBaseValue((int)baseMaxHealth);
         character.UpdateCharacterStats();
     }
@@ -179,11 +203,11 @@ public class CharacterHealth : MonoBehaviour, Health
     {
         isDead = true;
         characterAnimation.ChangeAnimationState(CHARACTER_DIE);
-        FindObjectOfType<AudioManager>().StopEffect("Run");
-        FindObjectOfType<AudioManager>().PlayEffect("CharacterDie");
-        GetComponent<BoxCollider2D>().enabled = false;
-        body.velocity = Vector2.zero;
-        body.gravityScale = GRAVITY_SCALE_ZERO;
+        FindObjectOfType<AudioManager>().StopEffect(AUDIO_RUN);
+        FindObjectOfType<AudioManager>().PlayEffect(AUDIO_CHARACTER_DIE);
+        boxCollider.enabled = false;
+        rigidBody.velocity = Vector2.zero;
+        rigidBody.gravityScale = GRAVITY_SCALE_ZERO;
         gameOver.gameObject.SetActive(true);
     }
 
@@ -191,8 +215,8 @@ public class CharacterHealth : MonoBehaviour, Health
     {
         isDead = false;
         health = maxHealth;
-        GetComponent<BoxCollider2D>().enabled = true;
-        body.gravityScale = GRAVITY_SCALE_NORMAL;
+        boxCollider.enabled = true;
+        rigidBody.gravityScale = GRAVITY_SCALE_NORMAL;
     }
 
     public bool IsHurting()
@@ -217,8 +241,9 @@ public class CharacterHealth : MonoBehaviour, Health
 
     public void FullRestore()
     {
-        health = maxHealth;
-        FindObjectOfType<AudioManager>().PlayEffect("CharacterHeal");
+        float missingHealth = maxHealth - health;
+        RestoreHealth(missingHealth);
+        FindObjectOfType<AudioManager>().PlayEffect(AUDIO_CHARACTER_HEAL);
     }
 
     public float GetCurrentHealth()

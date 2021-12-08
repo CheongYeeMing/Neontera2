@@ -1,5 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
@@ -10,6 +8,7 @@ public class CharacterLevel : MonoBehaviour
     private const float EXP_BAR_CHIP_SPEED = 2f;
     private const string LEVEL_TEXT = "Level ";
     private const string SEPARATOR = "/";
+
     [Header("UI")]
     [SerializeField] private Image frontExpBar;
     [SerializeField] private Image backExpBar;
