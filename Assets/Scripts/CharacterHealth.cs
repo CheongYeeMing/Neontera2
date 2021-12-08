@@ -61,19 +61,35 @@ public class CharacterHealth : MonoBehaviour, Health
     // Update is called once per frame
     private void Update()
     {
-        maxHealth = character.GetHealth().CalculateFinalValue();
-        health = Mathf.Clamp(health, HEALTH_ZERO, maxHealth);
-        if (transform.position.y < -100)
+        UpdateHealthValue();
+        if (CharacterOutOfBounds())
         {
-            health -= maxHealth * 0.2f; // When fall out of map, slow death.
-            if (health <= HEALTH_ZERO && !isDead)
-            {
-                isDead = true;
-                health = HEALTH_ZERO;
-                Die();
-            }
+            SlowlyKillCharacter();
         }
         UpdateHealthBarUI();
+    }
+
+    private void UpdateHealthValue()
+    {
+        maxHealth = character.GetHealth().CalculateFinalValue();
+        health = Mathf.Clamp(health, HEALTH_ZERO, maxHealth);
+    }
+
+    private void SlowlyKillCharacter()
+    {
+        health -= maxHealth * 0.2f; // When fall out of map, slow death.
+        bool characterIsDead = health <= HEALTH_ZERO && !isDead;
+        if (characterIsDead)
+        {
+            isDead = true;
+            health = HEALTH_ZERO; // Prevent negative health
+            Die(); // Kill Character
+        }
+    }
+
+    private bool CharacterOutOfBounds()
+    {
+        return transform.position.y < -100;
     }
 
     private void GetCharacterHealthComponents()
