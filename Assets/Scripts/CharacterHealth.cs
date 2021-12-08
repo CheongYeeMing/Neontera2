@@ -9,6 +9,7 @@ public class CharacterHealth : MonoBehaviour, Health
     private const float HEALTH_BAR_CHIP_SPEED = 2f;
     private const float HEALTH_ZERO = 0;
     private const float MAXIMUM_LEVEL = 100;
+    private const float TRANSFORM_NEGATIVE_LIMIT = -100;
     private const string AUDIO_CHARACTER_HEAL = "CharacterHeal";
     private const string AUDIO_CHARACTER_HURT = "CharacterHurt";
     private const string AUDIO_CHARACTER_DIE = "CharacterDie";
@@ -89,7 +90,7 @@ public class CharacterHealth : MonoBehaviour, Health
 
     private bool CharacterOutOfBounds()
     {
-        return transform.position.y < -100;
+        return transform.position.y < TRANSFORM_NEGATIVE_LIMIT;
     }
 
     private void GetCharacterHealthComponents()
