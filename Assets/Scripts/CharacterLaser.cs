@@ -33,7 +33,7 @@ public class CharacterLaser : Projectile
             if (mobHealth.IsDead() && mobHealth.gameObject.GetComponent<MobReward>().GetIsRewardGiven() == false)
             {
                 Character character = FindObjectOfType<Character>();
-                foreach (Quest quest in character.questList.quests)
+                foreach (Quest quest in character.questList.questList)
                 {
                     if (quest.questCriteria.criteriaType == CriteriaType.Kill)
                     {
@@ -59,7 +59,7 @@ public class CharacterLaser : Projectile
             if (bossHealth.IsDead() && bossHealth.gameObject.GetComponent<BossReward>().GetIsRewardGiven() == false)
             {
                 Character character = FindObjectOfType<Character>();
-                foreach (Quest quest in character.questList.quests)
+                foreach (Quest quest in character.questList.questList)
                 {
                     if (quest.questCriteria.criteriaType == CriteriaType.Kill)
                     {

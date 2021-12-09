@@ -75,7 +75,7 @@ public class PauseMenu : MonoBehaviour
         // Save Quest 
         Data.quests.Clear();
         Data.questProgress.Clear();
-        foreach (Quest quest in character.GetComponent<Character>().questList.quests)
+        foreach (Quest quest in character.GetComponent<Character>().questList.questList)
         {
             Data.quests.Add(quest.ID);
             Data.questProgress.Add(quest.questCriteria.currentAmount);

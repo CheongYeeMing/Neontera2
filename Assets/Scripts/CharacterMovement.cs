@@ -4,29 +4,31 @@ using UnityEngine;
 
 public class CharacterMovement : MonoBehaviour
 {
-    private const string AUDIO_JUMP = "Jump";
-    private const string AUDIO_RUN = "Run";
     private const float BOXCAST_ANGLE = 0;
     private const float BOXCAST_DISTANCE = 0.03f;
-    private const string CHARACTER_IDLE = "Idle";
-    private const string CHARACTER_RUN = "Run";
-    private const string CHARACTER_JUMP = "Jump";
     private const float CHARACTER_X = 0.3f;
     private const float CHARACTER_Y = 0.3f;
     private const float CHARACTER_Z = 1;
     private const float GRAVITY_SCALE_ZERO = 0;
     private const float GRAVITY_SCALE_NORMAL = 3;
-    private const string HORIZONTAL_AXIS = "Horizontal";
     private const float MINIMUM_HORIZONTAL_LEFT_INPUT = -0.01f;
     private const float MINIMUM_HORIZONTAL_RIGHT_INPUT = 0.01f;
     private const float WALL_JUMP_COOLDOWN = 0.2f;
+    private const string AUDIO_JUMP = "Jump";
+    private const string AUDIO_RUN = "Run";
+    private const string CHARACTER_IDLE = "Idle";
+    private const string CHARACTER_RUN = "Run";
+    private const string CHARACTER_JUMP = "Jump";
+    private const string HORIZONTAL_AXIS = "Horizontal";
+
 
     [SerializeField] private LayerMask groundLayer;
     [SerializeField] private LayerMask wallLayer;
+    [SerializeField] private ParticleSystem jumpDust;
+    [SerializeField] private ParticleSystem walkDust;
     [SerializeField] private float speed;
     [SerializeField] private float jumpPower;
-    [SerializeField] ParticleSystem jumpDust;
-    [SerializeField] ParticleSystem walkDust;
+    
 
     private BoxCollider2D boxCollider;
     private Character character;
@@ -43,12 +45,7 @@ public class CharacterMovement : MonoBehaviour
 
     private void Awake()
     {
-        body = GetComponent<Rigidbody2D>();
-        boxCollider = GetComponent<BoxCollider2D>();
-        character = GetComponent<Character>();
-        characterAnimation = GetComponent<CharacterAnimation>();
-        characterAttack = GetComponent<CharacterAttack>();
-        characterHealth = GetComponent<CharacterHealth>();
+        GetCharacterMovementComponents();
     }
 
     private void Start()
@@ -59,9 +56,13 @@ public class CharacterMovement : MonoBehaviour
 
     private void FixedUpdate()
     {
+        if (characterHealth.IsDead()) return;
         UpdateWalkDustParticle();
         UpdateSpeed();
-        if (characterAttack.GetIsAttacking() && IsGrounded()) return;
+        if (characterAttack.IsAttacking() && IsGrounded())
+        {
+            return;
+        }
         if (!IsAbleToMove())
         {
             characterAnimation.ChangeAnimationState(CHARACTER_IDLE);
@@ -72,7 +73,7 @@ public class CharacterMovement : MonoBehaviour
         UpdateFacingDirection();
 
         // Set animator parameters
-        if (IsGrounded() && !characterAttack.GetIsAttacking())
+        if (IsGrounded() && !characterAttack.IsAttacking())
         {
             if (IsMoving())
             {
@@ -104,6 +105,16 @@ public class CharacterMovement : MonoBehaviour
                 Jump();
             }
         }
+    }
+
+    private void GetCharacterMovementComponents()
+    {
+        body = GetComponent<Rigidbody2D>();
+        boxCollider = GetComponent<BoxCollider2D>();
+        character = GetComponent<Character>();
+        characterAnimation = GetComponent<CharacterAnimation>();
+        characterAttack = GetComponent<CharacterAttack>();
+        characterHealth = GetComponent<CharacterHealth>();
     }
 
     private void UpdateMovementAudio()
@@ -212,6 +223,54 @@ public class CharacterMovement : MonoBehaviour
         return isOnWall;
     }
 
+    private bool IsInMonologue()
+    {
+        bool inMonologue = false;
+        Monologue[] monologues = FindObjectsOfType<Monologue>();
+        foreach (Monologue mono in monologues)
+        {
+            if (mono.IsExamining())
+            {
+                inMonologue = true;
+                break;
+            }
+        }
+        return inMonologue;
+    }
+
+    private bool IsInDialogue()
+    {
+        bool inDialogue = false;
+        DialogueManager[] npc = FindObjectsOfType<DialogueManager>();
+        for (int i = 0; i < npc.Length; i++)
+        {
+            if (npc[i].isTalking)
+            {
+                inDialogue = true;
+                break;
+            }
+        }
+        return inDialogue;
+    }
+
+    // Methods for Particle System
+    private void CreateDust()
+    {
+        jumpDust.Play();
+    }
+
+    private void UpdateWalkDustParticle()
+    {
+        if (IsGrounded())
+        {
+            walkDust.gameObject.SetActive(true);
+        }
+        else
+        {
+            walkDust.gameObject.SetActive(false);
+        }
+    }
+
     public bool IsAbleToAttack()
     {
         //bool can = true;
@@ -257,56 +316,8 @@ public class CharacterMovement : MonoBehaviour
         return can;
     }
 
-    private bool IsInMonologue()
-    {
-        bool inMonologue = false;
-        Monologue[] monologues = FindObjectsOfType<Monologue>();
-        foreach (Monologue mono in monologues)
-        {
-            if (mono.IsExamining())
-            {
-                inMonologue = true;
-                break;
-            }
-        }
-        return inMonologue;
-    }
-
-    private bool IsInDialogue()
-    {
-        bool inDialogue = false;
-        DialogueManager[] npc = FindObjectsOfType<DialogueManager>();
-        for (int i = 0; i < npc.Length; i++)
-        {
-            if (npc[i].isTalking)
-            {
-                inDialogue = true;
-                break;
-            }
-        }
-        return inDialogue;
-    }
-
     public Rigidbody2D GetRigidBody()
     {
         return body;
-    }
-
-    // Methods for Particle System
-    private void CreateDust()
-    {
-        jumpDust.Play();
-    }
-
-    private void UpdateWalkDustParticle()
-    {
-        if (IsGrounded())
-        {
-            walkDust.gameObject.SetActive(true);
-        }
-        else
-        {
-            walkDust.gameObject.SetActive(false);
-        }
     }
 }

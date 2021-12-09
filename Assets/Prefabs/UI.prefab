@@ -744,7 +744,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 03642a28ba50b27428abc2799c970469, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  quests: []
   questsParent: {fileID: 33191798}
   questSlots:
   - {fileID: 670352765}
@@ -755,6 +754,7 @@ MonoBehaviour:
   - {fileID: 1454392145}
   selectedQuestWindow: {fileID: 902894906}
   acceptedQuestWindow: {fileID: 1275889550}
+  questList: []
 --- !u!1 &34741877
 GameObject:
   m_ObjectHideFlags: 0
@@ -73641,9 +73641,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: eb0d4e20ed5655a48853803b885000ce, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  charName: {fileID: 0}
-  charLevel: {fileID: 4322237879990472099}
   charExp: {fileID: 4322237879897837056}
+  charLevel: {fileID: 4322237879990472099}
 --- !u!1 &4322237880665359430
 GameObject:
   m_ObjectHideFlags: 0

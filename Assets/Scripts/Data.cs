@@ -17,12 +17,6 @@ public static class Data
     public static float baseHealth = 100;
     public static float Xcoordinate = -10.2f;
     public static float Ycoordinate = -1.39f;
-    //public static float Xcoordinate = 140.47f;
-    //public static float Ycoordinate = -18.02f;
-    //public static float Xcoordinate = 552.08f;
-    //public static float Ycoordinate = -20.19f;
-    //public static float Xcoordinate = 965.08f;
-    //public static float Ycoordinate = 10.19f;
     public static string location = "Intro";
 
     // Character Equipped Items
@@ -173,9 +167,6 @@ public static class Data
         Xcoordinate = -10.2f;
         Ycoordinate = -1.39f;
         location = "Intro";
-        //Xcoordinate = 140;
-        //Ycoordinate = -18;
-        //location = "Town";
 
 
         // Character Equipped Items
@@ -197,7 +188,6 @@ public static class Data
         MartinTown = 0;
         LloydForest = 0;
         TrinaCave = 0;
-        
         Nicole = 0;
         Wilson = 0;
 

@@ -73,7 +73,7 @@ public class Inventory : MonoBehaviour
         }
         //Data.items.Add(item);
         items.Add(item);
-        foreach (Quest quest in questList.quests)
+        foreach (Quest quest in questList.questList)
         {
             if (quest.questCriteria.criteriaType == CriteriaType.Collect)
             {
@@ -109,7 +109,7 @@ public class Inventory : MonoBehaviour
             RefreshUI();
             return true;
         }
-        foreach (Quest quest in questList.quests)
+        foreach (Quest quest in questList.questList)
         {
             if (quest.questCriteria.criteriaType == CriteriaType.Collect)
             {
