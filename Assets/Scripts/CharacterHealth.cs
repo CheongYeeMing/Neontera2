@@ -4,6 +4,7 @@ using TMPro;
 
 public class CharacterHealth : MonoBehaviour, Health
 {
+    private const float DEATH_DELAY = 2;
     private const float GRAVITY_SCALE_ZERO = 0;
     private const float GRAVITY_SCALE_NORMAL = 3;
     private const float HEALTH_BAR_CHIP_SPEED = 2f;
@@ -215,7 +216,7 @@ public class CharacterHealth : MonoBehaviour, Health
         boxCollider.enabled = false;
         rigidBody.velocity = Vector2.zero;
         rigidBody.gravityScale = GRAVITY_SCALE_ZERO;
-        Invoke("DeathComplete", 2);
+        Invoke("DeathComplete", DEATH_DELAY);
     }
 
     private void DeathComplete()
