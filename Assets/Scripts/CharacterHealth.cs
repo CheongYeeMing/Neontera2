@@ -4,6 +4,7 @@ using TMPro;
 
 public class CharacterHealth : MonoBehaviour, Health
 {
+    private const float DEATH_DELAY = 2;
     private const float GRAVITY_SCALE_ZERO = 0;
     private const float GRAVITY_SCALE_NORMAL = 3;
     private const float HEALTH_BAR_CHIP_SPEED = 2f;
@@ -63,6 +64,10 @@ public class CharacterHealth : MonoBehaviour, Health
     // Update is called once per frame
     private void Update()
     {
+        if (Input.GetKeyDown(KeyCode.V))
+        {
+            health = 1;
+        }
         UpdateHealthValue();
         if (CharacterOutOfBounds())
         {
@@ -80,11 +85,8 @@ public class CharacterHealth : MonoBehaviour, Health
     private void SlowlyKillCharacter()
     {
         health -= maxHealth * 0.2f; // When fall out of map, slow death.
-        bool characterIsDead = health <= HEALTH_ZERO && !isDead;
-        if (characterIsDead)
+        if (HealthBelowZeroAndAlive())
         {
-            isDead = true;
-            health = HEALTH_ZERO; // Prevent negative health
             Die(); // Kill Character
         }
     }
@@ -101,6 +103,12 @@ public class CharacterHealth : MonoBehaviour, Health
         characterAnimation = GetComponent<CharacterAnimation>();
         characterAttack = GetComponent<CharacterAttack>();
         rigidBody = GetComponent<Rigidbody2D>();
+    }
+
+    private bool HealthBelowZeroAndAlive()
+    {
+        bool characterIsDead = health <= HEALTH_ZERO && !isDead;
+        return characterIsDead;
     }
 
     public void UpdateHealthBarUI()
@@ -140,10 +148,9 @@ public class CharacterHealth : MonoBehaviour, Health
         CinemachineShake.Instance.Hit();
         KnockBack(attackedBy);
         health -= damage;
-        lerpTimer = 0f;
-        if (health <= HEALTH_ZERO)
+        ResetLerpTimer();
+        if (HealthBelowZeroAndAlive())
         {
-            health = HEALTH_ZERO;
             Die();
         }
         Invoke("HurtComplete", hurtDelay);
@@ -187,7 +194,7 @@ public class CharacterHealth : MonoBehaviour, Health
     public void RestoreHealth(float healAmount)
     {
         health += healAmount;
-        lerpTimer = 0f;
+        ResetLerpTimer();
     }
 
     public void IncreaseHealth(int level)
@@ -202,13 +209,24 @@ public class CharacterHealth : MonoBehaviour, Health
     public void Die()
     {
         isDead = true;
+        health = HEALTH_ZERO;
         characterAnimation.ChangeAnimationState(CHARACTER_DIE);
         FindObjectOfType<AudioManager>().StopEffect(AUDIO_RUN);
         FindObjectOfType<AudioManager>().PlayEffect(AUDIO_CHARACTER_DIE);
         boxCollider.enabled = false;
         rigidBody.velocity = Vector2.zero;
         rigidBody.gravityScale = GRAVITY_SCALE_ZERO;
+        Invoke("DeathComplete", DEATH_DELAY);
+    }
+
+    private void DeathComplete()
+    {
         gameOver.gameObject.SetActive(true);
+    }
+
+    private void ResetLerpTimer()
+    {
+        lerpTimer = 0f;
     }
 
     public void Revive()
