@@ -35,6 +35,7 @@ public class CharacterAnimation : MonoBehaviour, Animation
                 return;
             }
         }
+
         // Play the Animation
         animator.Play(newState);
 

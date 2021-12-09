@@ -63,6 +63,10 @@ public class CharacterHealth : MonoBehaviour, Health
     // Update is called once per frame
     private void Update()
     {
+        if (Input.GetKeyDown(KeyCode.V))
+        {
+            health = 1;
+        }
         UpdateHealthValue();
         if (CharacterOutOfBounds())
         {
@@ -211,6 +215,11 @@ public class CharacterHealth : MonoBehaviour, Health
         boxCollider.enabled = false;
         rigidBody.velocity = Vector2.zero;
         rigidBody.gravityScale = GRAVITY_SCALE_ZERO;
+        Invoke("DeathComplete", 2);
+    }
+
+    private void DeathComplete()
+    {
         gameOver.gameObject.SetActive(true);
     }
 

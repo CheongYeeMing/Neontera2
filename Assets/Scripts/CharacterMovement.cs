@@ -56,6 +56,7 @@ public class CharacterMovement : MonoBehaviour
 
     private void FixedUpdate()
     {
+        if (characterHealth.IsDead()) return;
         UpdateWalkDustParticle();
         UpdateSpeed();
         if (characterAttack.IsAttacking() && IsGrounded())
