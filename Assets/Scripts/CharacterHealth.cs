@@ -148,7 +148,7 @@ public class CharacterHealth : MonoBehaviour, Health
         CinemachineShake.Instance.Hit();
         KnockBack(attackedBy);
         health -= damage;
-        lerpTimer = 0f;
+        ResetLerpTimer();
         if (HealthBelowZeroAndAlive())
         {
             Die();
@@ -194,7 +194,7 @@ public class CharacterHealth : MonoBehaviour, Health
     public void RestoreHealth(float healAmount)
     {
         health += healAmount;
-        lerpTimer = 0f;
+        ResetLerpTimer();
     }
 
     public void IncreaseHealth(int level)
@@ -222,6 +222,11 @@ public class CharacterHealth : MonoBehaviour, Health
     private void DeathComplete()
     {
         gameOver.gameObject.SetActive(true);
+    }
+
+    private void ResetLerpTimer()
+    {
+        lerpTimer = 0f;
     }
 
     public void Revive()
