@@ -8,7 +8,7 @@ public class CharacterWallet : MonoBehaviour
     
     private float GoldAmount;
 
-    public void Awake()
+    private void Awake()
     {
         LoadCharacterWalletData();
         UpdateWallet();
@@ -19,7 +19,7 @@ public class CharacterWallet : MonoBehaviour
         GoldAmount = Data.gold;
     }
     
-    public void UpdateWallet()
+    private void UpdateWallet()
     {
         foreach (Wallet wallet in Wallet)
         {
