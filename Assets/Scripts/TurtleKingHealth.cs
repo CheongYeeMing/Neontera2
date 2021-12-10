@@ -89,7 +89,6 @@ public class TurtleKingHealth : BossHealth
         isDead = true;
         gameObject.GetComponent<TurtleKingMovement>().GetRigidbody().velocity = Vector2.zero;
         RewardsPopUp.Create(gameObject);
-        Debug.Log("Mob is dead!!!");
         gameObject.GetComponent<TurtleKingAnimation>().ChangeAnimationState(BOSS_DIE);
         gameObject.GetComponent<Rigidbody2D>().gravityScale = 0;
         RedArtifactMonologue.gameObject.transform.position = FindObjectOfType<Character>().gameObject.transform.position;
