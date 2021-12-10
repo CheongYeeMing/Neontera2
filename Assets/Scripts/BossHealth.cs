@@ -28,6 +28,7 @@ public class BossHealth : MonoBehaviour, Health
     protected Color high;
     protected Color low;
     protected BossAnimation bossAnimation;
+    protected BossMovement bossMovement;
     protected GameObject attackedBy;
     protected Image levelNameBG;
     protected Slider slider;
@@ -66,6 +67,7 @@ public class BossHealth : MonoBehaviour, Health
         }
         GetComponent<SpriteRenderer>().enabled = true;
         bossAnimation = GetComponent<BossAnimation>();
+        bossMovement = GetComponent<BossMovement>();
     }
 
     public virtual void Update()
@@ -109,7 +111,7 @@ public class BossHealth : MonoBehaviour, Health
     {
         if (isInvulnerable) return;
         isHurting = true;
-        GetComponent<BossMovement>().StopPatrol();
+        bossMovement.StopPatrol();
         DamagePopUp.Create(gameObject, damage);
         bossAnimation.ChangeAnimationState(BOSS_HURT);
         KnockBack(attackedBy);
@@ -157,7 +159,7 @@ public class BossHealth : MonoBehaviour, Health
     {
         GetComponent<BossSpawner>().SetDeathTimer(0);
         isDead = true;
-        GetComponent<BossMovement>().GetRigidbody().velocity = Vector2.zero;
+        bossMovement.GetRigidbody().velocity = Vector2.zero;
         RewardsPopUp.Create(gameObject);
         Debug.Log("Mob is dead!!!");
         GetComponent<BossAnimation>().ChangeAnimationState(BOSS_DIE);
