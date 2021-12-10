@@ -29,6 +29,7 @@ public class BossHealth : MonoBehaviour, Health
     protected Color low;
     protected BossAnimation bossAnimation;
     protected BossMovement bossMovement;
+    protected BossPathfindingAI bossPathfindingAI;
     protected GameObject attackedBy;
     protected Image levelNameBG;
     protected Slider slider;
@@ -68,6 +69,7 @@ public class BossHealth : MonoBehaviour, Health
         GetComponent<SpriteRenderer>().enabled = true;
         bossAnimation = GetComponent<BossAnimation>();
         bossMovement = GetComponent<BossMovement>();
+        bossPathfindingAI = GetComponent<BossPathfindingAI>();
     }
 
     public virtual void Update()
@@ -75,7 +77,7 @@ public class BossHealth : MonoBehaviour, Health
         SetBossDetails(currentHealth, maxHealth);
         levelName.transform.position = new Vector2(transform.position.x + nameOffsetX, transform.position.y + nameOffsetY);
         slider.transform.position = new Vector2(transform.position.x + hpOffsetX, transform.position.y + hpOffsetY);
-        if (isHurting || isDead || GetComponent<BossPathfindingAI>().GetIsChasingTarget())
+        if (isHurting || isDead || bossPathfindingAI.GetIsChasingTarget())
         {
             outOfCombatTimer = 0;
         }
@@ -174,9 +176,9 @@ public class BossHealth : MonoBehaviour, Health
     public void HurtComplete()
     {
         isHurting = false;
-        if (GetComponent<BossPathfindingAI>().passiveAggressive)
+        if (bossPathfindingAI.passiveAggressive)
         {
-            GetComponent<BossPathfindingAI>().SetIsChasingTarget(true);
+            bossPathfindingAI.SetIsChasingTarget(true);
         }
     }
 
