@@ -34,7 +34,6 @@ public class BossAttack : MonoBehaviour
 
     private void Attack()
     {
-        Debug.Log("attack animation called");
         isAttacking = true;
         gameObject.GetComponent<BossAnimation>().ChangeAnimationState(BOSS_ATTACK);
     }
