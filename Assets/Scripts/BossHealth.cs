@@ -173,7 +173,7 @@ public class BossHealth : MonoBehaviour, Health
         Invoke("DieComplete", dieDelay);
     }
 
-    public void HurtComplete()
+    protected void HurtComplete()
     {
         isHurting = false;
         if (bossPathfindingAI.passiveAggressive)
