@@ -27,6 +27,7 @@ public class BossHealth : MonoBehaviour, Health
 
     protected Color high;
     protected Color low;
+    protected BossAnimation bossAnimation;
     protected GameObject attackedBy;
     protected Image levelNameBG;
     protected Slider slider;
@@ -64,6 +65,7 @@ public class BossHealth : MonoBehaviour, Health
             boxCollider.enabled = true;
         }
         GetComponent<SpriteRenderer>().enabled = true;
+        bossAnimation = GetComponent<BossAnimation>();
     }
 
     public virtual void Update()
@@ -109,7 +111,7 @@ public class BossHealth : MonoBehaviour, Health
         isHurting = true;
         GetComponent<BossMovement>().StopPatrol();
         DamagePopUp.Create(gameObject, damage);
-        GetComponent<BossAnimation>().ChangeAnimationState(BOSS_HURT);
+        bossAnimation.ChangeAnimationState(BOSS_HURT);
         KnockBack(attackedBy);
         currentHealth -= damage;
         Debug.Log(damage);
