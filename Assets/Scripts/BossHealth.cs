@@ -6,43 +6,39 @@ using TMPro;
 
 public class BossHealth : MonoBehaviour, Health
 {
-    // Mob Animation States
     protected const string BOSS_HURT = "Hurt";
     protected const string BOSS_DIE = "Die";
 
-    [SerializeField] public string mobName;
-    [SerializeField] public float hurtDelay;
-    [SerializeField] public float dieDelay;
+    [SerializeField] public GameObject levelName;
+    [SerializeField] public GameObject mobDetails;
     [SerializeField] public Transform DamagePopup;
     [SerializeField] public Transform HealingPopup;
     [SerializeField] public Transform RewardPopUp;
-    [SerializeField] public float maxHealth;
-
-    [SerializeField] public GameObject mobDetails;
+    [SerializeField] public float dieDelay;
     [SerializeField] public float hpOffsetX;
     [SerializeField] public float hpOffsetY;
+    [SerializeField] public float hurtDelay;
+    [SerializeField] public float mobLevel;
     [SerializeField] public float nameOffsetY;
     [SerializeField] public float nameOffsetX;
+    [SerializeField] public float maxHealth;
+    [SerializeField] public string mobName;
 
-    [SerializeField] public GameObject levelName;
-    [SerializeField] public float mobLevel;
 
+    protected Color high;
+    protected Color low;
+    protected GameObject attackedBy;
     protected Image levelNameBG;
+    protected Slider slider;
     protected TextMeshProUGUI levelNameText;
 
-    protected Slider slider;
-    protected Color low;
-    protected Color high;
-
-    protected float currentHealth;
-    protected float regenTimer; // Default 10%maxHP/second
-    protected float outOfCombatTimer; // Default set to 5 seconds
-
-    protected bool isHurting;
     protected bool isDead;
+    protected bool isHurting;
     protected bool isInvulnerable;
+    protected float currentHealth;
+    protected float outOfCombatTimer; // Default set to 5 seconds
+    protected float regenTimer; // Default 10%maxHP/second
 
-    protected GameObject attackedBy;
 
     // Start is called before the first frame update
     public virtual void Start()
