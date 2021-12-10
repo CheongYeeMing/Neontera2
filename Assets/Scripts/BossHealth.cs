@@ -95,7 +95,7 @@ public class BossHealth : MonoBehaviour, Health
         outOfCombatTimer += Time.deltaTime;
     }
 
-    public void SetBossDetails(float currentHealth, float maxHealth)
+    protected void SetBossDetails(float currentHealth, float maxHealth)
     {
         mobDetails.SetActive(currentHealth != maxHealth && currentHealth > 0);
         slider.value = currentHealth;
