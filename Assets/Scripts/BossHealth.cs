@@ -176,7 +176,7 @@ public class BossHealth : MonoBehaviour, Health
         }
     }
 
-    public void DieComplete()
+    protected void DieComplete()
     {
         gameObject.GetComponent<SpriteRenderer>().enabled = false;
     }
