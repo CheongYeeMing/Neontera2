@@ -8,7 +8,7 @@ public class CharacterWallet : MonoBehaviour
     
     private float GoldAmount;
 
-    public void Awake()
+    private void Awake()
     {
         LoadCharacterWalletData();
         UpdateWallet();
