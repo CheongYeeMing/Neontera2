@@ -9,18 +9,13 @@ public class MobPathfindingAI : MonoBehaviour
     [SerializeField] public bool passiveAggressive; // Will only chase when is attacked
     [SerializeField] public bool instantAggressive; // Chase once target enters radius
 
+    private Vector2 direction;
     private Path path;
     private Rigidbody2D rb;
     private Seeker seeker;
 
-    private Vector2 direction;
-
-    private bool reachedEndOfPath;
     private bool isChasingTarget;
-
-    private float speed;
     private float nextWayPointDistance = 3f;
-
     private int currentWaypoint = 0;
 
     // Start is called before the first frame update
@@ -31,8 +26,7 @@ public class MobPathfindingAI : MonoBehaviour
         {
             isChasingTarget = true;
         }
-        speed = gameObject.GetComponent<MobMovement>().moveSpeed;
-        seeker = gameObject.GetComponent<Seeker>();
+        seeker = GetComponent<Seeker>();
         rb = GetComponent<Rigidbody2D>();
         InvokeRepeating("UpdatePath", 0f, 0.5f);
     }
@@ -55,23 +49,13 @@ public class MobPathfindingAI : MonoBehaviour
     } 
 
     // Update is called once per frame
-    void FixedUpdate()
+    private void FixedUpdate()
     {
         if (!isChasingTarget) return;
 
         if (path == null)
         {
             return;
-        }
-
-        if (currentWaypoint >= path.vectorPath.Count)
-        {
-            reachedEndOfPath = true;
-            return;
-        }
-        else
-        {
-            reachedEndOfPath = false;
         }
 
         direction = ((Vector2)path.vectorPath[currentWaypoint] - rb.position);
