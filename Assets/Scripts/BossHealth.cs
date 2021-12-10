@@ -58,20 +58,20 @@ public class BossHealth : MonoBehaviour, Health
         isInvulnerable = false;
         regenTimer = 0;
         outOfCombatTimer = 0;
-        gameObject.GetComponent<Rigidbody2D>().gravityScale = 3;
-        foreach (BoxCollider2D boxCollider in gameObject.GetComponents<BoxCollider2D>())
+        GetComponent<Rigidbody2D>().gravityScale = 3;
+        foreach (BoxCollider2D boxCollider in GetComponents<BoxCollider2D>())
         {
             boxCollider.enabled = true;
         }
-        gameObject.GetComponent<SpriteRenderer>().enabled = true;
+        GetComponent<SpriteRenderer>().enabled = true;
     }
 
     public virtual void Update()
     {
         SetBossDetails(currentHealth, maxHealth);
-        levelName.transform.position = new Vector2(gameObject.transform.position.x + nameOffsetX, gameObject.transform.position.y + nameOffsetY);
-        slider.transform.position = new Vector2(gameObject.transform.position.x + hpOffsetX, gameObject.transform.position.y + hpOffsetY);
-        if (isHurting || isDead || gameObject.GetComponent<BossPathfindingAI>().GetIsChasingTarget())
+        levelName.transform.position = new Vector2(transform.position.x + nameOffsetX, transform.position.y + nameOffsetY);
+        slider.transform.position = new Vector2(transform.position.x + hpOffsetX, transform.position.y + hpOffsetY);
+        if (isHurting || isDead || GetComponent<BossPathfindingAI>().GetIsChasingTarget())
         {
             outOfCombatTimer = 0;
         }
@@ -107,9 +107,9 @@ public class BossHealth : MonoBehaviour, Health
     {
         if (isInvulnerable) return;
         isHurting = true;
-        gameObject.GetComponent<BossMovement>().StopPatrol();
+        GetComponent<BossMovement>().StopPatrol();
         DamagePopUp.Create(gameObject, damage);
-        gameObject.GetComponent<BossAnimation>().ChangeAnimationState(BOSS_HURT);
+        GetComponent<BossAnimation>().ChangeAnimationState(BOSS_HURT);
         KnockBack(attackedBy);
         currentHealth -= damage;
         Debug.Log(damage);
@@ -124,7 +124,7 @@ public class BossHealth : MonoBehaviour, Health
     public void KnockBack(GameObject something)
     {
         Debug.Log("Knockbacked???");
-        Rigidbody2D body = gameObject.GetComponent<BossMovement>().GetRigidbody();
+        Rigidbody2D body = GetComponent<BossMovement>().GetRigidbody();
         CharacterAttack character;
         if (something.transform.position.x > gameObject.transform.position.x)
         {
@@ -153,13 +153,13 @@ public class BossHealth : MonoBehaviour, Health
 
     public virtual void Die()
     {
-        gameObject.GetComponent<BossSpawner>().SetDeathTimer(0);
+        GetComponent<BossSpawner>().SetDeathTimer(0);
         isDead = true;
-        gameObject.GetComponent<BossMovement>().GetRigidbody().velocity = Vector2.zero;
+        GetComponent<BossMovement>().GetRigidbody().velocity = Vector2.zero;
         RewardsPopUp.Create(gameObject);
         Debug.Log("Mob is dead!!!");
-        gameObject.GetComponent<BossAnimation>().ChangeAnimationState(BOSS_DIE);
-        gameObject.GetComponent<Rigidbody2D>().gravityScale = 0;
+        GetComponent<BossAnimation>().ChangeAnimationState(BOSS_DIE);
+        GetComponent<Rigidbody2D>().gravityScale = 0;
         foreach (BoxCollider2D boxCollider in gameObject.GetComponents<BoxCollider2D>())
         {
             boxCollider.enabled = false;
@@ -170,9 +170,9 @@ public class BossHealth : MonoBehaviour, Health
     public void HurtComplete()
     {
         isHurting = false;
-        if (gameObject.GetComponent<BossPathfindingAI>().passiveAggressive)
+        if (GetComponent<BossPathfindingAI>().passiveAggressive)
         {
-            gameObject.GetComponent<BossPathfindingAI>().SetIsChasingTarget(true);
+            GetComponent<BossPathfindingAI>().SetIsChasingTarget(true);
         }
     }
 
