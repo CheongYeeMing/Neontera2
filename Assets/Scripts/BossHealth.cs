@@ -51,10 +51,7 @@ public class BossHealth : MonoBehaviour, Health
         levelNameText = levelName.GetComponentInChildren<TextMeshProUGUI>();
         levelNameText.SetText("Lv" + mobLevel + " " + mobName);
         currentHealth = maxHealth;
-        low = Color.red;
-        high = Color.green;
-        low.a = 255;
-        high.a = 255;
+        SetBossHealthBarColour();
         SetBossDetails(currentHealth, maxHealth);
         isHurting = false;
         isDead = false;
@@ -70,6 +67,13 @@ public class BossHealth : MonoBehaviour, Health
         bossAnimation = GetComponent<BossAnimation>();
         bossMovement = GetComponent<BossMovement>();
         bossPathfindingAI = GetComponent<BossPathfindingAI>();
+    private void SetBossHealthBarColour()
+    {
+        low = Color.red;
+        high = Color.green;
+        low.a = OPACITY_MAX;
+        high.a = OPACITY_MAX;
+    }
     }
 
     public virtual void Update()
