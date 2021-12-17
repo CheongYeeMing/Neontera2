@@ -3,6 +3,7 @@ using UnityEngine;
 public class Portal : MonoBehaviour
 {
     private const float PORTAL_NAME_TAG_POSITION_Y_OFFSET = -1.2f;
+
     [SerializeField] GameObject PortalNameTag;
     [SerializeField] public Portal destination;
     [SerializeField] public string location;
@@ -41,5 +42,10 @@ public class Portal : MonoBehaviour
             StopAllCoroutines();
             StartCoroutine(character.GetComponent<ParallaxBackgroundManager>().ChangeBackground(destination.location, character, destination));
         }
+    }
+
+    public string GetPortalLocation()
+    {
+        return location;
     }
 }
