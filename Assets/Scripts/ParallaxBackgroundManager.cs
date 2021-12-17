@@ -3,6 +3,15 @@ using UnityEngine;
 
 public class ParallaxBackgroundManager : MonoBehaviour
 {
+    private const string INTRO = "Intro";
+    private const string TOWN = "Town";
+    private const string FOREST = "Forest";
+    private const string CAVE = "Cave";
+    private const string BASE_STATION = "Base Station";
+    private const string SPACE_STATION = "Space Station";
+    private const string SECRET_AREA_1 = "Secret Area 1";
+    private const string SECRET_AREA_2 = "Secret Area 2";
+
     [SerializeField] GameObject Intro;
     [SerializeField] GameObject IntroDetails;
     [SerializeField] GameObject Town;
@@ -23,16 +32,6 @@ public class ParallaxBackgroundManager : MonoBehaviour
     [SerializeField] TransitionManager Transition;
 
     public bool isTeleporting;
-
-    private const string INTRO = "Intro";
-    private const string TOWN = "Town";
-    private const string FOREST = "Forest";
-    private const string CAVE = "Cave";
-    private const string BASE_STATION = "Base Station";
-    private const string SPACE_STATION = "Space Station";
-    private const string SECRET_AREA_1 = "Secret Area 1";
-    private const string SECRET_AREA_2 = "Secret Area 2";
-
     private string currentBackground;
 
     public void Start()
