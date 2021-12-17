@@ -1,5 +1,4 @@
 using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class ParallaxBackgroundManager : MonoBehaviour
@@ -16,7 +15,6 @@ public class ParallaxBackgroundManager : MonoBehaviour
     [SerializeField] GameObject BSDetails;
     [SerializeField] GameObject SS;
     [SerializeField] GameObject SSDetails;
-
     [SerializeField] GameObject SecretArea1;
     [SerializeField] GameObject SecretArea1Details;
     [SerializeField] GameObject SecretArea2;
