@@ -19,7 +19,7 @@ public class Portal : MonoBehaviour
     // Update is called once per frame
     private void Update()
     {
-        PortalNameTag.transform.position = new Vector2(gameObject.transform.position.x, gameObject.transform.position.y + PORTAL_NAME_TAG_POSITION_Y_OFFSET);
+        PortalNameTag.transform.position = new Vector2(transform.position.x, transform.position.y + PORTAL_NAME_TAG_POSITION_Y_OFFSET);
         if (isActivated)
         {
             animator.SetTrigger("Activate");
