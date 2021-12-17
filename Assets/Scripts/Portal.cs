@@ -1,28 +1,26 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.SceneManagement;
 
 public class Portal : MonoBehaviour
 {
-    [SerializeField] public Portal Destination;
-    [SerializeField] public string Location;
+    private const float PORTAL_NAME_TAG_POSITION_Y_OFFSET = -1.2f;
 
+    [SerializeField] GameObject portalNameTag;
+    [SerializeField] public Portal destinationPortal;
+    [SerializeField] public string location;
     [SerializeField] public bool isActivated;
-    [SerializeField] GameObject PortalNameTag;
 
-    Animator animator;
+    private Animator animator;
 
     // Start is called before the first frame update
-    void Start()
+    private void Start()
     {
         animator = GetComponent<Animator>();
     }
 
     // Update is called once per frame
-    void Update()
+    private void Update()
     {
-        PortalNameTag.transform.position = new Vector2(gameObject.transform.position.x, gameObject.transform.position.y - 1.2f);
+        portalNameTag.transform.position = new Vector2(transform.position.x, transform.position.y + PORTAL_NAME_TAG_POSITION_Y_OFFSET);
         if (isActivated)
         {
             animator.SetTrigger("Activate");
@@ -34,15 +32,20 @@ public class Portal : MonoBehaviour
         }
     }
 
-    public void Teleport(GameObject Character)
+    public void Teleport(GameObject character)
     {
-        if (isActivated && !Character.GetComponent<ParallaxBackgroundManager>().isTeleporting)
+        if (isActivated && !character.GetComponent<ParallaxBackgroundManager>().isTeleporting)
         {
-            Character.GetComponent<ParallaxBackgroundManager>().isTeleporting = true;
+            character.GetComponent<ParallaxBackgroundManager>().isTeleporting = true;
             FindObjectOfType<AudioManager>().StopEffect("Portal");
             FindObjectOfType<AudioManager>().PlayEffect("Portal");
             StopAllCoroutines();
-            StartCoroutine(Character.GetComponent<ParallaxBackgroundManager>().ChangeBackground(Destination.Location, Character, Destination));
+            StartCoroutine(character.GetComponent<ParallaxBackgroundManager>().ChangeBackground(destinationPortal.GetPortalLocation(), character, destinationPortal));
         }
+    }
+
+    public string GetPortalLocation()
+    {
+        return location;
     }
 }

@@ -1,5 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class CaveParallaxBackground : ParallaxBackground
@@ -11,7 +9,7 @@ public class CaveParallaxBackground : ParallaxBackground
         transform.position += new Vector3(deltaMovement.x * parallaxEffectMultiplier.x, deltaMovement.y);
         lastCameraPosition = cameraTransform.position;
 
-        if (infiniteHorizontal)
+        if (isInfiniteHorizontal)
         {
             if (Mathf.Abs(cameraTransform.position.x - transform.position.x) >= textureUnitSizeX)
             {
