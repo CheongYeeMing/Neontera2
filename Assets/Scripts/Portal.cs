@@ -5,7 +5,7 @@ public class Portal : MonoBehaviour
     private const float PORTAL_NAME_TAG_POSITION_Y_OFFSET = -1.2f;
 
     [SerializeField] GameObject PortalNameTag;
-    [SerializeField] public Portal destination;
+    [SerializeField] public Portal destinationPortal;
     [SerializeField] public string location;
     [SerializeField] public bool isActivated;
 
@@ -40,7 +40,7 @@ public class Portal : MonoBehaviour
             FindObjectOfType<AudioManager>().StopEffect("Portal");
             FindObjectOfType<AudioManager>().PlayEffect("Portal");
             StopAllCoroutines();
-            StartCoroutine(character.GetComponent<ParallaxBackgroundManager>().ChangeBackground(destination.location, character, destination));
+            StartCoroutine(character.GetComponent<ParallaxBackgroundManager>().ChangeBackground(destinationPortal.GetPortalLocation(), character, destinationPortal));
         }
     }
 

@@ -86,7 +86,7 @@ public class DialogueManager : MonoBehaviour
                     {
                         foreach(Portal portal in FindObjectsOfType<Portal>())
                         {
-                            if (portal.destination.location == npc.Sequences[npc.sequenceNumber].destination)
+                            if (portal.destinationPortal.location == npc.Sequences[npc.sequenceNumber].destination)
                             {
                                 portal.isActivated = true;
                             }
