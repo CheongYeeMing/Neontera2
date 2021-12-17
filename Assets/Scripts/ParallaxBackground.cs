@@ -3,10 +3,11 @@ using UnityEngine;
 public class ParallaxBackground : MonoBehaviour
 {
     [SerializeField] protected Vector2 parallaxEffectMultiplier;
-    [SerializeField] protected bool infiniteHorizontal;
-    [SerializeField] protected bool infiniteVertical;
-    protected Transform cameraTransform;
+    [SerializeField] protected bool isInfiniteHorizontal;
+    [SerializeField] protected bool isInfiniteVertical;
+
     protected Vector3 lastCameraPosition;
+    protected Transform cameraTransform;
     protected float textureUnitSizeX;
     protected float textureUnitSizeY;
 
@@ -29,7 +30,7 @@ public class ParallaxBackground : MonoBehaviour
         transform.position += new Vector3(deltaMovement.x * parallaxEffectMultiplier.x, deltaMovement.y /* parallaxEffectMultiplier.y*/);
         lastCameraPosition = cameraTransform.position;
 
-        if (infiniteHorizontal)
+        if (isInfiniteHorizontal)
         {
             if (Mathf.Abs(cameraTransform.position.x - transform.position.x) >= textureUnitSizeX)
             {
@@ -37,7 +38,7 @@ public class ParallaxBackground : MonoBehaviour
                 transform.position = new Vector3(cameraTransform.position.x + offsetPositionX, cameraTransform.position.y);
             }
         }
-        if (infiniteVertical)
+        if (isInfiniteVertical)
         {
             if (Mathf.Abs(cameraTransform.position.y - transform.position.y) >= textureUnitSizeY)
             {
