@@ -7,7 +7,7 @@ public class Portal : MonoBehaviour
     [SerializeField] public string Location;
     [SerializeField] public bool isActivated;
 
-    Animator animator;
+    private Animator animator;
 
     // Start is called before the first frame update
     void Start()
