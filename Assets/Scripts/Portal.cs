@@ -31,15 +31,15 @@ public class Portal : MonoBehaviour
         }
     }
 
-    public void Teleport(GameObject Character)
+    public void Teleport(GameObject character)
     {
-        if (isActivated && !Character.GetComponent<ParallaxBackgroundManager>().isTeleporting)
+        if (isActivated && !character.GetComponent<ParallaxBackgroundManager>().isTeleporting)
         {
-            Character.GetComponent<ParallaxBackgroundManager>().isTeleporting = true;
+            character.GetComponent<ParallaxBackgroundManager>().isTeleporting = true;
             FindObjectOfType<AudioManager>().StopEffect("Portal");
             FindObjectOfType<AudioManager>().PlayEffect("Portal");
             StopAllCoroutines();
-            StartCoroutine(Character.GetComponent<ParallaxBackgroundManager>().ChangeBackground(destination.location, Character, destination));
+            StartCoroutine(character.GetComponent<ParallaxBackgroundManager>().ChangeBackground(destination.location, character, destination));
         }
     }
 }
