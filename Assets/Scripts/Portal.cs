@@ -2,11 +2,10 @@ using UnityEngine;
 
 public class Portal : MonoBehaviour
 {
+    [SerializeField] GameObject PortalNameTag;
     [SerializeField] public Portal Destination;
     [SerializeField] public string Location;
-
     [SerializeField] public bool isActivated;
-    [SerializeField] GameObject PortalNameTag;
 
     Animator animator;
 
