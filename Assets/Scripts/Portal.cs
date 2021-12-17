@@ -2,6 +2,7 @@ using UnityEngine;
 
 public class Portal : MonoBehaviour
 {
+    private const float POSITION_Y_OFFSET = -1.2f;
     [SerializeField] GameObject PortalNameTag;
     [SerializeField] public Portal Destination;
     [SerializeField] public string Location;
@@ -18,7 +19,7 @@ public class Portal : MonoBehaviour
     // Update is called once per frame
     private void Update()
     {
-        PortalNameTag.transform.position = new Vector2(gameObject.transform.position.x, gameObject.transform.position.y - 1.2f);
+        PortalNameTag.transform.position = new Vector2(gameObject.transform.position.x, gameObject.transform.position.y + POSITION_Y_OFFSET);
         if (isActivated)
         {
             animator.SetTrigger("Activate");
