@@ -34,7 +34,7 @@ public class ParallaxBackgroundManager : MonoBehaviour
     public bool isTeleporting;
     private string currentBackground;
 
-    public void Start()
+    private void Start()
     {
         Transition.gameObject.SetActive(true);
         Intro.SetActive(false);
