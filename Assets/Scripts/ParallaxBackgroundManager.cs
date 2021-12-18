@@ -37,7 +37,7 @@ public class ParallaxBackgroundManager : MonoBehaviour
     private void Start()
     {
         Transition.gameObject.SetActive(true);
-        DeactivateIntroDetails();
+        DeactivateIntro();
         Town.SetActive(false);
         TownDetails.SetActive(false);
         Forest.SetActive(false);
@@ -58,7 +58,7 @@ public class ParallaxBackgroundManager : MonoBehaviour
         isTeleporting = false;
     }
 
-    private void DeactivateIntroDetails()
+    private void DeactivateIntro()
     {
         Intro.SetActive(false);
         IntroDetails.SetActive(false);
