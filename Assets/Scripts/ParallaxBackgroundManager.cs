@@ -37,8 +37,7 @@ public class ParallaxBackgroundManager : MonoBehaviour
     private void Start()
     {
         Transition.gameObject.SetActive(true);
-        Intro.SetActive(false);
-        IntroDetails.SetActive(false);
+        DeactivateIntroDetails();
         Town.SetActive(false);
         TownDetails.SetActive(false);
         Forest.SetActive(false);
@@ -57,6 +56,12 @@ public class ParallaxBackgroundManager : MonoBehaviour
         SetBackground(currentBackground);
         FindObjectOfType<AudioManager>().PlayMusic(currentBackground);
         isTeleporting = false;
+    }
+
+    private void DeactivateIntroDetails()
+    {
+        Intro.SetActive(false);
+        IntroDetails.SetActive(false);
     }
 
     public void SetBackground(string newBackground)
