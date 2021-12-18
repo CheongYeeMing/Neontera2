@@ -34,17 +34,13 @@ public class ParallaxBackgroundManager : MonoBehaviour
     public bool isTeleporting;
     private string currentBackground;
 
-    public void Start()
+    private void Start()
     {
         Transition.gameObject.SetActive(true);
-        Intro.SetActive(false);
-        IntroDetails.SetActive(false);
-        Town.SetActive(false);
-        TownDetails.SetActive(false);
-        Forest.SetActive(false);
-        ForestDetails.SetActive(false);
-        Cave.SetActive(false);
-        CaveDetails.SetActive(false);
+        DeactivateIntro();
+        DeactivateTown();
+        DeactivateForest();
+        DeactivateCave();
         BS.SetActive(false);
         BSDetails.SetActive(false);
         SS.SetActive(false);
@@ -57,6 +53,30 @@ public class ParallaxBackgroundManager : MonoBehaviour
         SetBackground(currentBackground);
         FindObjectOfType<AudioManager>().PlayMusic(currentBackground);
         isTeleporting = false;
+    }
+
+    private void DeactivateIntro()
+    {
+        Intro.SetActive(false);
+        IntroDetails.SetActive(false);
+    }
+
+    private void DeactivateTown()
+    {
+        Town.SetActive(false);
+        TownDetails.SetActive(false);
+    }
+
+    private void DeactivateForest()
+    {
+        Forest.SetActive(false);
+        ForestDetails.SetActive(false);
+    }
+
+    private void DeactivateCave()
+    {
+        Cave.SetActive(false);
+        CaveDetails.SetActive(false);
     }
 
     public void SetBackground(string newBackground)
