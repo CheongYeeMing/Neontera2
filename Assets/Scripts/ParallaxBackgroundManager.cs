@@ -38,8 +38,7 @@ public class ParallaxBackgroundManager : MonoBehaviour
     {
         Transition.gameObject.SetActive(true);
         DeactivateIntro();
-        Town.SetActive(false);
-        TownDetails.SetActive(false);
+        DeactivateTown();
         Forest.SetActive(false);
         ForestDetails.SetActive(false);
         Cave.SetActive(false);
@@ -62,6 +61,12 @@ public class ParallaxBackgroundManager : MonoBehaviour
     {
         Intro.SetActive(false);
         IntroDetails.SetActive(false);
+    }
+
+    private void DeactivateTown()
+    {
+        Town.SetActive(false);
+        TownDetails.SetActive(false);
     }
 
     public void SetBackground(string newBackground)
