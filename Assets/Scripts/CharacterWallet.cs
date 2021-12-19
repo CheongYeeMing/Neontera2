@@ -8,7 +8,7 @@ public class CharacterWallet : MonoBehaviour
 
     [SerializeField] private List<Wallet> Wallet;
     
-    private float GoldAmount;
+    private float goldAmount;
 
     private void Awake()
     {
@@ -18,34 +18,34 @@ public class CharacterWallet : MonoBehaviour
 
     private void LoadCharacterWalletData()
     {
-        GoldAmount = Data.gold;
+        goldAmount = Data.gold;
     }
     
     private void UpdateWallet()
     {
         foreach (Wallet wallet in Wallet)
         {
-            wallet.goldAmountText.text = GoldAmount.ToString();
+            wallet.goldAmountText.text = goldAmount.ToString();
         }
-        Data.gold = GoldAmount;
+        Data.gold = goldAmount;
     }
 
     public void Revive()
     {
-        MinusGold(GoldAmount * PERCENT / 100);
+        MinusGold(goldAmount * PERCENT / 100);
     }
 
     public void AddGold(float goldAmount)
     {
         FindObjectOfType<AudioManager>().StopEffect("GainGold");
         FindObjectOfType<AudioManager>().PlayEffect("GainGold");
-        GoldAmount += goldAmount;
+        this.goldAmount += goldAmount;
         UpdateWallet();
     }
 
     public void MinusGold(float goldAmount)
     {
-        GoldAmount -= goldAmount;
+        this.goldAmount -= goldAmount;
         UpdateWallet();
     }
 
@@ -61,6 +61,6 @@ public class CharacterWallet : MonoBehaviour
 
     public float GetGoldAmount()
     {
-        return GoldAmount;
+        return goldAmount;
     }
 }
