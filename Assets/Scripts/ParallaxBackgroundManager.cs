@@ -47,12 +47,12 @@ public class ParallaxBackgroundManager : MonoBehaviour
         DeactivateSecretArea1();
         DeactivateSecretArea2();
         currentBackground = Data.location;
-        SetBackground(currentBackground);
+        SetNewBackground(currentBackground);
         FindObjectOfType<AudioManager>().PlayMusic(currentBackground);
         isTeleporting = false;
     }
 
-    public void SetBackground(string newBackground)
+    public void SetNewBackground(string newBackground)
     {
         FindObjectOfType<AudioManager>().ChangeMusic(currentBackground, newBackground);
         currentBackground = newBackground;
@@ -143,7 +143,7 @@ public class ParallaxBackgroundManager : MonoBehaviour
         {
             DeactivateSecretArea2();
         }
-        SetBackground(newBackground);
+        SetNewBackground(newBackground);
     }
 
     public void Respawn(string newBackground, GameObject Character, Vector2 Destination)
@@ -156,40 +156,8 @@ public class ParallaxBackgroundManager : MonoBehaviour
         Transition.Activate();
         yield return new WaitForSeconds(1.3f);
         Character.transform.position = Destination;
-        if (currentBackground == INTRO)
-        {
-            DeactivateIntro();
-        }
-        else if (currentBackground == TOWN)
-        {
-            DeactivateTown();
-        }
-        else if (currentBackground == FOREST)
-        {
-            DeactivateForest();
-        }
-        else if (currentBackground == CAVE)
-        {
-            DeactivateCave();
-        }
-        else if (currentBackground == BASE_STATION)
-        {
-            DeactivateBaseStation();
-        }
-        else if (currentBackground == SPACE_STATION)
-        {
-            DeactivateSpaceStation();
-        }
-        else if (currentBackground == SECRET_AREA_1)
-        {
-            DeactivateSecretArea1();
-        }
-        else if (currentBackground == SECRET_AREA_2)
-        {
-            DeactivateSecretArea2();
-        }
-
-        SetBackground(newBackground);
+        DeactivateCurrentBackground();
+        SetNewBackground(newBackground);
     }
 
     private void DeactivateCurrentBackground()
