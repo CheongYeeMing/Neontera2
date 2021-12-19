@@ -28,6 +28,11 @@ public class CharacterWallet : MonoBehaviour
         Data.gold = GoldAmount;
     }
 
+    public void Revive()
+    {
+        MinusGold(GoldAmount / 10);
+    }
+
     public void AddGold(float goldAmount)
     {
         FindObjectOfType<AudioManager>().StopEffect("GainGold");
