@@ -29,11 +29,15 @@ public class ParallaxBackgroundManager : MonoBehaviour
     [SerializeField] GameObject SecretArea1Details;
     [SerializeField] GameObject SecretArea2;
     [SerializeField] GameObject SecretArea2Details;
-
     [SerializeField] TransitionManager Transition;
 
     public bool isTeleporting;
     private string currentBackground;
+
+    private void Awake()
+    {
+        
+    }
 
     private void Start()
     {
@@ -57,6 +61,42 @@ public class ParallaxBackgroundManager : MonoBehaviour
         FindObjectOfType<AudioManager>().ChangeMusic(currentBackground, newBackground);
         currentBackground = newBackground;
         GetComponent<CharacterMovement>().location = currentBackground;
+        ActivateNewBackground(newBackground);
+        Transition.Deactivate();
+        if (GetComponent<CharacterHealth>().IsDead())
+        {
+            GetComponent<CharacterHealth>().Revive();
+            GetComponent<CharacterWallet>().MinusGold(GetComponent<CharacterWallet>().GetGoldAmount() / 10);
+        }
+        isTeleporting = false;
+    }
+
+    public IEnumerator ChangeBackground(string newBackground, GameObject character, Portal destination)
+    {
+        Transition.Activate();
+        yield return new WaitForSeconds(TELEPORT_DELAY);
+        character.transform.position = destination.transform.position;
+        DeactivateBackground();
+        SetNewBackground(newBackground);
+    }
+
+    public void Respawn(string newBackground, GameObject character, Vector2 destination)
+    {
+        StopAllCoroutines();
+        StartCoroutine(Teleport(newBackground,  character, destination));
+    }
+
+    public IEnumerator Teleport(string newBackground, GameObject character, Vector2 destination)
+    {
+        Transition.Activate();
+        yield return new WaitForSeconds(TELEPORT_DELAY);
+        character.transform.position = destination;
+        DeactivateBackground();
+        SetNewBackground(newBackground);
+    }
+
+    private void ActivateNewBackground(string newBackground)
+    {
         if (newBackground == INTRO)
         {
             Intro.SetActive(true);
@@ -97,70 +137,9 @@ public class ParallaxBackgroundManager : MonoBehaviour
             SecretArea2.SetActive(true);
             SecretArea2Details.SetActive(true);
         }
-        Transition.Deactivate();
-        if (GetComponent<CharacterHealth>().IsDead())
-        {
-            GetComponent<CharacterHealth>().Revive();
-            GetComponent<CharacterWallet>().MinusGold(GetComponent<CharacterWallet>().GetGoldAmount() / 10);
-        }
-        isTeleporting = false;
     }
 
-    public IEnumerator ChangeBackground(string newBackground, GameObject Character, Portal Destination)
-    {
-        Transition.Activate();
-        yield return new WaitForSeconds(TELEPORT_DELAY);
-        Character.transform.position = Destination.transform.position;
-        if (currentBackground == INTRO)
-        {
-            DeactivateIntro();
-        }
-        else if (currentBackground == TOWN)
-        {
-            DeactivateTown();
-        }
-        else if (currentBackground == FOREST)
-        {
-            DeactivateForest();
-        }
-        else if (currentBackground == CAVE)
-        {
-            DeactivateCave();
-        }
-        else if (currentBackground == BASE_STATION)
-        {
-            DeactivateBaseStation();
-        }
-        else if (currentBackground == SPACE_STATION)
-        {
-            DeactivateSpaceStation();
-        }
-        else if (currentBackground == SECRET_AREA_1)
-        {
-            DeactivateSecretArea1();
-        }
-        else if (currentBackground == SECRET_AREA_2)
-        {
-            DeactivateSecretArea2();
-        }
-        SetNewBackground(newBackground);
-    }
-
-    public void Respawn(string newBackground, GameObject Character, Vector2 Destination)
-    {
-        StopAllCoroutines();
-        StartCoroutine(Teleport(newBackground,  Character, Destination));
-    }
-    public IEnumerator Teleport(string newBackground, GameObject Character, Vector2 Destination)
-    {
-        Transition.Activate();
-        yield return new WaitForSeconds(1.3f);
-        Character.transform.position = Destination;
-        DeactivateCurrentBackground();
-        SetNewBackground(newBackground);
-    }
-
-    private void DeactivateCurrentBackground()
+    private void DeactivateBackground()
     {
         if (currentBackground == INTRO)
         {
