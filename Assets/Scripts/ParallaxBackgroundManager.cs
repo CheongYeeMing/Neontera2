@@ -51,54 +51,6 @@ public class ParallaxBackgroundManager : MonoBehaviour
         isTeleporting = false;
     }
 
-    private void DeactivateIntro()
-    {
-        Intro.SetActive(false);
-        IntroDetails.SetActive(false);
-    }
-
-    private void DeactivateTown()
-    {
-        Town.SetActive(false);
-        TownDetails.SetActive(false);
-    }
-
-    private void DeactivateForest()
-    {
-        Forest.SetActive(false);
-        ForestDetails.SetActive(false);
-    }
-
-    private void DeactivateCave()
-    {
-        Cave.SetActive(false);
-        CaveDetails.SetActive(false);
-    }
-
-    private void DeactivateBaseStation()
-    {
-        BS.SetActive(false);
-        BSDetails.SetActive(false);
-    }
-
-    private void DeactivateSpaceStation()
-    {
-        SS.SetActive(false);
-        SSDetails.SetActive(false);
-    }
-
-    private void DeactivateSecretArea1()
-    {
-        SecretArea1.SetActive(false);
-        SecretArea1Details.SetActive(false);
-    }
-
-    private void DeactivateSecretArea2()
-    {
-        SecretArea2.SetActive(false);
-        SecretArea2Details.SetActive(false);
-    }
-
     public void SetBackground(string newBackground)
     {
         FindObjectOfType<AudioManager>().ChangeMusic(currentBackground, newBackground);
@@ -298,5 +250,53 @@ public class ParallaxBackgroundManager : MonoBehaviour
         }
 
         SetBackground(newBackground);
+    }
+
+    private void DeactivateIntro()
+    {
+        Intro.SetActive(false);
+        IntroDetails.SetActive(false);
+    }
+
+    private void DeactivateTown()
+    {
+        Town.SetActive(false);
+        TownDetails.SetActive(false);
+    }
+
+    private void DeactivateForest()
+    {
+        Forest.SetActive(false);
+        ForestDetails.SetActive(false);
+    }
+
+    private void DeactivateCave()
+    {
+        Cave.SetActive(false);
+        CaveDetails.SetActive(false);
+    }
+
+    private void DeactivateBaseStation()
+    {
+        BS.SetActive(false);
+        BSDetails.SetActive(false);
+    }
+
+    private void DeactivateSpaceStation()
+    {
+        SS.SetActive(false);
+        SSDetails.SetActive(false);
+    }
+
+    private void DeactivateSecretArea1()
+    {
+        SecretArea1.SetActive(false);
+        SecretArea1Details.SetActive(false);
+    }
+
+    private void DeactivateSecretArea2()
+    {
+        SecretArea2.SetActive(false);
+        SecretArea2Details.SetActive(false);
     }
 }
