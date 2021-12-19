@@ -106,50 +106,6 @@ public class ParallaxBackgroundManager : MonoBehaviour
         isTeleporting = false;
     }
 
-    public void OffBackground()
-    {
-        if (currentBackground == INTRO)
-        {
-            Intro.SetActive(false);
-            IntroDetails.SetActive(false);
-        }
-        else if (currentBackground == TOWN)
-        {
-            Town.SetActive(false);
-            TownDetails.SetActive(false);
-        }
-        else if (currentBackground == FOREST)
-        {
-            Forest.SetActive(false);
-            ForestDetails.SetActive(false);
-        }
-        else if (currentBackground == CAVE)
-        {
-            Cave.SetActive(false);
-            CaveDetails.SetActive(false);
-        }
-        else if (currentBackground == BASE_STATION)
-        {
-            BS.SetActive(false);
-            BSDetails.SetActive(false);
-        }
-        else if (currentBackground == SPACE_STATION)
-        {
-            SS.SetActive(false);
-            SSDetails.SetActive(false);
-        }
-        else if (currentBackground == SECRET_AREA_1)
-        {
-            SecretArea1.SetActive(false);
-            SecretArea1Details.SetActive(false);
-        }
-        else if (currentBackground == SECRET_AREA_2)
-        {
-            SecretArea2.SetActive(false);
-            SecretArea2Details.SetActive(false);
-        }
-    }
-
     public IEnumerator ChangeBackground(string newBackground, GameObject Character, Portal Destination)
     {
         Transition.Activate();
@@ -157,45 +113,36 @@ public class ParallaxBackgroundManager : MonoBehaviour
         Character.transform.position = Destination.transform.position;
         if (currentBackground == INTRO)
         {
-            Intro.SetActive(false);
-            IntroDetails.SetActive(false);
+            DeactivateIntro();
         }
         else if (currentBackground == TOWN)
         {
-            Town.SetActive(false);
-            TownDetails.SetActive(false);
+            DeactivateTown();
         }
         else if (currentBackground == FOREST)
         {
-            Forest.SetActive(false);
-            ForestDetails.SetActive(false);
+            DeactivateForest();
         }
         else if (currentBackground == CAVE)
         {
-            Cave.SetActive(false);
-            CaveDetails.SetActive(false);
+            DeactivateCave();
         }
         else if (currentBackground == BASE_STATION)
         {
-            BS.SetActive(false);
-            BSDetails.SetActive(false);
+            DeactivateBaseStation();
         }
         else if (currentBackground == SPACE_STATION)
         {
-            SS.SetActive(false);
-            SSDetails.SetActive(false);
+            DeactivateSpaceStation();
         }
         else if (currentBackground == SECRET_AREA_1)
         {
-            SecretArea1.SetActive(false);
-            SecretArea1Details.SetActive(false);
+            DeactivateSecretArea1();
         }
         else if (currentBackground == SECRET_AREA_2)
         {
-            SecretArea2.SetActive(false);
-            SecretArea2Details.SetActive(false);
+            DeactivateSecretArea2();
         }
-
         SetBackground(newBackground);
     }
 
@@ -243,6 +190,42 @@ public class ParallaxBackgroundManager : MonoBehaviour
         }
 
         SetBackground(newBackground);
+    }
+
+    private void DeactivateCurrentBackground()
+    {
+        if (currentBackground == INTRO)
+        {
+            DeactivateIntro();
+        }
+        else if (currentBackground == TOWN)
+        {
+            DeactivateTown();
+        }
+        else if (currentBackground == FOREST)
+        {
+            DeactivateForest();
+        }
+        else if (currentBackground == CAVE)
+        {
+            DeactivateCave();
+        }
+        else if (currentBackground == BASE_STATION)
+        {
+            DeactivateBaseStation();
+        }
+        else if (currentBackground == SPACE_STATION)
+        {
+            DeactivateSpaceStation();
+        }
+        else if (currentBackground == SECRET_AREA_1)
+        {
+            DeactivateSecretArea1();
+        }
+        else if (currentBackground == SECRET_AREA_2)
+        {
+            DeactivateSecretArea2();
+        }
     }
 
     private void DeactivateIntro()
