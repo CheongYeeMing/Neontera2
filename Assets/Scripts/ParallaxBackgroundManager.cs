@@ -3,6 +3,7 @@ using UnityEngine;
 
 public class ParallaxBackgroundManager : MonoBehaviour
 {
+    private const float TELEPORT_DELAY = 1.3f;
     private const string INTRO = "Intro";
     private const string TOWN = "Town";
     private const string FOREST = "Forest";
@@ -152,7 +153,7 @@ public class ParallaxBackgroundManager : MonoBehaviour
     public IEnumerator ChangeBackground(string newBackground, GameObject Character, Portal Destination)
     {
         Transition.Activate();
-        yield return new WaitForSeconds(1.3f);
+        yield return new WaitForSeconds(TELEPORT_DELAY);
         Character.transform.position = Destination.transform.position;
         if (currentBackground == INTRO)
         {
@@ -210,43 +211,35 @@ public class ParallaxBackgroundManager : MonoBehaviour
         Character.transform.position = Destination;
         if (currentBackground == INTRO)
         {
-            Intro.SetActive(false);
-            IntroDetails.SetActive(false);
+            DeactivateIntro();
         }
         else if (currentBackground == TOWN)
         {
-            Town.SetActive(false);
-            TownDetails.SetActive(false);
+            DeactivateTown();
         }
         else if (currentBackground == FOREST)
         {
-            Forest.SetActive(false);
-            ForestDetails.SetActive(false);
+            DeactivateForest();
         }
         else if (currentBackground == CAVE)
         {
-            Cave.SetActive(false);
-            CaveDetails.SetActive(false);
+            DeactivateCave();
         }
         else if (currentBackground == BASE_STATION)
         {
-            BS.SetActive(false);
-            BSDetails.SetActive(false);
+            DeactivateBaseStation();
         }
         else if (currentBackground == SPACE_STATION)
         {
-            SS.SetActive(false);
-            SSDetails.SetActive(false);
+            DeactivateSpaceStation();
         }
         else if (currentBackground == SECRET_AREA_1)
         {
-            SecretArea1.SetActive(false);
-            SecretArea1Details.SetActive(false);
+            DeactivateSecretArea1();
         }
         else if (currentBackground == SECRET_AREA_2)
         {
-            SecretArea2.SetActive(false);
-            SecretArea2Details.SetActive(false);
+            DeactivateSecretArea2();
         }
 
         SetBackground(newBackground);
