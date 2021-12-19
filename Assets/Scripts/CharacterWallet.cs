@@ -4,6 +4,8 @@ using UnityEngine;
 [SerializeField]
 public class CharacterWallet : MonoBehaviour
 {
+    private const float PERCENT = 10;
+
     [SerializeField] private List<Wallet> Wallet;
     
     private float GoldAmount;
@@ -30,7 +32,7 @@ public class CharacterWallet : MonoBehaviour
 
     public void Revive()
     {
-        MinusGold(GoldAmount / 10);
+        MinusGold(GoldAmount * PERCENT / 100);
     }
 
     public void AddGold(float goldAmount)
