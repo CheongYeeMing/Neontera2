@@ -43,8 +43,7 @@ public class ParallaxBackgroundManager : MonoBehaviour
         DeactivateCave();
         DeactivateBaseStation();
         DeactivateSpaceStation();
-        SecretArea1.SetActive(false);
-        SecretArea1Details.SetActive(false);
+        DeactivateSecretArea1();
         SecretArea2.SetActive(false);
         SecretArea2Details.SetActive(false);
         currentBackground = Data.location;
@@ -87,6 +86,12 @@ public class ParallaxBackgroundManager : MonoBehaviour
     {
         SS.SetActive(false);
         SSDetails.SetActive(false);
+    }
+
+    private void DeactivateSecretArea1()
+    {
+        SecretArea1.SetActive(false);
+        SecretArea1Details.SetActive(false);
     }
 
     public void SetBackground(string newBackground)
