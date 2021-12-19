@@ -3,6 +3,7 @@ using UnityEngine;
 
 public class ParallaxBackgroundManager : MonoBehaviour
 {
+    private const float TELEPORT_DELAY = 1.3f;
     private const string INTRO = "Intro";
     private const string TOWN = "Town";
     private const string FOREST = "Forest";
@@ -28,11 +29,18 @@ public class ParallaxBackgroundManager : MonoBehaviour
     [SerializeField] GameObject SecretArea1Details;
     [SerializeField] GameObject SecretArea2;
     [SerializeField] GameObject SecretArea2Details;
-
     [SerializeField] TransitionManager Transition;
+
+    private CharacterHealth characterHealth;
+    private CharacterMovement characterMovement;
 
     public bool isTeleporting;
     private string currentBackground;
+
+    private void Awake()
+    {
+        GetCharacterComponents();
+    }
 
     private void Start()
     {
@@ -41,49 +49,63 @@ public class ParallaxBackgroundManager : MonoBehaviour
         DeactivateTown();
         DeactivateForest();
         DeactivateCave();
-        BS.SetActive(false);
-        BSDetails.SetActive(false);
-        SS.SetActive(false);
-        SSDetails.SetActive(false);
-        SecretArea1.SetActive(false);
-        SecretArea1Details.SetActive(false);
-        SecretArea2.SetActive(false);
-        SecretArea2Details.SetActive(false);
+        DeactivateBaseStation();
+        DeactivateSpaceStation();
+        DeactivateSecretArea1();
+        DeactivateSecretArea2();
         currentBackground = Data.location;
-        SetBackground(currentBackground);
+        SetNewBackground(currentBackground);
         FindObjectOfType<AudioManager>().PlayMusic(currentBackground);
         isTeleporting = false;
     }
 
-    private void DeactivateIntro()
-    {
-        Intro.SetActive(false);
-        IntroDetails.SetActive(false);
-    }
-
-    private void DeactivateTown()
-    {
-        Town.SetActive(false);
-        TownDetails.SetActive(false);
-    }
-
-    private void DeactivateForest()
-    {
-        Forest.SetActive(false);
-        ForestDetails.SetActive(false);
-    }
-
-    private void DeactivateCave()
-    {
-        Cave.SetActive(false);
-        CaveDetails.SetActive(false);
-    }
-
-    public void SetBackground(string newBackground)
+    public void SetNewBackground(string newBackground)
     {
         FindObjectOfType<AudioManager>().ChangeMusic(currentBackground, newBackground);
         currentBackground = newBackground;
-        GetComponent<CharacterMovement>().location = currentBackground;
+        characterMovement.location = currentBackground;
+        ActivateNewBackground(newBackground);
+        Transition.Deactivate();
+        // Return control to Character after teleport is done!!!
+        if (characterHealth.IsDead())
+        {
+            characterHealth.Revive();
+        }
+        isTeleporting = false;
+    }
+
+    public IEnumerator ChangeBackground(string newBackground, GameObject character, Portal destination)
+    {
+        Transition.Activate();
+        yield return new WaitForSeconds(TELEPORT_DELAY);
+        character.transform.position = destination.transform.position;
+        DeactivateBackground();
+        SetNewBackground(newBackground);
+    }
+
+    public void Respawn(string newBackground, GameObject character, Vector2 destination)
+    {
+        StopAllCoroutines();
+        StartCoroutine(Teleport(newBackground, character, destination));
+    }
+
+    public IEnumerator Teleport(string newBackground, GameObject character, Vector2 destination)
+    {
+        Transition.Activate();
+        yield return new WaitForSeconds(TELEPORT_DELAY);
+        character.transform.position = destination;
+        DeactivateBackground();
+        SetNewBackground(newBackground);
+    }
+
+    private void GetCharacterComponents()
+    {
+        characterHealth = GetComponent<CharacterHealth>();
+        characterMovement = GetComponent<CharacterMovement>();
+    }
+
+    private void ActivateNewBackground(string newBackground)
+    {
         if (newBackground == INTRO)
         {
             Intro.SetActive(true);
@@ -124,159 +146,89 @@ public class ParallaxBackgroundManager : MonoBehaviour
             SecretArea2.SetActive(true);
             SecretArea2Details.SetActive(true);
         }
-        Transition.Deactivate();
-        if (GetComponent<CharacterHealth>().IsDead())
-        {
-            GetComponent<CharacterHealth>().Revive();
-            GetComponent<CharacterWallet>().MinusGold(GetComponent<CharacterWallet>().GetGoldAmount() / 10);
-        }
-        isTeleporting = false;
     }
 
-    public void OffBackground()
+    private void DeactivateBackground()
     {
         if (currentBackground == INTRO)
         {
-            Intro.SetActive(false);
-            IntroDetails.SetActive(false);
+            DeactivateIntro();
         }
         else if (currentBackground == TOWN)
         {
-            Town.SetActive(false);
-            TownDetails.SetActive(false);
+            DeactivateTown();
         }
         else if (currentBackground == FOREST)
         {
-            Forest.SetActive(false);
-            ForestDetails.SetActive(false);
+            DeactivateForest();
         }
         else if (currentBackground == CAVE)
         {
-            Cave.SetActive(false);
-            CaveDetails.SetActive(false);
+            DeactivateCave();
         }
         else if (currentBackground == BASE_STATION)
         {
-            BS.SetActive(false);
-            BSDetails.SetActive(false);
+            DeactivateBaseStation();
         }
         else if (currentBackground == SPACE_STATION)
         {
-            SS.SetActive(false);
-            SSDetails.SetActive(false);
+            DeactivateSpaceStation();
         }
         else if (currentBackground == SECRET_AREA_1)
         {
-            SecretArea1.SetActive(false);
-            SecretArea1Details.SetActive(false);
+            DeactivateSecretArea1();
         }
         else if (currentBackground == SECRET_AREA_2)
         {
-            SecretArea2.SetActive(false);
-            SecretArea2Details.SetActive(false);
+            DeactivateSecretArea2();
         }
     }
 
-    public IEnumerator ChangeBackground(string newBackground, GameObject Character, Portal Destination)
+    private void DeactivateIntro()
     {
-        Transition.Activate();
-        yield return new WaitForSeconds(1.3f);
-        Character.transform.position = Destination.transform.position;
-        if (currentBackground == INTRO)
-        {
-            Intro.SetActive(false);
-            IntroDetails.SetActive(false);
-        }
-        else if (currentBackground == TOWN)
-        {
-            Town.SetActive(false);
-            TownDetails.SetActive(false);
-        }
-        else if (currentBackground == FOREST)
-        {
-            Forest.SetActive(false);
-            ForestDetails.SetActive(false);
-        }
-        else if (currentBackground == CAVE)
-        {
-            Cave.SetActive(false);
-            CaveDetails.SetActive(false);
-        }
-        else if (currentBackground == BASE_STATION)
-        {
-            BS.SetActive(false);
-            BSDetails.SetActive(false);
-        }
-        else if (currentBackground == SPACE_STATION)
-        {
-            SS.SetActive(false);
-            SSDetails.SetActive(false);
-        }
-        else if (currentBackground == SECRET_AREA_1)
-        {
-            SecretArea1.SetActive(false);
-            SecretArea1Details.SetActive(false);
-        }
-        else if (currentBackground == SECRET_AREA_2)
-        {
-            SecretArea2.SetActive(false);
-            SecretArea2Details.SetActive(false);
-        }
-
-        SetBackground(newBackground);
+        Intro.SetActive(false);
+        IntroDetails.SetActive(false);
     }
 
-    public void Respawn(string newBackground, GameObject Character, Vector2 Destination)
+    private void DeactivateTown()
     {
-        StopAllCoroutines();
-        StartCoroutine(Teleport(newBackground,  Character, Destination));
+        Town.SetActive(false);
+        TownDetails.SetActive(false);
     }
-    public IEnumerator Teleport(string newBackground, GameObject Character, Vector2 Destination)
-    {
-        Transition.Activate();
-        yield return new WaitForSeconds(1.3f);
-        Character.transform.position = Destination;
-        if (currentBackground == INTRO)
-        {
-            Intro.SetActive(false);
-            IntroDetails.SetActive(false);
-        }
-        else if (currentBackground == TOWN)
-        {
-            Town.SetActive(false);
-            TownDetails.SetActive(false);
-        }
-        else if (currentBackground == FOREST)
-        {
-            Forest.SetActive(false);
-            ForestDetails.SetActive(false);
-        }
-        else if (currentBackground == CAVE)
-        {
-            Cave.SetActive(false);
-            CaveDetails.SetActive(false);
-        }
-        else if (currentBackground == BASE_STATION)
-        {
-            BS.SetActive(false);
-            BSDetails.SetActive(false);
-        }
-        else if (currentBackground == SPACE_STATION)
-        {
-            SS.SetActive(false);
-            SSDetails.SetActive(false);
-        }
-        else if (currentBackground == SECRET_AREA_1)
-        {
-            SecretArea1.SetActive(false);
-            SecretArea1Details.SetActive(false);
-        }
-        else if (currentBackground == SECRET_AREA_2)
-        {
-            SecretArea2.SetActive(false);
-            SecretArea2Details.SetActive(false);
-        }
 
-        SetBackground(newBackground);
+    private void DeactivateForest()
+    {
+        Forest.SetActive(false);
+        ForestDetails.SetActive(false);
+    }
+
+    private void DeactivateCave()
+    {
+        Cave.SetActive(false);
+        CaveDetails.SetActive(false);
+    }
+
+    private void DeactivateBaseStation()
+    {
+        BS.SetActive(false);
+        BSDetails.SetActive(false);
+    }
+
+    private void DeactivateSpaceStation()
+    {
+        SS.SetActive(false);
+        SSDetails.SetActive(false);
+    }
+
+    private void DeactivateSecretArea1()
+    {
+        SecretArea1.SetActive(false);
+        SecretArea1Details.SetActive(false);
+    }
+
+    private void DeactivateSecretArea2()
+    {
+        SecretArea2.SetActive(false);
+        SecretArea2Details.SetActive(false);
     }
 }
