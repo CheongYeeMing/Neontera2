@@ -31,6 +31,8 @@ public class ParallaxBackgroundManager : MonoBehaviour
     [SerializeField] GameObject SecretArea2Details;
     [SerializeField] TransitionManager Transition;
 
+    private CharacterMovement characterMovement;
+
     public bool isTeleporting;
     private string currentBackground;
 
@@ -60,7 +62,7 @@ public class ParallaxBackgroundManager : MonoBehaviour
     {
         FindObjectOfType<AudioManager>().ChangeMusic(currentBackground, newBackground);
         currentBackground = newBackground;
-        GetComponent<CharacterMovement>().location = currentBackground;
+        characterMovement.location = currentBackground;
         ActivateNewBackground(newBackground);
         Transition.Deactivate();
         if (GetComponent<CharacterHealth>().IsDead())
@@ -97,7 +99,7 @@ public class ParallaxBackgroundManager : MonoBehaviour
 
     private void GetCharacterComponents()
     {
-
+        characterMovement = GetComponent<CharacterMovement>();
     }
 
     private void ActivateNewBackground(string newBackground)
