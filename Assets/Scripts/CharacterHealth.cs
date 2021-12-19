@@ -29,6 +29,7 @@ public class CharacterHealth : MonoBehaviour, Health
     private Character character;
     private CharacterAnimation characterAnimation;
     private CharacterAttack characterAttack;
+    private CharacterWallet characterWallet;
     private GameObject attackedBy;
     private Rigidbody2D rigidBody;
 
@@ -102,6 +103,7 @@ public class CharacterHealth : MonoBehaviour, Health
         character = GetComponent<Character>();
         characterAnimation = GetComponent<CharacterAnimation>();
         characterAttack = GetComponent<CharacterAttack>();
+        characterWallet = GetComponent<CharacterWallet>();
         rigidBody = GetComponent<Rigidbody2D>();
     }
 
@@ -235,6 +237,7 @@ public class CharacterHealth : MonoBehaviour, Health
         health = maxHealth;
         boxCollider.enabled = true;
         rigidBody.gravityScale = GRAVITY_SCALE_NORMAL;
+        characterWallet.Revive();
     }
 
     public bool IsHurting()
