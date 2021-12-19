@@ -41,7 +41,7 @@ public class ParallaxBackgroundManager : MonoBehaviour
         DeactivateTown();
         DeactivateForest();
         DeactivateCave();
-        DeactiveBaseStation();
+        DeactivateBaseStation();
         DeactivateSpaceStation();
         SecretArea1.SetActive(false);
         SecretArea1Details.SetActive(false);
@@ -77,7 +77,7 @@ public class ParallaxBackgroundManager : MonoBehaviour
         CaveDetails.SetActive(false);
     }
 
-    private void DeactiveBaseStation()
+    private void DeactivateBaseStation()
     {
         BS.SetActive(false);
         BSDetails.SetActive(false);
