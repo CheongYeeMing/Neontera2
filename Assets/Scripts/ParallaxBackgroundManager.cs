@@ -31,6 +31,7 @@ public class ParallaxBackgroundManager : MonoBehaviour
     [SerializeField] GameObject SecretArea2Details;
     [SerializeField] TransitionManager Transition;
 
+    private CharacterHealth characterHealth;
     private CharacterMovement characterMovement;
 
     public bool isTeleporting;
@@ -65,10 +66,10 @@ public class ParallaxBackgroundManager : MonoBehaviour
         characterMovement.location = currentBackground;
         ActivateNewBackground(newBackground);
         Transition.Deactivate();
-        if (GetComponent<CharacterHealth>().IsDead())
+        // Return control to Character after teleport is done!!!
+        if (characterHealth.IsDead())
         {
-            GetComponent<CharacterHealth>().Revive();
-            GetComponent<CharacterWallet>().MinusGold(GetComponent<CharacterWallet>().GetGoldAmount() / 10);
+            characterHealth.Revive();
         }
         isTeleporting = false;
     }
@@ -85,7 +86,7 @@ public class ParallaxBackgroundManager : MonoBehaviour
     public void Respawn(string newBackground, GameObject character, Vector2 destination)
     {
         StopAllCoroutines();
-        StartCoroutine(Teleport(newBackground,  character, destination));
+        StartCoroutine(Teleport(newBackground, character, destination));
     }
 
     public IEnumerator Teleport(string newBackground, GameObject character, Vector2 destination)
@@ -99,6 +100,7 @@ public class ParallaxBackgroundManager : MonoBehaviour
 
     private void GetCharacterComponents()
     {
+        characterHealth = GetComponent<CharacterHealth>();
         characterMovement = GetComponent<CharacterMovement>();
     }
 
