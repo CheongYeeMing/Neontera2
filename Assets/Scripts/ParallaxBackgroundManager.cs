@@ -36,7 +36,7 @@ public class ParallaxBackgroundManager : MonoBehaviour
 
     private void Awake()
     {
-        
+        GetCharacterComponents();
     }
 
     private void Start()
@@ -93,6 +93,11 @@ public class ParallaxBackgroundManager : MonoBehaviour
         character.transform.position = destination;
         DeactivateBackground();
         SetNewBackground(newBackground);
+    }
+
+    private void GetCharacterComponents()
+    {
+
     }
 
     private void ActivateNewBackground(string newBackground)
