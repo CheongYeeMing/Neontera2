@@ -44,8 +44,7 @@ public class ParallaxBackgroundManager : MonoBehaviour
         DeactivateBaseStation();
         DeactivateSpaceStation();
         DeactivateSecretArea1();
-        SecretArea2.SetActive(false);
-        SecretArea2Details.SetActive(false);
+        DeactivateSecretArea2();
         currentBackground = Data.location;
         SetBackground(currentBackground);
         FindObjectOfType<AudioManager>().PlayMusic(currentBackground);
@@ -92,6 +91,12 @@ public class ParallaxBackgroundManager : MonoBehaviour
     {
         SecretArea1.SetActive(false);
         SecretArea1Details.SetActive(false);
+    }
+
+    private void DeactivateSecretArea2()
+    {
+        SecretArea2.SetActive(false);
+        SecretArea2Details.SetActive(false);
     }
 
     public void SetBackground(string newBackground)
