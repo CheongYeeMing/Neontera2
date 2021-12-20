@@ -3,6 +3,8 @@ using UnityEngine;
 public class Portal : MonoBehaviour
 {
     private const float PORTAL_NAME_TAG_POSITION_Y_OFFSET = -1.2f;
+    private const string ACTIVATE_PORTAL = "Activate";
+    private const string DEACTIVATE_PORTAL = "Deactivate";
 
     [SerializeField] GameObject portalNameTag;
     [SerializeField] public Portal destinationPortal;
