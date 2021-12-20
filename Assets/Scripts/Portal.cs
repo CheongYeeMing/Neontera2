@@ -25,11 +25,11 @@ public class Portal : MonoBehaviour
         portalNameTag.transform.position = new Vector2(transform.position.x, transform.position.y + PORTAL_NAME_TAG_POSITION_Y_OFFSET);
         if (isActivated)
         {
-            animator.SetTrigger("Activate");
+            animator.SetTrigger(ACTIVATE_PORTAL);
         }
         else
         {
-            animator.SetTrigger("Deactivate");
+            animator.SetTrigger(DEACTIVATE_PORTAL);
 
         }
     }
