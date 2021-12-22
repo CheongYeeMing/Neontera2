@@ -325,4 +325,9 @@ public class CharacterMovement : MonoBehaviour
     {
         return location;
     }
+
+    public void SetLocation(string newLocation)
+    {
+        location = newLocation;
+    }
 }

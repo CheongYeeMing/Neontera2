@@ -13,7 +13,7 @@ public class GameOver : MonoBehaviour
     public void Respawn(Character character)
     {
         
-        if (character.GetComponent<CharacterMovement>().location == LOCATION_INTRO)
+        if (character.GetComponent<CharacterMovement>().GetLocation() == LOCATION_INTRO)
         {
             character.GetComponent<ParallaxBackgroundManager>().Respawn(LOCATION_INTRO, character.gameObject, respawnPointIntro.position);
             respawnMonologueIntro.gameObject.SetActive(true);

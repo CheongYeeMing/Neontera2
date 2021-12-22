@@ -62,7 +62,7 @@ public class PauseMenu : MonoBehaviour
         // Character Position
         Data.Xcoordinate = character.transform.position.x;
         Data.Ycoordinate = character.transform.position.y;
-        Data.location = character.GetComponent<CharacterMovement>().location;
+        Data.location = character.GetComponent<CharacterMovement>().GetLocation();
 
         // Save Inventory
         Data.items.Clear();
