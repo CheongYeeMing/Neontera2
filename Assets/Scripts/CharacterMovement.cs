@@ -41,7 +41,7 @@ public class CharacterMovement : MonoBehaviour
     private float horizontalInput;
 
     // Location
-    public string location;
+    private string location;
 
     private void Awake()
     {
@@ -319,5 +319,15 @@ public class CharacterMovement : MonoBehaviour
     public Rigidbody2D GetRigidBody()
     {
         return body;
+    }
+
+    public string GetLocation()
+    {
+        return location;
+    }
+
+    public void SetLocation(string newLocation)
+    {
+        location = newLocation;
     }
 }

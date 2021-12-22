@@ -7,9 +7,9 @@ public class Portal : MonoBehaviour
     private const string DEACTIVATE_PORTAL = "Deactivate";
 
     [SerializeField] GameObject portalNameTag;
-    [SerializeField] public Portal destinationPortal;
-    [SerializeField] public string location;
-    [SerializeField] public bool isActivated;
+    [SerializeField] private Portal destinationPortal;
+    [SerializeField] private string location;
+    [SerializeField] private bool isActivated;
 
     private Animator animator;
 
@@ -49,5 +49,20 @@ public class Portal : MonoBehaviour
     public string GetPortalLocation()
     {
         return location;
+    }
+
+    public bool IsActivated()
+    {
+        return isActivated;
+    }
+
+    public void Activate()
+    {
+        isActivated = true;
+    }
+
+    public Portal GetDestinationPortal()
+    {
+        return destinationPortal;
     }
 }

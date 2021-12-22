@@ -63,7 +63,7 @@ public class ParallaxBackgroundManager : MonoBehaviour
     {
         FindObjectOfType<AudioManager>().ChangeMusic(currentBackground, newBackground);
         currentBackground = newBackground;
-        characterMovement.location = currentBackground;
+        characterMovement.SetLocation(currentBackground);
         ActivateNewBackground(newBackground);
         Transition.Deactivate();
         // Return control to Character after teleport is done!!!
