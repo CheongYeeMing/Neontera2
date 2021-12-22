@@ -50,4 +50,9 @@ public class Portal : MonoBehaviour
     {
         return location;
     }
+
+    public bool IsActivated()
+    {
+        return isActivated;
+    }
 }
