@@ -6,7 +6,7 @@ public class PortalManager : MonoBehaviour
 {
     [SerializeField] List<GameObject> Portal;
 
-    public void Start()
+    private void Start()
     {
         for (int i = 0; i < Data.Portal.Count; i++)
         {
