@@ -9,7 +9,7 @@ public class Portal : MonoBehaviour
     [SerializeField] GameObject portalNameTag;
     [SerializeField] public Portal destinationPortal;
     [SerializeField] public string location;
-    [SerializeField] public bool isActivated;
+    [SerializeField] private bool isActivated;
 
     private Animator animator;
 
