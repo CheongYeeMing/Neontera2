@@ -55,4 +55,14 @@ public class Portal : MonoBehaviour
     {
         return isActivated;
     }
+
+    public void Activate()
+    {
+        isActivated = true;
+    }
+
+    public Portal GetDestinationPortal()
+    {
+        return destinationPortal;
+    }
 }
