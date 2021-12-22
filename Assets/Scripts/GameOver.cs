@@ -12,6 +12,7 @@ public class GameOver : MonoBehaviour
     [SerializeField] private Transform respawnPointTown;
     [SerializeField] private Monologue respawnMonologueIntro;
     [SerializeField] private Monologue respawnMonologueTown;
+
     public void Respawn(Character character)
     {
         
