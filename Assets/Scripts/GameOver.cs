@@ -5,6 +5,9 @@ using UnityEngine.UI;
 
 public class GameOver : MonoBehaviour
 {
+    private const string LOCATION_INTRO = "Intro";
+    private const string LOCATION_TOWN = "Town";
+
     [SerializeField] private Transform respawnPointIntro;
     [SerializeField] private Transform respawnPointTown;
     [SerializeField] private Monologue respawnMonologueIntro;
@@ -12,14 +15,14 @@ public class GameOver : MonoBehaviour
     public void Respawn(Character character)
     {
         
-        if (character.GetComponent<CharacterMovement>().location == "Intro")
+        if (character.GetComponent<CharacterMovement>().location == LOCATION_INTRO)
         {
-            character.GetComponent<ParallaxBackgroundManager>().Respawn("Intro", character.gameObject, respawnPointIntro.position);
+            character.GetComponent<ParallaxBackgroundManager>().Respawn(LOCATION_INTRO, character.gameObject, respawnPointIntro.position);
             respawnMonologueIntro.gameObject.SetActive(true);
         }
         else
         {
-            character.GetComponent<ParallaxBackgroundManager>().Respawn("Town", character.gameObject, respawnPointTown.position);
+            character.GetComponent<ParallaxBackgroundManager>().Respawn(LOCATION_TOWN, character.gameObject, respawnPointTown.position);
             respawnMonologueTown.gameObject.SetActive(true);
         }
         gameObject.SetActive(false);
