@@ -5,10 +5,10 @@ using UnityEngine.UI;
 
 public class GameOver : MonoBehaviour
 {
-    [SerializeField] Transform RespawnPointIntro;
-    [SerializeField] Transform RespawnPointTown;
-    [SerializeField] Monologue RespawnMonologueIntro;
-    [SerializeField] Monologue RespawnMonologueTown;
+    [SerializeField] private Transform RespawnPointIntro;
+    [SerializeField] private Transform RespawnPointTown;
+    [SerializeField] private Monologue RespawnMonologueIntro;
+    [SerializeField] private Monologue RespawnMonologueTown;
     public void Respawn(Character character)
     {
         
