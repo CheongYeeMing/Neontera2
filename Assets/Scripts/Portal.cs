@@ -7,7 +7,7 @@ public class Portal : MonoBehaviour
     private const string DEACTIVATE_PORTAL = "Deactivate";
 
     [SerializeField] GameObject portalNameTag;
-    [SerializeField] public Portal destinationPortal;
+    [SerializeField] private Portal destinationPortal;
     [SerializeField] private string location;
     [SerializeField] private bool isActivated;
 
