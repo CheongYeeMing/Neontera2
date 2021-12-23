@@ -6,6 +6,7 @@ using TMPro;
 
 public class DialogueManager : MonoBehaviour
 {
+    private const string AUDIO_DIALOGUE_MONOLOGUE = "DialogueMonologue";
     private const string AUDIO_RETRO_CLICK = "RetroClick";
     private const string AUDIO_RUN = "Run";
 
@@ -242,8 +243,8 @@ public class DialogueManager : MonoBehaviour
         isTalking = true;
         FindObjectOfType<Character>().GetComponent<Rigidbody2D>().velocity = Vector2.zero;
         FindObjectOfType<AudioManager>().StopEffect(AUDIO_RUN);
-        FindObjectOfType<AudioManager>().StopEffect("DialogueMonologue");
-        FindObjectOfType<AudioManager>().PlayEffect("DialogueMonologue");
+        FindObjectOfType<AudioManager>().StopEffect(AUDIO_DIALOGUE_MONOLOGUE);
+        FindObjectOfType<AudioManager>().PlayEffect(AUDIO_DIALOGUE_MONOLOGUE);
         currResponseTracker = 0;
         npcName.text = npc.npcName;
         npcFace.sprite = npc.icon;
