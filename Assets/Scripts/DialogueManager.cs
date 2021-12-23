@@ -313,7 +313,10 @@ public class DialogueManager : MonoBehaviour
 
     public bool OpenShop()
     {
-        if (!isTalking) return false;
+        if (!isTalking)
+        {
+            return false;
+        }
         FindObjectOfType<AudioManager>().StopEffect(AUDIO_OPEN);
         FindObjectOfType<AudioManager>().PlayEffect(AUDIO_OPEN);
         ShopManager shopManager;
@@ -329,7 +332,10 @@ public class DialogueManager : MonoBehaviour
 
     public void CloseShop()
     {
-        if (!gameObject.activeSelf || !isTalking) return;
+        if (!gameObject.activeSelf || !isTalking)
+        {
+            return;
+        }
         FindObjectOfType<AudioManager>().StopEffect(AUDIO_OPEN);
         FindObjectOfType<AudioManager>().PlayEffect(AUDIO_OPEN);
         FindObjectOfType<AudioManager>().StopEffect(AUDIO_CLICK);
@@ -347,7 +353,10 @@ public class DialogueManager : MonoBehaviour
 
     public bool OpenQuestWindow()
     {
-        if (!isTalking || currResponseTracker == SECOND_RESPONSE) return false;
+        if (!isTalking || currResponseTracker == SECOND_RESPONSE)
+        {
+            return false;
+        }
         quest = npc.Sequences[npc.sequenceNumber].Quest;
         quest.npc = npc;
         quest.Reset();
