@@ -7,7 +7,7 @@ using TMPro;
 public class DialogueManager : MonoBehaviour
 {
     public NPC npc;
-    [SerializeField] private GameObject NpcNameTag;
+    [SerializeField] private GameObject npcNameTag;
 
     public bool isTalking = false;
 
@@ -47,7 +47,7 @@ public class DialogueManager : MonoBehaviour
 
     public void Update()
     {
-        NpcNameTag.transform.position = new Vector2(gameObject.transform.position.x, gameObject.transform.position.y - 1);
+        npcNameTag.transform.position = new Vector2(gameObject.transform.position.x, gameObject.transform.position.y - 1);
         if (!isTalking) return;
         if (Input.GetKeyDown(KeyCode.DownArrow))
         {
