@@ -20,7 +20,7 @@ public class DialogueManager : MonoBehaviour
 
     private Text npcName;
     private Image npcFace;
-    public Text npcDialogueBox;
+    private Text npcDialogueBox;
     public Button[] characterResponses;
 
     public Animator animator;
