@@ -371,7 +371,10 @@ public class DialogueManager : MonoBehaviour
 
     public void HealCharacter()
     {
-        if (currResponseTracker != 0) return;
+        if (currResponseTracker != 0)
+        {
+            return;
+        }
         FindObjectOfType<CharacterHealth>().FullRestore();
     }
 }
