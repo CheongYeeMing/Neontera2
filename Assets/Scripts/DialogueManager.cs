@@ -7,6 +7,7 @@ using TMPro;
 public class DialogueManager : MonoBehaviour
 {
     private const string AUDIO_RETRO_CLICK = "RetroClick";
+    private const string AUDIO_RUN = "Run";
 
     private NPC npc;
     [SerializeField] private GameObject npcNameTag;
@@ -240,7 +241,7 @@ public class DialogueManager : MonoBehaviour
         animator.SetBool("IsOpen", true);
         isTalking = true;
         FindObjectOfType<Character>().GetComponent<Rigidbody2D>().velocity = Vector2.zero;
-        FindObjectOfType<AudioManager>().StopEffect("Run");
+        FindObjectOfType<AudioManager>().StopEffect(AUDIO_RUN);
         FindObjectOfType<AudioManager>().StopEffect("DialogueMonologue");
         FindObjectOfType<AudioManager>().PlayEffect("DialogueMonologue");
         currResponseTracker = 0;
