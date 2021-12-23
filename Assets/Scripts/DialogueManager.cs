@@ -7,6 +7,7 @@ using TMPro;
 public class DialogueManager : MonoBehaviour
 {
     private const int FIRST_RESPONSE = 0;
+    private const int SECOND_RESPONSE = 1;
     private const string AUDIO_DIALOGUE_MONOLOGUE = "DialogueMonologue";
     private const string AUDIO_RETRO_CLICK = "RetroClick";
     private const string AUDIO_RUN = "Run";
@@ -314,7 +315,7 @@ public class DialogueManager : MonoBehaviour
         FindObjectOfType<AudioManager>().StopEffect("Open");
         FindObjectOfType<AudioManager>().PlayEffect("Open");
         ShopManager shopManager;
-        if (currResponseTracker == 0 && gameObject.TryGetComponent<ShopManager>(out shopManager) == true 
+        if (currResponseTracker == FIRST_RESPONSE && gameObject.TryGetComponent<ShopManager>(out shopManager) == true 
             && npc.Sequences[npc.sequenceNumber].hasShop)
         {
             shopManager.ShopWindow.GetComponentInChildren<Shop>().SetItems(npc.Sequences[npc.sequenceNumber].Items);
@@ -344,7 +345,7 @@ public class DialogueManager : MonoBehaviour
 
     public bool OpenQuestWindow()
     {
-        if (!isTalking || currResponseTracker == 1) return false;
+        if (!isTalking || currResponseTracker == SECOND_RESPONSE) return false;
         quest = npc.Sequences[npc.sequenceNumber].Quest;
         quest.npc = npc;
         quest.Reset();
