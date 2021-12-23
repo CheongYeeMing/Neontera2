@@ -8,6 +8,7 @@ public class DialogueManager : MonoBehaviour
 {
     private const int FIRST_RESPONSE = 0;
     private const int SECOND_RESPONSE = 1;
+    private const string AUDIO_CLICK = "Click";
     private const string AUDIO_DIALOGUE_MONOLOGUE = "DialogueMonologue";
     private const string AUDIO_OPEN = "Open";
     private const string AUDIO_RETRO_CLICK = "RetroClick";
@@ -331,8 +332,8 @@ public class DialogueManager : MonoBehaviour
         if (!gameObject.activeSelf || !isTalking) return;
         FindObjectOfType<AudioManager>().StopEffect(AUDIO_OPEN);
         FindObjectOfType<AudioManager>().PlayEffect(AUDIO_OPEN);
-        FindObjectOfType<AudioManager>().StopEffect("Click");
-        FindObjectOfType<AudioManager>().PlayEffect("Click");
+        FindObjectOfType<AudioManager>().StopEffect(AUDIO_CLICK);
+        FindObjectOfType<AudioManager>().PlayEffect(AUDIO_CLICK);
         ShopManager shopManager;
         if (gameObject.TryGetComponent<ShopManager>(out shopManager) == true)
         {
