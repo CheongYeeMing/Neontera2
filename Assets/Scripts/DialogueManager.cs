@@ -21,7 +21,7 @@ public class DialogueManager : MonoBehaviour
     private Text npcName;
     private Image npcFace;
     private Text npcDialogueBox;
-    public Button[] characterResponses;
+    private Button[] characterResponses;
 
     public Animator animator;
     [SerializeField] DialogueFocus dialogueFocus;
