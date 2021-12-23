@@ -19,7 +19,7 @@ public class DialogueManager : MonoBehaviour
     [SerializeField] TextMeshProUGUI enterToContinue;
 
     private Text npcName;
-    public Image npcFace;
+    private Image npcFace;
     public Text npcDialogueBox;
     public Button[] characterResponses;
 
