@@ -7,7 +7,7 @@ using TMPro;
 public class DialogueManager : MonoBehaviour
 {
     public NPC npc;
-    [SerializeField] GameObject NpcNameTag;
+    [SerializeField] private GameObject NpcNameTag;
 
     public bool isTalking = false;
 
