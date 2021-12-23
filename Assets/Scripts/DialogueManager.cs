@@ -28,7 +28,7 @@ public class DialogueManager : MonoBehaviour
 
     [SerializeField] QuestList questList;
 
-    public Quest quest;
+    private Quest quest;
     [SerializeField] public SelectedQuestWindow selectedQuestWindow;
     [SerializeField] public ShopSelectedItemPanel shopSelectedItemPanel;
 
