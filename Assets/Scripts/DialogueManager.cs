@@ -9,6 +9,7 @@ public class DialogueManager : MonoBehaviour
     private const int FIRST_RESPONSE = 0;
     private const int SECOND_RESPONSE = 1;
     private const string AUDIO_DIALOGUE_MONOLOGUE = "DialogueMonologue";
+    private const string AUDIO_OPEN = "Open";
     private const string AUDIO_RETRO_CLICK = "RetroClick";
     private const string AUDIO_RUN = "Run";
 
@@ -312,8 +313,8 @@ public class DialogueManager : MonoBehaviour
     public bool OpenShop()
     {
         if (!isTalking) return false;
-        FindObjectOfType<AudioManager>().StopEffect("Open");
-        FindObjectOfType<AudioManager>().PlayEffect("Open");
+        FindObjectOfType<AudioManager>().StopEffect(AUDIO_OPEN);
+        FindObjectOfType<AudioManager>().PlayEffect(AUDIO_OPEN);
         ShopManager shopManager;
         if (currResponseTracker == FIRST_RESPONSE && gameObject.TryGetComponent<ShopManager>(out shopManager) == true 
             && npc.Sequences[npc.sequenceNumber].hasShop)
@@ -328,8 +329,8 @@ public class DialogueManager : MonoBehaviour
     public void CloseShop()
     {
         if (!gameObject.activeSelf || !isTalking) return;
-        FindObjectOfType<AudioManager>().StopEffect("Open");
-        FindObjectOfType<AudioManager>().PlayEffect("Open");
+        FindObjectOfType<AudioManager>().StopEffect(AUDIO_OPEN);
+        FindObjectOfType<AudioManager>().PlayEffect(AUDIO_OPEN);
         FindObjectOfType<AudioManager>().StopEffect("Click");
         FindObjectOfType<AudioManager>().PlayEffect("Click");
         ShopManager shopManager;
