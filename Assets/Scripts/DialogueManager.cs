@@ -24,9 +24,9 @@ public class DialogueManager : MonoBehaviour
     private Button[] characterResponses;
 
     private Animator animator;
-    [SerializeField] DialogueFocus dialogueFocus;
+    [SerializeField] private DialogueFocus dialogueFocus;
 
-    [SerializeField] QuestList questList;
+    [SerializeField] private QuestList questList;
 
     private Quest quest;
     [SerializeField] public SelectedQuestWindow selectedQuestWindow;
@@ -34,9 +34,9 @@ public class DialogueManager : MonoBehaviour
 
     [SerializeField] public TransitionManager transition;
     [SerializeField] public GameObject boss;
-    [SerializeField] Inventory inventory;
+    [SerializeField] private Inventory inventory;
 
-    [SerializeField] Button Close;
+    [SerializeField] private Button Close;
 
     // Start is called before the first frame update
     void Start()
