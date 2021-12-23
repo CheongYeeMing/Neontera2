@@ -6,6 +6,8 @@ using TMPro;
 
 public class DialogueManager : MonoBehaviour
 {
+    private const string AUDIO_RETRO_CLICK = "RetroClick";
+
     private NPC npc;
     [SerializeField] private GameObject npcNameTag;
 
@@ -69,8 +71,8 @@ public class DialogueManager : MonoBehaviour
         }
         if (Input.GetKeyDown(KeyCode.Return))
         {
-            FindObjectOfType<AudioManager>().StopEffect("RetroClick");
-            FindObjectOfType<AudioManager>().PlayEffect("RetroClick");
+            FindObjectOfType<AudioManager>().StopEffect(AUDIO_RETRO_CLICK);
+            FindObjectOfType<AudioManager>().PlayEffect(AUDIO_RETRO_CLICK);
             if (npc.Sequences[npc.sequenceNumber].isStory)
             {
                 if (currResponseTracker < npc.Sequences[npc.sequenceNumber].dialogue.Length - 1)
