@@ -23,7 +23,7 @@ public class DialogueManager : MonoBehaviour
     private Text npcDialogueBox;
     private Button[] characterResponses;
 
-    public Animator animator;
+    private Animator animator;
     [SerializeField] DialogueFocus dialogueFocus;
 
     [SerializeField] QuestList questList;
