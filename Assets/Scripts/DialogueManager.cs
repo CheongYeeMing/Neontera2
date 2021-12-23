@@ -6,8 +6,10 @@ using TMPro;
 
 public class DialogueManager : MonoBehaviour
 {
+    private const float TEXT_TYPING_SPEED = 0.008f;
     private const int FIRST_RESPONSE = 0;
     private const int SECOND_RESPONSE = 1;
+    private const string ANIMATOR_IS_OPEN = "IsOpen";
     private const string AUDIO_CLICK = "Click";
     private const string AUDIO_DIALOGUE_MONOLOGUE = "DialogueMonologue";
     private const string AUDIO_OPEN = "Open";
@@ -243,13 +245,13 @@ public class DialogueManager : MonoBehaviour
 
     public void StartConversation()
     {
-        animator.SetBool("IsOpen", true);
+        animator.SetBool(ANIMATOR_IS_OPEN, true);
         isTalking = true;
         FindObjectOfType<Character>().GetComponent<Rigidbody2D>().velocity = Vector2.zero;
         FindObjectOfType<AudioManager>().StopEffect(AUDIO_RUN);
         FindObjectOfType<AudioManager>().StopEffect(AUDIO_DIALOGUE_MONOLOGUE);
         FindObjectOfType<AudioManager>().PlayEffect(AUDIO_DIALOGUE_MONOLOGUE);
-        currResponseTracker = 0;
+        currResponseTracker = FIRST_RESPONSE;
         npcName.text = npc.npcName;
         npcFace.sprite = npc.icon;
         StopAllCoroutines();
@@ -289,7 +291,7 @@ public class DialogueManager : MonoBehaviour
 
     public void EndDialogue()
     {
-        animator.SetBool("IsOpen", false);
+        animator.SetBool(ANIMATOR_IS_OPEN, false);
         for (int i = 0; i < npc.Sequences[npc.sequenceNumber].characterDialogue.Length; i++)
         {
             characterResponses[i].gameObject.SetActive(false);
@@ -306,7 +308,7 @@ public class DialogueManager : MonoBehaviour
         foreach (char letter in sentence.ToCharArray())
         {
             npcDialogueBox.text += letter;
-            yield return new WaitForSeconds(0.008f);//null;
+            yield return new WaitForSeconds(TEXT_TYPING_SPEED);//null;
         }
         enterToContinue.gameObject.SetActive(true);
     }
