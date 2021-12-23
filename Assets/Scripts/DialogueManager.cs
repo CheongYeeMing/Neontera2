@@ -6,6 +6,7 @@ using TMPro;
 
 public class DialogueManager : MonoBehaviour
 {
+    private const int FIRST_RESPONSE = 0;
     private const string AUDIO_DIALOGUE_MONOLOGUE = "DialogueMonologue";
     private const string AUDIO_RETRO_CLICK = "RetroClick";
     private const string AUDIO_RUN = "Run";
@@ -374,7 +375,7 @@ public class DialogueManager : MonoBehaviour
 
     public void HealCharacter()
     {
-        if (currResponseTracker != 0)
+        if (currResponseTracker != FIRST_RESPONSE)
         {
             return;
         }
