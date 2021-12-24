@@ -16,37 +16,30 @@ public class DialogueManager : MonoBehaviour
     private const string AUDIO_RETRO_CLICK = "RetroClick";
     private const string AUDIO_RUN = "Run";
 
-    private NPC npc;
-    [SerializeField] private GameObject npcNameTag;
-
-    public bool isTalking = false;
-
-    public float distance;
-    public float currResponseTracker = 0;
-
-    public GameObject character;
-    public GameObject dialogueWindow;
-    [SerializeField] private TextMeshProUGUI enterToContinue;
-
-    private Text npcName;
-    private Image npcFace;
-    private Text npcDialogueBox;
-    private Button[] characterResponses;
-
-    private Animator animator;
+    [SerializeField] private Button Close;
     [SerializeField] private DialogueFocus dialogueFocus;
-
-    [SerializeField] private QuestList questList;
-
-    private Quest quest;
-    [SerializeField] public SelectedQuestWindow selectedQuestWindow;
-    [SerializeField] public ShopSelectedItemPanel shopSelectedItemPanel;
-
-    [SerializeField] public TransitionManager transition;
     [SerializeField] public GameObject boss;
     [SerializeField] private Inventory inventory;
+    [SerializeField] private GameObject npcNameTag;
+    [SerializeField] private QuestList questList;
+    [SerializeField] public SelectedQuestWindow selectedQuestWindow;
+    [SerializeField] public ShopSelectedItemPanel shopSelectedItemPanel;
+    [SerializeField] private TextMeshProUGUI enterToContinue;
+    [SerializeField] public TransitionManager transition;
 
-    [SerializeField] private Button Close;
+    private Animator animator;
+    private Button[] characterResponses;
+    public GameObject character;
+    public GameObject dialogueWindow;
+    private Image npcFace;
+    private NPC npc;
+    private Quest quest;
+    private Text npcDialogueBox;
+    private Text npcName;
+
+    public bool isTalking = false;
+    public float distance;
+    public float currResponseTracker = 0;
 
     // Start is called before the first frame update
     void Start()
