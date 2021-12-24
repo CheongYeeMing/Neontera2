@@ -26,7 +26,7 @@ public class DialogueManager : MonoBehaviour
 
     public GameObject character;
     public GameObject dialogueWindow;
-    [SerializeField] TextMeshProUGUI enterToContinue;
+    [SerializeField] private TextMeshProUGUI enterToContinue;
 
     private Text npcName;
     private Image npcFace;
