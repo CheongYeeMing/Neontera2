@@ -51,7 +51,10 @@ public class DialogueManager : MonoBehaviour
     public void Update()
     {
         npcNameTag.transform.position = new Vector2(gameObject.transform.position.x, gameObject.transform.position.y - 1);
-        if (!isTalking) return;
+        if (!isTalking)
+        {
+            return;
+        }
         if (Input.GetKeyDown(KeyCode.DownArrow))
         {
             Debug.Log("Down");
