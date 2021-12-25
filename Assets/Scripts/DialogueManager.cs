@@ -226,11 +226,11 @@ public class DialogueManager : MonoBehaviour
     public void TriggerDialogue()
     {
         dialogueFocus.ToggleZoom();
-        if (isTalking == false)
+        if (!isTalking)
         {
             StartConversation();
         }
-        else if (isTalking == true)
+        else if (isTalking)
         {
             EndDialogue();
         }
