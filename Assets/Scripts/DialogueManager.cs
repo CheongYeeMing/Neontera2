@@ -262,7 +262,7 @@ public class DialogueManager : MonoBehaviour
         }
     }
 
-    public void StartConversation()
+    private void StartConversation()
     {
         animator.SetBool(ANIMATOR_IS_OPEN, true);
         isTalking = true;
