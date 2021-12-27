@@ -341,7 +341,7 @@ public class DialogueManager : MonoBehaviour
         FindObjectOfType<AudioManager>().StopEffect(AUDIO_OPEN);
         FindObjectOfType<AudioManager>().PlayEffect(AUDIO_OPEN);
         ShopManager shopManager;
-        if (currResponseTracker == FIRST_RESPONSE && gameObject.TryGetComponent<ShopManager>(out shopManager) == true 
+        if (currResponseTracker == FIRST_RESPONSE && gameObject.TryGetComponent(out shopManager) == true 
             && npc.Sequences[npc.sequenceNumber].hasShop)
         {
             shopManager.ShopWindow.GetComponentInChildren<Shop>().SetItems(npc.Sequences[npc.sequenceNumber].Items);
