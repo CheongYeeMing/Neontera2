@@ -73,6 +73,8 @@ public class DialogueManager : MonoBehaviour
                 currResponseTracker = 0;
             }
         }
+        
+        // Next
         if (Input.GetKeyDown(KeyCode.Return))
         {
             FindObjectOfType<AudioManager>().StopEffect(AUDIO_RETRO_CLICK);
@@ -98,32 +100,38 @@ public class DialogueManager : MonoBehaviour
                         }
                     }
 
+                    // Activates Boss
                     if (npc.Sequences[npc.sequenceNumber].triggerBoss)
                     {
                         boss.gameObject.SetActive(true);
                     }
 
+                    // Remove Quest Item from Inventory
                     if (npc.Sequences[npc.sequenceNumber].removeItem)
                     {
                         inventory.RemoveItem(npc.Sequences[npc.sequenceNumber].item);
                     }
 
+                    // Add Item to Inventory
                     if (npc.Sequences[npc.sequenceNumber].addItem)
                     {
                         inventory.AddItem(npc.Sequences[npc.sequenceNumber].giveItem);
                     }
 
+                    // Teleports Character
                     if (npc.Sequences[npc.sequenceNumber].teleport)
                     {
                         TriggerDialogue();
                         StopAllCoroutines();
                         StartCoroutine(FindObjectOfType<ParallaxBackgroundManager>().Teleport(npc.Sequences[npc.sequenceNumber].newBG, character, npc.Sequences[npc.sequenceNumber].characterV2));
                     }
+                    // Reset Redoable Quest
                     else if (npc.Sequences[npc.sequenceNumber].backToNormal)
                     {
                         npc.sequenceNumber = npc.Sequences[npc.sequenceNumber].sequenceNum;
                         TriggerDialogue();
                     }
+                    // Increment to next Sequence
                     else
                     {
                         npc.sequenceNumber++;
@@ -131,6 +139,8 @@ public class DialogueManager : MonoBehaviour
                     }
                 }
             }
+
+            // Shop
             else if (npc.Sequences[npc.sequenceNumber].hasShop)
             {
                 if (currResponseTracker < npc.Sequences[npc.sequenceNumber].dialogue.Length)
@@ -145,6 +155,8 @@ public class DialogueManager : MonoBehaviour
                     TriggerDialogue();
                 }
             }
+
+            // Quest
             else if (npc.Sequences[npc.sequenceNumber].hasQuest)
             {
                 if (currResponseTracker < npc.Sequences[npc.sequenceNumber].dialogue.Length)
@@ -159,10 +171,14 @@ public class DialogueManager : MonoBehaviour
                     TriggerDialogue();
                 }
             }
+
+            // Ongoing Quest
             else if (npc.Sequences[npc.sequenceNumber].waitingQuest)
             {
                 TriggerDialogue();
             }
+
+            // Just talk
             else if (npc.Sequences[npc.sequenceNumber].justDialogue)
             {
                 if (currResponseTracker < npc.Sequences[npc.sequenceNumber].dialogue.Length)
@@ -178,6 +194,8 @@ public class DialogueManager : MonoBehaviour
                     StartConversation();
                 }
             }
+
+            // Jeanne Heal
             else if (npc.Sequences[npc.sequenceNumber].hasHeal)
             {
                 if (currResponseTracker < npc.Sequences[npc.sequenceNumber].dialogue.Length - 1)
@@ -193,8 +211,11 @@ public class DialogueManager : MonoBehaviour
                     TriggerDialogue();
                 }
             }
+
+            // End of Sequence
             else if (npc.Sequences[npc.sequenceNumber].isEnd)
             {
+                // Repeatable Quest
                 if (npc.Sequences[npc.sequenceNumber].repeatableQuest)
                 {
                     if (currResponseTracker < npc.Sequences[npc.sequenceNumber].dialogue.Length)
@@ -209,7 +230,9 @@ public class DialogueManager : MonoBehaviour
                         TriggerDialogue();
                     }
                 }
-                else // Just story
+
+                // Just Story
+                else
                 {
                     if (currResponseTracker < npc.Sequences[npc.sequenceNumber].dialogue.Length - 1)
                     {
