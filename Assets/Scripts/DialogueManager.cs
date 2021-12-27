@@ -50,7 +50,7 @@ public class DialogueManager : MonoBehaviour
 
     public void Update()
     {
-        npcNameTag.transform.position = new Vector2(gameObject.transform.position.x, gameObject.transform.position.y - 1);
+        npcNameTag.transform.position = new Vector2(transform.position.x, transform.position.y - 1);
         if (!isTalking)
         {
             return;
