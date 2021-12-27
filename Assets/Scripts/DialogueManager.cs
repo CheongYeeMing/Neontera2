@@ -362,7 +362,7 @@ public class DialogueManager : MonoBehaviour
         FindObjectOfType<AudioManager>().StopEffect(AUDIO_CLICK);
         FindObjectOfType<AudioManager>().PlayEffect(AUDIO_CLICK);
         ShopManager shopManager;
-        if (gameObject.TryGetComponent<ShopManager>(out shopManager) == true)
+        if (gameObject.TryGetComponent(out shopManager) == true)
         {
             shopManager.shopSelectedItemPanel.gameObject.SetActive(false);
             shopManager.ShopWindow.gameObject.SetActive(false);
