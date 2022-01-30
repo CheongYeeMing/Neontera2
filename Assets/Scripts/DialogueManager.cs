@@ -16,26 +16,26 @@ public class DialogueManager : MonoBehaviour
     private const string AUDIO_RETRO_CLICK = "RetroClick";
     private const string AUDIO_RUN = "Run";
 
+    [SerializeField] private Animator animator;
     [SerializeField] private Button Close;
+    [SerializeField] private Button[] characterResponses;
     [SerializeField] private DialogueFocus dialogueFocus;
     [SerializeField] private GameObject boss;
     [SerializeField] private Inventory inventory;
     [SerializeField] private GameObject npcNameTag;
+    [SerializeField] private NPC npc;
+    [SerializeField] private Text npcName;
+    [SerializeField] private Image npcFace;
+    [SerializeField] private Text npcDialogueBox;
     [SerializeField] private QuestList questList;
     [SerializeField] private SelectedQuestWindow selectedQuestWindow;
     [SerializeField] private ShopSelectedItemPanel shopSelectedItemPanel;
     [SerializeField] private TextMeshProUGUI enterToContinue;
     [SerializeField] private TransitionManager transition;
 
-    private Animator animator;
-    private Button[] characterResponses;
     public GameObject character;
     public GameObject dialogueWindow;
-    private Image npcFace;
-    private NPC npc;
-    private Quest quest;
-    private Text npcDialogueBox;
-    private Text npcName;
+    private Quest quest;    
 
     public bool isTalking = false;
     public float distance;
