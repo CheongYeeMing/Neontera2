@@ -8907,10 +8907,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2f95058535699d64da64555456d86fee, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  RespawnPointIntro: {fileID: 0}
-  RespawnPointTown: {fileID: 0}
-  RespawnMonologueIntro: {fileID: 0}
-  RespawnMonologueTown: {fileID: 0}
+  respawnPointIntro: {fileID: 0}
+  respawnPointTown: {fileID: 0}
+  respawnMonologueIntro: {fileID: 0}
+  respawnMonologueTown: {fileID: 0}
 --- !u!1 &329797388
 GameObject:
   m_ObjectHideFlags: 0
