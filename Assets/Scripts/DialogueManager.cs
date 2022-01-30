@@ -16,37 +16,30 @@ public class DialogueManager : MonoBehaviour
     private const string AUDIO_RETRO_CLICK = "RetroClick";
     private const string AUDIO_RUN = "Run";
 
-    private NPC npc;
+    [SerializeField] private Button Close;
+    [SerializeField] private DialogueFocus dialogueFocus;
+    [SerializeField] private GameObject boss;
+    [SerializeField] private Inventory inventory;
     [SerializeField] private GameObject npcNameTag;
-
-    public bool isTalking = false;
-
-    public float distance;
-    public float currResponseTracker = 0;
-
-    public GameObject character;
-    public GameObject dialogueWindow;
-    [SerializeField] TextMeshProUGUI enterToContinue;
-
-    private Text npcName;
-    private Image npcFace;
-    private Text npcDialogueBox;
-    private Button[] characterResponses;
+    [SerializeField] private QuestList questList;
+    [SerializeField] private SelectedQuestWindow selectedQuestWindow;
+    [SerializeField] private ShopSelectedItemPanel shopSelectedItemPanel;
+    [SerializeField] private TextMeshProUGUI enterToContinue;
+    [SerializeField] private TransitionManager transition;
 
     private Animator animator;
-    [SerializeField] private DialogueFocus dialogueFocus;
-
-    [SerializeField] private QuestList questList;
-
+    private Button[] characterResponses;
+    public GameObject character;
+    public GameObject dialogueWindow;
+    private Image npcFace;
+    private NPC npc;
     private Quest quest;
-    [SerializeField] public SelectedQuestWindow selectedQuestWindow;
-    [SerializeField] public ShopSelectedItemPanel shopSelectedItemPanel;
+    private Text npcDialogueBox;
+    private Text npcName;
 
-    [SerializeField] public TransitionManager transition;
-    [SerializeField] public GameObject boss;
-    [SerializeField] private Inventory inventory;
-
-    [SerializeField] private Button Close;
+    public bool isTalking = false;
+    public float distance;
+    public float currResponseTracker = 0;
 
     // Start is called before the first frame update
     void Start()
@@ -57,8 +50,11 @@ public class DialogueManager : MonoBehaviour
 
     public void Update()
     {
-        npcNameTag.transform.position = new Vector2(gameObject.transform.position.x, gameObject.transform.position.y - 1);
-        if (!isTalking) return;
+        npcNameTag.transform.position = new Vector2(transform.position.x, transform.position.y - 1);
+        if (!isTalking)
+        {
+            return;
+        }
         if (Input.GetKeyDown(KeyCode.DownArrow))
         {
             Debug.Log("Down");
@@ -77,6 +73,8 @@ public class DialogueManager : MonoBehaviour
                 currResponseTracker = 0;
             }
         }
+        
+        // Next
         if (Input.GetKeyDown(KeyCode.Return))
         {
             FindObjectOfType<AudioManager>().StopEffect(AUDIO_RETRO_CLICK);
@@ -102,32 +100,38 @@ public class DialogueManager : MonoBehaviour
                         }
                     }
 
+                    // Activates Boss
                     if (npc.Sequences[npc.sequenceNumber].triggerBoss)
                     {
                         boss.gameObject.SetActive(true);
                     }
 
+                    // Remove Quest Item from Inventory
                     if (npc.Sequences[npc.sequenceNumber].removeItem)
                     {
                         inventory.RemoveItem(npc.Sequences[npc.sequenceNumber].item);
                     }
 
+                    // Add Item to Inventory
                     if (npc.Sequences[npc.sequenceNumber].addItem)
                     {
                         inventory.AddItem(npc.Sequences[npc.sequenceNumber].giveItem);
                     }
 
+                    // Teleports Character
                     if (npc.Sequences[npc.sequenceNumber].teleport)
                     {
                         TriggerDialogue();
                         StopAllCoroutines();
                         StartCoroutine(FindObjectOfType<ParallaxBackgroundManager>().Teleport(npc.Sequences[npc.sequenceNumber].newBG, character, npc.Sequences[npc.sequenceNumber].characterV2));
                     }
+                    // Reset Redoable Quest
                     else if (npc.Sequences[npc.sequenceNumber].backToNormal)
                     {
                         npc.sequenceNumber = npc.Sequences[npc.sequenceNumber].sequenceNum;
                         TriggerDialogue();
                     }
+                    // Increment to next Sequence
                     else
                     {
                         npc.sequenceNumber++;
@@ -135,6 +139,8 @@ public class DialogueManager : MonoBehaviour
                     }
                 }
             }
+
+            // Shop
             else if (npc.Sequences[npc.sequenceNumber].hasShop)
             {
                 if (currResponseTracker < npc.Sequences[npc.sequenceNumber].dialogue.Length)
@@ -149,6 +155,8 @@ public class DialogueManager : MonoBehaviour
                     TriggerDialogue();
                 }
             }
+
+            // Quest
             else if (npc.Sequences[npc.sequenceNumber].hasQuest)
             {
                 if (currResponseTracker < npc.Sequences[npc.sequenceNumber].dialogue.Length)
@@ -163,10 +171,14 @@ public class DialogueManager : MonoBehaviour
                     TriggerDialogue();
                 }
             }
+
+            // Ongoing Quest
             else if (npc.Sequences[npc.sequenceNumber].waitingQuest)
             {
                 TriggerDialogue();
             }
+
+            // Just talk
             else if (npc.Sequences[npc.sequenceNumber].justDialogue)
             {
                 if (currResponseTracker < npc.Sequences[npc.sequenceNumber].dialogue.Length)
@@ -182,6 +194,8 @@ public class DialogueManager : MonoBehaviour
                     StartConversation();
                 }
             }
+
+            // Jeanne Heal
             else if (npc.Sequences[npc.sequenceNumber].hasHeal)
             {
                 if (currResponseTracker < npc.Sequences[npc.sequenceNumber].dialogue.Length - 1)
@@ -197,8 +211,11 @@ public class DialogueManager : MonoBehaviour
                     TriggerDialogue();
                 }
             }
+
+            // End of Sequence
             else if (npc.Sequences[npc.sequenceNumber].isEnd)
             {
+                // Repeatable Quest
                 if (npc.Sequences[npc.sequenceNumber].repeatableQuest)
                 {
                     if (currResponseTracker < npc.Sequences[npc.sequenceNumber].dialogue.Length)
@@ -213,7 +230,9 @@ public class DialogueManager : MonoBehaviour
                         TriggerDialogue();
                     }
                 }
-                else // Just story
+
+                // Just Story
+                else
                 {
                     if (currResponseTracker < npc.Sequences[npc.sequenceNumber].dialogue.Length - 1)
                     {
@@ -233,17 +252,17 @@ public class DialogueManager : MonoBehaviour
     public void TriggerDialogue()
     {
         dialogueFocus.ToggleZoom();
-        if (isTalking == false)
+        if (!isTalking)
         {
             StartConversation();
         }
-        else if (isTalking == true)
+        else if (isTalking)
         {
             EndDialogue();
         }
     }
 
-    public void StartConversation()
+    private void StartConversation()
     {
         animator.SetBool(ANIMATOR_IS_OPEN, true);
         isTalking = true;
@@ -322,7 +341,7 @@ public class DialogueManager : MonoBehaviour
         FindObjectOfType<AudioManager>().StopEffect(AUDIO_OPEN);
         FindObjectOfType<AudioManager>().PlayEffect(AUDIO_OPEN);
         ShopManager shopManager;
-        if (currResponseTracker == FIRST_RESPONSE && gameObject.TryGetComponent<ShopManager>(out shopManager) == true 
+        if (currResponseTracker == FIRST_RESPONSE && gameObject.TryGetComponent(out shopManager) == true 
             && npc.Sequences[npc.sequenceNumber].hasShop)
         {
             shopManager.ShopWindow.GetComponentInChildren<Shop>().SetItems(npc.Sequences[npc.sequenceNumber].Items);
@@ -343,7 +362,7 @@ public class DialogueManager : MonoBehaviour
         FindObjectOfType<AudioManager>().StopEffect(AUDIO_CLICK);
         FindObjectOfType<AudioManager>().PlayEffect(AUDIO_CLICK);
         ShopManager shopManager;
-        if (gameObject.TryGetComponent<ShopManager>(out shopManager) == true)
+        if (gameObject.TryGetComponent(out shopManager) == true)
         {
             shopManager.shopSelectedItemPanel.gameObject.SetActive(false);
             shopManager.ShopWindow.gameObject.SetActive(false);
