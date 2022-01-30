@@ -18,7 +18,7 @@ public class DialogueManager : MonoBehaviour
 
     [SerializeField] private Button Close;
     [SerializeField] private DialogueFocus dialogueFocus;
-    [SerializeField] public GameObject boss;
+    [SerializeField] private GameObject boss;
     [SerializeField] private Inventory inventory;
     [SerializeField] private GameObject npcNameTag;
     [SerializeField] private QuestList questList;
