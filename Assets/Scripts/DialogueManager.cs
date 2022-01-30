@@ -25,7 +25,7 @@ public class DialogueManager : MonoBehaviour
     [SerializeField] public SelectedQuestWindow selectedQuestWindow;
     [SerializeField] public ShopSelectedItemPanel shopSelectedItemPanel;
     [SerializeField] private TextMeshProUGUI enterToContinue;
-    [SerializeField] public TransitionManager transition;
+    [SerializeField] private TransitionManager transition;
 
     private Animator animator;
     private Button[] characterResponses;
