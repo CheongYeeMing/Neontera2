@@ -22,7 +22,7 @@ public class DialogueManager : MonoBehaviour
     [SerializeField] private Inventory inventory;
     [SerializeField] private GameObject npcNameTag;
     [SerializeField] private QuestList questList;
-    [SerializeField] public SelectedQuestWindow selectedQuestWindow;
+    [SerializeField] private SelectedQuestWindow selectedQuestWindow;
     [SerializeField] public ShopSelectedItemPanel shopSelectedItemPanel;
     [SerializeField] private TextMeshProUGUI enterToContinue;
     [SerializeField] private TransitionManager transition;
