@@ -67,6 +67,7 @@ public class PauseMenu : MonoBehaviour
         // Save Inventory
         Data.items.Clear();
         foreach (Item item in character.GetComponent<Character>().inventory.GetItems()) Data.items.Add(item.id);
+        Debug.Log(Data.items.Count);
 
         // Save Equipped Items
         Data.equippedItems.Clear();

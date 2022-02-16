@@ -9,21 +9,19 @@ public class Inventory : MonoBehaviour
     [SerializeField] ItemSlot[] itemSlots;
     [SerializeField] QuestList questList;
 
-    [SerializeField] ItemList itemList;
+    [SerializeField] ItemList itemList; // Global Data Object 
 
     public event Action<Item> OnItemRightClickedEvent;
     public event Action<Item> OnItemLeftClickedEvent;
 
     public void Start()
     {
-        foreach (int item in Data.items) AddItem(itemList.GetItem(item));
-        //itemSlots = Data.itemSlot;
-        //items = Data.items;
-        //items = Data.items;
+        foreach (int item in Data.items)
+        {
+            AddItem(itemList.GetItem(item));
+        }
         RefreshUI();
         //Debug.Log(Data.items.Count);
-        //foreach (Item item in Data.items) AddItem(item);
-        //RefreshUI();
     }
 
     private void Awake()
@@ -37,23 +35,15 @@ public class Inventory : MonoBehaviour
 
     private void OnValidate()
     {
-        
-        
         if (itemsParent != null)
         {
             itemSlots = itemsParent.GetComponentsInChildren<ItemSlot>();
         }
-        //items = Data.items;
-        //RefreshUI();
     }
 
     private void RefreshUI()
     {
         int i = 0;
-        //for (; i < Data.items.Count && i < itemSlots.Length; i++)
-        //{
-        //    itemSlots[i].Item = Data.items[i];
-        //}
         for (; i < items.Count && i < itemSlots.Length; i++)
         {
             itemSlots[i].Item = items[i];
@@ -71,7 +61,6 @@ public class Inventory : MonoBehaviour
         {
             return false;
         }
-        //Data.items.Add(item);
         items.Add(item);
         foreach (Quest quest in questList.questList)
         {
@@ -84,18 +73,15 @@ public class Inventory : MonoBehaviour
                 }
             }
         }
-        //Data.items.Add(item);
         RefreshUI();
         return true;
     }
     public bool RemoveItemHelper(Item item)
     {
-        //foreach (Item i in Data.items)
         foreach (Item i in items)
         {
             if (i.ItemName == item.ItemName)
             {
-                //Data.items.Remove(i);
                 items.Remove(i);
                 return true;
             }
@@ -120,19 +106,16 @@ public class Inventory : MonoBehaviour
                 }
             }
         }
-        //Data.items.Remove(item);
         return false;
     }
 
     public bool IsFull()
     {
-        //return Data.items.Count >= itemSlots.Length;
         return items.Count >= itemSlots.Length;
     }
 
     public bool ContainsItem(Item item)
     {
-        //foreach (Item i in Data.items)
         foreach (Item i in items)
         {
             if (i.ItemName == item.ItemName)
@@ -146,7 +129,6 @@ public class Inventory : MonoBehaviour
     public int ItemCount(String item)
     {
         int count = 0;
-        //foreach (Item i in Data.items)
         foreach (Item i in items)
         {
             if (i.ItemName == item)
