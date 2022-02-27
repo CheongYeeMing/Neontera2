@@ -1,7 +1,4 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.UI;
 using UnityEngine.SceneManagement;
 
 public class PauseMenu : MonoBehaviour
@@ -100,6 +97,7 @@ public class PauseMenu : MonoBehaviour
         FindObjectOfType<AudioManager>().StopEffect("Click");
         FindObjectOfType<AudioManager>().PlayEffect("Click");
         Time.timeScale = 1;
+        Debug.Log(Data.items.Count);
         SceneManager.LoadScene(0); // Return to Start Menu
     }
 
