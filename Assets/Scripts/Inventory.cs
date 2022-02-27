@@ -21,7 +21,6 @@ public class Inventory : MonoBehaviour
             AddItem(itemList.GetItem(item));
         }
         RefreshUI();
-        //Debug.Log(Data.items.Count);
     }
 
     private void Awake()

@@ -1,7 +1,4 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.UI;
 using UnityEngine.SceneManagement;
 
 public class PauseMenu : MonoBehaviour
@@ -67,7 +64,6 @@ public class PauseMenu : MonoBehaviour
         // Save Inventory
         Data.items.Clear();
         foreach (Item item in character.GetComponent<Character>().inventory.GetItems()) Data.items.Add(item.id);
-        Debug.Log(Data.items.Count);
 
         // Save Equipped Items
         Data.equippedItems.Clear();
@@ -101,6 +97,7 @@ public class PauseMenu : MonoBehaviour
         FindObjectOfType<AudioManager>().StopEffect("Click");
         FindObjectOfType<AudioManager>().PlayEffect("Click");
         Time.timeScale = 1;
+        Debug.Log(Data.items.Count);
         SceneManager.LoadScene(0); // Return to Start Menu
     }
 
