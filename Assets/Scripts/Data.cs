@@ -53,6 +53,8 @@ public static class Data
 
     public static void SaveGame()
     {
+        PlayerPrefs.DeleteAll();
+
         PlayerPrefs.SetFloat("musicVolume", musicVolume);
         PlayerPrefs.SetFloat("effectsVolume", effectsVolume);
 
@@ -71,7 +73,11 @@ public static class Data
         for (int i = 0; i < equippedItems.Count; i++) PlayerPrefs.SetInt("equippedItem" + (i + 1), equippedItems[i]);
 
         PlayerPrefs.SetInt("numItems", items.Count);
-        for (int i = 0; i < items.Count; i++) PlayerPrefs.SetInt("items" + (i + 1), items[i]);
+        for (int i = 0; i < items.Count; i++)
+        {
+            Debug.Log("items" + (i + 1));
+            PlayerPrefs.SetInt("items" + (i + 1), items[i]);
+        }
 
         PlayerPrefs.SetInt("numQuests", quests.Count);
         for (int i = 0; i < quests.Count; i++) PlayerPrefs.SetInt("quests" + (i + 1), quests[i]);
@@ -120,13 +126,16 @@ public static class Data
 
         location = PlayerPrefs.GetString("location", location);
 
-        
+        equippedItems.Clear();
         for (int i = 0; i < PlayerPrefs.GetInt("numEquippedItems"); i++) equippedItems.Add(PlayerPrefs.GetInt("equippedItem" + (i + 1)));
 
+        items.Clear();
         for (int i = 0; i < PlayerPrefs.GetInt("numItems"); i++) items.Add(PlayerPrefs.GetInt("items" + (i + 1)));
-        
+
+        quests.Clear();
         for (int i = 0; i < PlayerPrefs.GetInt("numQuests"); i++) quests.Add(PlayerPrefs.GetInt("quests" + (i + 1)));
 
+        questProgress.Clear();
         for (int i = 0; i < PlayerPrefs.GetInt("questProgress"); i++) questProgress.Add(PlayerPrefs.GetInt("questProgress" + (i + 1)));
 
         //NPC
@@ -142,10 +151,13 @@ public static class Data
         Nicole = PlayerPrefs.GetInt("Nicole");
         Wilson = PlayerPrefs.GetInt("Wilson");
 
+        Item.Clear();
         for (int i = 0; i < PlayerPrefs.GetInt("gameObjectItem"); i++) Item.Add(PlayerPrefs.GetInt("gameObjectItem" + (i + 1)));
 
+        Monologue.Clear();
         for (int i = 0; i < PlayerPrefs.GetInt("gameObjectMonologue"); i++) Monologue.Add(PlayerPrefs.GetInt("gameObjectMonologue" + (i + 1)));
 
+        Portal.Clear();
         for (int i = 0; i < PlayerPrefs.GetInt("gameObjectPortal"); i++) Portal.Add(PlayerPrefs.GetInt("gameObjectPortal" + (i + 1)));
     }
 

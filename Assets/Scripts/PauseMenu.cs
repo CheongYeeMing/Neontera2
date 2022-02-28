@@ -97,7 +97,6 @@ public class PauseMenu : MonoBehaviour
         FindObjectOfType<AudioManager>().StopEffect("Click");
         FindObjectOfType<AudioManager>().PlayEffect("Click");
         Time.timeScale = 1;
-        Debug.Log(Data.items.Count);
         SceneManager.LoadScene(0); // Return to Start Menu
     }
 
