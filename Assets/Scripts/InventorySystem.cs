@@ -24,7 +24,9 @@ public class InventorySystem : MonoBehaviour
         FindObjectOfType<AudioManager>().PlayEffect("Open");
         isOpen = !isOpen;
         if (FindObjectOfType<SelectedItemPanel>())
+        {
             FindObjectOfType<SelectedItemPanel>().gameObject.SetActive(false);
+        }
         ui_Window.SetActive(isOpen);
     }
 

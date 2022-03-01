@@ -108,16 +108,4 @@ public class PlayMenu : MonoBehaviour
         StartButton.GetComponent<AudioSource>().Play();
         Application.Quit();
     }
-
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        //slider.value = Mathf.MoveTowards(slider.value, target, 3 * Time.deltaTime);
-    }
 }

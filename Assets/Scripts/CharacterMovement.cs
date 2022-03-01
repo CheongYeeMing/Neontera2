@@ -1,5 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class CharacterMovement : MonoBehaviour
@@ -201,7 +199,8 @@ public class CharacterMovement : MonoBehaviour
 
     private bool IsGrounded()
     {
-        RaycastHit2D raycastHit = Physics2D.BoxCast(boxCollider.bounds.center,
+        RaycastHit2D raycastHit = Physics2D.BoxCast(
+            boxCollider.bounds.center,
             boxCollider.bounds.size,
             BOXCAST_ANGLE,
             Vector2.down,
@@ -213,7 +212,8 @@ public class CharacterMovement : MonoBehaviour
 
     private bool IsOnWall()
     {
-        RaycastHit2D raycastHit = Physics2D.BoxCast(boxCollider.bounds.center,
+        RaycastHit2D raycastHit = Physics2D.BoxCast(
+            boxCollider.bounds.center,
             boxCollider.bounds.size,
             BOXCAST_ANGLE,
             new Vector2(transform.localScale.x, 0),
