@@ -3,21 +3,16 @@ using UnityEngine.SceneManagement;
 
 public class PauseMenu : MonoBehaviour
 {
-    public string mainMenuScene;
-    public GameObject pauseMenu;
-    public bool isPaused;
-
-    public GameObject character;
     [SerializeField] NPCManager npcManager;
     [SerializeField] ItemManager itemManager;
     [SerializeField] MonologueManager monologueManager;
     [SerializeField] PortalManager portalManager;
 
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
+    public GameObject character;
+    public GameObject pauseMenu;
+
+    public bool isPaused;
+    public string mainMenuScene;
 
     // Update is called once per frame
     void Update()
