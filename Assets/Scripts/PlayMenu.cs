@@ -20,7 +20,7 @@ public class PlayMenu : MonoBehaviour
         NoSavedData.SetActive(false);
     }
 
-    public void No()
+    public void DoNotOverwriteData()
     {
         StartButton.GetComponent<AudioSource>().Stop();
         StartButton.GetComponent<AudioSource>().Play();
