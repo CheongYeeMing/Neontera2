@@ -5,26 +5,32 @@ using UnityEngine.SceneManagement;
 
 public class PlayMenu : MonoBehaviour
 {
+    private const float MAXIMUM_PROGRESS = 100f;
+    private const string PLAYERPREF_KEY_LEVEL = "level";
+
     [SerializeField] GameObject StartMenu;
     [SerializeField] GameObject StartButton;
     [SerializeField] GameObject NoSavedData;
     [SerializeField] GameObject OverwriteData;
-
-
     [SerializeField] GameObject LoadingScreen;
     [SerializeField] Slider slider;
     [SerializeField] Text progressText;
 
-    private float target;
+    private AudioSource buttonClick;
 
-    public void Close()
+    private void Start()
+    {
+        buttonClick = StartButton.GetComponent<AudioSource>();
+    }
+
+    public void CloseSavedData()
     {
         StartButton.GetComponent<AudioSource>().Stop();
         StartButton.GetComponent<AudioSource>().Play();
         NoSavedData.SetActive(false);
     }
 
-    public void No()
+    public void DoNotOverwriteData()
     {
         StartButton.GetComponent<AudioSource>().Stop();
         StartButton.GetComponent<AudioSource>().Play();
@@ -47,7 +53,7 @@ public class PlayMenu : MonoBehaviour
             float progress = Mathf.Clamp01(operation.progress / 0.9f);
 
             slider.value = progress;
-            progressText.text = progress * 100f + "%";
+            progressText.text = progress * MAXIMUM_PROGRESS + "%";
 
             yield return null;
         }
@@ -55,16 +61,14 @@ public class PlayMenu : MonoBehaviour
 
     public void Play()
     {
-        StartButton.GetComponent<AudioSource>().Stop();
-        StartButton.GetComponent<AudioSource>().Play();
+        PlayButtonClickSound();
         StartMenu.SetActive(true);
     }
 
     public void LoadGame()
     {
-        StartButton.GetComponent<AudioSource>().Stop();
-        StartButton.GetComponent<AudioSource>().Play();
-        if (!PlayerPrefs.HasKey("level"))
+        PlayButtonClickSound();
+        if (!PlayerPrefs.HasKey(PLAYERPREF_KEY_LEVEL))
         {
             NoSavedData.SetActive(true);
             return;
@@ -75,9 +79,8 @@ public class PlayMenu : MonoBehaviour
 
     public void NewGame()
     {
-        StartButton.GetComponent<AudioSource>().Stop();
-        StartButton.GetComponent<AudioSource>().Play();
-        if (PlayerPrefs.HasKey("level"))
+        PlayButtonClickSound();
+        if (PlayerPrefs.HasKey(PLAYERPREF_KEY_LEVEL))
         {
             OverwriteData.SetActive(true);
             return;
@@ -86,10 +89,9 @@ public class PlayMenu : MonoBehaviour
         PlayGame();
     }
 
-    public void Yes()
+    public void OverwriteExistingData()
     {
-        StartButton.GetComponent<AudioSource>().Stop();
-        StartButton.GetComponent<AudioSource>().Play();
+        PlayButtonClickSound();
         OverwriteData.SetActive(false);
         Data.NewGame();
         PlayGame();
@@ -97,15 +99,19 @@ public class PlayMenu : MonoBehaviour
 
     public void ReturnToMainMenu()
     {
-        StartButton.GetComponent<AudioSource>().Stop();
-        StartButton.GetComponent<AudioSource>().Play();
+        PlayButtonClickSound();
         StartMenu.SetActive(false);
     }
 
-    public void CloseGame()
+    public void ExitGame()
     {
-        StartButton.GetComponent<AudioSource>().Stop();
-        StartButton.GetComponent<AudioSource>().Play();
+        PlayButtonClickSound();
         Application.Quit();
+    }
+
+    private void PlayButtonClickSound()
+    {
+        buttonClick.Stop();
+        buttonClick.Play();
     }
 }

@@ -14,7 +14,9 @@ public class InventorySystem : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.I))
         {
             if (isOpen || !isOpen && CanOpen())
+            {
                 ToggleInventory();
+            }
         }
     }
 
