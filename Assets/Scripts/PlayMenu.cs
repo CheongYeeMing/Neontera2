@@ -5,6 +5,8 @@ using UnityEngine.SceneManagement;
 
 public class PlayMenu : MonoBehaviour
 {
+    private const string PLAYERPREF_KEY_LEVEL = "level";
+
     [SerializeField] GameObject StartMenu;
     [SerializeField] GameObject StartButton;
     [SerializeField] GameObject NoSavedData;
