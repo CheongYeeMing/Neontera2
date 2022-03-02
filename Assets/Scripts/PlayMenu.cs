@@ -5,6 +5,7 @@ using UnityEngine.SceneManagement;
 
 public class PlayMenu : MonoBehaviour
 {
+    private const float MAXIMUM_PROGRESS = 100f;
     private const string PLAYERPREF_KEY_LEVEL = "level";
 
     [SerializeField] GameObject StartMenu;
@@ -52,7 +53,7 @@ public class PlayMenu : MonoBehaviour
             float progress = Mathf.Clamp01(operation.progress / 0.9f);
 
             slider.value = progress;
-            progressText.text = progress * 100f + "%";
+            progressText.text = progress * MAXIMUM_PROGRESS + "%";
 
             yield return null;
         }
