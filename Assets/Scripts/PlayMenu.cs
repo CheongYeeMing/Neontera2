@@ -98,7 +98,7 @@ public class PlayMenu : MonoBehaviour
         StartMenu.SetActive(false);
     }
 
-    public void CloseGame()
+    public void ExitGame()
     {
         StartButton.GetComponent<AudioSource>().Stop();
         StartButton.GetComponent<AudioSource>().Play();
