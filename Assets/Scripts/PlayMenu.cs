@@ -14,6 +14,12 @@ public class PlayMenu : MonoBehaviour
     [SerializeField] Text progressText;
 
     private AudioSource ButtonClick;
+
+    private void Start()
+    {
+        ButtonClick = StartButton.GetComponent<AudioSource>();
+    }
+
     public void CloseSavedData()
     {
         StartButton.GetComponent<AudioSource>().Stop();
