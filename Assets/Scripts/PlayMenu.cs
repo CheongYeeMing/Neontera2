@@ -82,7 +82,7 @@ public class PlayMenu : MonoBehaviour
         PlayGame();
     }
 
-    public void Yes()
+    public void OverwriteExistingData()
     {
         StartButton.GetComponent<AudioSource>().Stop();
         StartButton.GetComponent<AudioSource>().Play();
