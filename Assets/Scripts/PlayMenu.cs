@@ -13,6 +13,7 @@ public class PlayMenu : MonoBehaviour
     [SerializeField] Slider slider;
     [SerializeField] Text progressText;
 
+    private AudioSource ButtonClick;
     public void CloseSavedData()
     {
         StartButton.GetComponent<AudioSource>().Stop();
