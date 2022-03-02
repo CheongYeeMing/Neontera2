@@ -9,13 +9,9 @@ public class PlayMenu : MonoBehaviour
     [SerializeField] GameObject StartButton;
     [SerializeField] GameObject NoSavedData;
     [SerializeField] GameObject OverwriteData;
-
-
     [SerializeField] GameObject LoadingScreen;
     [SerializeField] Slider slider;
     [SerializeField] Text progressText;
-
-    private float target;
 
     public void Close()
     {
