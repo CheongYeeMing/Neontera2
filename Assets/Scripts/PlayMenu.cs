@@ -67,7 +67,7 @@ public class PlayMenu : MonoBehaviour
     public void LoadGame()
     {
         PlayButtonClickSound();
-        if (!PlayerPrefs.HasKey("level"))
+        if (!PlayerPrefs.HasKey(PLAYERPREF_KEY_LEVEL))
         {
             NoSavedData.SetActive(true);
             return;
@@ -79,7 +79,7 @@ public class PlayMenu : MonoBehaviour
     public void NewGame()
     {
         PlayButtonClickSound();
-        if (PlayerPrefs.HasKey("level"))
+        if (PlayerPrefs.HasKey(PLAYERPREF_KEY_LEVEL))
         {
             OverwriteData.SetActive(true);
             return;
