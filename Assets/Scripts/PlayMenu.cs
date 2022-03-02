@@ -58,15 +58,13 @@ public class PlayMenu : MonoBehaviour
 
     public void Play()
     {
-        StartButton.GetComponent<AudioSource>().Stop();
-        StartButton.GetComponent<AudioSource>().Play();
+        PlayButtonClickSound();
         StartMenu.SetActive(true);
     }
 
     public void LoadGame()
     {
-        StartButton.GetComponent<AudioSource>().Stop();
-        StartButton.GetComponent<AudioSource>().Play();
+        PlayButtonClickSound();
         if (!PlayerPrefs.HasKey("level"))
         {
             NoSavedData.SetActive(true);
@@ -78,8 +76,7 @@ public class PlayMenu : MonoBehaviour
 
     public void NewGame()
     {
-        StartButton.GetComponent<AudioSource>().Stop();
-        StartButton.GetComponent<AudioSource>().Play();
+        PlayButtonClickSound();
         if (PlayerPrefs.HasKey("level"))
         {
             OverwriteData.SetActive(true);
@@ -91,8 +88,7 @@ public class PlayMenu : MonoBehaviour
 
     public void OverwriteExistingData()
     {
-        StartButton.GetComponent<AudioSource>().Stop();
-        StartButton.GetComponent<AudioSource>().Play();
+        PlayButtonClickSound();
         OverwriteData.SetActive(false);
         Data.NewGame();
         PlayGame();
@@ -100,15 +96,13 @@ public class PlayMenu : MonoBehaviour
 
     public void ReturnToMainMenu()
     {
-        StartButton.GetComponent<AudioSource>().Stop();
-        StartButton.GetComponent<AudioSource>().Play();
+        PlayButtonClickSound();
         StartMenu.SetActive(false);
     }
 
     public void ExitGame()
     {
-        StartButton.GetComponent<AudioSource>().Stop();
-        StartButton.GetComponent<AudioSource>().Play();
+        PlayButtonClickSound();
         Application.Quit();
     }
 
