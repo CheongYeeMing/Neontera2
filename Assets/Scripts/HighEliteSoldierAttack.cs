@@ -15,6 +15,17 @@ public class HighEliteSoldierAttack : MobAttack
         summonCooldownTimer = 0f;
     }
 
+    // Update is called once per frame
+    public void Update()
+    {
+        if (GetComponent<MobHealth>().IsDead()) return;
+        if (!GetComponent<MobPathfindingAI>().GetIsChasingTarget()) return;
+        if (summonCooldownTimer > summonCooldown && isAttacking == false)
+        {
+            Attack();
+        }
+        summonCooldownTimer += Time.deltaTime;
+    }
 
     public void Attack()
     {
