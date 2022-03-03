@@ -4,17 +4,15 @@ using UnityEngine;
 
 public class MobAttack : MonoBehaviour
 {
-    [SerializeField] public float attackDelay;
-    [SerializeField] public float KnockbackX;
-    [SerializeField] public float KnockbackY;
-
-    // Mob Damage
-    [SerializeField] public float attack;
-
-    protected bool isAttacking;
-
     // Mob Animation States
     protected const string MOB_ATTACK = "Attack";
+
+    [SerializeField] public float attackDelay;      // Mob attacking frequency
+    [SerializeField] public float KnockbackX;
+    [SerializeField] public float KnockbackY;
+    [SerializeField] public float attack;           // Mob Damage
+
+    protected bool isAttacking;
 
     // Mob Auto Attack
     public virtual void OnCollisionEnter2D(Collision2D collision)

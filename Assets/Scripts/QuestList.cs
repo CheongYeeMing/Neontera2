@@ -49,13 +49,10 @@ public class QuestList : MonoBehaviour
         {
             questSlots[i].Quest = questList[i];
         }
-
         for (; i < questSlots.Length; i++)
         {
             questSlots[i].Quest = null;
         }
-
-        
         acceptedQuestWindow.SetActive(false);
         acceptedQuestWindow.SetActive(true);
     }
