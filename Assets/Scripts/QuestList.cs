@@ -5,11 +5,10 @@ using System;
 
 public class QuestList : MonoBehaviour
 {
+    [SerializeField] GameObject acceptedQuestWindow;
     [SerializeField] Transform questsParent;
     [SerializeField] QuestSlot[] questSlots;
     [SerializeField] SelectedQuestWindow selectedQuestWindow;
-    [SerializeField] GameObject acceptedQuestWindow;
-
 
     [SerializeField] public List<Quest> questList;
 
