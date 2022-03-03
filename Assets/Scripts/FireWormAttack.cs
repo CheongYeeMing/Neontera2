@@ -1,5 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class FireWormAttack : MobAttack
@@ -9,7 +7,7 @@ public class FireWormAttack : MobAttack
     protected float summonCooldown;
     protected float summonCooldownTimer;
 
-    public void Start()
+    public override void Start()
     {
         fireballSummonFactory = gameObject.GetComponent<FireWormSummonerFireball>();
         summonCooldown = 5f;

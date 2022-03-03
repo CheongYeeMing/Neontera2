@@ -8,7 +8,7 @@ public class HighEliteSoldierAttack : MobAttack
     protected float summonCooldown;
     protected float summonCooldownTimer;
 
-    public void Start()
+    public override void Start()
     {
         highEliteSoldierSummonLaser = gameObject.GetComponent<HighEliteSoldierSummonLaser>();
         summonCooldown = 5f;
