@@ -8,24 +8,13 @@ public class HighEliteSoldierAttack : MobAttack
     protected float summonCooldown;
     protected float summonCooldownTimer;
 
-    public void Start()
+    public override void Start()
     {
         highEliteSoldierSummonLaser = gameObject.GetComponent<HighEliteSoldierSummonLaser>();
         summonCooldown = 5f;
         summonCooldownTimer = 0f;
     }
 
-    // Update is called once per frame
-    public void Update()
-    {
-        if (GetComponent<MobHealth>().IsDead()) return;
-        if (!GetComponent<MobPathfindingAI>().GetIsChasingTarget()) return;
-        if (summonCooldownTimer > summonCooldown && isAttacking == false)
-        {
-            Attack();
-        }
-        summonCooldownTimer += Time.deltaTime;
-    }
 
     public void Attack()
     {

@@ -10,7 +10,14 @@ public class MobAttack : MonoBehaviour
     [SerializeField] public float KnockbackY;
     [SerializeField] public float attack;           // Mob Damage
 
+    private MobAnimation mobAnimation;
+
     protected bool isAttacking;
+
+    public virtual void Start()
+    {
+        mobAnimation = GetComponent<MobAnimation>();
+    }
 
     // Mob Auto Attack
     public virtual void OnCollisionEnter2D(Collision2D collision)
@@ -20,7 +27,7 @@ public class MobAttack : MonoBehaviour
             if (isAttacking == false)
             {
                 isAttacking = true;
-                gameObject.GetComponent<MobAnimation>().ChangeAnimationState(MOB_ATTACK);
+                mobAnimation.ChangeAnimationState(MOB_ATTACK);
             }
             collision.gameObject.GetComponent<CharacterHealth>().SetAttackedBy(gameObject);
             collision.gameObject.GetComponent<CharacterHealth>().TakeDamage(attack);
