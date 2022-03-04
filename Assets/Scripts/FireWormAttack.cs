@@ -2,7 +2,6 @@ using UnityEngine;
 
 public class FireWormAttack : MobAttack
 {
-
     protected FireWormSummonerFireball fireballSummonFactory;
     protected float summonCooldown;
     protected float summonCooldownTimer;
