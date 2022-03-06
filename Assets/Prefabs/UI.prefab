@@ -744,6 +744,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 03642a28ba50b27428abc2799c970469, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  acceptedQuestWindow: {fileID: 1275889550}
   questsParent: {fileID: 33191798}
   questSlots:
   - {fileID: 670352765}
@@ -753,7 +754,6 @@ MonoBehaviour:
   - {fileID: 812654842}
   - {fileID: 1454392145}
   selectedQuestWindow: {fileID: 902894906}
-  acceptedQuestWindow: {fileID: 1275889550}
   questList: []
 --- !u!1 &34741877
 GameObject:
