@@ -1,6 +1,6 @@
 using UnityEngine;
 
-public class RangedMobAttack : MonoBehaviour
+public class RangedMobAttack : MobAttack
 {
     // Do nothing yet
 }
