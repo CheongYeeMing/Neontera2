@@ -10,7 +10,7 @@ public class MobAttack : MonoBehaviour
     [SerializeField] public float KnockbackY;
     [SerializeField] public float attack;           // Mob Damage
 
-    private MobAnimation mobAnimation;
+    protected MobAnimation mobAnimation;
 
     protected bool isAttacking;
 
