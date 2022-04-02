@@ -50,7 +50,7 @@ public class PlayMenu : MonoBehaviour
 
         while (!operation.isDone)
         {
-            float progress = Mathf.Clamp01(operation.progress / 0.9f);
+            float progress = Mathf.Round(Mathf.Clamp01(operation.progress / 0.9f));
 
             slider.value = progress;
             progressText.text = progress * MAXIMUM_PROGRESS + "%";
