@@ -3,11 +3,13 @@ using UnityEngine;
 public class ParallaxBackground : MonoBehaviour
 {
     [SerializeField] protected Vector2 parallaxEffectMultiplier;
+
     [SerializeField] protected bool isInfiniteHorizontal;
     [SerializeField] protected bool isInfiniteVertical;
 
     protected Vector3 lastCameraPosition;
     protected Transform cameraTransform;
+
     protected float textureUnitSizeX;
     protected float textureUnitSizeY;
 
