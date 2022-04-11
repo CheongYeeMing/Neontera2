@@ -209,6 +209,8 @@ public class CharacterHealth : MonoBehaviour, Health
         character.UpdateCharacterStats();
     }
 
+    // Invoked by TakeDamage method above
+    // Removes player control over character 
     public void Die()
     {
         isDead = true;
