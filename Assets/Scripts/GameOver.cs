@@ -16,6 +16,7 @@ public class GameOver : MonoBehaviour
         if (character.GetComponent<CharacterMovement>().GetLocation() == LOCATION_INTRO)
         {
             characterBackground.Respawn(LOCATION_INTRO, character.gameObject, respawnPointIntro.position);
+            character.GetComponent<CharacterMovement>().CharacterFaceLeft();
             respawnMonologueIntro.gameObject.SetActive(true);
         }
         else

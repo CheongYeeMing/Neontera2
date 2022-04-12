@@ -146,6 +146,11 @@ public class CharacterMovement : MonoBehaviour
         }
     }
 
+    public void CharacterFaceLeft()
+    {
+        transform.localScale = new Vector3(-CHARACTER_X, CHARACTER_Y, CHARACTER_Z);
+    }
+
     private void UpdateHorizontalInput()
     {
         horizontalInput = Input.GetAxis(HORIZONTAL_AXIS);
