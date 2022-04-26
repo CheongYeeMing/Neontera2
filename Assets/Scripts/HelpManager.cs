@@ -32,4 +32,9 @@ public class HelpManager : MonoBehaviour
         isOpen = !isOpen;
         animator.SetBool("isOpen", isOpen);
     }
+
+    public void Close()
+    {
+        ToggleHelpMenu();
+    }
 }
