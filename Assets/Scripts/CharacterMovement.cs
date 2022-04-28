@@ -279,15 +279,14 @@ public class CharacterMovement : MonoBehaviour
     public bool IsAbleToAttack()
     {
         //bool can = true;
-        //Monologue[] monologues = FindObjectsOfType<Monologue>();
-        //foreach (Monologue mono in monologues)
-        //{
-        //    if (mono.IsExamining())
-        //    {
-        //        can = false;
-        //        break;
-        //    }
-        //}
+        Monologue[] monologues = FindObjectsOfType<Monologue>();
+        foreach (Monologue mono in monologues)
+        {
+            if (mono.IsExamining())
+            {
+                return false;
+            }
+        }
         //if (FindObjectOfType<InventorySystem>().isOpen)
         //{
         //    can = false;
