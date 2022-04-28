@@ -24,7 +24,7 @@ public class Monologue : MonoBehaviour
 
     bool isExamining;
     [SerializeField] bool triggerAgain;
-    int currTextNumber;
+    [SerializeField] int currTextNumber;
 
     [SerializeField] bool activateBoss;
     [SerializeField] GameObject boss;
@@ -43,6 +43,10 @@ public class Monologue : MonoBehaviour
         {
             FindObjectOfType<AudioManager>().StopEffect("RetroClick");
             FindObjectOfType<AudioManager>().PlayEffect("RetroClick");
+            if (currTextNumber <= 0)
+            {
+                currTextNumber = 1;
+            }
             if (requireKey)
             {
                 if (!HasKey())
@@ -77,8 +81,12 @@ public class Monologue : MonoBehaviour
                 if (currTextNumber < text.Count)
                 {
                     StopAllCoroutines();
+                    print("return");
+                    print(currTextNumber);
                     StartCoroutine(TypeSentence(text[currTextNumber]));
+
                     currTextNumber++;
+                    //currTextNumber++;
                 }
                 else
                 {
@@ -122,7 +130,11 @@ public class Monologue : MonoBehaviour
                 examineImage.sprite = characterHead;
             // Write description text on the right side of image
             StopAllCoroutines();
+            print("TM Before increment");
+            print(currTextNumber);
             StartCoroutine(TypeSentence(text[currTextNumber++]));
+            print("TM After increment");
+            print(currTextNumber);
             // Display an Examine Window
             examineWindow.SetActive(true);
             // Enable the boolean

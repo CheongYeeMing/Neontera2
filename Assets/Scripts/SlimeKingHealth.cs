@@ -68,7 +68,7 @@ public class SlimeKingHealth : BossHealth
         currentHealth -= damage;
         Debug.Log(damage);
         Invoke("HurtComplete", hurtDelay);
-        if (currentHealth <= 0)
+        if (currentHealth <= 0 && !isDead)
         {
             Die();
             return;
