@@ -249,7 +249,7 @@ public class CharacterAttack : MonoBehaviour
             return;
         }
         Gizmos.DrawWireSphere(attackPoint.position, attackRange);
-        Gizmos.DrawWireSphere(firePoint.position, attackRange);
+        Gizmos.DrawWireSphere(firePoint.position, attackRange - 0.5f);
     }
 
     private void SpecialAttack()
