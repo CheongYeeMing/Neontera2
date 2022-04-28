@@ -96,6 +96,7 @@ public class ParallaxBackgroundManager : MonoBehaviour
         character.transform.position = destination;
         DeactivateBackground();
         SetNewBackground(newBackground);
+        character.GetComponent<CharacterMovement>().CharacterFaceLeft();
     }
 
     private void GetCharacterComponents()

@@ -12,11 +12,12 @@ public class GameOver : MonoBehaviour
 
     public void Respawn(Character character)
     {
+        FindObjectOfType<AudioManager>().StopEffect("Click");
+        FindObjectOfType<AudioManager>().PlayEffect("Click");
         ParallaxBackgroundManager characterBackground = character.GetComponent<ParallaxBackgroundManager>();
         if (character.GetComponent<CharacterMovement>().GetLocation() == LOCATION_INTRO)
         {
             characterBackground.Respawn(LOCATION_INTRO, character.gameObject, respawnPointIntro.position);
-            character.GetComponent<CharacterMovement>().CharacterFaceLeft();
             respawnMonologueIntro.gameObject.SetActive(true);
         }
         else
