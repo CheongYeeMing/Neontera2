@@ -84,7 +84,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1661888695}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 2.77, y: 0.09, z: 0}
+  m_LocalPosition: {x: 3.88, y: 0.09, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 8316542597656949630}
@@ -308,13 +308,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 571e0f30cb1b7df42b8ac09cd39508b8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  characterAttack: {fileID: 480833871}
   groundLayer:
     serializedVersion: 2
     m_Bits: 256
   wallLayer:
     serializedVersion: 2
     m_Bits: 512
+  jumpDust: {fileID: 0}
+  walkDust: {fileID: 0}
   speed: 8
   jumpPower: 10
 --- !u!95 &8316542597656949619
@@ -357,6 +358,7 @@ MonoBehaviour:
   examineImage: {fileID: 0}
   examineText: {fileID: 0}
   isExamining: 0
+  DetectedHint: {fileID: 0}
 --- !u!114 &8316542597656949625
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -369,13 +371,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d0798ddd3a4243c43be7c8b8e5f25f40, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  inventory: {fileID: 0}
+  buffWindow: {fileID: 0}
   equipmentPanel: {fileID: 0}
+  inventory: {fileID: 0}
+  questList: {fileID: 0}
   statPanel: {fileID: 0}
   selectedItemPanel: {fileID: 0}
-  questList: {fileID: 0}
   selectedQuestWindow: {fileID: 0}
-  buffWindow: {fileID: 0}
   Attack:
     isDirty: 1
     _value: 0
@@ -388,6 +390,7 @@ MonoBehaviour:
     isDirty: 1
     _value: 0
     lastBaseValue: -3.4028235e+38
+  itemList: {fileID: 0}
 --- !u!114 &8316542597656949627
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -415,9 +418,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a50cbd1fdc586794ab4e622edb384370, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  healthText: {fileID: 0}
-  frontHealthBar: {fileID: 0}
+  gameOver: {fileID: 0}
   backHealthBar: {fileID: 0}
+  frontHealthBar: {fileID: 0}
+  healthText: {fileID: 0}
   hurtDelay: 0
 --- !u!114 &480833871
 MonoBehaviour:
@@ -431,15 +435,21 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1f900009a0282a543a62cc673c3e05b2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  firePoint: {fileID: 1378947220}
-  attackPoint: {fileID: 1661888696}
-  attackDelay: 0.4
   fireball: {fileID: 7623080616758158920, guid: 22fef93f237a1a5428c06fc833cd72cd, type: 3}
+  Slash_1: {fileID: 0}
+  Slash_2: {fileID: 0}
+  Slash_3: {fileID: 0}
+  attackPoint: {fileID: 1661888696}
+  firePoint: {fileID: 1378947220}
+  attackDelay: 0.4
   KnockbackX: 0
   KnockbackY: 0
   mobLayer:
     serializedVersion: 2
     m_Bits: 2048
+  baseAttack: 0
+  attackCombo: 0
+  attackComboTimer: 0
 --- !u!114 &480833872
 MonoBehaviour:
   m_ObjectHideFlags: 0
