@@ -43,7 +43,7 @@ public class Monologue : MonoBehaviour
         {
             FindObjectOfType<AudioManager>().StopEffect("RetroClick");
             FindObjectOfType<AudioManager>().PlayEffect("RetroClick");
-            if (currTextNumber <= 0)
+            if (currTextNumber <= 0) // For Slime King Monologue bug REPEATING FIRST LINE TWICE 
             {
                 currTextNumber = 1;
             }
