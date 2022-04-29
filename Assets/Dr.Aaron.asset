@@ -117,7 +117,7 @@ MonoBehaviour:
       npc: {fileID: 11400000}
       isActive: 1
       canRepeat: 0
-      status: 0
+      status: 2
       title: Lost Artifact
       description: This artifact seems to be the core of the portal system... Now
         where did I spot those red slimes...
@@ -126,7 +126,7 @@ MonoBehaviour:
         action: Found Artifact
         Target: Artifact
         requiredAmount: 1
-        currentAmount: 1
+        currentAmount: 0
       expReward: 300
       goldReward: 100
       itemReward: {fileID: 0}
