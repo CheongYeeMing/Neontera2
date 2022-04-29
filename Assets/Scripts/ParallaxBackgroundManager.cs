@@ -78,8 +78,8 @@ public class ParallaxBackgroundManager : MonoBehaviour
     {
         Transition.Activate();
         yield return new WaitForSeconds(TELEPORT_DELAY);
-        character.transform.position = destination.transform.position;
         DeactivateBackground();
+        character.transform.position = destination.transform.position;
         SetNewBackground(newBackground);
     }
 
@@ -93,8 +93,8 @@ public class ParallaxBackgroundManager : MonoBehaviour
     {
         Transition.Activate();
         yield return new WaitForSeconds(TELEPORT_DELAY);
-        character.transform.position = destination;
         DeactivateBackground();
+        character.transform.position = destination;
         SetNewBackground(newBackground);
         character.GetComponent<CharacterMovement>().CharacterFaceLeft();
     }
