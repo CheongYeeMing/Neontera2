@@ -10,7 +10,7 @@ public class TurtleKingHealth : BossHealth
     // Start is called before the first frame update
     public override void Start()
     {
-        slider = mobDetails.GetComponentInChildren<Slider>();
+        /*slider = mobDetails.GetComponentInChildren<Slider>();
         levelNameBG = levelName.GetComponentInChildren<Image>();
         levelNameText = levelName.GetComponentInChildren<TextMeshProUGUI>();
         levelNameText.SetText("Lv" + mobLevel + " " + mobName);
@@ -30,7 +30,8 @@ public class TurtleKingHealth : BossHealth
         {
             boxCollider.enabled = true;
         }
-        gameObject.GetComponent<SpriteRenderer>().enabled = true;
+        gameObject.GetComponent<SpriteRenderer>().enabled = true;*/
+        base.Start();
     }
 
     // Update is called once per frame
