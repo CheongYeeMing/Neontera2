@@ -37,7 +37,7 @@ public class BossHealth : MonoBehaviour, Health
     protected BossPathfindingAI bossPathfindingAI;
     protected BossSpawner bossSpawner;
     protected BoxCollider2D[] boxColliders;
-    protected GameObject attackedBy;
+    public GameObject attackedBy;
     protected Image levelNameBG;
     protected Rigidbody2D rigidBody;
     protected Slider slider;
