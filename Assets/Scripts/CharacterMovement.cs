@@ -62,7 +62,7 @@ public class CharacterMovement : MonoBehaviour
         {
             return;
         }
-        if (!IsAbleToMove())
+        if (!IsAbleToMove() && !characterAttack.IsAttacking())
         {
             characterAnimation.ChangeAnimationState(CHARACTER_IDLE);
             return;
