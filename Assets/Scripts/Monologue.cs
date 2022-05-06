@@ -81,8 +81,6 @@ public class Monologue : MonoBehaviour
                 if (currTextNumber < text.Count)
                 {
                     StopAllCoroutines();
-                    print("return");
-                    print(currTextNumber);
                     StartCoroutine(TypeSentence(text[currTextNumber]));
 
                     currTextNumber++;
@@ -130,11 +128,7 @@ public class Monologue : MonoBehaviour
                 examineImage.sprite = characterHead;
             // Write description text on the right side of image
             StopAllCoroutines();
-            print("TM Before increment");
-            print(currTextNumber);
             StartCoroutine(TypeSentence(text[currTextNumber++]));
-            print("TM After increment");
-            print(currTextNumber);
             // Display an Examine Window
             examineWindow.SetActive(true);
             // Enable the boolean

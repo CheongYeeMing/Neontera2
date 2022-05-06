@@ -12,19 +12,19 @@ public class Buff : MonoBehaviour
     [SerializeField] TextMeshProUGUI durationLeft;
 
     public ConsumableItem Item;
-    public float duration;
 
     public void Update()
     {
         if (Item != null)
         {
-            durationLeft.text = "Duration Left: " + Mathf.Round(duration) + "secs";
+            durationLeft.text = "Duration Left: " + Mathf.Round(Item.duration) + "secs";
             if (Item.isConsumed && Item.consumableType == ConsumableType.FadeOverTime)
             {
-                duration -= Time.deltaTime;
-                if (duration <= 0)
+                Item.duration -= Time.deltaTime;
+                print(itemName.text);
+                if (Item.duration <= 0)
                 {
-                    duration = 0;
+                    Item.duration = 0;
                     FindObjectOfType<Character>().ConsumeEffectFaded(Item);
                 }
             }
@@ -53,8 +53,7 @@ public class Buff : MonoBehaviour
         {
             itemEffect.text += "Spd +" + Item.SpeedPercentBonus + "% ";
         }
-        duration = Item.duration;
-        durationLeft.text = "Duration Left: " + duration + "secs";
+        durationLeft.text = "Duration Left: " + Item.duration + "secs";
     }
 
     public void NoItem()
@@ -63,6 +62,7 @@ public class Buff : MonoBehaviour
         itemName.enabled = false;
         itemEffect.enabled = false;
         durationLeft.enabled = false;
+        Item = null;
         GetComponent<Image>().enabled = false;
     }
 }
