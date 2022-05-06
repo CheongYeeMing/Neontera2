@@ -254,6 +254,7 @@ public class CharacterAttack : MonoBehaviour
 
     private void SpecialAttack()
     {
+        isAttacking = true;
         characterAnimation.ChangeAnimationState(CHARACTER_SPECIAL_ATTACK);
         ResetAttackCooldown();
         FindObjectOfType<AudioManager>().StopEffect("CharacterLaser");
