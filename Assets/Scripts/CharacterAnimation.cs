@@ -12,6 +12,7 @@ public class CharacterAnimation : MonoBehaviour, Animation
     private const string CHARACTER_SPECIAL_ATTACK = "AttackFireball";
     private const string CHARACTER_HURT = "Hurt";
     private const string CHARACTER_DIE = "Die";
+    private const string CHARACTER_WALLHANG = "WallHang";
 
     public Animator animator;
     private string currentState;
@@ -32,6 +33,9 @@ public class CharacterAnimation : MonoBehaviour, Animation
             }
             else
             {
+                //Debug.Log("return with anim state");
+                //Debug.Log(currentState);
+                //Debug.Log(newState);
                 return;
             }
         }
