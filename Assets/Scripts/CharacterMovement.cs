@@ -17,6 +17,7 @@ public class CharacterMovement : MonoBehaviour
     private const string CHARACTER_IDLE = "Idle";
     private const string CHARACTER_RUN = "Run";
     private const string CHARACTER_JUMP = "Jump";
+    private const string CHARACTER_WALLHANG = "WallHang";
     private const string HORIZONTAL_AXIS = "Horizontal";
 
 
@@ -93,6 +94,7 @@ public class CharacterMovement : MonoBehaviour
             {
                 body.gravityScale = GRAVITY_SCALE_ZERO;
                 body.velocity = new Vector2(transform.localScale.x, CHARACTER_Y);
+                characterAnimation.ChangeAnimationState(CHARACTER_WALLHANG);
             } else
             {
                 body.gravityScale = GRAVITY_SCALE_NORMAL;
@@ -199,6 +201,7 @@ public class CharacterMovement : MonoBehaviour
                 body.velocity = new Vector2(-Mathf.Sign(transform.localScale.x) * 3, 6);
             }
             wallJumpTimer = 0;
+            characterAnimation.ChangeAnimationState(CHARACTER_JUMP);
         }
     }
 
@@ -295,7 +298,7 @@ public class CharacterMovement : MonoBehaviour
         //{
         //    can = false;
         //}
-        return !IsOnWall() && !characterHealth.IsDead();
+        return !IsOnWall() && !characterHealth.IsDead() && !characterAttack.IsAttacking();
     }
 
     public bool IsAbleToMove()
