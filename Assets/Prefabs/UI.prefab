@@ -251,7 +251,6 @@ MonoBehaviour:
   itemEffect: {fileID: 1921507462}
   durationLeft: {fileID: 909535578}
   Item: {fileID: 0}
-  duration: 0
 --- !u!1 &5210104
 GameObject:
   m_ObjectHideFlags: 0
@@ -2251,7 +2250,6 @@ MonoBehaviour:
   itemEffect: {fileID: 1745002126}
   durationLeft: {fileID: 1385589496}
   Item: {fileID: 0}
-  duration: 0
 --- !u!1 &90600385
 GameObject:
   m_ObjectHideFlags: 0
@@ -14214,7 +14212,6 @@ MonoBehaviour:
   itemEffect: {fileID: 1819965902}
   durationLeft: {fileID: 1073206753}
   Item: {fileID: 0}
-  duration: 0
 --- !u!1 &524311883
 GameObject:
   m_ObjectHideFlags: 0
@@ -35057,7 +35054,6 @@ MonoBehaviour:
   itemEffect: {fileID: 826794313}
   durationLeft: {fileID: 282699761}
   Item: {fileID: 0}
-  duration: 0
 --- !u!1 &1229143401
 GameObject:
   m_ObjectHideFlags: 0
@@ -59612,7 +59608,6 @@ MonoBehaviour:
   itemEffect: {fileID: 1008597419}
   durationLeft: {fileID: 1526729712}
   Item: {fileID: 0}
-  duration: 0
 --- !u!1 &2120603414
 GameObject:
   m_ObjectHideFlags: 0
@@ -72361,6 +72356,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: aad1fc02140add144adbc1e25729c18d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  character: {fileID: 0}
   inventory: {fileID: 4322237880540490116}
   isOpen: 0
   ui_Window: {fileID: 4322237880338741594}
@@ -73188,7 +73184,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 0.49056602, g: 0.49056602, b: 0.49056602, a: 1}
+  m_Color: {r: 0, g: 0, b: 0, a: 0.6745098}
   m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
