@@ -1,31 +1,26 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.UI;
 using UnityEngine.SceneManagement;
 
 public class PauseMenu : MonoBehaviour
 {
-    public string mainMenuScene;
-    public GameObject pauseMenu;
-    public bool isPaused;
-
-    public GameObject character;
     [SerializeField] NPCManager npcManager;
     [SerializeField] ItemManager itemManager;
     [SerializeField] MonologueManager monologueManager;
     [SerializeField] PortalManager portalManager;
 
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
+    public GameObject character;
+    public GameObject pauseMenu;
+
+    public bool isPaused;
+    public string mainMenuScene;
 
     // Update is called once per frame
     void Update()
     {
-        if (Input.GetKeyDown(KeyCode.Escape)) TogglePause();
+        if (Input.GetKeyDown(KeyCode.Escape))
+        {
+            TogglePause();
+        }
     }
 
     public void TogglePause()
@@ -62,7 +57,7 @@ public class PauseMenu : MonoBehaviour
         // Character Position
         Data.Xcoordinate = character.transform.position.x;
         Data.Ycoordinate = character.transform.position.y;
-        Data.location = character.GetComponent<CharacterMovement>().location;
+        Data.location = character.GetComponent<CharacterMovement>().GetLocation();
 
         // Save Inventory
         Data.items.Clear();

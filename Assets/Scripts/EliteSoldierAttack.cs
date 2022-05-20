@@ -1,5 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class EliteSoldierAttack : MobAttack
@@ -8,7 +6,7 @@ public class EliteSoldierAttack : MobAttack
     protected float summonCooldown;
     protected float summonCooldownTimer;
 
-    public void Start()
+    public override void Start()
     {
         eliteSoldierSummonLaser = gameObject.GetComponent<EliteSoldierSummonLaser>();
         summonCooldown = 5f;

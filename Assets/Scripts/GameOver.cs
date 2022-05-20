@@ -1,35 +1,30 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.UI;
 
 public class GameOver : MonoBehaviour
 {
-    [SerializeField] Transform RespawnPointIntro;
-    [SerializeField] Transform RespawnPointTown;
-    [SerializeField] Monologue RespawnMonologueIntro;
-    [SerializeField] Monologue RespawnMonologueTown;
+    private const string LOCATION_INTRO = "Intro";
+    private const string LOCATION_TOWN = "Town";
+
+    [SerializeField] private Transform respawnPointIntro;
+    [SerializeField] private Transform respawnPointTown;
+    [SerializeField] private Monologue respawnMonologueIntro;
+    [SerializeField] private Monologue respawnMonologueTown;
+
     public void Respawn(Character character)
     {
-        
-        if (character.GetComponent<CharacterMovement>().location == "Intro")
+        FindObjectOfType<AudioManager>().StopEffect("Click");
+        FindObjectOfType<AudioManager>().PlayEffect("Click");
+        ParallaxBackgroundManager characterBackground = character.GetComponent<ParallaxBackgroundManager>();
+        if (character.GetComponent<CharacterMovement>().GetLocation() == LOCATION_INTRO)
         {
-            character.GetComponent<ParallaxBackgroundManager>().Respawn("Intro", character.gameObject, RespawnPointIntro.position);
-            RespawnMonologueIntro.gameObject.SetActive(true);
-            //character.transform.position = RespawnPointIntro.position;
+            characterBackground.Respawn(LOCATION_INTRO, character.gameObject, respawnPointIntro.position);
+            respawnMonologueIntro.gameObject.SetActive(true);
         }
         else
         {
-
-            //character.GetComponent<ParallaxBackgroundManager>().OffBackground();
-            //character.GetComponent<ParallaxBackgroundManager>().SetBackground("Town");
-            //character.GetComponent<ParallaxBackgroundManager>().Teleport("Town", character.gameObject, RespawnPointTown.position);'
-            character.GetComponent<ParallaxBackgroundManager>().Respawn("Town", character.gameObject, RespawnPointTown.position);
-            RespawnMonologueTown.gameObject.SetActive(true);
-            //character.transform.position = RespawnPointTown.position;
+            characterBackground.Respawn(LOCATION_TOWN, character.gameObject, respawnPointTown.position);
+            respawnMonologueTown.gameObject.SetActive(true);
         }
-        //character.GetComponent<CharacterHealth>().Revive();
-        //character.GetComponent<CharacterWallet>().MinusGold(character.GetComponent<CharacterWallet>().GetGoldAmount() / 10);
         gameObject.SetActive(false);
     }
 }

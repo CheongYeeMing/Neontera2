@@ -249,11 +249,12 @@ public class CharacterAttack : MonoBehaviour
             return;
         }
         Gizmos.DrawWireSphere(attackPoint.position, attackRange);
-        Gizmos.DrawWireSphere(firePoint.position, attackRange);
+        Gizmos.DrawWireSphere(firePoint.position, attackRange - 0.5f);
     }
 
     private void SpecialAttack()
     {
+        isAttacking = true;
         characterAnimation.ChangeAnimationState(CHARACTER_SPECIAL_ATTACK);
         ResetAttackCooldown();
         FindObjectOfType<AudioManager>().StopEffect("CharacterLaser");

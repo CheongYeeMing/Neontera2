@@ -1,4 +1,3 @@
-using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -11,7 +10,9 @@ public class MonologueManager : MonoBehaviour
         for (int i = 0; i < Data.Monologue.Count; i++)
         {
             if (Data.Monologue[i] == 0)
+            {
                 Monologue[i].gameObject.SetActive(false);
+            }
         }
     }
 

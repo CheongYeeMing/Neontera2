@@ -545,8 +545,8 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls:
       - m_Target: {fileID: 82818711}
-        m_TargetAssemblyTypeName: PlayMenu, Assembly-CSharp
-        m_MethodName: No
+        m_TargetAssemblyTypeName: PlayMenu, Scripts
+        m_MethodName: DoNotOverwriteData
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -2251,8 +2251,8 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls:
       - m_Target: {fileID: 82818711}
-        m_TargetAssemblyTypeName: PlayMenu, Assembly-CSharp
-        m_MethodName: CloseGame
+        m_TargetAssemblyTypeName: PlayMenu, Scripts
+        m_MethodName: ExitGame
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -3199,8 +3199,8 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls:
       - m_Target: {fileID: 82818711}
-        m_TargetAssemblyTypeName: PlayMenu, Assembly-CSharp
-        m_MethodName: Close
+        m_TargetAssemblyTypeName: PlayMenu, Scripts
+        m_MethodName: CloseSavedData
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -3814,8 +3814,8 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls:
       - m_Target: {fileID: 82818711}
-        m_TargetAssemblyTypeName: PlayMenu, Assembly-CSharp
-        m_MethodName: Yes
+        m_TargetAssemblyTypeName: PlayMenu, Scripts
+        m_MethodName: OverwriteExistingData
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}

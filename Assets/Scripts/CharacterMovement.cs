@@ -1,5 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class CharacterMovement : MonoBehaviour
@@ -19,6 +17,7 @@ public class CharacterMovement : MonoBehaviour
     private const string CHARACTER_IDLE = "Idle";
     private const string CHARACTER_RUN = "Run";
     private const string CHARACTER_JUMP = "Jump";
+    private const string CHARACTER_WALLHANG = "WallHang";
     private const string HORIZONTAL_AXIS = "Horizontal";
 
 
@@ -41,7 +40,7 @@ public class CharacterMovement : MonoBehaviour
     private float horizontalInput;
 
     // Location
-    public string location;
+    private string location;
 
     private void Awake()
     {
@@ -63,7 +62,7 @@ public class CharacterMovement : MonoBehaviour
         {
             return;
         }
-        if (!IsAbleToMove())
+        if (!IsAbleToMove() && !characterAttack.IsAttacking())
         {
             characterAnimation.ChangeAnimationState(CHARACTER_IDLE);
             return;
@@ -95,6 +94,7 @@ public class CharacterMovement : MonoBehaviour
             {
                 body.gravityScale = GRAVITY_SCALE_ZERO;
                 body.velocity = new Vector2(transform.localScale.x, CHARACTER_Y);
+                characterAnimation.ChangeAnimationState(CHARACTER_WALLHANG);
             } else
             {
                 body.gravityScale = GRAVITY_SCALE_NORMAL;
@@ -148,6 +148,11 @@ public class CharacterMovement : MonoBehaviour
         }
     }
 
+    public void CharacterFaceLeft()
+    {
+        transform.localScale = new Vector3(-CHARACTER_X, CHARACTER_Y, CHARACTER_Z);
+    }
+
     private void UpdateHorizontalInput()
     {
         horizontalInput = Input.GetAxis(HORIZONTAL_AXIS);
@@ -196,12 +201,14 @@ public class CharacterMovement : MonoBehaviour
                 body.velocity = new Vector2(-Mathf.Sign(transform.localScale.x) * 3, 6);
             }
             wallJumpTimer = 0;
+            characterAnimation.ChangeAnimationState(CHARACTER_JUMP);
         }
     }
 
     private bool IsGrounded()
     {
-        RaycastHit2D raycastHit = Physics2D.BoxCast(boxCollider.bounds.center,
+        RaycastHit2D raycastHit = Physics2D.BoxCast(
+            boxCollider.bounds.center,
             boxCollider.bounds.size,
             BOXCAST_ANGLE,
             Vector2.down,
@@ -213,7 +220,8 @@ public class CharacterMovement : MonoBehaviour
 
     private bool IsOnWall()
     {
-        RaycastHit2D raycastHit = Physics2D.BoxCast(boxCollider.bounds.center,
+        RaycastHit2D raycastHit = Physics2D.BoxCast(
+            boxCollider.bounds.center,
             boxCollider.bounds.size,
             BOXCAST_ANGLE,
             new Vector2(transform.localScale.x, 0),
@@ -274,15 +282,14 @@ public class CharacterMovement : MonoBehaviour
     public bool IsAbleToAttack()
     {
         //bool can = true;
-        //Monologue[] monologues = FindObjectsOfType<Monologue>();
-        //foreach (Monologue mono in monologues)
-        //{
-        //    if (mono.IsExamining())
-        //    {
-        //        can = false;
-        //        break;
-        //    }
-        //}
+        Monologue[] monologues = FindObjectsOfType<Monologue>();
+        foreach (Monologue mono in monologues)
+        {
+            if (mono.IsExamining())
+            {
+                return false;
+            }
+        }
         //if (FindObjectOfType<InventorySystem>().isOpen)
         //{
         //    can = false;
@@ -291,7 +298,7 @@ public class CharacterMovement : MonoBehaviour
         //{
         //    can = false;
         //}
-        return !IsOnWall() && !characterHealth.IsDead();
+        return !IsOnWall() && !characterHealth.IsDead() && !characterAttack.IsAttacking();
     }
 
     public bool IsAbleToMove()
@@ -319,5 +326,15 @@ public class CharacterMovement : MonoBehaviour
     public Rigidbody2D GetRigidBody()
     {
         return body;
+    }
+
+    public string GetLocation()
+    {
+        return location;
+    }
+
+    public void SetLocation(string newLocation)
+    {
+        location = newLocation;
     }
 }

@@ -29,6 +29,7 @@ public class CharacterHealth : MonoBehaviour, Health
     private Character character;
     private CharacterAnimation characterAnimation;
     private CharacterAttack characterAttack;
+    private CharacterWallet characterWallet;
     private GameObject attackedBy;
     private Rigidbody2D rigidBody;
 
@@ -47,6 +48,7 @@ public class CharacterHealth : MonoBehaviour, Health
     // Start is called before the first frame update
     private void Start()
     {
+        if (Input.GetKeyDown(KeyCode.V)) health = 1;
         baseMaxHealth = Data.baseHealth;
         if (Data.currentHealth == HEALTH_ZERO) 
         { 
@@ -102,6 +104,7 @@ public class CharacterHealth : MonoBehaviour, Health
         character = GetComponent<Character>();
         characterAnimation = GetComponent<CharacterAnimation>();
         characterAttack = GetComponent<CharacterAttack>();
+        characterWallet = GetComponent<CharacterWallet>();
         rigidBody = GetComponent<Rigidbody2D>();
     }
 
@@ -206,6 +209,8 @@ public class CharacterHealth : MonoBehaviour, Health
         character.UpdateCharacterStats();
     }
 
+    // Invoked by TakeDamage method above
+    // Removes player control over character 
     public void Die()
     {
         isDead = true;
@@ -235,6 +240,7 @@ public class CharacterHealth : MonoBehaviour, Health
         health = maxHealth;
         boxCollider.enabled = true;
         rigidBody.gravityScale = GRAVITY_SCALE_NORMAL;
+        characterWallet.Revive();
     }
 
     public bool IsHurting()

@@ -1,5 +1,3 @@
-using System;
-using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -31,6 +29,7 @@ public class Interactable : MonoBehaviour
             if (detectedObject.CompareTag("Monologue") && !detectedObject.GetComponent<Monologue>().IsExamining())
             {
                 detectedObject.GetComponent<Monologue>().ToggleMonologue();
+                print("togglemono from interactable");
             }
             if (GetComponent<CharacterMovement>().IsAbleToMove()) DetectedHint.gameObject.SetActive(true);
             if (InteractInput())

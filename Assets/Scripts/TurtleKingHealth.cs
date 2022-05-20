@@ -1,5 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
@@ -12,7 +10,7 @@ public class TurtleKingHealth : BossHealth
     // Start is called before the first frame update
     public override void Start()
     {
-        slider = mobDetails.GetComponentInChildren<Slider>();
+        /*slider = mobDetails.GetComponentInChildren<Slider>();
         levelNameBG = levelName.GetComponentInChildren<Image>();
         levelNameText = levelName.GetComponentInChildren<TextMeshProUGUI>();
         levelNameText.SetText("Lv" + mobLevel + " " + mobName);
@@ -32,7 +30,8 @@ public class TurtleKingHealth : BossHealth
         {
             boxCollider.enabled = true;
         }
-        gameObject.GetComponent<SpriteRenderer>().enabled = true;
+        gameObject.GetComponent<SpriteRenderer>().enabled = true;*/
+        base.Start();
     }
 
     // Update is called once per frame
@@ -89,7 +88,6 @@ public class TurtleKingHealth : BossHealth
         isDead = true;
         gameObject.GetComponent<TurtleKingMovement>().GetRigidbody().velocity = Vector2.zero;
         RewardsPopUp.Create(gameObject);
-        Debug.Log("Mob is dead!!!");
         gameObject.GetComponent<TurtleKingAnimation>().ChangeAnimationState(BOSS_DIE);
         gameObject.GetComponent<Rigidbody2D>().gravityScale = 0;
         RedArtifactMonologue.gameObject.transform.position = FindObjectOfType<Character>().gameObject.transform.position;

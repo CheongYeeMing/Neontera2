@@ -1,10 +1,8 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.UI;
 
 public class InventorySystem : MonoBehaviour
 {
+    [SerializeField] Character character;
     [SerializeField] Inventory inventory;
     [Header("General Fields")]
     public bool isOpen;
@@ -17,17 +15,24 @@ public class InventorySystem : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.I))
         {
             if (isOpen || !isOpen && CanOpen())
+            {
                 ToggleInventory();
+            }
         }
     }
 
     public void ToggleInventory()
     {
+        character.GetComponent<CharacterAnimation>().ChangeAnimationState("Idle");
+        character.GetComponent<Rigidbody2D>().velocity = Vector2.zero;
+        FindObjectOfType<AudioManager>().StopEffect("Run");
         FindObjectOfType<AudioManager>().StopEffect("Open");
         FindObjectOfType<AudioManager>().PlayEffect("Open");
         isOpen = !isOpen;
         if (FindObjectOfType<SelectedItemPanel>())
+        {
             FindObjectOfType<SelectedItemPanel>().gameObject.SetActive(false);
+        }
         ui_Window.SetActive(isOpen);
     }
 

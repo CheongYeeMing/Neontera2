@@ -1,5 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
@@ -15,27 +13,7 @@ public class SupremeLeaderHealth : BossHealth
     // Start is called before the first frame update
     public override void Start()
     {
-        slider = mobDetails.GetComponentInChildren<Slider>();
-        levelNameBG = levelName.GetComponentInChildren<Image>();
-        levelNameText = levelName.GetComponentInChildren<TextMeshProUGUI>();
-        levelNameText.SetText("Lv" + mobLevel + " " + mobName);
-        currentHealth = maxHealth;
-        low = Color.red;
-        high = Color.green;
-        low.a = 255;
-        high.a = 255;
-        SetBossDetails(currentHealth, maxHealth);
-        isHurting = false;
-        isDead = false;
-        isInvulnerable = false;
-        regenTimer = 0;
-        outOfCombatTimer = 0;
-        gameObject.GetComponent<Rigidbody2D>().gravityScale = 3;
-        foreach (BoxCollider2D boxCollider in gameObject.GetComponents<BoxCollider2D>())
-        {
-            boxCollider.enabled = true;
-        }
-        gameObject.GetComponent<SpriteRenderer>().enabled = true;
+        base.Start();
     }
 
     // Update is called once per frame

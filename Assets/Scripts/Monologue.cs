@@ -24,7 +24,7 @@ public class Monologue : MonoBehaviour
 
     bool isExamining;
     [SerializeField] bool triggerAgain;
-    int currTextNumber;
+    [SerializeField] int currTextNumber;
 
     [SerializeField] bool activateBoss;
     [SerializeField] GameObject boss;
@@ -43,6 +43,10 @@ public class Monologue : MonoBehaviour
         {
             FindObjectOfType<AudioManager>().StopEffect("RetroClick");
             FindObjectOfType<AudioManager>().PlayEffect("RetroClick");
+            if (currTextNumber <= 0) // For Slime King Monologue bug REPEATING FIRST LINE TWICE 
+            {
+                currTextNumber = 1;
+            }
             if (requireKey)
             {
                 if (!HasKey())
@@ -78,7 +82,9 @@ public class Monologue : MonoBehaviour
                 {
                     StopAllCoroutines();
                     StartCoroutine(TypeSentence(text[currTextNumber]));
+
                     currTextNumber++;
+                    //currTextNumber++;
                 }
                 else
                 {
