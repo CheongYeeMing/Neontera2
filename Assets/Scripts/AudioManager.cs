@@ -16,7 +16,6 @@ public class AudioManager : MonoBehaviour
     public Sound[] musicList;
     public Sound[] effectsList;
 
-
     // Start is called before the first frame update
     void Awake()
     {
