@@ -59,7 +59,6 @@ public class DialogueManager : MonoBehaviour
         }
         if (Input.GetKeyDown(KeyCode.DownArrow))
         {
-            Debug.Log("Down");
             currResponseTracker++;
             if (currResponseTracker >= npc.Sequences[npc.sequenceNumber].characterDialogue.Length - 1)
             {
@@ -68,7 +67,6 @@ public class DialogueManager : MonoBehaviour
         }
         else if (Input.GetKeyDown(KeyCode.UpArrow))
         {
-            Debug.Log("Up");
             currResponseTracker--;
             if (currResponseTracker < 0)
             {
