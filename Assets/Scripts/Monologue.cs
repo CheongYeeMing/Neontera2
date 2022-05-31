@@ -29,6 +29,9 @@ public class Monologue : MonoBehaviour
     [SerializeField] bool activateBoss;
     [SerializeField] GameObject boss;
 
+    private bool isTyping;
+    private string previousSentence;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -41,6 +44,11 @@ public class Monologue : MonoBehaviour
         if (!IsExamining()) return;
         if (Input.GetKeyDown(KeyCode.Return))
         {
+            if (isTyping)
+            {
+                CompleteSentence();
+                return;
+            }
             FindObjectOfType<AudioManager>().StopEffect("RetroClick");
             FindObjectOfType<AudioManager>().PlayEffect("RetroClick");
             if (currTextNumber <= 0) // For Slime King Monologue bug REPEATING FIRST LINE TWICE 
@@ -148,12 +156,23 @@ public class Monologue : MonoBehaviour
     {
         enterToContinue.gameObject.SetActive(false);
         examineText.text = "";
+        isTyping = true;
+        previousSentence = sentence;
         foreach (char letter in sentence.ToCharArray())
         {
             examineText.text += letter;
             yield return new WaitForSeconds(0.008f);
         }
         enterToContinue.gameObject.SetActive(true);
+        isTyping = false;
+    }
+
+    private void CompleteSentence()
+    {
+        StopAllCoroutines();
+        examineText.text = previousSentence;
+        enterToContinue.gameObject.SetActive(true);
+        isTyping = false;
     }
 
     public bool IsExamining()
