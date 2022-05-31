@@ -85,7 +85,6 @@ public class DialogueManager : MonoBehaviour
             {
                 CompleteSentence();
                 return;
-
             }
             if (npc.Sequences[npc.sequenceNumber].isStory)
             {
