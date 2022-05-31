@@ -14,6 +14,7 @@ public class CharacterMovement : MonoBehaviour
     private const float WALL_JUMP_COOLDOWN = 0.2f;
     private const string AUDIO_JUMP = "Jump";
     private const string AUDIO_RUN = "Run";
+    private const string CHARACTER_FALLING = "Falling";
     private const string CHARACTER_IDLE = "Idle";
     private const string CHARACTER_RUN = "Run";
     private const string CHARACTER_JUMP = "Jump";
@@ -67,6 +68,11 @@ public class CharacterMovement : MonoBehaviour
             characterAnimation.ChangeAnimationState(CHARACTER_IDLE);
             return;
         }
+        if (IsFalling() && !IsOnWall())
+        {
+            print(body.velocity.y);
+            characterAnimation.ChangeAnimationState(CHARACTER_FALLING);
+        }
         UpdateHorizontalInput();
         UpdateMovementAudio();
         UpdateFacingDirection();
@@ -93,7 +99,7 @@ public class CharacterMovement : MonoBehaviour
             if (IsOnWall() && !IsGrounded())
             {
                 body.gravityScale = GRAVITY_SCALE_ZERO;
-                body.velocity = new Vector2(transform.localScale.x, CHARACTER_Y);
+                body.velocity = new Vector2(0,0);
                 characterAnimation.ChangeAnimationState(CHARACTER_WALLHANG);
             } else
             {
@@ -107,6 +113,10 @@ public class CharacterMovement : MonoBehaviour
         }
     }
 
+    private bool IsFalling()
+    {
+        return body.velocity.y < -0.1f;
+    }
     private void GetCharacterMovementComponents()
     {
         body = GetComponent<Rigidbody2D>();
@@ -198,7 +208,7 @@ public class CharacterMovement : MonoBehaviour
             }
             else
             {
-                body.velocity = new Vector2(-Mathf.Sign(transform.localScale.x) * 3, 6);
+                body.velocity = new Vector2(-Mathf.Sign(transform.localScale.x) * 0.01f, 6);
             }
             wallJumpTimer = 0;
             characterAnimation.ChangeAnimationState(CHARACTER_JUMP);
