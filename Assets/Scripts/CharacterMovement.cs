@@ -70,7 +70,6 @@ public class CharacterMovement : MonoBehaviour
         }
         if (IsFalling() && !IsOnWall())
         {
-            print(body.velocity.y);
             characterAnimation.ChangeAnimationState(CHARACTER_FALLING);
         }
         UpdateHorizontalInput();
