@@ -75,6 +75,7 @@ public class CharacterLevel : MonoBehaviour
         if (currentExp > requiredExp)
         {
             LevelUp();
+            characterHealth.FullRestore();
         }
         charInfoWindow.UpdateCharInfoWindow(this);
     }
