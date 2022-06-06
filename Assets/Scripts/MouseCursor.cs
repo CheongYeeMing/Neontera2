@@ -4,11 +4,12 @@ using UnityEngine;
 
 public class MouseCursor : MonoBehaviour
 {   public GameObject trialEffect;
+    public Texture2D cursorArrow;
     public float timeBtwSpawn = 0.1f;
     // Start is called before the first frame update
     void Start()
     {
-        Cursor.visible = false;
+        Cursor.SetCursor(cursorArrow, Vector2.zero, CursorMode.ForceSoftware);
     }
 
     // Update is called once per frame
