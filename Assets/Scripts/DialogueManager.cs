@@ -38,6 +38,8 @@ public class DialogueManager : MonoBehaviour
     private Quest quest;    
 
     public bool isTalking = false;
+    private bool isTyping;
+    private string previousSentence;
     public float distance;
     public float currResponseTracker = 0;
 
@@ -57,7 +59,6 @@ public class DialogueManager : MonoBehaviour
         }
         if (Input.GetKeyDown(KeyCode.DownArrow))
         {
-            Debug.Log("Down");
             currResponseTracker++;
             if (currResponseTracker >= npc.Sequences[npc.sequenceNumber].characterDialogue.Length - 1)
             {
@@ -66,7 +67,6 @@ public class DialogueManager : MonoBehaviour
         }
         else if (Input.GetKeyDown(KeyCode.UpArrow))
         {
-            Debug.Log("Up");
             currResponseTracker--;
             if (currResponseTracker < 0)
             {
@@ -79,6 +79,11 @@ public class DialogueManager : MonoBehaviour
         {
             FindObjectOfType<AudioManager>().StopEffect(AUDIO_RETRO_CLICK);
             FindObjectOfType<AudioManager>().PlayEffect(AUDIO_RETRO_CLICK);
+            if (isTyping)
+            {
+                CompleteSentence();
+                return;
+            }
             if (npc.Sequences[npc.sequenceNumber].isStory)
             {
                 if (currResponseTracker < npc.Sequences[npc.sequenceNumber].dialogue.Length - 1)
@@ -324,12 +329,23 @@ public class DialogueManager : MonoBehaviour
     {
         enterToContinue.gameObject.SetActive(false);
         npcDialogueBox.text = "";
+        previousSentence = sentence;
+        isTyping = true;
         foreach (char letter in sentence.ToCharArray())
         {
             npcDialogueBox.text += letter;
             yield return new WaitForSeconds(TEXT_TYPING_SPEED);//null;
         }
         enterToContinue.gameObject.SetActive(true);
+        isTyping = false;
+    }
+
+    private void CompleteSentence()
+    {
+        StopAllCoroutines();
+        npcDialogueBox.text = previousSentence;
+        enterToContinue.gameObject.SetActive(true);
+        isTyping = false;
     }
 
     public bool OpenShop()
