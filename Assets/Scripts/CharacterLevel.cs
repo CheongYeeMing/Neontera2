@@ -68,10 +68,10 @@ public class CharacterLevel : MonoBehaviour
     private void Update()
     {
         UpdateExpUI();
-        if (Input.GetKeyDown(KeyCode.Equals))
-        {
-            GainExperience(requiredExp);
-        }
+        //if (Input.GetKeyDown(KeyCode.Equals))
+        //{
+        //    GainExperience(requiredExp);
+        //}
         if (currentExp > requiredExp)
         {
             LevelUp();

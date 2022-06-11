@@ -48,7 +48,7 @@ public class CharacterHealth : MonoBehaviour, Health
     // Start is called before the first frame update
     private void Start()
     {
-        if (Input.GetKeyDown(KeyCode.V)) health = 1;
+        //if (Input.GetKeyDown(KeyCode.V)) health = 1;
         baseMaxHealth = Data.baseHealth;
         if (Data.currentHealth == HEALTH_ZERO) 
         { 
