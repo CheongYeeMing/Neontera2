@@ -8,13 +8,20 @@ public class PlayMenu : MonoBehaviour
     private const float MAXIMUM_PROGRESS = 100f;
     private const string PLAYERPREF_KEY_LEVEL = "level";
 
-    [SerializeField] GameObject StartMenu;
     [SerializeField] GameObject StartButton;
+    [SerializeField] GameObject SettingsButton;
+    [SerializeField] GameObject QuitButton;
+    [SerializeField] GameObject LoadGameButton;
+    [SerializeField] GameObject NewGameButton;
+    [SerializeField] GameObject BackButton;
     [SerializeField] GameObject NoSavedData;
     [SerializeField] GameObject OverwriteData;
     [SerializeField] GameObject LoadingScreen;
     [SerializeField] Slider slider;
     [SerializeField] Text progressText;
+
+    [SerializeField] GameObject MainMenuButtons;
+    [SerializeField] GameObject PlayMenuButtons;
 
     private AudioSource buttonClick;
 
@@ -62,7 +69,11 @@ public class PlayMenu : MonoBehaviour
     public void Play()
     {
         PlayButtonClickSound();
-        StartMenu.SetActive(true);
+        PlayMenuButtons.SetActive(true);
+        MainMenuButtons.SetActive(false);
+        LoadGameButton.GetComponent<ButtonHover>().HoverOff();
+        NewGameButton.GetComponent<ButtonHover>().HoverOff();
+        BackButton.GetComponent<ButtonHover>().HoverOff();
     }
 
     public void LoadGame()
@@ -100,7 +111,11 @@ public class PlayMenu : MonoBehaviour
     public void ReturnToMainMenu()
     {
         PlayButtonClickSound();
-        StartMenu.SetActive(false);
+        PlayMenuButtons.SetActive(false);
+        MainMenuButtons.SetActive(true);
+        StartButton.GetComponent<ButtonHover>().HoverOff();
+        SettingsButton.GetComponent<ButtonHover>().HoverOff();
+        QuitButton.GetComponent<ButtonHover>().HoverOff();
     }
 
     public void ExitGame()
