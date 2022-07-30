@@ -31,6 +31,12 @@ public class ButtonHover : MonoBehaviour, IPointerEnterHandler, IPointerExitHand
 
     public void HoverOff()
     {
-        buttonAnimator.Play("HoverOff");
+        try
+        {
+            buttonAnimator.Play("HoverOff");
+        }
+        catch (System.NullReferenceException ex)
+        {
+        }
     }
 }

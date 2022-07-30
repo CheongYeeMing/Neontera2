@@ -153,4 +153,10 @@ public class AudioManager : MonoBehaviour
         if (s == null) return;
         s.source.Stop();
     }
+
+    public void MainMenuSave()
+    {
+        UpdateMusicVolume();
+        UpdateEffectsVolume();
+    }
 }
